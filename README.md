@@ -1,9 +1,6 @@
-# Proyecto Diseño
-## B93250-B95811-B84964
-
-
-
 # Juego de Ur
+
+Proyecto final para el curso de Diseño de Software
 
 ## Descripción
 ...
