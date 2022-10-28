@@ -1,11 +1,10 @@
 # Juego de Ur
 
-Proyecto final para el curso de Diseño de Software
+Proyecto final para el curso de Diseño de Software.
+Version 1.0.
 
 ## Descripción
 ...
-
-## Version 1.0
 
 ## ¿Como correr el programa?
 ...
