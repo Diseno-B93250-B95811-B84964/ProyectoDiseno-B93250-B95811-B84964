@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.lang.Math;
+
 /**
  *
- * @author Usuario1
+ * @author Alvaro Miranda
  */
-public abstract class Dice {
+public abstract class DiceModel {
     
     protected int numberOfSides;
     protected int rollResult;

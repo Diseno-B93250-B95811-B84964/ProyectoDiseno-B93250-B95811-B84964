@@ -11,23 +11,25 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import model.UrPiece;
+import model.UrPieceModel;
 import view.MainMenuView;
 
 /**
  *
- * @author Jimena Gdur Vargas
+ * @author Jimena Gdur
  */
 public class MainMenuController
 {
-    private UrPiece piece;
+    private UrPieceModel piece;
     private MainMenuView menu;
     
-    public MainMenuController(UrPiece piece, MainMenuView view) {
+    public MainMenuController(UrPieceModel piece, MainMenuView view) {
         this.piece = piece;
         this.menu = view;
         
-        this.menu.addButtonClickListener( new MenuViewListener());
+        this.menu.addColorButtonClickListener( new MenuViewListener());
+        this.menu.addRulesButtonClickListener( new RulesViewListener());
+
     }
     
     class MenuViewListener implements ActionListener {
@@ -36,7 +38,14 @@ public class MainMenuController
             menu.chooseColor();
             Color color = menu.getChoosenColor();            
             piece.setColor(color);
-            menu.setColorChooser(color);
+            menu.setColorChooser();
+        }
+    }
+    
+    class RulesViewListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            menu.showRules();
         }
     }
  

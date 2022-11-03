@@ -5,18 +5,18 @@
 package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.UrDice;
+import model.UrDiceModel;
 import view.UrDiceView;
 
 /**
  *
- * @author Usuario1
+ * @author Alvaro Miranda
  */
 public class UrDiceController {
-    private UrDice model;
+    private UrDiceModel model;
     private UrDiceView view;
     
-    public UrDiceController(UrDice model, UrDiceView view)
+    public UrDiceController(UrDiceModel model, UrDiceView view)
     {
         this.model = model;
         this.view = view;

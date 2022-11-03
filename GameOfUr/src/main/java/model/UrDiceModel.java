@@ -5,13 +5,13 @@
 package model;
 /**
  *
- * @author Usuario1
+ * @author Alvaro Miranda
  */
-public class UrDice extends Dice {
+public class UrDiceModel extends DiceModel {
     
     int urNumberOfSides;
     
-    public UrDice()
+    public UrDiceModel()
     {
         urNumberOfSides = 5;
         this.numberOfSides = urNumberOfSides;

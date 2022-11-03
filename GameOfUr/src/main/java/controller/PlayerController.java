@@ -12,7 +12,7 @@ import view.WinnerView;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class PlayerController {
     private PlayerModel playersArray[];
@@ -33,7 +33,6 @@ public class PlayerController {
     class GameViewListener implements ActionListener{
     
         public void actionPerformed(ActionEvent e) {
-            
             try {
                 gameView.setplayerTurnsText(firstPlayer+1);
                 playersArray[firstPlayer].addToScore();

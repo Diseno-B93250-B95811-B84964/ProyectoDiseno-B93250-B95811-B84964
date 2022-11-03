@@ -8,7 +8,7 @@ import java.awt.Color;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class PlayerModel {
     private int playerID;
