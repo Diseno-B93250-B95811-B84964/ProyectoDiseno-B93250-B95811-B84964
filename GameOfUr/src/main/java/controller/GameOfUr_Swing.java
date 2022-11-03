@@ -7,11 +7,12 @@ package controller;
 
 import model.PlayerModel;
 import model.UrDice;
-import view.GameView;
+import view.PlayerView;
 import controller.MainMenuController;
 import model.UrPiece;
 import view.MainMenuView;
 import view.UrDiceView;
+import view.WinnerView;
 
 /**
  *
@@ -20,21 +21,22 @@ import view.UrDiceView;
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        //startGame();
+        startGame();
         displayMainMenu();
     }
     
     private static void startGame() {
-        GameView gameView = new GameView();
-        
+        PlayerView gameView = new PlayerView();
+        WinnerView winnerView = new WinnerView();
         PlayerModel firstPlayer = new PlayerModel();
         PlayerModel secondPlayer = new PlayerModel();
         
         PlayerController playerController = new PlayerController(
-                firstPlayer, secondPlayer, gameView);
+                firstPlayer, secondPlayer, gameView, winnerView);
         
         gameView.setVisible(true);
-        
+        winnerView.setVisible(false);
+
         UrDice dice = new UrDice();
         UrDiceView view = new UrDiceView();
         UrDiceController controller =  new UrDiceController(dice, view);
