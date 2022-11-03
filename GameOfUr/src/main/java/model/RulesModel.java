@@ -12,7 +12,7 @@ public class RulesModel {
     private String rules[];
     
     public RulesModel(){
-        rules = new String[10];
+        rules = new String[11];
         rules[0] = "Game Rules";
         rules[1] = "1. Throw the dice to decide who plays first - highest score";
         rules[2] = "goes first, if it's a draw, throw again.";
@@ -22,7 +22,8 @@ public class RulesModel {
         rules[6] = "pieces must always move forward around the track.";
         rules[7] = "4. If a counter lands upon a square occupied by an opposing ";
         rules[8] = "counter, the counter landed upon is sent off the board and ";
-        rules[9] = "must start again from the beginning.";
+        rules[9] = "must start again from the beginning";
+        rules[10] = "5. This wil happen unless a player lands on a flower tile.";
     }
     
     public String[] getRules() {
