@@ -6,10 +6,12 @@
 package controller;
 
 import model.PlayerModel;
+import model.UrDice;
 import view.GameView;
 import controller.MainMenuController;
 import model.UrPiece;
 import view.MainMenuView;
+import view.UrDiceView;
 
 /**
  *
@@ -32,6 +34,11 @@ public class GameOfUr_Swing {
                 firstPlayer, secondPlayer, gameView);
         
         gameView.setVisible(true);
+        
+        UrDice dice = new UrDice();
+        UrDiceView view = new UrDiceView();
+        UrDiceController controller =  new UrDiceController(dice, view);
+        view.setVisible(true);
     }
     
     private static void displayMainMenu() {
@@ -42,4 +49,5 @@ public class GameOfUr_Swing {
         
         view.setVisible(true);
     }
+
 }
