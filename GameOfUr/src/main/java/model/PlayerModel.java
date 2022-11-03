@@ -13,10 +13,12 @@ import java.awt.Color;
 public class PlayerModel {
     private int playerID;
     private Color playerColor;
+    private int score;
     
     public PlayerModel() {
         this.playerID = -1;
         this.playerColor = new Color(255,0,0);
+        this.score = 0;
     }
     
     public PlayerModel (int playerID, Color playerColor) {
@@ -30,5 +32,13 @@ public class PlayerModel {
     
     public int getID() {
         return this.playerID;
+    }
+    
+    public void addToScore(){
+        this.score++;
+    }
+    
+    public int getScore(){
+        return this.score;
     }
 }

@@ -9,9 +9,10 @@ import model.PlayerModel;
 import model.UrDiceModel;
 import model.UrPieceModel;
 
-import view.GameView;
+import view.PlayerView;
 import view.MainMenuView;
 import view.UrDiceView;
+import view.WinnerView;
 
 
 public class GameOfUr_Swing {
@@ -26,15 +27,16 @@ public class GameOfUr_Swing {
     * @author Mauricio Palma, Alvaro Miranda
     */
     private static void startGame() {
-        GameView gameView = new GameView();
-        
+        PlayerView gameView = new PlayerView();
+        WinnerView winnerView = new WinnerView();
         PlayerModel firstPlayer = new PlayerModel();
         PlayerModel secondPlayer = new PlayerModel();
         
         PlayerController playerController = new PlayerController(
-                firstPlayer, secondPlayer, gameView);
+                firstPlayer, secondPlayer, gameView, winnerView);
         
         gameView.setVisible(true);
+        winnerView.setVisible(false);
         
         UrDiceModel dice = new UrDiceModel();
         UrDiceView view = new UrDiceView();
