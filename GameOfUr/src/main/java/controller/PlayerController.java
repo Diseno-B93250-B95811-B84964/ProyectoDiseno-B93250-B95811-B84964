@@ -16,35 +16,28 @@ import view.GameView;
 public class PlayerController {
     private PlayerModel playersArray[];
     private GameView gameView;
+    private int firstPlayer; 
     
     public PlayerController(PlayerModel aFirstPlayer, PlayerModel aSecondPlayer, GameView aGameView){
         playersArray = new PlayerModel[2];
         playersArray[0] = aFirstPlayer;
         playersArray[1] = aSecondPlayer;
         gameView = aGameView;
-        int firstPlayerID = 1;
-        int secondPlayerID = 2;
-        this.gameView.setplayerTurnsText(firstPlayerID);
-        this.gameView.setplayerTurnsText(secondPlayerID);
+        firstPlayer  = (int)(Math.random()*2);
+        //int firstPlayerID = 1;
+        //int secondPlayerID = 2;
         this.gameView.addButtonClickListener( new GameViewListener());
     }
     
     class GameViewListener implements ActionListener{
     
         public void actionPerformed(ActionEvent e) {
-            int firstPlayerID = 1;
-            int secondPlayerID = 2;
-            int firstPlayer = (int)(Math.random()*2); 
-            int gameOver = 0;
+            
             try {
+                gameView.setplayerTurnsText(firstPlayer+1);
+                firstPlayer++;
+                firstPlayer %= playersArray.length;
 
-                while (gameOver < 5) {
-                    //playersArray[firstPlayer];
-                    firstPlayer++;
-                    firstPlayer %= playersArray.length;
-                    System.out.println("FirstPlayr: " + firstPlayer);
-                    gameOver++;
-                }
             }
             catch(Exception exception) {
                 System.out.println(exception);
