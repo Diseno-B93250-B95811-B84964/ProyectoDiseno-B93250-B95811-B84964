@@ -6,7 +6,9 @@
 package controller;
 
 import model.PlayerModel;
+import model.UrDice;
 import view.GameView;
+import view.UrDiceView;
 
 /**
  *
@@ -15,11 +17,16 @@ import view.GameView;
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        /*System.out.println("Hello World!");
         GameView gameView = new GameView();
         PlayerModel firstPlayer = new PlayerModel();
         PlayerModel secondPlayer = new PlayerModel();
         PlayerController playerController = new PlayerController(firstPlayer, secondPlayer, gameView);
         gameView.setVisible(true);
+        */
+        UrDice dice = new UrDice();
+        UrDiceView view = new UrDiceView();
+        UrDiceController controller =  new UrDiceController(dice, view);
+        view.setVisible(true);
     }
 }
