@@ -8,12 +8,12 @@ package model;
  *
  * @author Jimena Gdur Vargas
  */
-public class Piece {
+public class PieceModel {
     protected int x;
     protected int y;
     
-    public Piece() {
-        x = 0; // TODO: change to position in board
+    public PieceModel() {
+        x = 0;
         y = 0;
     }
     

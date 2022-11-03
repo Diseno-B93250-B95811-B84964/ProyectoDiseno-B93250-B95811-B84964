@@ -11,7 +11,7 @@ import view.GameView;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class PlayerController {
     private PlayerModel playersArray[];
@@ -24,20 +24,16 @@ public class PlayerController {
         playersArray[1] = aSecondPlayer;
         gameView = aGameView;
         firstPlayer  = (int)(Math.random()*2);
-        //int firstPlayerID = 1;
-        //int secondPlayerID = 2;
         this.gameView.addButtonClickListener( new GameViewListener());
     }
     
     class GameViewListener implements ActionListener{
     
         public void actionPerformed(ActionEvent e) {
-            
             try {
                 gameView.setplayerTurnsText(firstPlayer+1);
                 firstPlayer++;
                 firstPlayer %= playersArray.length;
-
             }
             catch(Exception exception) {
                 System.out.println(exception);

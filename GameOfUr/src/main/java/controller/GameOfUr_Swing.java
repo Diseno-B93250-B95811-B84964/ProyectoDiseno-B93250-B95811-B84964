@@ -6,24 +6,25 @@
 package controller;
 
 import model.PlayerModel;
-import model.UrDice;
+import model.UrDiceModel;
+import model.UrPieceModel;
+
 import view.GameView;
-import controller.MainMenuController;
-import model.UrPiece;
 import view.MainMenuView;
 import view.UrDiceView;
 
-/**
- *
- * @author mauup
- */
+
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        //startGame();
+        startGame();
         displayMainMenu();
     }
     
+    /**
+    *
+    * @author Mauricio Palma, Alvaro Miranda
+    */
     private static void startGame() {
         GameView gameView = new GameView();
         
@@ -35,15 +36,19 @@ public class GameOfUr_Swing {
         
         gameView.setVisible(true);
         
-        UrDice dice = new UrDice();
+        UrDiceModel dice = new UrDiceModel();
         UrDiceView view = new UrDiceView();
         UrDiceController controller =  new UrDiceController(dice, view);
         view.setVisible(true);
     }
     
+    /**
+    *
+    * @author Jimena Gdur
+    */
     private static void displayMainMenu() {
         MainMenuView view = new MainMenuView();
-        UrPiece piece = new UrPiece();
+        UrPieceModel piece = new UrPieceModel();
         
         MainMenuController menu = new MainMenuController(piece, view);
         

@@ -4,9 +4,20 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.LayoutManager;
+
 import javax.swing.JColorChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import model.RulesModel;
 
 /**
  *
@@ -33,6 +44,7 @@ public class MainMenuView extends javax.swing.JFrame {
         boxWithChosenColor = new javax.swing.JPanel();
         gameName = new javax.swing.JLabel();
         colorButton = new javax.swing.JButton();
+        rulesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +65,19 @@ public class MainMenuView extends javax.swing.JFrame {
         gameName.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         gameName.setText("Royal Game Of Ur");
 
-        colorButton.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        colorButton.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         colorButton.setText("Choose a color");
         colorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorButtonActionPerformed(evt);
+            }
+        });
+
+        rulesButton.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
+        rulesButton.setText("Game Rules");
+        rulesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesButtonActionPerformed(evt);
             }
         });
 
@@ -68,25 +88,33 @@ public class MainMenuView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(boxWithChosenColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gameName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(colorButton)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(boxWithChosenColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(gameName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(185, 185, 185)
+                                .addComponent(colorButton)))
+                        .addGap(0, 121, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(rulesButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(gameName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(colorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxWithChosenColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
+                .addGap(64, 64, 64)
+                .addComponent(rulesButton)
+                .addContainerGap())
         );
 
         pack();
@@ -95,6 +123,10 @@ public class MainMenuView extends javax.swing.JFrame {
     private void colorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorButtonActionPerformed
 
     }//GEN-LAST:event_colorButtonActionPerformed
+
+    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rulesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,8 +163,12 @@ public class MainMenuView extends javax.swing.JFrame {
         });
     }
     
-    public void addButtonClickListener(ActionListener listenForButton) {
+    public void addColorButtonClickListener(ActionListener listenForButton) {
         colorButton.addActionListener(listenForButton);
+    }
+    
+    public void addRulesButtonClickListener(ActionListener listenForButton) {
+        rulesButton.addActionListener(listenForButton);
     }
     
     public void chooseColor() {
@@ -140,12 +176,41 @@ public class MainMenuView extends javax.swing.JFrame {
         chosenColor = JColorChooser.showDialog(this,"Select a color", initialColor);
     }
     
-    public void setColorChooser(Color color) {
-        boxWithChosenColor.setBackground(color);
+    public void setColorChooser() {
+        boxWithChosenColor.setBackground(chosenColor);
     }
     
     public Color getChoosenColor() {
         return chosenColor;
+    }
+    
+    public void showRules() {
+        RulesModel rules = new RulesModel();
+        
+        JFrame frame = new JFrame("Swing Tester");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);
+        
+        final JLabel title = new JLabel();
+        title.setFont(new Font("Century Schoolbook", 1, 36));
+        title.setText(rules.getRules()[0]);
+        panel.add(title);
+        
+        for (int index = 1; index < rules.getLength(); index++) {
+            final JLabel label = new JLabel();
+            label.setFont(new Font("Century Schoolbook", 0, 18));
+            label.setText(rules.getRules()[index]);
+            panel.add(label);
+        }
+  
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        
+        frame.setSize(560, 200);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true);
     }
 
     private Color chosenColor;
@@ -153,5 +218,6 @@ public class MainMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel boxWithChosenColor;
     private javax.swing.JButton colorButton;
     private javax.swing.JLabel gameName;
+    private javax.swing.JButton rulesButton;
     // End of variables declaration//GEN-END:variables
 }
