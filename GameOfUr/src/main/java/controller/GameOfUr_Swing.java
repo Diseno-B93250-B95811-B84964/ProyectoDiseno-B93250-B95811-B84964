@@ -15,7 +15,6 @@ import view.GameView;
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         GameView gameView = new GameView();
         PlayerModel firstPlayer = new PlayerModel();
         PlayerModel secondPlayer = new PlayerModel();
