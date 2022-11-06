@@ -32,15 +32,16 @@ public class GameOfUr_Swing {
         PlayerModel firstPlayer = new PlayerModel();
         PlayerModel secondPlayer = new PlayerModel();
         
-        PlayerController playerController = new PlayerController(
-                firstPlayer, secondPlayer, gameView, winnerView);
-        
-        gameView.setVisible(true);
-        winnerView.setVisible(false);
-        
         UrDiceModel dice = new UrDiceModel();
         UrDiceView view = new UrDiceView();
         UrDiceController controller =  new UrDiceController(dice, view);
+         
+        PlayerController playerController = new PlayerController(
+                firstPlayer, secondPlayer, gameView, winnerView,
+                dice, view, controller);
+        
+        gameView.setVisible(true);
+        winnerView.setVisible(false);
         view.setVisible(true);
     }
     
