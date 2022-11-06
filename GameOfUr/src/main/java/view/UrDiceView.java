@@ -14,11 +14,10 @@ import javax.swing.JLabel;
  */
 public class UrDiceView extends javax.swing.JFrame {
 
-    ImageIcon diceState1 = new ImageIcon("result_0_1.png");
-    ImageIcon diceState2 = new ImageIcon("result_1_1.png");
+    ImageIcon diceState1 = new ImageIcon("images/result_0_1.png");
+    ImageIcon diceState2 = new ImageIcon("images/result_1_1.png");
     JLabel diceLabelsArray[] = new JLabel[4];
-    //ImageIcon diceState3 = new ImageIcon("result_1_2.png");
-    //ImageIcon diceState4 = new ImageIcon("result_1_3.png");
+
     /** Creates new form UrDiceView */
     public UrDiceView() {
         initComponents();
