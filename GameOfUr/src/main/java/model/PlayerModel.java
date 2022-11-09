@@ -24,6 +24,7 @@ public class PlayerModel {
     public PlayerModel (int playerID, Color playerColor) {
         this.playerID = playerID;
         this.playerColor = playerColor;
+        this.score = 0;
     }
     
     public void setPlayerID(int id) {

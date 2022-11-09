@@ -23,45 +23,48 @@ public class PlayerController {
     private UrDiceModel diceModel;
     private UrDiceView diceView;
 
-    private int firstPlayer; 
+    private int playerNumber; 
     
-    public PlayerController(PlayerModel aFirstPlayer, PlayerModel aSecondPlayer, PlayerView aGameView,
-            WinnerView aWinnerView, UrDiceModel aDiceModel, UrDiceView aDiceView,
-            UrDiceController diceController){
+    public PlayerController(PlayerView aGameView, WinnerView aWinnerView, UrDiceController diceController){
         playersArray = new PlayerModel[2];
-        winnerView = aWinnerView;
-        playersArray[0] = aFirstPlayer;
-        playersArray[1] = aSecondPlayer;
-        gameView = aGameView;
-        firstPlayer  = (int)(Math.random()*2);
-        this.gameView.addButtonClickListener( new GameViewListener());
+        playerNumber  = (int)(Math.random()*2);
         
-        diceModel = aDiceModel;
-        diceView = aDiceView;
-        UrDiceController.DiceListener diceListener = diceController.new DiceListener();
+        winnerView = aWinnerView; // TODO delete this
+        gameView = aGameView;
+       
+        UrDiceController.DiceListener diceListener = initializeDice(diceController);
+        this.gameView.addButtonClickListener( new GameViewListener());
         this.diceView.addDiceListener(diceListener);    
+    }
+    
+    public void setPlayers(PlayerModel firstPlayer, PlayerModel secondPlayer){
+        playersArray[0] = firstPlayer;
+        playersArray[1] = secondPlayer;
+    }
+    
+    private UrDiceController.DiceListener initializeDice(UrDiceController diceController){
+        diceModel = diceController.getDiceModel();
+        diceView = diceController.getDiceView();
+        UrDiceController.DiceListener diceListener = diceController.new DiceListener();
+        return diceListener;
     }
     
     class GameViewListener implements ActionListener{
     
+        @Override
         public void actionPerformed(ActionEvent e) {
             int diceResult = -1;
             try {
-                gameView.setplayerTurnsText(firstPlayer+1);
+                gameView.setplayerTurnsText(playerNumber + 1);
                 diceResult = throwDice();
                 if (diceResult > 0) {
-                    playersArray[firstPlayer].addToScore();
+                    playersArray[playerNumber].addToScore();
+                    gameView.setplayer0Score(playersArray[playerNumber].getScore());
+                    checkIfWinner(playerNumber);
+                    playerNumber++;
+                    playerNumber %= playersArray.length;
+                    gameView.setplayer1Score(playersArray[playerNumber].getScore());
                 }
-                gameView.setplayer0Score(playersArray[firstPlayer].getScore());             
-                if (playersArray[firstPlayer].getScore()>= 7) {
-                    gameView.setVisible(false);
-                    winnerView.setwinnerPlayerText(firstPlayer+1);
-                    winnerView.setVisible(true);
-                }
-                firstPlayer++;
-                firstPlayer %= playersArray.length;
-                gameView.setplayer1Score(playersArray[firstPlayer].getScore());
-
             }
             catch(Exception exception) {
                 System.out.println(exception);
@@ -76,6 +79,14 @@ public class PlayerController {
             diceView.showThrow(diceResult);
             diceView.setMoves(diceResult);
             return diceResult;
+        }
+        
+        private void checkIfWinner(int player) {
+            if (playersArray[player].getScore()>= 7) {
+             gameView.setVisible(false);
+             winnerView.setwinnerPlayerText(player+1);
+             winnerView.setVisible(true);
+            }
         }
     }
 }

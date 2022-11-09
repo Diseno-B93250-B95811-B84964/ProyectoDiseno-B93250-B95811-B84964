@@ -19,7 +19,7 @@ public class GameOfUr_Swing {
 
     public static void main(String[] args) {
         startGame();
-        displayMainMenu();
+        //displayMainMenu();
     }
     
     /**
@@ -29,20 +29,20 @@ public class GameOfUr_Swing {
     private static void startGame() {
         PlayerView gameView = new PlayerView();
         WinnerView winnerView = new WinnerView();
-        PlayerModel firstPlayer = new PlayerModel();
+        PlayerModel firstPlayer = new PlayerModel(); // These have to edited after using main menu view
         PlayerModel secondPlayer = new PlayerModel();
         
         UrDiceModel dice = new UrDiceModel();
-        UrDiceView view = new UrDiceView();
-        UrDiceController controller =  new UrDiceController(dice, view);
+        UrDiceView urView = new UrDiceView();
+        UrDiceController urController =  new UrDiceController(dice, urView);
          
-        PlayerController playerController = new PlayerController(
-                firstPlayer, secondPlayer, gameView, winnerView,
-                dice, view, controller);
+        PlayerController playerController = new PlayerController(gameView, winnerView, urController);
+        
+        playerController.setPlayers(firstPlayer, secondPlayer);
         
         gameView.setVisible(true);
         winnerView.setVisible(false);
-        view.setVisible(true);
+        urView.setVisible(true);
     }
     
     /**
