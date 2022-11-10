@@ -5,7 +5,7 @@
 
 package controller;
 
-import model.PlayerModel;
+import model.UrPlayerModel;
 import model.UrDiceModel;
 import model.UrPieceModel;
 
@@ -29,8 +29,8 @@ public class GameOfUr_Swing {
     private static void startGame() {
         PlayerView gameView = new PlayerView();
         WinnerView winnerView = new WinnerView();
-        PlayerModel firstPlayer = new PlayerModel(); // These have to edited after using main menu view
-        PlayerModel secondPlayer = new PlayerModel();
+        UrPlayerModel firstPlayer = new UrPlayerModel(); // These have to edited after using main menu view
+        UrPlayerModel secondPlayer = new UrPlayerModel();
         
         UrDiceModel dice = new UrDiceModel();
         UrDiceView urView = new UrDiceView();

@@ -10,20 +10,17 @@ import java.awt.Color;
  *
  * @author Mauricio Palma
  */
-public class PlayerModel {
-    private int playerID;
-    private Color playerColor;
-    private int score;
+public abstract class PlayerModel {
+    protected int playerID;
+    protected int score;
     
     public PlayerModel() {
         this.playerID = -1;
-        this.playerColor = new Color(255,0,0);
         this.score = 0;
     }
     
-    public PlayerModel (int playerID, Color playerColor) {
+    public PlayerModel (int playerID) {
         this.playerID = playerID;
-        this.playerColor = playerColor;
         this.score = 0;
     }
     
@@ -31,15 +28,15 @@ public class PlayerModel {
         this.playerID = id;
     }
     
-    public int getID() {
+    public int getplayerID() {
         return this.playerID;
     }
     
-    public void addToScore(){
+    public void addScoreToPlayer(){
         this.score++;
     }
     
-    public int getScore(){
+    public int getPlayerScore(){
         return this.score;
     }
 }

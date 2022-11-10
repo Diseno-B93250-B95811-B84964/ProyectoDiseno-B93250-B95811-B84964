@@ -6,7 +6,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.PlayerModel;
+import model.UrPlayerModel;
 import model.UrDiceModel;
 import view.PlayerView;
 import view.UrDiceView;
@@ -17,7 +17,7 @@ import view.WinnerView;
  * @author Mauricio Palma
  */
 public class PlayerController {
-    private PlayerModel playersArray[];
+    private UrPlayerModel playersArray[];
     private PlayerView gameView;
     private WinnerView winnerView;
     private UrDiceModel diceModel;
@@ -26,7 +26,7 @@ public class PlayerController {
     private int playerNumber; 
     
     public PlayerController(PlayerView aGameView, WinnerView aWinnerView, UrDiceController diceController){
-        playersArray = new PlayerModel[2];
+        playersArray = new UrPlayerModel[2];
         playerNumber  = (int)(Math.random()*2);
         
         winnerView = aWinnerView; // TODO delete this
@@ -37,7 +37,7 @@ public class PlayerController {
         this.diceView.addDiceListener(diceListener);    
     }
     
-    public void setPlayers(PlayerModel firstPlayer, PlayerModel secondPlayer){
+    public void setPlayers(UrPlayerModel firstPlayer, UrPlayerModel secondPlayer){
         playersArray[0] = firstPlayer;
         playersArray[1] = secondPlayer;
     }
@@ -58,12 +58,12 @@ public class PlayerController {
                 gameView.setplayerTurnsText(playerNumber + 1);
                 diceResult = throwDice();
                 if (diceResult > 0) {
-                    playersArray[playerNumber].addToScore();
-                    gameView.setFirstPlayerScore(playersArray[playerNumber].getScore());
+                    playersArray[playerNumber].addScoreToPlayer();
+                    gameView.setFirstPlayerScore(playersArray[playerNumber].getPlayerScore());
                     checkIfWinner(playerNumber);
                     playerNumber++;
                     playerNumber %= playersArray.length;
-                    gameView.setSecondPlayerScore(playersArray[playerNumber].getScore());
+                    gameView.setSecondPlayerScore(playersArray[playerNumber].getPlayerScore());
                 }
             }
             catch(Exception exception) {
@@ -82,7 +82,7 @@ public class PlayerController {
         }
         
         private void checkIfWinner(int player) {
-            if (playersArray[player].getScore()>= 7) {
+            if (playersArray[player].getPlayerScore()>= 7) {
              gameView.setVisible(false);
              winnerView.setwinnerPlayerText(player+1);
              winnerView.setVisible(true);
