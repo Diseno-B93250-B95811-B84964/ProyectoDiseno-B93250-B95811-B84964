@@ -13,11 +13,10 @@ import java.awt.event.ActionListener;
 public class PlayerView extends javax.swing.JFrame {
 
     /**
-     * Creates new form GameView
+     * Creates new form PlayerView
      */
     public PlayerView() {
         initComponents();
-
     }
 
     /**
@@ -29,33 +28,63 @@ public class PlayerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel4 = new javax.swing.JPanel();
         mainTitle = new javax.swing.JLabel();
-        okButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
-        playerTurnsText = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        player0Score = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        player1Score = new javax.swing.JLabel();
-
-        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 111, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
-        );
+        playerTurnText = new javax.swing.JLabel();
+        firstPlayerPanel = new javax.swing.JPanel();
+        firstPlayerText = new javax.swing.JLabel();
+        okButton = new javax.swing.JButton();
+        secondPlayerPanel = new javax.swing.JPanel();
+        secondPlayerText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         mainTitle.setText("Royal Game of Ur");
+
+        mainPanel.setBackground(new java.awt.Color(153, 153, 153));
+
+        playerTurnText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        playerTurnText.setText("Waiting...");
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(playerTurnText)
+                .addContainerGap(180, Short.MAX_VALUE))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(114, Short.MAX_VALUE)
+                .addComponent(playerTurnText)
+                .addGap(99, 99, 99))
+        );
+
+        firstPlayerPanel.setBackground(new java.awt.Color(153, 153, 153));
+
+        firstPlayerText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstPlayerText.setText("Player 1 Score:");
+
+        javax.swing.GroupLayout firstPlayerPanelLayout = new javax.swing.GroupLayout(firstPlayerPanel);
+        firstPlayerPanel.setLayout(firstPlayerPanelLayout);
+        firstPlayerPanelLayout.setHorizontalGroup(
+            firstPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(firstPlayerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(firstPlayerText)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        firstPlayerPanelLayout.setVerticalGroup(
+            firstPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(firstPlayerPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(firstPlayerText)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
 
         okButton.setText("Play");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,111 +93,67 @@ public class PlayerView extends javax.swing.JFrame {
             }
         });
 
-        mainPanel.setBackground(new java.awt.Color(204, 204, 204));
+        secondPlayerPanel.setBackground(new java.awt.Color(153, 153, 153));
 
-        playerTurnsText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        playerTurnsText.setText("Waiting...");
+        secondPlayerText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        secondPlayerText.setText("Player 2 Score:");
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addComponent(playerTurnsText)
-                .addGap(129, 129, 129))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(playerTurnsText)
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
-
-        player0Score.setText("Player 1 Score: ");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout secondPlayerPanelLayout = new javax.swing.GroupLayout(secondPlayerPanel);
+        secondPlayerPanel.setLayout(secondPlayerPanelLayout);
+        secondPlayerPanelLayout.setHorizontalGroup(
+            secondPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(secondPlayerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(player0Score)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(secondPlayerText)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(player0Score)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-
-        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
-
-        player1Score.setText("Player 2: Score");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(player1Score)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(player1Score)
-                .addContainerGap(31, Short.MAX_VALUE))
+        secondPlayerPanelLayout.setVerticalGroup(
+            secondPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, secondPlayerPanelLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(secondPlayerText)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(okButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(64, 64, 64)
                         .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(mainTitle)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(firstPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(okButton)
+                        .addGap(30, 30, 30)
+                        .addComponent(secondPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(mainTitle)
+                .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(35, 35, 35)
                 .addComponent(mainTitle)
+                .addGap(34, 34, 34)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(okButton)
-                                .addGap(27, 27, 27))))
+                            .addComponent(secondPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firstPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
+                        .addGap(69, 69, 69)
+                        .addComponent(okButton)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,20 +164,20 @@ public class PlayerView extends javax.swing.JFrame {
     }//GEN-LAST:event_okButtonActionPerformed
 
     
-    public void addButtonClickListener(ActionListener listenForButton) {
+      public void addButtonClickListener(ActionListener listenForButton) {
         okButton.addActionListener(listenForButton);
     }
     
     public void setplayerTurnsText(int playerID){
-        playerTurnsText.setText("Player: " + playerID + " plays!");
+        playerTurnText.setText("Player: " + playerID + " plays!");
     }
     
-    public void setplayer0Score(int score) {
-        player0Score.setText("Player 1 Score: " + score);
+    public void setFirstPlayerScore(int score) {
+        firstPlayerText.setText("Player 1 Score: " + score);
     }
     
-    public void setplayer1Score(int score) {
-        player1Score.setText("Player 2 Score: " + score);
+    public void setSecondPlayerScore(int score) {
+        secondPlayerText.setText("Player 2 Score: " + score);
     }
     
     /**
@@ -221,9 +206,6 @@ public class PlayerView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PlayerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -234,14 +216,13 @@ public class PlayerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel firstPlayerPanel;
+    private javax.swing.JLabel firstPlayerText;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel mainTitle;
     private javax.swing.JButton okButton;
-    private javax.swing.JLabel player0Score;
-    private javax.swing.JLabel player1Score;
-    private javax.swing.JLabel playerTurnsText;
+    private javax.swing.JLabel playerTurnText;
+    private javax.swing.JPanel secondPlayerPanel;
+    private javax.swing.JLabel secondPlayerText;
     // End of variables declaration//GEN-END:variables
 }

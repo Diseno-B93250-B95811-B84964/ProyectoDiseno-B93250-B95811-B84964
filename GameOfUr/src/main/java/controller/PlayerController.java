@@ -59,11 +59,11 @@ public class PlayerController {
                 diceResult = throwDice();
                 if (diceResult > 0) {
                     playersArray[playerNumber].addToScore();
-                    gameView.setplayer0Score(playersArray[playerNumber].getScore());
+                    gameView.setFirstPlayerScore(playersArray[playerNumber].getScore());
                     checkIfWinner(playerNumber);
                     playerNumber++;
                     playerNumber %= playersArray.length;
-                    gameView.setplayer1Score(playersArray[playerNumber].getScore());
+                    gameView.setSecondPlayerScore(playersArray[playerNumber].getScore());
                 }
             }
             catch(Exception exception) {
