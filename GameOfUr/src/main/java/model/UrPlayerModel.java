@@ -11,17 +11,12 @@ import java.awt.Color;
  * @author Mauricio Palma
  */
 public class UrPlayerModel extends PlayerModel{
-     /**
-     * Color attribute that will identify the player of a given game    
-     */
-    private Color playerColor;
-    
+
     /**
      * Default constructor that calls super constructor and sets attribute to a default value
      */
     public UrPlayerModel() {
         super();
-        this.playerColor = new Color(255,0,0); 
     }
     
     /**
@@ -31,7 +26,6 @@ public class UrPlayerModel extends PlayerModel{
      */
     public UrPlayerModel (int playerID, Color playerColor) {
         super(playerID);
-        this.playerColor = playerColor;
     }
     
     /**

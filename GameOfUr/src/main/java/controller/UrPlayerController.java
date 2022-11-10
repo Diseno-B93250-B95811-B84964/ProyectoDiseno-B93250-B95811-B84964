@@ -67,7 +67,7 @@ public class UrPlayerController extends PlayerController{
         * {@inheritDoc}
         * Method that holds the logic to set points to the players.
         * It starts working when a player clicks the option to play 
-        * @param  event 
+        * @param  event The event that trigger the action
         */
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -89,6 +89,9 @@ public class UrPlayerController extends PlayerController{
             }
         }
         
+        /**
+        * Method that throws the dice to know how many positions can a player move
+        */
         private int throwDice() {
             int diceResult = -1;
             diceView.cleanDice();
@@ -99,6 +102,9 @@ public class UrPlayerController extends PlayerController{
             return diceResult;
         }
         
+        /**
+        * Method that checks if a player won the match to stop the game
+        */
         private void checkIfWinner(int player) {
             if (playersArray[player].getPlayerScore()>= 7) {
              gameView.setVisible(false);
