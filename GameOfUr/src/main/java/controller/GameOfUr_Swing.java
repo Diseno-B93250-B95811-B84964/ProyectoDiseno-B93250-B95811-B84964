@@ -5,13 +5,15 @@
 
 package controller;
 
+import model.PlayerModel;
+
 import model.UrPlayerModel;
-import model.UrDiceModel;
-import model.UrPieceModel;
+import model.UrDiceModel; // TODO change this to DiceModel
+import model.UrPieceModel; // TODO change this to PieceModel
 
 import view.PlayerView;
 import view.MainMenuView;
-import view.UrDiceView;
+import view.UrDiceView; // TODO change this to DiceView
 import view.WinnerView;
 
 
@@ -29,16 +31,17 @@ public class GameOfUr_Swing {
     private static void startGame() {
         PlayerView gameView = new PlayerView();
         WinnerView winnerView = new WinnerView();
-        UrPlayerModel firstPlayer = new UrPlayerModel(); // These have to edited after using main menu view
-        UrPlayerModel secondPlayer = new UrPlayerModel();
+        PlayerModel firstPlayer = new UrPlayerModel(); // These have to edited after using main menu view
+        PlayerModel secondPlayer = new UrPlayerModel();
         
         UrDiceModel dice = new UrDiceModel();
         UrDiceView urView = new UrDiceView();
         UrDiceController urController =  new UrDiceController(dice, urView);
          
-        PlayerController playerController = new PlayerController(gameView, winnerView, urController);
+        PlayerController playerController = new UrPlayerController(gameView, winnerView, urController);
         
         playerController.setPlayers(firstPlayer, secondPlayer);
+        playerController.start();
         
         gameView.setVisible(true);
         winnerView.setVisible(false);
