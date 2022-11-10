@@ -8,7 +8,6 @@ import model.PlayerModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.UrPlayerModel;
 import model.UrDiceModel;
 import view.PlayerView;
 import view.UrDiceView;
@@ -19,7 +18,6 @@ import view.WinnerView;
  * @author Mauricio Palma
  */
 public class UrPlayerController extends PlayerController{
-    private PlayerModel playersArray[];
     private PlayerView gameView;
     private WinnerView winnerView;
     private UrDiceModel diceModel;
@@ -27,8 +25,13 @@ public class UrPlayerController extends PlayerController{
 
     private int playerNumber; 
     
+    /**
+     *
+     * @param aGameView
+     * @param aWinnerView
+     * @param diceController
+     */
     public UrPlayerController(PlayerView aGameView, WinnerView aWinnerView, UrDiceController diceController){
-        playersArray = super.playersArray;
         playerNumber  = (int)(Math.random()*2);
         
         winnerView = aWinnerView; // TODO delete this
@@ -38,13 +41,20 @@ public class UrPlayerController extends PlayerController{
 
     }
     
+    /**
+     * {@inheritDoc}
+     * It starts the controller by calling the listeners needed to get user´s inputs
+     */
     @Override
     public void start() {
         
         this.gameView.addButtonClickListener( new GameViewListener());
     }
-    
-    private UrDiceController.DiceListener initializeDice(UrDiceController diceController){
+
+    /**
+    * Method that initializes the Dice as an UrDice to get user´s input
+    */
+    private UrDiceController.DiceListener initializeDice(UrDiceController diceController){ // TODO change it to DiceController
         diceModel = diceController.getDiceModel();
         diceView = diceController.getDiceView();
         UrDiceController.DiceListener diceListener = diceController.new DiceListener();
@@ -53,8 +63,14 @@ public class UrPlayerController extends PlayerController{
     
     class GameViewListener implements ActionListener{
     
+        /**
+        * {@inheritDoc}
+        * Method that holds the logic to set points to the players.
+        * It starts working when a player clicks the option to play 
+        * @param  event 
+        */
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
             int diceResult = -1;
             try {
                 gameView.setplayerTurnsText(playerNumber + 1);

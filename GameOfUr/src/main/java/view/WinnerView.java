@@ -6,7 +6,7 @@ package view;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class WinnerView extends javax.swing.JFrame {
 
@@ -17,6 +17,10 @@ public class WinnerView extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Method that allows to set the id of the plaer who won the match
+     * @param playerID The id that will be printed on the screen
+     */
     public void setwinnerPlayerText(int playerID){
         winnerText.setText("Player: " + playerID + " wins!");
     }
@@ -107,6 +111,8 @@ public class WinnerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * {@inheritDoc}
+     * Main method that starts graphic aspects of WinnerView
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -143,6 +149,7 @@ public class WinnerView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel congratulationsText;
+	
     private javax.swing.JPanel congratulationsTextPanel;
     private javax.swing.JLabel winnerText;
     private javax.swing.JPanel winnerTextPanel;

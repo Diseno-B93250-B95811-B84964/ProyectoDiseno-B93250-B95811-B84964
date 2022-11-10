@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class PlayerView extends javax.swing.JFrame {
 
@@ -163,24 +163,42 @@ public class PlayerView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_okButtonActionPerformed
 
-    
-      public void addButtonClickListener(ActionListener listenForButton) {
+    /**
+     * Method that is trigger when the user clicks the button associated
+     * @param listenForButton Event that will trigger the action designed for the button
+     */
+    public void addButtonClickListener(ActionListener listenForButton) {
         okButton.addActionListener(listenForButton);
     }
     
+
+    /**
+     * Method that allows to set the id of the plaer who will be playing at a given turn
+     * @param playerID The id that will be printed on the screen
+     */
     public void setplayerTurnsText(int playerID){
         playerTurnText.setText("Player: " + playerID + " plays!");
     }
     
+    /**
+     * Method that allows to set the the score of the first player that will be playing the game
+     * @param score The score that will be added to the player
+     */
     public void setFirstPlayerScore(int score) {
         firstPlayerText.setText("Player 1 Score: " + score);
     }
     
+    /**
+     * Method that allows to set the the score of the second player that will be playing the game
+     * @param score The score that will be added to the player
+     */
     public void setSecondPlayerScore(int score) {
         secondPlayerText.setText("Player 2 Score: " + score);
     }
     
     /**
+     * {@inheritDoc}
+     * Main method that starts graphic aspects of WinnerView
      * @param args the command line arguments
      */
     public static void main(String args[]) {
