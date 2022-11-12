@@ -31,13 +31,12 @@ import view.WinnerView;
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        GameOfUr_Swing my = new GameOfUr_Swing();
         SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-                            my.startGame();
-			}
-		});
+            @Override
+            public void run() {
+                startGame();
+            }
+            });
         
         //displayMainMenu();
     }
