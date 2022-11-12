@@ -26,94 +26,46 @@ public class MainGame extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Player1Frame = new javax.swing.JInternalFrame();
-        player1Label = new javax.swing.JLabel();
-        PlayerName = new java.awt.Label();
-        panel1 = new java.awt.Panel();
-        inventoryTitle = new javax.swing.JLabel();
-        Player2Frame = new javax.swing.JInternalFrame();
         SaveButton = new javax.swing.JButton();
         rulesButton = new javax.swing.JButton();
-        GameBoard = new javax.swing.JInternalFrame();
+        playerTurnLabel = new javax.swing.JLabel();
+        Player1Panel = new javax.swing.JPanel();
+        playerLabel = new javax.swing.JLabel();
+        PlayerName = new java.awt.Label();
+        PlayerScore = new javax.swing.JLabel();
+        PlayerScoreTitle = new javax.swing.JLabel();
+        inventoryTitle2 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        DicePanel = new javax.swing.JPanel();
         dice1 = new javax.swing.JLabel();
         dice2 = new javax.swing.JLabel();
-        dice3 = new javax.swing.JLabel();
-        dice4 = new javax.swing.JLabel();
         moves = new javax.swing.JLabel();
+        dice3 = new javax.swing.JLabel();
         throwDice = new javax.swing.JButton();
-        ScrollPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dice4 = new javax.swing.JLabel();
+        Player2Panel = new javax.swing.JPanel();
+        playerLabel1 = new javax.swing.JLabel();
+        PlayerName2 = new java.awt.Label();
+        PlayerScore2 = new javax.swing.JLabel();
+        PlayerScoreTitle2 = new javax.swing.JLabel();
+        inventoryTitle3 = new javax.swing.JLabel();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        Player1Frame.setVisible(true);
-
-        player1Label.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        player1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        player1Label.setText("Player 1");
-
-        PlayerName.setAlignment(java.awt.Label.CENTER);
-        PlayerName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
-        PlayerName.setText("label1");
-
-        inventoryTitle.setFont(new java.awt.Font("Century Schoolbook", 0, 12)); // NOI18N
-        inventoryTitle.setText("Pieces Left");
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(inventoryTitle)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inventoryTitle)
-                .addContainerGap(180, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout Player1FrameLayout = new javax.swing.GroupLayout(Player1Frame.getContentPane());
-        Player1Frame.getContentPane().setLayout(Player1FrameLayout);
-        Player1FrameLayout.setHorizontalGroup(
-            Player1FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Player1FrameLayout.createSequentialGroup()
-                .addGroup(Player1FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Player1FrameLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addGroup(Player1FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(player1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(PlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(Player1FrameLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        Player1FrameLayout.setVerticalGroup(
-            Player1FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Player1FrameLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(player1Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(382, Short.MAX_VALUE))
-        );
-
-        Player2Frame.setVisible(true);
-
-        javax.swing.GroupLayout Player2FrameLayout = new javax.swing.GroupLayout(Player2Frame.getContentPane());
-        Player2Frame.getContentPane().setLayout(Player2FrameLayout);
-        Player2FrameLayout.setHorizontalGroup(
-            Player2FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
-        );
-        Player2FrameLayout.setVerticalGroup(
-            Player2FrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(255, 255, 255));
 
         SaveButton.setBackground(new java.awt.Color(44, 37, 37));
         SaveButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
@@ -135,108 +87,409 @@ public class MainGame extends javax.swing.JPanel {
             }
         });
 
-        GameBoard.setVisible(true);
+        playerTurnLabel.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        playerTurnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerTurnLabel.setText("Player 1's turn");
 
+        Player1Panel.setBackground(new java.awt.Color(255, 255, 255));
+        Player1Panel.setPreferredSize(new java.awt.Dimension(350, 700));
+
+        playerLabel.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        playerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerLabel.setText("Player 1");
+
+        PlayerName.setAlignment(java.awt.Label.CENTER);
+        PlayerName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
+        PlayerName.setText("label1");
+
+        PlayerScore.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
+        PlayerScore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PlayerScore.setText("0");
+
+        PlayerScoreTitle.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        PlayerScoreTitle.setText("Score");
+
+        inventoryTitle2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
+        inventoryTitle2.setText("Pieces Left");
+
+        jButton16.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
+        jButton17.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton17.setBorder(null);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
+        jButton18.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton18.setBorder(null);
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        jButton19.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton19.setBorder(null);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+
+        jButton20.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton20.setBorder(null);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
+        jButton21.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton21.setBorder(null);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
+        jButton22.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
+        jButton22.setBorder(null);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Player1PanelLayout = new javax.swing.GroupLayout(Player1Panel);
+        Player1Panel.setLayout(Player1PanelLayout);
+        Player1PanelLayout.setHorizontalGroup(
+            Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Player1PanelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Player1PanelLayout.createSequentialGroup()
+                        .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Player1PanelLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(Player1PanelLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(inventoryTitle2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(Player1PanelLayout.createSequentialGroup()
+                            .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player1PanelLayout.createSequentialGroup()
+                            .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton16)
+                                .addComponent(jButton20)
+                                .addComponent(jButton21))
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton19)
+                            .addGap(18, 18, 18)
+                            .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton18)
+                                .addComponent(jButton17)
+                                .addComponent(jButton22)))))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        Player1PanelLayout.setVerticalGroup(
+            Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Player1PanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(playerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(inventoryTitle2)
+                .addGap(18, 18, 18)
+                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton16)
+                    .addComponent(jButton19)
+                    .addComponent(jButton17))
+                .addGap(18, 18, 18)
+                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton18)
+                    .addComponent(jButton20))
+                .addGap(18, 18, 18)
+                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton22)
+                    .addComponent(jButton21))
+                .addGap(54, 54, 54)
+                .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PlayerScore))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        dice1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\result_0_1.png")); // NOI18N
         dice1.setText("dice1");
 
+        dice2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\result_0_1.png")); // NOI18N
         dice2.setText("dice2");
-
-        dice3.setText("dice3");
-
-        dice4.setText("dice4");
 
         moves.setText("Number of moves");
 
+        dice3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\result_0_1.png")); // NOI18N
+        dice3.setText("dice3");
+
         throwDice.setText("Throw Dice");
 
-        javax.swing.GroupLayout GameBoardLayout = new javax.swing.GroupLayout(GameBoard.getContentPane());
-        GameBoard.getContentPane().setLayout(GameBoardLayout);
-        GameBoardLayout.setHorizontalGroup(
-            GameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GameBoardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(GameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(GameBoardLayout.createSequentialGroup()
-                        .addComponent(moves)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(throwDice))
-                    .addGroup(GameBoardLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
-        );
-        GameBoardLayout.setVerticalGroup(
-            GameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GameBoardLayout.createSequentialGroup()
-                .addGroup(GameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+        dice4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\result_0_1.png")); // NOI18N
+        dice4.setText("dice4");
+
+        javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
+        DicePanel.setLayout(DicePanelLayout);
+        DicePanelLayout.setHorizontalGroup(
+            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DicePanelLayout.createSequentialGroup()
+                .addComponent(moves)
+                .addGap(141, 141, 141)
+                .addComponent(throwDice))
+            .addGroup(DicePanelLayout.createSequentialGroup()
+                .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(GameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        DicePanelLayout.setVerticalGroup(
+            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DicePanelLayout.createSequentialGroup()
+                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(moves)
                     .addComponent(throwDice)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
+        Player2Panel.setPreferredSize(new java.awt.Dimension(350, 700));
+
+        playerLabel1.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        playerLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerLabel1.setText("Player 2");
+
+        PlayerName2.setAlignment(java.awt.Label.CENTER);
+        PlayerName2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
+        PlayerName2.setText("label1");
+
+        PlayerScore2.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
+        PlayerScore2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PlayerScore2.setText("0");
+
+        PlayerScoreTitle2.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        PlayerScoreTitle2.setText("Score");
+
+        inventoryTitle3.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
+        inventoryTitle3.setText("Pieces Left");
+
+        jButton23.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton23.setBorder(null);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
             }
-        ));
-        ScrollPane.setViewportView(jTable1);
+        });
+
+        jButton24.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton24.setBorder(null);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+
+        jButton25.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton25.setBorder(null);
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+
+        jButton26.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton26.setBorder(null);
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
+
+        jButton27.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton27.setBorder(null);
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+
+        jButton28.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton28.setBorder(null);
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
+        jButton29.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ryzen\\source\\repos\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
+        jButton29.setBorder(null);
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Player2PanelLayout = new javax.swing.GroupLayout(Player2Panel);
+        Player2Panel.setLayout(Player2PanelLayout);
+        Player2PanelLayout.setHorizontalGroup(
+            Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Player2PanelLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playerLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PlayerName2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Player2PanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Player2PanelLayout.createSequentialGroup()
+                        .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(PlayerScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Player2PanelLayout.createSequentialGroup()
+                        .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(inventoryTitle3)
+                            .addGroup(Player2PanelLayout.createSequentialGroup()
+                                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton23)
+                                    .addComponent(jButton27)
+                                    .addComponent(jButton28))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton26)))
+                        .addGap(18, 18, 18)
+                        .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton25)
+                            .addComponent(jButton24)
+                            .addComponent(jButton29))))
+                .addGap(0, 29, Short.MAX_VALUE))
+        );
+        Player2PanelLayout.setVerticalGroup(
+            Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Player2PanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(playerLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PlayerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(inventoryTitle3)
+                .addGap(18, 18, 18)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton23)
+                    .addComponent(jButton26)
+                    .addComponent(jButton24))
+                .addGap(18, 18, 18)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton25)
+                    .addComponent(jButton27))
+                .addGap(18, 18, 18)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton29)
+                    .addComponent(jButton28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PlayerScore2)))
+        );
+
+        jLabel1.setText("jLabel1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(532, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(Player1Frame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SaveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rulesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(149, 149, 149))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ScrollPane)
-                            .addComponent(GameBoard))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(Player2Frame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                        .addGap(533, 533, 533)
+                        .addComponent(playerTurnLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Player2Frame, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Player1Frame, javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(playerTurnLabel)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(GameBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(DicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -248,23 +501,100 @@ public class MainGame extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rulesButtonActionPerformed
 
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton29ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame GameBoard;
-    private javax.swing.JInternalFrame Player1Frame;
-    private javax.swing.JInternalFrame Player2Frame;
+    private javax.swing.JPanel DicePanel;
+    private javax.swing.JPanel Player1Panel;
+    private javax.swing.JPanel Player2Panel;
     private java.awt.Label PlayerName;
+    private java.awt.Label PlayerName2;
+    private javax.swing.JLabel PlayerScore;
+    private javax.swing.JLabel PlayerScore2;
+    private javax.swing.JLabel PlayerScoreTitle;
+    private javax.swing.JLabel PlayerScoreTitle2;
     private javax.swing.JButton SaveButton;
-    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JLabel dice1;
     private javax.swing.JLabel dice2;
     private javax.swing.JLabel dice3;
     private javax.swing.JLabel dice4;
-    private javax.swing.JLabel inventoryTitle;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel inventoryTitle2;
+    private javax.swing.JLabel inventoryTitle3;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel moves;
-    private java.awt.Panel panel1;
-    private javax.swing.JLabel player1Label;
+    private javax.swing.JLabel playerLabel;
+    private javax.swing.JLabel playerLabel1;
+    private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton rulesButton;
     private javax.swing.JButton throwDice;
     // End of variables declaration//GEN-END:variables
