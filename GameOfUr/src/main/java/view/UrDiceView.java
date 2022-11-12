@@ -14,8 +14,8 @@ import javax.swing.JLabel;
  */
 public class UrDiceView extends javax.swing.JFrame {
 
-    ImageIcon diceState1 = new ImageIcon("images/result_0_1.png");
-    ImageIcon diceState2 = new ImageIcon("images/result_1_1.png");
+    ImageIcon noColorTipDiceState = new ImageIcon("images/result_0_1.png");
+    ImageIcon colorTipDiceState = new ImageIcon("images/result_1_1.png");
     JLabel diceLabelsArray[] = new JLabel[4];
 
     /** Creates new form UrDiceView */
@@ -26,25 +26,25 @@ public class UrDiceView extends javax.swing.JFrame {
         diceLabelsArray[1] = dice2;
         diceLabelsArray[2] = dice3;
         diceLabelsArray[3] = dice4;
-        dice1.setIcon(diceState1);
-        dice2.setIcon(diceState1);
-        dice3.setIcon(diceState1);
-        dice4.setIcon(diceState1);
+        dice1.setIcon(noColorTipDiceState);
+        dice2.setIcon(noColorTipDiceState);
+        dice3.setIcon(noColorTipDiceState);
+        dice4.setIcon(noColorTipDiceState);
     }
     
     public void showThrow(int rollResult)
     {
         for(int index = 0; index < rollResult; index++){
-            diceLabelsArray[index].setIcon(diceState2);
+            diceLabelsArray[index].setIcon(colorTipDiceState);
         }
     }
     
    public void cleanDice()
    {
-        dice1.setIcon(diceState1);
-        dice2.setIcon(diceState1);
-        dice3.setIcon(diceState1);
-        dice4.setIcon(diceState1);
+        dice1.setIcon(noColorTipDiceState);
+        dice2.setIcon(noColorTipDiceState);
+        dice3.setIcon(noColorTipDiceState);
+        dice4.setIcon(noColorTipDiceState);
    }
     
     public void setMoves(int rollResult)
@@ -77,6 +77,7 @@ public class UrDiceView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         dice1.setText("dice1");
+        dice1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         dice2.setText("dice2");
 
