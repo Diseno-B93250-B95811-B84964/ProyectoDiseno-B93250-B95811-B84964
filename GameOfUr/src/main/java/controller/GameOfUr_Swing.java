@@ -22,7 +22,7 @@ import model.UrPieceModel; // TODO change this to PieceModel
 
 import view.PlayerView;
 import view.MainMenuView;
-import view.MainMenuViewPanel;
+import view.MainMenu;
 import view.UrDiceView; // TODO change this to DiceView
 import view.UrDiceViewPanel;
 import view.WinnerView;
@@ -69,7 +69,7 @@ public class GameOfUr_Swing {
         UrPieceModel piece = new UrPieceModel();
         MainMenuController menu = new MainMenuController(piece, view);
          */
-        MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
+        MainMenu menuViewPanel = new MainMenu();
         UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
        
         JFrame frame = new JFrame("CardLayout Trials");
