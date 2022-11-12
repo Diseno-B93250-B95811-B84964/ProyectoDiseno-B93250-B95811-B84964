@@ -5,6 +5,15 @@
 
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import model.PlayerModel;
 
 import model.UrPlayerModel;
@@ -13,14 +22,23 @@ import model.UrPieceModel; // TODO change this to PieceModel
 
 import view.PlayerView;
 import view.MainMenuView;
+import view.MainMenuViewPanel;
 import view.UrDiceView; // TODO change this to DiceView
+import view.UrDiceViewPanel;
 import view.WinnerView;
 
 
 public class GameOfUr_Swing {
 
     public static void main(String[] args) {
-        startGame();
+        GameOfUr_Swing my = new GameOfUr_Swing();
+        SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+                            my.startGame();
+			}
+		});
+        
         //displayMainMenu();
     }
     
@@ -29,6 +47,7 @@ public class GameOfUr_Swing {
     * @author Mauricio Palma, Alvaro Miranda
     */
     private static void startGame() {
+        /*
         PlayerView gameView = new PlayerView();
         WinnerView winnerView = new WinnerView();
         PlayerModel firstPlayer = new UrPlayerModel(); // These have to edited after using main menu view
@@ -43,9 +62,60 @@ public class GameOfUr_Swing {
         playerController.setPlayers(firstPlayer, secondPlayer);
         playerController.start();
         
-        gameView.setVisible(true);
-        winnerView.setVisible(false);
-        urView.setVisible(true);
+        //gameView.setVisible(true);
+        //winnerView.setVisible(false);
+        //urView.setVisible(true);
+        
+        MainMenuView view = new MainMenuView();
+        UrPieceModel piece = new UrPieceModel();
+        MainMenuController menu = new MainMenuController(piece, view);
+         */
+        MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
+        UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
+       
+        JFrame frame = new JFrame("CardLayout Trials");
+        JPanel panelCont = new JPanel();
+        CardLayout card = new CardLayout();
+        JButton buttonOne = new JButton("Switch to second panel/workspace");
+        buttonOne.setBounds(35,30,300,15);
+        JButton buttonSecond = new JButton("Switch to first panel/workspace");
+        buttonSecond.setBounds(35,30,300,15);
+
+        panelCont.setLayout(card);
+        //panelCont.add(new JButton("Switch to second panel/workspace"));
+        //panelCont.add(new JButton("Switch to first panel/workspace"));
+        
+        menuViewPanel.add(buttonOne);
+        //panelCont.revalidate(); // invokes layout manager
+        //panelCont.repaint();
+        diceViewPanel.add(buttonSecond);
+        //panelCont.revalidate(); // invokes layout manager
+        //panelCont.repaint();
+        
+        //menuViewPanel.setBackground(Color.BLUE);
+        //diceViewPanel.setBackground(Color.RED);
+
+        
+        panelCont.add(menuViewPanel, "menuView");
+        //panelCont.revalidate(); // invokes layout manager
+        //panelCont.repaint();
+        panelCont.add(diceViewPanel, "diceView");
+        //panelCont.revalidate(); // invokes layout manager
+        //panelCont.repaint();
+        card.show(panelCont, "menuView");
+        
+        buttonOne.addActionListener((ActionEvent arg0) -> {
+            card.show(panelCont, "diceView");
+        });
+		
+        buttonSecond.addActionListener((ActionEvent arg0) -> {
+            card.show(panelCont,"menuView");
+        });
+        frame.add(panelCont);
+        //frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
     
     /**
@@ -59,6 +129,10 @@ public class GameOfUr_Swing {
         MainMenuController menu = new MainMenuController(piece, view);
         
         view.setVisible(true);
+    }
+    
+    private static void CardLayoutMaker(){
+    
     }
 
 }
