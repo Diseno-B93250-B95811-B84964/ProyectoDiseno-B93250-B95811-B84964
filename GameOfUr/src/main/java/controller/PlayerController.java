@@ -4,78 +4,49 @@
  */
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import model.PlayerModel;
-import model.UrDiceModel;
-import view.PlayerView;
-import view.UrDiceView;
-import view.WinnerView;
+
 
 /**
  *
  * @author Mauricio Palma
  */
-public class PlayerController {
-    private PlayerModel playersArray[];
-    private PlayerView gameView;
-    private WinnerView winnerView;
-    private UrDiceModel diceModel;
-    private UrDiceView diceView;
+public abstract class PlayerController {
 
-    private int firstPlayer; 
+    /**
+     * Array of PlayerModels to keep track of every player playing a game
+     */
+    protected PlayerModel playersArray[];
     
-    public PlayerController(PlayerModel aFirstPlayer, PlayerModel aSecondPlayer, PlayerView aGameView,
-            WinnerView aWinnerView, UrDiceModel aDiceModel, UrDiceView aDiceView,
-            UrDiceController diceController){
+    /**
+     * Default contructor that creates two players
+     */
+    public PlayerController(){
         playersArray = new PlayerModel[2];
-        winnerView = aWinnerView;
-        playersArray[0] = aFirstPlayer;
-        playersArray[1] = aSecondPlayer;
-        gameView = aGameView;
-        firstPlayer  = (int)(Math.random()*2);
-        this.gameView.addButtonClickListener( new GameViewListener());
-        
-        diceModel = aDiceModel;
-        diceView = aDiceView;
-        UrDiceController.DiceListener diceListener = diceController.new DiceListener();
-        this.diceView.addDiceListener(diceListener);    
     }
     
-    class GameViewListener implements ActionListener{
+    /**
+    * Constructor that creates N players 
+    * @param numberOfPlayers It indicates the number of players that will be playing the game
+    */
     
-        public void actionPerformed(ActionEvent e) {
-            int diceResult = -1;
-            try {
-                gameView.setplayerTurnsText(firstPlayer+1);
-                diceResult = throwDice();
-                if (diceResult > 0) {
-                    playersArray[firstPlayer].addToScore();
-                }
-                gameView.setplayer0Score(playersArray[firstPlayer].getScore());             
-                if (playersArray[firstPlayer].getScore()>= 7) {
-                    gameView.setVisible(false);
-                    winnerView.setwinnerPlayerText(firstPlayer+1);
-                    winnerView.setVisible(true);
-                }
-                firstPlayer++;
-                firstPlayer %= playersArray.length;
-                gameView.setplayer1Score(playersArray[firstPlayer].getScore());
-
-            }
-            catch(Exception exception) {
-                System.out.println(exception);
-            }
-        }
-        
-        private int throwDice() {
-            int diceResult = -1;
-            diceView.cleanDice();
-            diceModel.rollDice();
-            diceResult = diceModel.getRollResult();
-            diceView.showThrow(diceResult);
-            diceView.setMoves(diceResult);
-            return diceResult;
-        }
+    public PlayerController(int numberOfPlayers){
+        playersArray = new PlayerModel[numberOfPlayers];
     }
+    
+    /**
+     * Method that sets the two players existing in the array to the given parameters
+     * @param firstPlayer The first player that will be playing the game
+     * @param secondPlayer The second player that will be playing the game
+     */
+    public void setPlayers(PlayerModel firstPlayer, PlayerModel secondPlayer){ // make it abstract and remove attributes
+        playersArray[0] = firstPlayer;
+        playersArray[1] = secondPlayer;
+    }
+    
+    /**
+     * Template method that allows the controller to start operating
+     */
+    public abstract void start();
+      
 }

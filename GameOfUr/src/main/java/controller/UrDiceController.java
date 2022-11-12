@@ -33,6 +33,14 @@ public class UrDiceController {
         return model.getRollResult();
     }
     
+    public UrDiceModel getDiceModel() {
+        return this.model;
+    }
+    
+    public UrDiceView getDiceView() {
+        return this.view;
+    }
+    
     class DiceListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e)

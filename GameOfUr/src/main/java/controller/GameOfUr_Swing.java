@@ -6,12 +6,14 @@
 package controller;
 
 import model.PlayerModel;
-import model.UrDiceModel;
-import model.UrPieceModel;
+
+import model.UrPlayerModel;
+import model.UrDiceModel; // TODO change this to DiceModel
+import model.UrPieceModel; // TODO change this to PieceModel
 
 import view.PlayerView;
 import view.MainMenuView;
-import view.UrDiceView;
+import view.UrDiceView; // TODO change this to DiceView
 import view.WinnerView;
 
 
@@ -19,7 +21,7 @@ public class GameOfUr_Swing {
 
     public static void main(String[] args) {
         startGame();
-        displayMainMenu();
+        //displayMainMenu();
     }
     
     /**
@@ -29,20 +31,21 @@ public class GameOfUr_Swing {
     private static void startGame() {
         PlayerView gameView = new PlayerView();
         WinnerView winnerView = new WinnerView();
-        PlayerModel firstPlayer = new PlayerModel();
-        PlayerModel secondPlayer = new PlayerModel();
+        PlayerModel firstPlayer = new UrPlayerModel(); // These have to edited after using main menu view
+        PlayerModel secondPlayer = new UrPlayerModel();
         
         UrDiceModel dice = new UrDiceModel();
-        UrDiceView view = new UrDiceView();
-        UrDiceController controller =  new UrDiceController(dice, view);
+        UrDiceView urView = new UrDiceView();
+        UrDiceController urController =  new UrDiceController(dice, urView);
          
-        PlayerController playerController = new PlayerController(
-                firstPlayer, secondPlayer, gameView, winnerView,
-                dice, view, controller);
+        PlayerController playerController = new UrPlayerController(gameView, winnerView, urController);
+        
+        playerController.setPlayers(firstPlayer, secondPlayer);
+        playerController.start();
         
         gameView.setVisible(true);
         winnerView.setVisible(false);
-        view.setVisible(true);
+        urView.setVisible(true);
     }
     
     /**
