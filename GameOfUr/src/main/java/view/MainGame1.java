@@ -6,10 +6,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,7 +18,7 @@ import javax.swing.JLabel;
  *
  * @author Ryzen
  */
-public class MainGameView extends javax.swing.JPanel {
+public class MainGame1 extends javax.swing.JPanel {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
 
@@ -28,7 +26,7 @@ public class MainGameView extends javax.swing.JPanel {
     /**
      * Creates new form MainGame
      */
-    public MainGameView() throws IOException {
+    public MainGame1() throws IOException {
         initComponents();
         initializeTilesArray();
         makeUrBoard();
@@ -52,33 +50,33 @@ public class MainGameView extends javax.swing.JPanel {
         PlayerScore = new javax.swing.JLabel();
         PlayerScoreTitle = new javax.swing.JLabel();
         inventoryTitle2 = new javax.swing.JLabel();
-        firstPlayerPiece3 = new javax.swing.JButton();
-        firstPlayerPiece5 = new javax.swing.JButton();
-        firstPlayerPiece6 = new javax.swing.JButton();
-        firstPlayerPiece4 = new javax.swing.JButton();
-        firstPlayerPiece2 = new javax.swing.JButton();
-        firstPlayerPiece1 = new javax.swing.JButton();
-        firstPlayerPiece7 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
         DicePanel = new javax.swing.JPanel();
         dice1 = new javax.swing.JLabel();
         dice2 = new javax.swing.JLabel();
-        dice3 = new javax.swing.JLabel();
-        dice4 = new javax.swing.JLabel();
-        throwDiceButton = new javax.swing.JButton();
         moves = new javax.swing.JLabel();
+        dice3 = new javax.swing.JLabel();
+        throwDice = new javax.swing.JButton();
+        dice4 = new javax.swing.JLabel();
         Player2Panel = new javax.swing.JPanel();
         playerLabel1 = new javax.swing.JLabel();
         PlayerName2 = new java.awt.Label();
         PlayerScore2 = new javax.swing.JLabel();
         PlayerScoreTitle2 = new javax.swing.JLabel();
         inventoryTitle3 = new javax.swing.JLabel();
-        secondPlayerPiece3 = new javax.swing.JButton();
-        secondPlayerPiece5 = new javax.swing.JButton();
-        secondPlayerPiece6 = new javax.swing.JButton();
-        secondPlayerPiece4 = new javax.swing.JButton();
-        secondPlayerPiece2 = new javax.swing.JButton();
-        secondPlayerPiece1 = new javax.swing.JButton();
-        secondPlayerPiece7 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
         boardGamePanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -128,52 +126,59 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle2.setText("Pieces Left");
 
-        firstPlayerPiece3.setBorder(null);
-        firstPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece3ActionPerformed(evt);
+                jButton16ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece5.setBorder(null);
-        firstPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton17.setBorder(null);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece5ActionPerformed(evt);
+                jButton17ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece6.setBorder(null);
-        firstPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton18.setBorder(null);
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece6ActionPerformed(evt);
+                jButton18ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece4.setBorder(null);
-        firstPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
+        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton19.setBorder(null);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece4ActionPerformed(evt);
+                jButton19ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece2.setBorder(null);
-        firstPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
+        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton20.setBorder(null);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece2ActionPerformed(evt);
+                jButton20ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece1.setBorder(null);
-        firstPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
+        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton21.setBorder(null);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece1ActionPerformed(evt);
+                jButton21ActionPerformed(evt);
             }
         });
 
-        firstPlayerPiece7.setBorder(null);
-        firstPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
+        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
+        jButton22.setBorder(null);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstPlayerPiece7ActionPerformed(evt);
+                jButton22ActionPerformed(evt);
             }
         });
 
@@ -199,18 +204,18 @@ public class MainGameView extends javax.swing.JPanel {
                             .addComponent(PlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player1PanelLayout.createSequentialGroup()
                             .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(firstPlayerPiece3)
-                                .addComponent(firstPlayerPiece2)
-                                .addComponent(firstPlayerPiece1))
+                                .addComponent(jButton16)
+                                .addComponent(jButton20)
+                                .addComponent(jButton21))
                             .addGap(18, 18, 18)
-                            .addComponent(firstPlayerPiece4)
+                            .addComponent(jButton19)
                             .addGap(18, 18, 18)
                             .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(firstPlayerPiece6)
-                                .addComponent(firstPlayerPiece5)
-                                .addComponent(firstPlayerPiece7))
+                                .addComponent(jButton18)
+                                .addComponent(jButton17)
+                                .addComponent(jButton22))
                             .addGap(72, 72, 72))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Player1PanelLayout.setVerticalGroup(
             Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,44 +228,39 @@ public class MainGameView extends javax.swing.JPanel {
                 .addComponent(inventoryTitle2)
                 .addGap(18, 18, 18)
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(firstPlayerPiece3)
-                    .addComponent(firstPlayerPiece4)
-                    .addComponent(firstPlayerPiece5))
+                    .addComponent(jButton16)
+                    .addComponent(jButton19)
+                    .addComponent(jButton17))
                 .addGap(18, 18, 18)
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(firstPlayerPiece6)
-                    .addComponent(firstPlayerPiece2))
+                    .addComponent(jButton18)
+                    .addComponent(jButton20))
                 .addGap(18, 18, 18)
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(firstPlayerPiece7)
-                    .addComponent(firstPlayerPiece1))
+                    .addComponent(jButton22)
+                    .addComponent(jButton21))
                 .addGap(54, 54, 54)
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dice1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice1.setText("dice1");
 
+        dice2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice2.setText("dice2");
 
+        moves.setText("Number of moves");
+
+        dice3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice3.setText("dice3");
 
+        throwDice.setText("Throw Dice");
+
+        dice4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice4.setText("dice4");
-
-        throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));
-        throwDiceButton.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
-        throwDiceButton.setForeground(new java.awt.Color(255, 255, 255));
-        throwDiceButton.setText("THROW DICE");
-        throwDiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                throwDiceButtonActionPerformed(evt);
-            }
-        });
-
-        moves.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        moves.setText("Number of moves");
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
@@ -269,18 +269,17 @@ public class MainGameView extends javax.swing.JPanel {
             .addGroup(DicePanelLayout.createSequentialGroup()
                 .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DicePanelLayout.createSequentialGroup()
+                        .addComponent(moves)
+                        .addGap(141, 141, 141)
+                        .addComponent(throwDice))
+                    .addGroup(DicePanelLayout.createSequentialGroup()
                         .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DicePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(throwDiceButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(moves)))
+                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         DicePanelLayout.setVerticalGroup(
@@ -291,11 +290,11 @@ public class MainGameView extends javax.swing.JPanel {
                     .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(throwDiceButton)
-                    .addComponent(moves))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(moves)
+                    .addComponent(throwDice))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -319,52 +318,59 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle3.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle3.setText("Pieces Left");
 
-        secondPlayerPiece3.setBorder(null);
-        secondPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
+        jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton23.setBorder(null);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece3ActionPerformed(evt);
+                jButton23ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece5.setBorder(null);
-        secondPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton24.setBorder(null);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece5ActionPerformed(evt);
+                jButton24ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece6.setBorder(null);
-        secondPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
+        jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton25.setBorder(null);
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece6ActionPerformed(evt);
+                jButton25ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece4.setBorder(null);
-        secondPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
+        jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton26.setBorder(null);
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece4ActionPerformed(evt);
+                jButton26ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece2.setBorder(null);
-        secondPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
+        jButton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton27.setBorder(null);
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece2ActionPerformed(evt);
+                jButton27ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece1.setBorder(null);
-        secondPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
+        jButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton28.setBorder(null);
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece1ActionPerformed(evt);
+                jButton28ActionPerformed(evt);
             }
         });
 
-        secondPlayerPiece7.setBorder(null);
-        secondPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
+        jButton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
+        jButton29.setBorder(null);
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                secondPlayerPiece7ActionPerformed(evt);
+                jButton29ActionPerformed(evt);
             }
         });
 
@@ -390,16 +396,16 @@ public class MainGameView extends javax.swing.JPanel {
                             .addComponent(inventoryTitle3)
                             .addGroup(Player2PanelLayout.createSequentialGroup()
                                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(secondPlayerPiece3)
-                                    .addComponent(secondPlayerPiece2)
-                                    .addComponent(secondPlayerPiece1))
+                                    .addComponent(jButton23)
+                                    .addComponent(jButton27)
+                                    .addComponent(jButton28))
                                 .addGap(18, 18, 18)
-                                .addComponent(secondPlayerPiece4)))
+                                .addComponent(jButton26)))
                         .addGap(18, 18, 18)
                         .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(secondPlayerPiece6)
-                            .addComponent(secondPlayerPiece5)
-                            .addComponent(secondPlayerPiece7))))
+                            .addComponent(jButton25)
+                            .addComponent(jButton24)
+                            .addComponent(jButton29))))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
         Player2PanelLayout.setVerticalGroup(
@@ -413,18 +419,18 @@ public class MainGameView extends javax.swing.JPanel {
                 .addComponent(inventoryTitle3)
                 .addGap(18, 18, 18)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(secondPlayerPiece3)
-                    .addComponent(secondPlayerPiece4)
-                    .addComponent(secondPlayerPiece5))
+                    .addComponent(jButton23)
+                    .addComponent(jButton26)
+                    .addComponent(jButton24))
                 .addGap(18, 18, 18)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(secondPlayerPiece6)
-                    .addComponent(secondPlayerPiece2))
+                    .addComponent(jButton25)
+                    .addComponent(jButton27))
                 .addGap(18, 18, 18)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(secondPlayerPiece7)
-                    .addComponent(secondPlayerPiece1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                    .addComponent(jButton29)
+                    .addComponent(jButton28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore2)))
@@ -502,73 +508,64 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rulesButtonActionPerformed
 
-    private void firstPlayerPiece3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece3ActionPerformed
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece3ActionPerformed
+    }//GEN-LAST:event_jButton16ActionPerformed
 
-    private void firstPlayerPiece5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece5ActionPerformed
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece5ActionPerformed
+    }//GEN-LAST:event_jButton17ActionPerformed
 
-    private void firstPlayerPiece6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece6ActionPerformed
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece6ActionPerformed
+    }//GEN-LAST:event_jButton18ActionPerformed
 
-    private void firstPlayerPiece4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece4ActionPerformed
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece4ActionPerformed
+    }//GEN-LAST:event_jButton19ActionPerformed
 
-    private void firstPlayerPiece2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece2ActionPerformed
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece2ActionPerformed
+    }//GEN-LAST:event_jButton20ActionPerformed
 
-    private void firstPlayerPiece1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece1ActionPerformed
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece1ActionPerformed
+    }//GEN-LAST:event_jButton21ActionPerformed
 
-    private void firstPlayerPiece7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece7ActionPerformed
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstPlayerPiece7ActionPerformed
+    }//GEN-LAST:event_jButton22ActionPerformed
 
-    private void secondPlayerPiece3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece3ActionPerformed
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece3ActionPerformed
+    }//GEN-LAST:event_jButton23ActionPerformed
 
-    private void secondPlayerPiece5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece5ActionPerformed
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece5ActionPerformed
+    }//GEN-LAST:event_jButton24ActionPerformed
 
-    private void secondPlayerPiece6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece6ActionPerformed
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece6ActionPerformed
+    }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void secondPlayerPiece4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece4ActionPerformed
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece4ActionPerformed
+    }//GEN-LAST:event_jButton26ActionPerformed
 
-    private void secondPlayerPiece2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece2ActionPerformed
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece2ActionPerformed
+    }//GEN-LAST:event_jButton27ActionPerformed
 
-    private void secondPlayerPiece1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece1ActionPerformed
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece1ActionPerformed
+    }//GEN-LAST:event_jButton28ActionPerformed
 
-    private void secondPlayerPiece7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondPlayerPiece7ActionPerformed
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_secondPlayerPiece7ActionPerformed
+    }//GEN-LAST:event_jButton29ActionPerformed
 
-    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_throwDiceButtonActionPerformed
-
-    public void addMouseListener(MouseListener listenForMouse) {
-        addMouseListener(listenForMouse);
-    }
-    
-    public JLabel getLabel(int row, int column){
-        System.out.println("Returning label");
-        return tilesArray[row][column];
+    private void createBoard(){
+        
     }
     
     private void  initializeTilesArray(){
@@ -581,20 +578,22 @@ public class MainGameView extends javax.swing.JPanel {
             for (int column = 0; column < COLUMNS; column++) 
             {
                 tilesArray[row][column] = new JLabel();
+                // tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#999999"));
                 tilesArray[row][column].setBackground(Color.decode("#2D3553"));
                 tilesArray[row][column].setOpaque(true);
                 tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
                 boardGamePanel.add(tilesArray[row][column]);
-                //tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column], row, column));
+                tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column], row, column));
                 intialXGap += horizontalGapTuning;
             }
-            intialXGap = verticalGapTuning;
-            intialYGap += verticaOffset;
+              intialXGap = verticalGapTuning;
+              intialYGap += verticaOffset;
         }
     }
     
     private void makeUrBoard() throws IOException{
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
+        // "/src/main/java/images/icon2_rounded.png"
         ImageIcon roseIcon = new ImageIcon(image);
         Image temporalImage = roseIcon.getImage();
         Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
@@ -626,29 +625,49 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JLabel dice2;
     private javax.swing.JLabel dice3;
     private javax.swing.JLabel dice4;
-    private javax.swing.JButton firstPlayerPiece1;
-    private javax.swing.JButton firstPlayerPiece2;
-    private javax.swing.JButton firstPlayerPiece3;
-    private javax.swing.JButton firstPlayerPiece4;
-    private javax.swing.JButton firstPlayerPiece5;
-    private javax.swing.JButton firstPlayerPiece6;
-    private javax.swing.JButton firstPlayerPiece7;
     private javax.swing.JLabel inventoryTitle2;
     private javax.swing.JLabel inventoryTitle3;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JLabel moves;
     private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel playerLabel1;
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton rulesButton;
-    private javax.swing.JButton secondPlayerPiece1;
-    private javax.swing.JButton secondPlayerPiece2;
-    private javax.swing.JButton secondPlayerPiece3;
-    private javax.swing.JButton secondPlayerPiece4;
-    private javax.swing.JButton secondPlayerPiece5;
-    private javax.swing.JButton secondPlayerPiece6;
-    private javax.swing.JButton secondPlayerPiece7;
-    private javax.swing.JButton throwDiceButton;
+    private javax.swing.JButton throwDice;
     // End of variables declaration//GEN-END:variables
+    
+    class TileMouseListener extends MouseAdapter {
+        JLabel label;
+        int row;
+        int column;
 
+        TileMouseListener(JLabel label, int row, int column){
+            this.label = label;
+            this.row = row;
+            this.column = column;
+        }
+
+        @Override
+        public void mousePressed(MouseEvent entered){
+            this.label.setBackground(Color.red);
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent entered){
+            this.label.setBackground(Color.decode("#2D3553"));
+        }
+    }
 }
-

@@ -20,6 +20,7 @@ import model.PlayerModel;
 import model.UrPlayerModel;
 import model.UrDiceModel; // TODO change this to DiceModel
 import model.UrPieceModel; // TODO change this to PieceModel
+import view.MainGame1;
 import view.MainGameView;
 
 import view.PlayerView;
@@ -73,58 +74,72 @@ public class GameOfUr_Swing {
          */
         MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
         //UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
-        MainGameView diceViewPanel = null;
+        //MainGame1 diceViewPanel = null;
         
         try {
-          diceViewPanel = new MainGameView();
+            MainGameView diceViewPanel = new MainGameView();
+            MainGameController mainController = new MainGameController(diceViewPanel);
+            JFrame frame = new JFrame("CardLayout Trials");
+            JPanel panelCont = new JPanel();
+            CardLayout card = new CardLayout();
+            JButton buttonOne = new JButton("Switch to second panel/workspace");
+            buttonOne.setBounds(35,30,300,15);
+            JButton buttonSecond = new JButton("Switch to first panel/workspace");
+            buttonSecond.setBounds(35,30,300,15);
+
+            panelCont.setLayout(card);
+            //panelCont.add(new JButton("Switch to second panel/workspace"));
+            //panelCont.add(new JButton("Switch to first panel/workspace"));
+
+            menuViewPanel.add(buttonOne);
+            //panelCont.revalidate(); // invokes layout manager
+            //panelCont.repaint();
+            diceViewPanel.add(buttonSecond);
+            //panelCont.revalidate(); // invokes layout manager
+            //panelCont.repaint();
+
+            //menuViewPanel.setBackground(Color.BLUE);
+            //diceViewPanel.setBackground(Color.RED);
+
+
+            panelCont.add(menuViewPanel, "menuView");
+            //panelCont.revalidate(); // invokes layout manager
+            //panelCont.repaint();
+            panelCont.add(diceViewPanel, "diceView");
+            //panelCont.revalidate(); // invokes layout manager
+            //panelCont.repaint();
+            card.show(panelCont, "diceView");
+
+            buttonOne.addActionListener((ActionEvent arg0) -> {
+                card.show(panelCont, "diceView");
+            });
+
+            buttonSecond.addActionListener((ActionEvent arg0) -> {
+                card.show(panelCont,"menuView");
+            });
+            frame.add(panelCont);
+            //frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
         }
         catch(IOException e) {
           e.printStackTrace();
         }
         
-        JFrame frame = new JFrame("CardLayout Trials");
-        JPanel panelCont = new JPanel();
-        CardLayout card = new CardLayout();
-        JButton buttonOne = new JButton("Switch to second panel/workspace");
-        buttonOne.setBounds(35,30,300,15);
-        JButton buttonSecond = new JButton("Switch to first panel/workspace");
-        buttonSecond.setBounds(35,30,300,15);
+        
+        
+        /*
+        try {
+            MainGameView gameView = new MainGameView();
+            MainGameController mainController = new MainGameController(gameView);
+            gameView.setVisible(true);
+        } catch (IOException e){
+          e.printStackTrace();
+        }
+        */
+         
 
-        panelCont.setLayout(card);
-        //panelCont.add(new JButton("Switch to second panel/workspace"));
-        //panelCont.add(new JButton("Switch to first panel/workspace"));
-        
-        menuViewPanel.add(buttonOne);
-        //panelCont.revalidate(); // invokes layout manager
-        //panelCont.repaint();
-        diceViewPanel.add(buttonSecond);
-        //panelCont.revalidate(); // invokes layout manager
-        //panelCont.repaint();
-        
-        //menuViewPanel.setBackground(Color.BLUE);
-        //diceViewPanel.setBackground(Color.RED);
-
-        
-        panelCont.add(menuViewPanel, "menuView");
-        //panelCont.revalidate(); // invokes layout manager
-        //panelCont.repaint();
-        panelCont.add(diceViewPanel, "diceView");
-        //panelCont.revalidate(); // invokes layout manager
-        //panelCont.repaint();
-        card.show(panelCont, "diceView");
-        
-        buttonOne.addActionListener((ActionEvent arg0) -> {
-            card.show(panelCont, "diceView");
-        });
-		
-        buttonSecond.addActionListener((ActionEvent arg0) -> {
-            card.show(panelCont,"menuView");
-        });
-        frame.add(panelCont);
-        //frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
     
     /**

@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.awt.Color;
-
 /**
  *
  * @author Jimena Gdur Vargas
@@ -13,7 +11,6 @@ import java.awt.Color;
 public class PieceModel {
     protected int x;
     protected int y;
-    protected Color pieceColor;
     
     public PieceModel() {
         x = 0;
@@ -34,13 +31,5 @@ public class PieceModel {
     
     public int getY() {
         return y;
-    }
-    
-    public void setColor(Color pieceColor){
-        this.pieceColor = pieceColor;
-    }
-    
-    public Color getColor(){
-        return pieceColor;
     }
 }
