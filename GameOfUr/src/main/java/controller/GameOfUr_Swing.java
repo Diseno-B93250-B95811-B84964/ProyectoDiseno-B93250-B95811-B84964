@@ -20,7 +20,6 @@ import model.PlayerModel;
 import model.UrPlayerModel;
 import model.UrDiceModel; // TODO change this to DiceModel
 import model.UrPieceModel; // TODO change this to PieceModel
-import view.MainGame1;
 import view.MainGameView;
 
 import view.PlayerView;

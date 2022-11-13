@@ -179,7 +179,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -213,7 +213,7 @@
                       <Component id="PlayerScoreTitle" max="32767" attributes="0"/>
                       <Component id="PlayerScore" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="216" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -264,6 +264,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -274,6 +277,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece5">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -284,6 +290,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece6">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -294,6 +303,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece4">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -304,6 +316,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -314,6 +329,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -324,6 +342,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece7">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -383,21 +404,33 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="dice1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/result_0_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="dice1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="dice2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/result_0_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="dice2"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="dice3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/result_0_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="dice3"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="dice4">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/result_0_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="dice4"/>
           </Properties>
         </Component>
@@ -507,7 +540,7 @@
                       <Component id="secondPlayerPiece7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="secondPlayerPiece1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="270" max="32767" attributes="0"/>
+                  <EmptySpace pref="60" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="PlayerScoreTitle2" alignment="0" max="32767" attributes="0"/>
                       <Component id="PlayerScore2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -562,6 +595,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -572,6 +608,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece5">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -582,6 +621,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece6">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -592,6 +634,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece4">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -602,6 +647,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -612,6 +660,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -622,6 +673,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece7">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

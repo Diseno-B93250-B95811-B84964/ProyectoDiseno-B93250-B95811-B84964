@@ -26,14 +26,15 @@ public class UrBoardModel {
                 urBoard[rows][cols] = new TileModel(); 
             }
         }
+        /*
         urBoard[0][0].isSafe();
         urBoard[0][2].isSafe();
         urBoard[3][1].isSafe();
         urBoard[6][0].isSafe();
-        urBoard[6][2].isSafe();
+        urBoard[6][2].isSafe();*/
         this.playerOneColor = playerOneColor;
     }
-    
+    /*
     public ArrayList<Integer> indicateGameState() {
         ArrayList<Integer> gameState = new ArrayList<>();
         for(int rows = 0; rows < ROWS; rows++){
@@ -50,5 +51,5 @@ public class UrBoardModel {
             }
         }
         return gameState;
-    }
+    }*/
 }
