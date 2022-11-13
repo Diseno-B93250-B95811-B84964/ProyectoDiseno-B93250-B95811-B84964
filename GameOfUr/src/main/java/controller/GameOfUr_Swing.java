@@ -19,6 +19,7 @@ import model.PlayerModel;
 import model.UrPlayerModel;
 import model.UrDiceModel; // TODO change this to DiceModel
 import model.UrPieceModel; // TODO change this to PieceModel
+import view.MainGame1;
 
 import view.PlayerView;
 import view.MainMenuView;
@@ -70,8 +71,10 @@ public class GameOfUr_Swing {
         MainMenuController menu = new MainMenuController(piece, view);
          */
         MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
-        UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
-       
+        //UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
+        MainGame1 diceViewPanel = new MainGame1();
+        
+        
         JFrame frame = new JFrame("CardLayout Trials");
         JPanel panelCont = new JPanel();
         CardLayout card = new CardLayout();
@@ -101,7 +104,7 @@ public class GameOfUr_Swing {
         panelCont.add(diceViewPanel, "diceView");
         //panelCont.revalidate(); // invokes layout manager
         //panelCont.repaint();
-        card.show(panelCont, "menuView");
+        card.show(panelCont, "diceView");
         
         buttonOne.addActionListener((ActionEvent arg0) -> {
             card.show(panelCont, "diceView");

@@ -5,22 +5,26 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
  *
  * @author Ryzen
  */
-public class MainGame extends javax.swing.JPanel {
-    private final static int ROWS = 3;
-    private final static int COLUMNS = 8;
+public class MainGame1 extends javax.swing.JPanel {
+    private final static int ROWS = 8;
+    private final static int COLUMNS = 3;
 
     private JLabel tilesArray[][] = new JLabel[ROWS][COLUMNS];
     /**
      * Creates new form MainGame
      */
-    public MainGame() {
+    public MainGame1() {
         initComponents();
+        initializeTilesArray();
+        makeUrBoard();
     }
 
     /**
@@ -69,30 +73,6 @@ public class MainGame extends javax.swing.JPanel {
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
         boardGamePanel = new javax.swing.JPanel();
-        labelTile0_0 = new javax.swing.JLabel();
-        labelTile0_2 = new javax.swing.JLabel();
-        labelTile0_1 = new javax.swing.JLabel();
-        labelTile4_0 = new javax.swing.JLabel();
-        labelTile1_0 = new javax.swing.JLabel();
-        labelTile3_0 = new javax.swing.JLabel();
-        labelTile2_0 = new javax.swing.JLabel();
-        labelTile5_0 = new javax.swing.JLabel();
-        labelTile7_0 = new javax.swing.JLabel();
-        labelTile6_0 = new javax.swing.JLabel();
-        labelTile1_1 = new javax.swing.JLabel();
-        labelTile2_1 = new javax.swing.JLabel();
-        labelTile3_1 = new javax.swing.JLabel();
-        labelTile4_1 = new javax.swing.JLabel();
-        labelTile5_1 = new javax.swing.JLabel();
-        labelTile6_1 = new javax.swing.JLabel();
-        labelTile7_1 = new javax.swing.JLabel();
-        labelTile1_2 = new javax.swing.JLabel();
-        labelTile2_2 = new javax.swing.JLabel();
-        labelTile3_2 = new javax.swing.JLabel();
-        labelTile4_2 = new javax.swing.JLabel();
-        labelTile5_2 = new javax.swing.JLabel();
-        labelTile6_2 = new javax.swing.JLabel();
-        labelTile7_2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -451,197 +431,15 @@ public class MainGame extends javax.swing.JPanel {
                     .addComponent(PlayerScore2)))
         );
 
-        labelTile0_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile0_0.setText("jLabel2");
-        labelTile0_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile0_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile0_2.setText("jLabel2");
-        labelTile0_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile0_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile0_1.setText("jLabel2");
-        labelTile0_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile4_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile4_0.setText("jLabel2");
-        labelTile4_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile1_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile1_0.setText("jLabel2");
-        labelTile1_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile3_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile3_0.setText("jLabel2");
-        labelTile3_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile2_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile2_0.setText("jLabel2");
-        labelTile2_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile5_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile5_0.setText("jLabel2");
-        labelTile5_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile7_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile7_0.setText("jLabel2");
-        labelTile7_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile6_0.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile6_0.setText("jLabel2");
-        labelTile6_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile1_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile1_1.setText("jLabel2");
-        labelTile1_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile2_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile2_1.setText("jLabel2");
-        labelTile2_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile3_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile3_1.setText("jLabel2");
-        labelTile3_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile4_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile4_1.setText("jLabel2");
-        labelTile4_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile5_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile5_1.setText("jLabel2");
-        labelTile5_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile6_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile6_1.setText("jLabel2");
-        labelTile6_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile7_1.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile7_1.setText("jLabel2");
-        labelTile7_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile1_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile1_2.setText("jLabel2");
-        labelTile1_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile2_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile2_2.setText("jLabel2");
-        labelTile2_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile3_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile3_2.setText("jLabel2");
-        labelTile3_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile4_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile4_2.setText("jLabel2");
-        labelTile4_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile5_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile5_2.setText("jLabel2");
-        labelTile5_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile6_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile6_2.setText("jLabel2");
-        labelTile6_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelTile7_2.setBackground(new java.awt.Color(0, 102, 102));
-        labelTile7_2.setText("jLabel2");
-        labelTile7_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout boardGamePanelLayout = new javax.swing.GroupLayout(boardGamePanel);
         boardGamePanel.setLayout(boardGamePanelLayout);
         boardGamePanelLayout.setHorizontalGroup(
             boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(boardGamePanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(boardGamePanelLayout.createSequentialGroup()
-                        .addComponent(labelTile0_0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelTile0_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelTile0_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(boardGamePanelLayout.createSequentialGroup()
-                        .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTile7_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile3_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile4_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile5_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile6_0, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTile7_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile3_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile4_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile5_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile6_1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTile7_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile3_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile4_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile5_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTile6_2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addGap(0, 336, Short.MAX_VALUE)
         );
         boardGamePanelLayout.setVerticalGroup(
             boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(boardGamePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTile0_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTile0_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTile0_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(boardGamePanelLayout.createSequentialGroup()
-                        .addComponent(labelTile1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile3_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile4_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile5_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile6_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile7_0, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(boardGamePanelLayout.createSequentialGroup()
-                        .addComponent(labelTile1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile3_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile4_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile5_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile6_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile7_1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(boardGamePanelLayout.createSequentialGroup()
-                        .addComponent(labelTile1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile3_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile4_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile5_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile6_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTile7_2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -688,7 +486,7 @@ public class MainGame extends javax.swing.JPanel {
                     .addComponent(boardGamePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                         .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -766,23 +564,41 @@ public class MainGame extends javax.swing.JPanel {
     }
     
     private void  initializeTilesArray(){
-        int xGap = 6;
-        int yGap = 18;
-        int noventaAHacha = 90;
+        int intialXGap = 39;
+        int intialYGap = 18;
+        int horizontalGapTuning = 89;
+        int verticalGapTuning = horizontalGapTuning - 50;
+        int verticaOffset = horizontalGapTuning - 2;
         for (int row = 0; row < ROWS; row++) {
-            for (int column = 0; column < COLUMN; column++) 
+            for (int column = 0; column < COLUMNS; column++) 
             {
-                tilesArray[ROWS][COLUMNS] = new JLabel();
+                tilesArray[row][column] = new JLabel();
                 // tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#999999"));
-                tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#2D3553"));
-                tilesArray[ROWS][COLUMNS].setOpaque(true);
-                tilesArray[ROWS][COLUMNS].setBounds(xGap, yGap, 88, 82);
-                boardGamePanel.add(tilesArray[ROWS][COLUMNS]);
-                xGap += noventaAHacha;
+                tilesArray[row][column].setBackground(Color.decode("#2D3553"));
+                tilesArray[row][column].setOpaque(true);
+                tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
+                boardGamePanel.add(tilesArray[row][column]);
+                intialXGap += horizontalGapTuning;
             }
-              xGap = noventaAHacha-70;
-              yGap += noventaAHacha;
+              intialXGap = verticalGapTuning;
+              intialYGap += verticaOffset;
         }
+    }
+    
+    private void makeUrBoard(){
+        ImageIcon roseIcon = new ImageIcon("src/main/java/images/icon2_rounded.png");
+        Image temporalImage = roseIcon.getImage();
+        Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
+        roseIcon = new ImageIcon(resizedImage);
+        tilesArray[4][0].show(false);
+        tilesArray[5][0].show(false);
+        tilesArray[4][2].show(false);
+        tilesArray[5][2].show(false);
+        tilesArray[0][0].setIcon(roseIcon);
+        tilesArray[0][2].setIcon(roseIcon);
+        tilesArray[3][1].setIcon(roseIcon);
+        tilesArray[6][0].setIcon(roseIcon);
+        tilesArray[6][2].setIcon(roseIcon);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -817,30 +633,6 @@ public class MainGame extends javax.swing.JPanel {
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
-    private javax.swing.JLabel labelTile0_0;
-    private javax.swing.JLabel labelTile0_1;
-    private javax.swing.JLabel labelTile0_2;
-    private javax.swing.JLabel labelTile1_0;
-    private javax.swing.JLabel labelTile1_1;
-    private javax.swing.JLabel labelTile1_2;
-    private javax.swing.JLabel labelTile2_0;
-    private javax.swing.JLabel labelTile2_1;
-    private javax.swing.JLabel labelTile2_2;
-    private javax.swing.JLabel labelTile3_0;
-    private javax.swing.JLabel labelTile3_1;
-    private javax.swing.JLabel labelTile3_2;
-    private javax.swing.JLabel labelTile4_0;
-    private javax.swing.JLabel labelTile4_1;
-    private javax.swing.JLabel labelTile4_2;
-    private javax.swing.JLabel labelTile5_0;
-    private javax.swing.JLabel labelTile5_1;
-    private javax.swing.JLabel labelTile5_2;
-    private javax.swing.JLabel labelTile6_0;
-    private javax.swing.JLabel labelTile6_1;
-    private javax.swing.JLabel labelTile6_2;
-    private javax.swing.JLabel labelTile7_0;
-    private javax.swing.JLabel labelTile7_1;
-    private javax.swing.JLabel labelTile7_2;
     private javax.swing.JLabel moves;
     private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel playerLabel1;

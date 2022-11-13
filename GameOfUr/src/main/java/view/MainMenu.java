@@ -160,10 +160,6 @@ public void addColorButtonClickListener(ActionListener listenForButton) {
         chosenColor = JColorChooser.showDialog(this,"Select a color", initialColor);
     }
     
-    public void setColorChooser() {
-        boxWithChosenColor.setBackground(chosenColor);
-    }
-    
     public Color getChoosenColor() {
         return chosenColor;
     }

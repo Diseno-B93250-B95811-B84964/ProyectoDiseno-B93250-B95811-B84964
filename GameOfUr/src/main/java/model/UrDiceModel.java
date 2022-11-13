@@ -9,7 +9,7 @@ package model;
  */
 public class UrDiceModel extends DiceModel {
     
-    int urNumberOfSides;
+    private int urNumberOfSides;
     
     public UrDiceModel()
     {
