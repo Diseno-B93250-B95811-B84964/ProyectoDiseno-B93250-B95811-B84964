@@ -6,8 +6,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -18,7 +20,7 @@ import javax.swing.JLabel;
  *
  * @author Ryzen
  */
-public class MainGame extends javax.swing.JPanel {
+public class MainGameView extends javax.swing.JPanel {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
 
@@ -26,7 +28,7 @@ public class MainGame extends javax.swing.JPanel {
     /**
      * Creates new form MainGame
      */
-    public MainGame() throws IOException {
+    public MainGameView() throws IOException {
         initComponents();
         initializeTilesArray();
         makeUrBoard();
@@ -578,6 +580,14 @@ public class MainGame extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
+    public void addMouseListener(MouseListener listenForMouse, int row, int column) {
+        tilesArray[row][column].addMouseListener(listenForMouse);
+    }
+    
+    public JLabel getLabel(int row, int column){
+        return tilesArray[row][column];
+    }
+    
     private void  initializeTilesArray(){
         int intialXGap = 39;
         int intialYGap = 18;
@@ -588,16 +598,15 @@ public class MainGame extends javax.swing.JPanel {
             for (int column = 0; column < COLUMNS; column++) 
             {
                 tilesArray[row][column] = new JLabel();
-                // tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#999999"));
                 tilesArray[row][column].setBackground(Color.decode("#2D3553"));
                 tilesArray[row][column].setOpaque(true);
                 tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
                 boardGamePanel.add(tilesArray[row][column]);
-                tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column]));
+                //tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column], row, column));
                 intialXGap += horizontalGapTuning;
             }
-              intialXGap = verticalGapTuning;
-              intialYGap += verticaOffset;
+            intialXGap = verticalGapTuning;
+            intialYGap += verticaOffset;
         }
     }
     
@@ -618,6 +627,9 @@ public class MainGame extends javax.swing.JPanel {
         tilesArray[6][2].setIcon(roseIcon);
     }
     
+    private void getLabel() {
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DicePanel;
     private javax.swing.JPanel Player1Panel;
@@ -657,18 +669,6 @@ public class MainGame extends javax.swing.JPanel {
     private javax.swing.JButton secondPlayerPiece7;
     private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables
-    
-    private class TileMouseListener extends MouseAdapter {
-        JLabel label;
-        
-        TileMouseListener(JLabel label){
-            this.label = label;
-        }
-        
-        @Override
-        public void mousePressed(MouseEvent entered){
-            this.label.setBackground(Color.red);
-        }
-    }
+
 }
 

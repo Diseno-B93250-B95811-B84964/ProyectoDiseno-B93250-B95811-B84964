@@ -20,7 +20,7 @@ import model.PlayerModel;
 import model.UrPlayerModel;
 import model.UrDiceModel; // TODO change this to DiceModel
 import model.UrPieceModel; // TODO change this to PieceModel
-import view.MainGame;
+import view.MainGameView;
 
 import view.PlayerView;
 import view.MainMenuView;
@@ -73,10 +73,10 @@ public class GameOfUr_Swing {
          */
         MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
         //UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
-        MainGame diceViewPanel = null;
+        MainGameView diceViewPanel = null;
         
         try {
-          diceViewPanel = new MainGame();
+          diceViewPanel = new MainGameView();
         }
         catch(IOException e) {
           e.printStackTrace();
