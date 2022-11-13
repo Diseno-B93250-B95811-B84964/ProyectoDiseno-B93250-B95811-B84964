@@ -34,8 +34,8 @@ public class UrBoardModel {
         this.playerOneColor = playerOneColor;
     }
     
-    public ArrayList<int> indicateGameState(){
-        ArrayList<int> gameState = new ArrayList<int>();
+    public ArrayList<Integer> indicateGameState() {
+        ArrayList<Integer> gameState = new ArrayList<>();
         for(int rows = 0; rows < ROWS; rows++){
             for(int cols = 0; cols < COLUMNS; cols++){
                 if( !urBoard[rows][cols].isVacant()){

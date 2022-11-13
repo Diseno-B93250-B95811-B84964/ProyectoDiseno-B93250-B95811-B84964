@@ -6,6 +6,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -575,12 +577,20 @@ public class MainGame1 extends javax.swing.JPanel {
         for (int row = 0; row < ROWS; row++) {
             for (int column = 0; column < COLUMNS; column++) 
             {
+                final int innerIndex = row;
+                final int innerCol = column;
                 tilesArray[row][column] = new JLabel();
                 // tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#999999"));
                 tilesArray[row][column].setBackground(Color.decode("#2D3553"));
                 tilesArray[row][column].setOpaque(true);
                 tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
                 boardGamePanel.add(tilesArray[row][column]);
+                tilesArray[row][column].addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mousePressed(MouseEvent pressed) {
+                        tilesArray[innerIndex][innerCol].setBackground(Color.red);
+                    }
+                });
                 intialXGap += horizontalGapTuning;
             }
               intialXGap = verticalGapTuning;
