@@ -6,6 +6,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -21,7 +24,7 @@ public class MainGame1 extends javax.swing.JPanel {
     /**
      * Creates new form MainGame
      */
-    public MainGame1() {
+    public MainGame1() throws IOException {
         initComponents();
         initializeTilesArray();
         makeUrBoard();
@@ -585,8 +588,10 @@ public class MainGame1 extends javax.swing.JPanel {
         }
     }
     
-    private void makeUrBoard(){
-        ImageIcon roseIcon = new ImageIcon("src/main/java/images/icon2_rounded.png");
+    private void makeUrBoard() throws IOException{
+        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
+        // "/src/main/java/images/icon2_rounded.png"
+        ImageIcon roseIcon = new ImageIcon(image);
         Image temporalImage = roseIcon.getImage();
         Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
         roseIcon = new ImageIcon(resizedImage);

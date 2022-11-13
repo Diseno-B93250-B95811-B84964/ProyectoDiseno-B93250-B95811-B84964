@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -72,8 +73,14 @@ public class GameOfUr_Swing {
          */
         MainMenuViewPanel menuViewPanel = new MainMenuViewPanel();
         //UrDiceViewPanel diceViewPanel = new UrDiceViewPanel();
-        MainGame1 diceViewPanel = new MainGame1();
+        MainGame1 diceViewPanel = null;
         
+        try {
+          diceViewPanel = new MainGame1();
+        }
+        catch(IOException e) {
+          e.printStackTrace();
+        }
         
         JFrame frame = new JFrame("CardLayout Trials");
         JPanel panelCont = new JPanel();

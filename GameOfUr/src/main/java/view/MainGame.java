@@ -770,7 +770,7 @@ public class MainGame extends javax.swing.JPanel {
         int yGap = 18;
         int noventaAHacha = 90;
         for (int row = 0; row < ROWS; row++) {
-            for (int column = 0; column < COLUMN; column++) 
+            for (int column = 0; column < COLUMNS; column++) 
             {
                 tilesArray[ROWS][COLUMNS] = new JLabel();
                 // tilesArray[ROWS][COLUMNS].setBackground(Color.decode("#999999"));
