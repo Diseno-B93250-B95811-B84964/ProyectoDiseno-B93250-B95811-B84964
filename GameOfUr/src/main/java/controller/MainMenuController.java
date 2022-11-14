@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import model.UrPieceModel;
-import view.MainMenuView;
+import view.MainMenuViewOld;
 
 /**
  *
@@ -21,9 +21,9 @@ import view.MainMenuView;
 public class MainMenuController
 {
     private UrPieceModel piece;
-    private MainMenuView menu;
+    private MainMenuViewOld menu;
     
-    public MainMenuController(UrPieceModel piece, MainMenuView view) {
+    public MainMenuController(UrPieceModel piece, MainMenuViewOld view) {
         this.piece = piece;
         this.menu = view;
         

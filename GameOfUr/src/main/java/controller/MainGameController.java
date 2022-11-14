@@ -24,13 +24,17 @@ public class MainGameController {
         JLabel currentLabel;
         for (int row = 0; row < ROWS; row++) {
             for (int column = 0; column < COLUMNS; column++) {
-                currentLabel = gameView.getLabel(ROWS, COLUMNS);
-                this.gameView.addMouseListener(new TileMouseListener(currentLabel,row,column));
+                currentLabel = gameView.getLabel(row, column);
+                currentLabel.addMouseListener(new TileMouseListener(currentLabel,row,column));
             }
-        }
-        
+        }   
+        chooseNextPossibleLabel();
     }
     
+    private void chooseNextPossibleLabel(){
+        gameView.setNextPossibleLabel(2,2);
+    }
+            
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;
@@ -45,6 +49,7 @@ public class MainGameController {
         @Override
         public void mousePressed(MouseEvent entered){
             this.label.setBackground(Color.red);
+            chooseNextPossibleLabel();     
         }
 
         @Override

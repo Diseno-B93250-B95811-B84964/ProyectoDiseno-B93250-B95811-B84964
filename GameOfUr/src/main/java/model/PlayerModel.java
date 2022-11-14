@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.awt.Color;
-
 /**
  *
  * @author Mauricio Palma
@@ -22,15 +20,12 @@ public abstract class PlayerModel {
      */
     protected int score;
     
-    protected Color playerColor;
-    
     /**
      * Default constructor method that sets everything to default values
      */
     public PlayerModel() {
         this.playerID = -1;
         this.score = 0;
-        this.playerColor = Color.WHITE;
     }
     
     /**
