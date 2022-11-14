@@ -19,10 +19,10 @@ import view.MainMenuView;
 import view.MainMenuViewOld;
 import view.UrDiceView;
 
-public class GameOfUr_Swing {
+public class GameOfUrMainController {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(GameOfUr_Swing::startGame);
+        SwingUtilities.invokeLater(GameOfUrMainController::startGame);
     }
     
     /**

@@ -19,7 +19,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>controller.GameOfUr_Swing</mainClass>
+							<mainClass>controller.GameOfUrMainController</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
