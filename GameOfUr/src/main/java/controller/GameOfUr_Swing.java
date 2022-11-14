@@ -40,7 +40,7 @@ public class GameOfUr_Swing {
             UrDiceModel diceModel = new UrDiceModel();
             UrDiceView diceView = new UrDiceView();
             //diceView.setVisible(true);
-            mainGame.add(diceView.getComponent(0));
+            //mainGame.add(diceView.getComponent(0));
             mainGame.revalidate();
             mainGame.repaint();
             
@@ -64,7 +64,12 @@ public class GameOfUr_Swing {
             panelCont.add(mainMenu, "mainMenu");
             panelCont.revalidate();
             panelCont.repaint();
+            
+            //mainGame.add(diceView);
             panelCont.add(mainGame, "mainGame");
+
+            
+            
             panelCont.revalidate(); 
             panelCont.repaint();
             card.show(panelCont, "mainGame");
@@ -77,6 +82,8 @@ public class GameOfUr_Swing {
                 card.show(panelCont,"mainMenu");
             });
             mainFrame.add(panelCont);
+            mainFrame.getContentPane().add(diceView);
+
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.pack();
             mainFrame.setVisible(true);
@@ -95,7 +102,7 @@ public class GameOfUr_Swing {
         MainMenuViewOld view = new MainMenuViewOld();
         UrPieceModel piece = new UrPieceModel();
         
-        MainMenuController menu = new MainMenuController(piece, view);
+        //MainMenuController menu = new MainMenuController(piece, view);
         
         view.setVisible(true);
     }
