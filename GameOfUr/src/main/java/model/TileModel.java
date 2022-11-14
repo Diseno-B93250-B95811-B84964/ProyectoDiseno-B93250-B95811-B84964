@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author mauup
+ * @author Alvaro Miranda
  */
 public class TileModel {
     private int row;

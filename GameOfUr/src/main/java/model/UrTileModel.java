@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class UrTileModel extends TileModel{
     private boolean isSafe;

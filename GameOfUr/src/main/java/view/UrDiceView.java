@@ -4,7 +4,11 @@
  */
 package view;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -13,31 +17,54 @@ import javax.swing.JLabel;
  * @author Alvaro Miranda
  */
 public class UrDiceView extends javax.swing.JPanel {
-
-    ImageIcon diceState1 = new ImageIcon("images/result_0_1.png");
-    ImageIcon diceState2 = new ImageIcon("images/result_1_1.png");
+    /*
+    ImageIcon diceState1 = new ImageIcon("/images/result_0_1.png");
+    ImageIcon diceState2 = new ImageIcon("/images/result_1_1.png");
     JLabel diceLabelsArray[] = new JLabel[4];
+    */
+    
+    private ImageIcon diceState1;
+    private ImageIcon diceState2;
+    private JLabel diceLabelArray[];
     
     /**
      * Creates new form UrDiceViewPanel
      */
-    public UrDiceView() {
+    public UrDiceView() throws IOException{
         initComponents();
         //this.setLocationRelativeTo(null);
-        diceLabelsArray[0] = dice1;
-        diceLabelsArray[1] = dice2;
-        diceLabelsArray[2] = dice3;
-        diceLabelsArray[3] = dice4;
+        
+        //diceState1 = new ImageIcon("/images/result_0_1.png");
+        //diceState2 = new ImageIcon("/images/result_1_1.png");
+        diceLabelArray = new JLabel[4];
+        
+        
+        BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
+        BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
+        diceState1 = resizeImage(diceState1Image);
+        diceState2 = resizeImage(diceState2Image);
+    
+        diceLabelArray[0] = dice1;
+        diceLabelArray[1] = dice2;
+        diceLabelArray[2] = dice3;
+        diceLabelArray[3] = dice4;
         dice1.setIcon(diceState1);
         dice2.setIcon(diceState1);
         dice3.setIcon(diceState1);
         dice4.setIcon(diceState1);
     }
 
+    private ImageIcon resizeImage(BufferedImage diceState){
+        ImageIcon diceStateIcon = new ImageIcon(diceState);
+        Image temporalImage = diceStateIcon.getImage();
+        Image resizedImage = temporalImage.getScaledInstance(77, 77,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+    }
+    
     public void showThrow(int rollResult)
     {
         for(int index = 0; index < rollResult; index++){
-            diceLabelsArray[index].setIcon(diceState2);
+            diceLabelArray[index].setIcon(diceState2);
         }
     }
     
@@ -57,7 +84,7 @@ public class UrDiceView extends javax.swing.JPanel {
     
     public void addDiceListener(ActionListener listenForThrowDice)
     {
-        throwDice.addActionListener(listenForThrowDice); 
+        throwDiceButton.addActionListener(listenForThrowDice); 
     }
     
     /**
@@ -69,74 +96,130 @@ public class UrDiceView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        DicePanel4 = new javax.swing.JPanel();
         dice1 = new javax.swing.JLabel();
         dice2 = new javax.swing.JLabel();
         dice3 = new javax.swing.JLabel();
         dice4 = new javax.swing.JLabel();
-        throwDice = new javax.swing.JButton();
+        throwDiceButton = new javax.swing.JButton();
         moves = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        dice1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice1.setText("dice1");
 
+        dice2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice2.setText("dice2");
 
+        dice3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice3.setText("dice3");
 
+        dice4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice4.setText("dice4");
 
-        throwDice.setText("Throw Dice");
+        throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));
+        throwDiceButton.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
+        throwDiceButton.setForeground(new java.awt.Color(255, 255, 255));
+        throwDiceButton.setText("THROW DICE");
+        throwDiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwDiceButtonActionPerformed(evt);
+            }
+        });
 
+        moves.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         moves.setText("Number of moves");
+
+        javax.swing.GroupLayout DicePanel4Layout = new javax.swing.GroupLayout(DicePanel4);
+        DicePanel4.setLayout(DicePanel4Layout);
+        DicePanel4Layout.setHorizontalGroup(
+            DicePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DicePanel4Layout.createSequentialGroup()
+                .addGroup(DicePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DicePanel4Layout.createSequentialGroup()
+                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DicePanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(throwDiceButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(moves)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        DicePanel4Layout.setVerticalGroup(
+            DicePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DicePanel4Layout.createSequentialGroup()
+                .addGroup(DicePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DicePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(throwDiceButton)
+                    .addComponent(moves))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(DicePanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(694, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(645, Short.MAX_VALUE)
+                .addComponent(DicePanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(throwDice)
-                .addGap(18, 18, 18)
-                .addComponent(moves)
-                .addContainerGap(179, Short.MAX_VALUE))
+            .addGap(0, 1044, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(9, 9, 9)
-                    .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(17, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(231, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(throwDice)
-                    .addComponent(moves))
-                .addGap(46, 46, 46))
+            .addGap(0, 776, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(110, 110, 110)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(111, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_throwDiceButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel DicePanel4;
     private javax.swing.JLabel dice1;
     private javax.swing.JLabel dice2;
     private javax.swing.JLabel dice3;
     private javax.swing.JLabel dice4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel moves;
-    private javax.swing.JButton throwDice;
+    private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables
 }

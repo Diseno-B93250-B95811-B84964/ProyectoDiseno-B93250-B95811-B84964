@@ -147,7 +147,7 @@ public class MainMenuView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rules1ActionPerformed
 
-public void addColorButtonClickListener(ActionListener listenForButton) {
+    public void addColorButtonClickListener(ActionListener listenForButton) {
         colorButton.addActionListener(listenForButton);
     }
     
