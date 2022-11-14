@@ -46,6 +46,7 @@ public class GameOfUrMainController {
            
             MainGameController mainController = new MainGameController(mainGame, piece, menu);
             SelectColorController colorController = new SelectColorController(colorView);
+            colorController.start();
             
             JFrame mainFrame = new JFrame("CardLayout Trials");
             JPanel panelCont = new JPanel();
@@ -56,46 +57,20 @@ public class GameOfUrMainController {
             JButton continueFromColorViewToMainGame = colorView.getContinueButton();
             
             panelCont.setLayout(card);
-            mainMenu.add(startNewGameButton);
-            mainMenu.revalidate();
-            mainMenu.repaint();
             
-            colorView.add(goBackFromColorViewToMainMenu);
-            mainMenu.revalidate();
-            mainMenu.repaint();
+            addButtonToPanel(mainMenu, startNewGameButton);
+            addButtonToPanel(colorView, goBackFromColorViewToMainMenu);
+            addButtonToPanel(colorView, continueFromColorViewToMainGame);
             
-            colorView.add(continueFromColorViewToMainGame);
-            mainMenu.revalidate();
-            mainMenu.repaint();
-            
-            panelCont.add(mainMenu, "mainMenu");
-            panelCont.revalidate();
-            panelCont.repaint();
-            
-            panelCont.add(mainGame, "mainGame");
-            panelCont.revalidate(); 
-            panelCont.repaint();
-            
-            panelCont.add(colorView, "colorView");
-            panelCont.revalidate(); 
-            panelCont.repaint();
+            addToComponentToPanel(panelCont, mainMenu, "mainMenu");
+            addToComponentToPanel(panelCont, mainGame, "mainGame");     
+            addToComponentToPanel(panelCont, colorView, "colorView");
+
+            addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
+            addActionListenerToButton(card, panelCont, goBackFromColorViewToMainMenu, "mainMenu"); 
+            addActionListenerToButton(card, panelCont, continueFromColorViewToMainGame, "mainGame");
             
             card.show(panelCont, "mainMenu");
-
-            startNewGameButton.addActionListener((ActionEvent arg0) -> {
-                card.show(panelCont, "colorView");
-            });
-            
-            goBackFromColorViewToMainMenu.addActionListener((ActionEvent arg0) -> {
-                card.show(panelCont, "mainMenu");
-            });
-            
-                        
-            continueFromColorViewToMainGame.addActionListener((ActionEvent arg0) -> {
-                card.show(panelCont, "mainGame");
-            });
-            
-
             mainFrame.add(panelCont);
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.pack();
@@ -107,6 +82,23 @@ public class GameOfUrMainController {
         }
     }
     
+    private static void addActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName){
+        button.addActionListener((ActionEvent arg0) -> {
+            baseCard.show(basePanel, finalPanelName);
+        });
+    }
+    
+    private static void addButtonToPanel(JPanel basePanel, JButton button){            
+        basePanel.add(button);
+        basePanel.revalidate();
+        basePanel.repaint();
+    }
+    
+    private static void addToComponentToPanel(JPanel basePanel, JPanel newComponent ,String panelsName){
+        basePanel.add(newComponent, panelsName);
+        basePanel.revalidate();
+        basePanel.repaint();
+    }
     /**
     *
     * @author Jimena Gdur
