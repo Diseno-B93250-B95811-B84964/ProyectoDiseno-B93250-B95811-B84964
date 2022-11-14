@@ -39,7 +39,7 @@ public class GameOfUr_Swing {
             
             UrDiceModel diceModel = new UrDiceModel();
             UrDiceView diceView = new UrDiceView();
-            //diceView.setVisible(true);
+
             mainGame.add(diceView.getComponent(0));
             mainGame.revalidate();
             mainGame.repaint();
@@ -85,19 +85,6 @@ public class GameOfUr_Swing {
         }
         catch(IOException e) {
         }
-    }
-    
-    /**
-    *
-    * @author Jimena Gdur
-    */
-    private static void displayMainMenu() {
-        MainMenuViewOld view = new MainMenuViewOld();
-        UrPieceModel piece = new UrPieceModel();
-        
-        MainMenuController menu = new MainMenuController(piece, view);
-        
-        view.setVisible(true);
     }
     
     private static void CardLayoutMaker(){

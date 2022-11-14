@@ -15,30 +15,16 @@ import java.awt.Color;
  */
 public class UrPieceModel extends PieceModel {
 
-    protected Color color;
-
     protected boolean isSafe;
     
     public UrPieceModel() {
         super();
-        color = Color.RED;
         isSafe = false;
     }
     
-    /**
-     * Sets color received by parameters
-     * @param chosenColor
-     */
-    public void setColor(Color chosenColor) {
-        color = chosenColor;
-    }
-    
-    /**
-     * Gets selected color
-     * @return Returns selected color
-     */
-    public Color getColor() {
-        return color;
+    public UrPieceModel(Color playerColor) {
+        super(playerColor);
+        isSafe = false;
     }
     
     /**
