@@ -20,12 +20,12 @@ import model.RulesModel;
  *
  * @author Jimena Gdur
  */
-public class MainMenuViewPanel extends javax.swing.JPanel {
+public class MainMenuViewOld extends javax.swing.JPanel {
 
     /**
      * Creates new form MainMenuViewJPanel
      */
-    public MainMenuViewPanel() {
+    public MainMenuViewOld() {
         initComponents();
     }
 

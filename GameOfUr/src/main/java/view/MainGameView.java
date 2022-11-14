@@ -577,13 +577,11 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
-    public void addMouseListener(MouseListener listenForMouse) {
-        addMouseListener(listenForMouse);
-    }
-    
     public JLabel getLabel(int row, int column){
-        System.out.println("Returning label");
         return tilesArray[row][column];
+    }
+    public void setNextPossibleLabel(int row, int column) {
+        tilesArray[row][column].setBackground(Color.WHITE);
     }
     
     private void  initializeTilesArray(){
@@ -600,7 +598,6 @@ public class MainGameView extends javax.swing.JPanel {
                 tilesArray[row][column].setOpaque(true);
                 tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
                 boardGamePanel.add(tilesArray[row][column]);
-                //tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column], row, column));
                 intialXGap += horizontalGapTuning;
             }
             intialXGap = verticalGapTuning;
