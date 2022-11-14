@@ -205,8 +205,6 @@ public class SelectColorView extends javax.swing.JPanel {
 
       
     public void addTextFieldClickListener(FocusListener listenForButton) {
-        System.out.println("Select color view says hello");
-        //playerNameTextField.addActionListener(listenForButton);
         playerNameTextField.addFocusListener(listenForButton);
     }
     

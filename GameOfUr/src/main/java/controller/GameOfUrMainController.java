@@ -37,14 +37,9 @@ public class GameOfUrMainController {
         try {
             MainMenuView mainMenu = new MainMenuView();
             MainGameView mainGame = new MainGameView();
-            
-            UrPieceModel piece = new UrPieceModel();
-            MainMenuView menu = new MainMenuView();
-            
             SelectColorView colorView = new SelectColorView();
 
-           
-            MainGameController mainController = new MainGameController(mainGame, piece, menu);
+            MainGameController mainController = new MainGameController(mainGame, mainMenu);
             SelectColorController colorController = new SelectColorController(colorView);
             colorController.start();
             
@@ -79,6 +74,7 @@ public class GameOfUrMainController {
             mainFrame.setResizable(false);
         }
         catch(IOException e) {
+            System.out.println("Images not found! Please check images path");
         }
     }
     
@@ -98,22 +94,6 @@ public class GameOfUrMainController {
         basePanel.add(newComponent, panelsName);
         basePanel.revalidate();
         basePanel.repaint();
-    }
-    /**
-    *
-    * @author Jimena Gdur
-    */
-    private static void displayMainMenu() {
-        MainMenuViewOld view = new MainMenuViewOld();
-        UrPieceModel piece = new UrPieceModel();
-        
-        //MainMenuController menu = new MainMenuController(piece, view);
-        
-        view.setVisible(true);
-    }
-    
-    private static void CardLayoutMaker(){
-    
     }
 
 }

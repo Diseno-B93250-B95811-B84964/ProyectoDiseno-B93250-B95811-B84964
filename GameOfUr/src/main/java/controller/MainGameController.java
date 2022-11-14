@@ -32,10 +32,10 @@ public class MainGameController {
     private MainMenuView mainMenuView;
     private UrDiceModel diceModel;
 
-    public MainGameController(MainGameView gameView, UrPieceModel piece, MainMenuView menu){
+    public MainGameController(MainGameView gameView, MainMenuView menu){
         this.diceModel = new UrDiceModel();
         this.gameView = gameView;
-        this.piece = piece;
+        this.piece = new UrPieceModel();
         this.mainMenuView = menu;
         initializeLabels();
         chooseNextPossibleLabel();        
@@ -44,10 +44,12 @@ public class MainGameController {
     }
     
     private void menuHandler(){
-        //this.menu.addColorButtonClickListener( new MenuViewListener());
+        //this.mainMenuView.addColorButtonClickListener( new MenuViewListener());
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
-        System.out.println("Gonna call colorClicker:");
+        System.out.println("Going to call exit button of main menu");
+        this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
+        this.mainMenuView.addLoadGameButtonClickListener(new LoadGameClickListener());
     }
     
     private void initializeLabels(){
@@ -63,6 +65,7 @@ public class MainGameController {
     private void chooseNextPossibleLabel(){
         gameView.setNextPossibleLabel(2,2);
     }
+
       
     /* Listeners */
     class TileMouseListener extends MouseAdapter {
@@ -100,15 +103,6 @@ public class MainGameController {
         }
     }
     
-    class RulesViewListener implements ActionListener {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //mainMenuView.showRules();
-
-        }
-    }
-    
     class SaveAndLeaveClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -133,5 +127,18 @@ public class MainGameController {
 
     }
     
-
+    class ExitClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+    }
+    
+    class LoadGameClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Teach me how to load a game!");
+            
+        }
+    }
 }
