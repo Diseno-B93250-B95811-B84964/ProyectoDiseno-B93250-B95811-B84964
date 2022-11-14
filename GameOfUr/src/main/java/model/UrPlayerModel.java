@@ -5,13 +5,13 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
  * @author Mauricio Palma
  */
 public class UrPlayerModel extends PlayerModel{
-
     /**
      * Default constructor that calls super constructor and sets attribute to a default value
      */

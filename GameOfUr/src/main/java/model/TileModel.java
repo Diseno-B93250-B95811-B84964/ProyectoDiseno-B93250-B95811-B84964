@@ -11,14 +11,20 @@ package model;
 public class TileModel {
     private int row;
     private int column;
-    private boolean isSafe;
+    
     private boolean isVacant;
     private PieceModel piece;
     
     public TileModel(){
         row = -1;
         column = -1;
-        isSafe = false;
+        isVacant = false;
+        piece = null;
+    }
+    
+    public TileModel(int row, int column){
+        this.row = row;
+        this.column = column;
         isVacant = false;
         piece = null;
     }
@@ -31,19 +37,20 @@ public class TileModel {
         return piece;
     }
     
-    public boolean isSafe(){
-        return isSafe;
-    }
-    
     public boolean isVacant(){
         return isVacant;
     }
     
-    public void toggleSafeTile(){
-        this.isSafe = !isSafe;
-    }
     
     public void toggleVacancy(){
         this.isVacant = !isVacant;
+    }
+    
+    public int getRow() {
+        return row;
+    }
+    
+    public int getColumn() {
+        return column;
     }
 }
