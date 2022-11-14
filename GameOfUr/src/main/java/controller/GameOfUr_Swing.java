@@ -82,7 +82,7 @@ public class GameOfUr_Swing {
                 card.show(panelCont,"mainMenu");
             });
             mainFrame.add(panelCont);
-            mainFrame.getContentPane().add(diceView);
+            //mainFrame.getContentPane().add(diceView);
 
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.pack();
