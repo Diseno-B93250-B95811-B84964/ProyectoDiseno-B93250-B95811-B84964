@@ -6,9 +6,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -580,12 +577,11 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
-    public void addMouseListener(MouseListener listenForMouse, int row, int column) {
-        tilesArray[row][column].addMouseListener(listenForMouse);
-    }
-    
     public JLabel getLabel(int row, int column){
         return tilesArray[row][column];
+    }
+    public void setNextPossibleLabel(int row, int column) {
+        tilesArray[row][column].setBackground(Color.WHITE);
     }
     
     private void  initializeTilesArray(){
@@ -602,7 +598,6 @@ public class MainGameView extends javax.swing.JPanel {
                 tilesArray[row][column].setOpaque(true);
                 tilesArray[row][column].setBounds(intialXGap, intialYGap, 80, 80);
                 boardGamePanel.add(tilesArray[row][column]);
-                //tilesArray[row][column].addMouseListener(new TileMouseListener(tilesArray[row][column], row, column));
                 intialXGap += horizontalGapTuning;
             }
             intialXGap = verticalGapTuning;
@@ -627,9 +622,6 @@ public class MainGameView extends javax.swing.JPanel {
         tilesArray[6][2].setIcon(roseIcon);
     }
     
-    private void getLabel() {
-        
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DicePanel;
     private javax.swing.JPanel Player1Panel;
