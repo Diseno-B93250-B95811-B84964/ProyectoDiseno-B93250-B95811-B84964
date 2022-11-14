@@ -37,16 +37,16 @@ public class GameOfUr_Swing {
             UrPieceModel piece = new UrPieceModel();
             MainMenuView menu = new MainMenuView();
             
-            UrDiceModel diceModel = new UrDiceModel();
-            UrDiceView diceView = new UrDiceView();
+            //UrDiceModel diceModel = new UrDiceModel();
+            //UrDiceView diceView = new UrDiceView();
             //diceView.setVisible(true);
             //mainGame.add(diceView.getComponent(0));
             mainGame.revalidate();
             mainGame.repaint();
             
-            UrDiceController diceController = new UrDiceController(diceModel, diceView);
+            //UrDiceController diceController = new UrDiceController(diceModel, diceView);
             
-            MainGameController mainController = new MainGameController(mainGame, piece, menu, diceController);
+            MainGameController mainController = new MainGameController(mainGame, piece, menu);
             JFrame mainFrame = new JFrame("CardLayout Trials");
             JPanel panelCont = new JPanel();
             CardLayout card = new CardLayout();

@@ -25,25 +25,24 @@ public class MainGameController {
     private final static int COLUMNS = 3;
     private MainGameView gameView;
     private UrPieceModel piece;
-    private MainMenuView menu;
-    private UrDiceView diceView;
+    private MainMenuView mainMenuView;
     private UrDiceModel diceModel;
 
-    public MainGameController(MainGameView gameView, UrPieceModel piece, MainMenuView menu, UrDiceController diceController){
+    public MainGameController(MainGameView gameView, UrPieceModel piece, MainMenuView menu){
+        this.diceModel = new UrDiceModel();
         this.gameView = gameView;
         this.piece = piece;
-        this.menu = menu;
+        this.mainMenuView = menu;
         initializeLabels();
         chooseNextPossibleLabel();        
         menuHandler();
-        UrDiceController.DiceListener diceListener = initializeDice(diceController); // TODO move this
-        this.diceView.addDiceListener(diceListener);  
+
     }
     
     private void menuHandler(){
         //this.menu.addColorButtonClickListener( new MenuViewListener());
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
-        //this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
+        this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
     }
     
     private void initializeLabels(){
@@ -60,13 +59,7 @@ public class MainGameController {
         gameView.setNextPossibleLabel(2,2);
     }
       
-    private UrDiceController.DiceListener initializeDice(UrDiceController diceController){ // TODO change it to DiceController
-        diceModel = diceController.getDiceModel();
-        diceView = diceController.getDiceView();
-        UrDiceController.DiceListener diceListener = diceController.new DiceListener();
-        return diceListener;
-    }
-    
+    /* Listeners */
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;
@@ -94,11 +87,11 @@ public class MainGameController {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            menu.chooseColor();
-            Color color = menu.getChoosenColor();            
+            mainMenuView.chooseColor();
+            Color color = mainMenuView.getChoosenColor();            
             piece.setColor(color);
             //menu.setColorChooser();
-            System.out.println("Hey there");
+            System.out.println("Hey there color picker!");
         }
     }
     
@@ -106,8 +99,7 @@ public class MainGameController {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            menu.showRules();
-            System.out.println("Hey there rules!");
+            mainMenuView.showRules();
 
         }
     }
@@ -123,15 +115,14 @@ public class MainGameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int diceResult = getDiceResult();
-            System.out.println("Prueba de throw dice con dice value: " + diceResult);
         }
         
         private int getDiceResult(){
-            diceView.cleanDice();
+            gameView.cleanDice();
             diceModel.rollDice();
             int diceResult = diceModel.getRollResult();
-            diceView.showThrow(diceResult);
-            diceView.setMoves(diceResult);
+            gameView.showThrow(diceResult);
+            gameView.setMoves(diceResult);
             return diceResult;
         }
 

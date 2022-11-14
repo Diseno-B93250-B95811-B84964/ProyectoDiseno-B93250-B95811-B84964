@@ -525,28 +525,6 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
-    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
-        RulesModel rules = new RulesModel();
-        JFrame frame = new JFrame("Rules");        
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);     
-        final JLabel title = new JLabel();
-        title.setFont(new Font("Century Schoolbook", 1, 36));
-        title.setText(rules.getRules()[0]);
-        panel.add(title);    
-        for (int index = 1; index < rules.getLength(); index++) {
-            final JLabel label = new JLabel();
-            label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
-            panel.add(label);
-        }
-        frame.getContentPane().add(panel, BorderLayout.CENTER);   
-        frame.setSize(600, 420);      
-        frame.setLocationRelativeTo(null);  
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_rulesButtonActionPerformed
 
     private void firstPlayerPiece3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece3ActionPerformed
         // TODO add your handling code here:
@@ -608,12 +586,35 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
-   
+    /* Main Panel Buttons */
+    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
+        RulesModel rules = new RulesModel();
+        JFrame frame = new JFrame("Rules");        
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);     
+        final JLabel title = new JLabel();
+        title.setFont(new Font("Century Schoolbook", 1, 36));
+        title.setText(rules.getRules()[0]);
+        panel.add(title);    
+        for (int index = 1; index < rules.getLength(); index++) {
+            final JLabel label = new JLabel();
+            label.setFont(new Font("Century Schoolbook", 0, 18));
+            label.setText(rules.getRules()[index]);
+            panel.add(label);
+        }
+        frame.getContentPane().add(panel, BorderLayout.CENTER);   
+        frame.setSize(600, 420);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_rulesButtonActionPerformed
+
     public void addSaveAndLeaveButtonClickListener(ActionListener listenForButton) {
         saveAndLeaveButton.addActionListener(listenForButton);
     }
     
-     /* Main Board Methods  */
+    /* Main Board Methods  */
 
     
     private void makeUrBoard() throws IOException{
@@ -697,7 +698,34 @@ public class MainGameView extends javax.swing.JPanel {
         Image resizedImage = temporalImage.getScaledInstance(77, 77,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
-        
+    
+    public void showThrow(int rollResult)
+    {
+        for(int index = 0; index < rollResult; index++){
+            diceLabelArray[index].setIcon(scoreDiceState);
+        }
+    }
+    
+    public void cleanDice()
+    {
+         dice1.setIcon(noScoreDiceState);
+         dice2.setIcon(noScoreDiceState);
+         dice3.setIcon(noScoreDiceState);
+         dice4.setIcon(noScoreDiceState);
+    }
+    
+    public void setMoves(int rollResult)
+    {
+        String movesResult = String.valueOf(rollResult);
+        moves.setText(movesResult);
+    }
+    
+    public void addthrowDiceButtonClickListener(ActionListener listenForThrowDice)
+    {
+        System.out.println("Throw dice button has been clicked!");
+        throwDiceButton.addActionListener(listenForThrowDice); 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;
