@@ -37,53 +37,37 @@ public class GameOfUr_Swing {
             UrPieceModel piece = new UrPieceModel();
             MainMenuView menu = new MainMenuView();
             
-            //UrDiceModel diceModel = new UrDiceModel();
-            //UrDiceView diceView = new UrDiceView();
-            //diceView.setVisible(true);
-            //mainGame.add(diceView.getComponent(0));
             mainGame.revalidate();
             mainGame.repaint();
             
-            //UrDiceController diceController = new UrDiceController(diceModel, diceView);
             
             MainGameController mainController = new MainGameController(mainGame, piece, menu);
             JFrame mainFrame = new JFrame("CardLayout Trials");
             JPanel panelCont = new JPanel();
             CardLayout card = new CardLayout();
-            JButton buttonOne = new JButton("Switch to second panel/workspace");
-            buttonOne.setBounds(35,30,300,15);
-            JButton buttonSecond = new JButton("Switch to first panel/workspace");
-            buttonSecond.setBounds(35,30,300,15);
+
+            JButton startNewGameButton = mainMenu.getStartNewGameButton();
             panelCont.setLayout(card);
-            mainMenu.add(buttonOne);
+            mainMenu.add(startNewGameButton);
             mainMenu.revalidate();
             mainMenu.repaint();
-            mainGame.add(buttonSecond);
-            mainGame.revalidate();
-            mainGame.repaint();
+            
             panelCont.add(mainMenu, "mainMenu");
             panelCont.revalidate();
             panelCont.repaint();
             
-            //mainGame.add(diceView);
             panelCont.add(mainGame, "mainGame");
 
-            
-            
             panelCont.revalidate(); 
             panelCont.repaint();
-            card.show(panelCont, "mainGame");
+            card.show(panelCont, "mainMenu");
 
-            buttonOne.addActionListener((ActionEvent arg0) -> {
+            startNewGameButton.addActionListener((ActionEvent arg0) -> {
                 card.show(panelCont, "mainGame");
             });
+            
 
-            buttonSecond.addActionListener((ActionEvent arg0) -> {
-                card.show(panelCont,"mainMenu");
-            });
             mainFrame.add(panelCont);
-            //mainFrame.getContentPane().add(diceView);
-
             mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             mainFrame.pack();
             mainFrame.setVisible(true);

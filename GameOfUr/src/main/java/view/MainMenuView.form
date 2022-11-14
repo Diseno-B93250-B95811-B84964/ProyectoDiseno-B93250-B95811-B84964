@@ -32,10 +32,10 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="317" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="rules1" min="-2" pref="417" max="-2" attributes="0"/>
-                  <Component id="rules" min="-2" pref="417" max="-2" attributes="0"/>
-                  <Component id="newGame" min="-2" pref="417" max="-2" attributes="0"/>
-                  <Component id="newGame1" min="-2" pref="417" max="-2" attributes="0"/>
+                  <Component id="exitButton" min="-2" pref="417" max="-2" attributes="0"/>
+                  <Component id="gameRulesButton" min="-2" pref="417" max="-2" attributes="0"/>
+                  <Component id="loadGameButton" min="-2" pref="417" max="-2" attributes="0"/>
+                  <Component id="startNewGameButton" min="-2" pref="417" max="-2" attributes="0"/>
                   <Component id="gameName" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
@@ -48,13 +48,13 @@
               <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
               <Component id="gameName" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-              <Component id="newGame1" min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="startNewGameButton" min="-2" pref="70" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="newGame" min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="loadGameButton" min="-2" pref="70" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="rules" min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="gameRulesButton" min="-2" pref="70" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="rules1" min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="exitButton" min="-2" pref="70" max="-2" attributes="0"/>
               <EmptySpace pref="196" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -69,7 +69,7 @@
         <Property name="text" type="java.lang.String" value="Royal Game Of Ur"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="rules">
+    <Component class="javax.swing.JButton" name="gameRulesButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="25" green="25" red="2c" type="rgb"/>
@@ -83,10 +83,10 @@
         <Property name="text" type="java.lang.String" value="GAME RULES"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rulesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameRulesButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="newGame">
+    <Component class="javax.swing.JButton" name="loadGameButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="25" green="25" red="2c" type="rgb"/>
@@ -100,10 +100,10 @@
         <Property name="text" type="java.lang.String" value="LOAD GAME"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newGameActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadGameButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="newGame1">
+    <Component class="javax.swing.JButton" name="startNewGameButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="25" green="25" red="2c" type="rgb"/>
@@ -117,10 +117,10 @@
         <Property name="text" type="java.lang.String" value="START NEW GAME"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newGame1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startNewGameButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="rules1">
+    <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="25" green="25" red="2c" type="rgb"/>
@@ -134,7 +134,7 @@
         <Property name="text" type="java.lang.String" value="EXIT"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rules1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
