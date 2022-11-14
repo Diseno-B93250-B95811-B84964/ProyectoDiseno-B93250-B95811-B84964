@@ -17,6 +17,7 @@ import model.UrPieceModel;
 import view.MainGameView;
 import view.MainMenuView;
 import view.MainMenuViewOld;
+import view.SelectColorView;
 import view.UrDiceView;
 
 public class GameOfUrMainController {
@@ -29,7 +30,10 @@ public class GameOfUrMainController {
     *
     * @author Mauricio Palma, Alvaro Miranda
     */
+    
+    
     private static void startGame() {
+            
         try {
             MainMenuView mainMenu = new MainMenuView();
             MainGameView mainGame = new MainGameView();
@@ -37,18 +41,30 @@ public class GameOfUrMainController {
             UrPieceModel piece = new UrPieceModel();
             MainMenuView menu = new MainMenuView();
             
-            mainGame.revalidate();
-            mainGame.repaint();
-            
-            
+            SelectColorView colorView = new SelectColorView();
+
+           
             MainGameController mainController = new MainGameController(mainGame, piece, menu);
+            SelectColorController colorController = new SelectColorController(colorView);
+            
             JFrame mainFrame = new JFrame("CardLayout Trials");
             JPanel panelCont = new JPanel();
             CardLayout card = new CardLayout();
 
             JButton startNewGameButton = mainMenu.getStartNewGameButton();
+            JButton goBackFromColorViewToMainMenu = colorView.getBackButton();
+            JButton continueFromColorViewToMainGame = colorView.getContinueButton();
+            
             panelCont.setLayout(card);
             mainMenu.add(startNewGameButton);
+            mainMenu.revalidate();
+            mainMenu.repaint();
+            
+            colorView.add(goBackFromColorViewToMainMenu);
+            mainMenu.revalidate();
+            mainMenu.repaint();
+            
+            colorView.add(continueFromColorViewToMainGame);
             mainMenu.revalidate();
             mainMenu.repaint();
             
@@ -57,12 +73,25 @@ public class GameOfUrMainController {
             panelCont.repaint();
             
             panelCont.add(mainGame, "mainGame");
-
             panelCont.revalidate(); 
             panelCont.repaint();
+            
+            panelCont.add(colorView, "colorView");
+            panelCont.revalidate(); 
+            panelCont.repaint();
+            
             card.show(panelCont, "mainMenu");
 
             startNewGameButton.addActionListener((ActionEvent arg0) -> {
+                card.show(panelCont, "colorView");
+            });
+            
+            goBackFromColorViewToMainMenu.addActionListener((ActionEvent arg0) -> {
+                card.show(panelCont, "mainMenu");
+            });
+            
+                        
+            continueFromColorViewToMainGame.addActionListener((ActionEvent arg0) -> {
                 card.show(panelCont, "mainGame");
             });
             

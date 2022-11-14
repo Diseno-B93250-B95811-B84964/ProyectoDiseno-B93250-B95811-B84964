@@ -7,13 +7,17 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import model.UrDiceModel;
 import model.UrPieceModel;
 import view.MainGameView;
 import view.MainMenuView;
+import view.SelectColorView;
 import view.UrDiceView;
 
 /**
@@ -43,6 +47,7 @@ public class MainGameController {
         //this.menu.addColorButtonClickListener( new MenuViewListener());
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
+        System.out.println("Gonna call colorClicker:");
     }
     
     private void initializeLabels(){
@@ -99,7 +104,7 @@ public class MainGameController {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainMenuView.showRules();
+            //mainMenuView.showRules();
 
         }
     }
@@ -127,4 +132,6 @@ public class MainGameController {
         }
 
     }
+    
+
 }

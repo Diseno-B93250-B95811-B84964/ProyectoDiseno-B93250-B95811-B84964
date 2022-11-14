@@ -634,7 +634,7 @@ public class MainGameView extends javax.swing.JPanel {
             tilesArray[6][0].setIcon(roseIcon);
             tilesArray[6][2].setIcon(roseIcon);
         } catch (IOException e) {
-            System.out.println("Sad duck sounds");
+            System.out.println("Rose icon not found");
         }
     }
     
@@ -669,12 +669,10 @@ public class MainGameView extends javax.swing.JPanel {
 
     /* Main Frame Dices Feature */
     private void makeDices(){
-        System.out.println("Im gonna make some dices for ya");
         try{
             diceLabelArray = new JLabel[4];
             BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
             BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
-            System.out.println("Found Images!");
             noScoreDiceState = resizeImage(diceState1Image);
             scoreDiceState = resizeImage(diceState2Image);
 
@@ -688,7 +686,7 @@ public class MainGameView extends javax.swing.JPanel {
             dice4.setIcon(noScoreDiceState);
             
         } catch(IOException e){
-            System.out.println("Images not found");
+            System.out.println("Dices images not found!");
         }
     }
     
@@ -722,7 +720,6 @@ public class MainGameView extends javax.swing.JPanel {
     
     public void addthrowDiceButtonClickListener(ActionListener listenForThrowDice)
     {
-        System.out.println("Throw dice button has been clicked!");
         throwDiceButton.addActionListener(listenForThrowDice); 
     }
     

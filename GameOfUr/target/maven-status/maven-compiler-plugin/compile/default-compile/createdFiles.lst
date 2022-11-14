@@ -1,7 +1,7 @@
-model\DiceModel.class
-model\PieceModel.class
 model\UrDiceModel.class
 view\UrDiceView.class
+model\DiceModel.class
+model\PieceModel.class
 controller\UrDiceController$DiceListener.class
 controller\UrDiceController.class
 view\UrDiceView$1.class
