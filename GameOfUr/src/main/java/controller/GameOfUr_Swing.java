@@ -12,10 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import model.UrDiceModel;
 import model.UrPieceModel; 
 import view.MainGameView;
 import view.MainMenuView;
 import view.MainMenuViewOld;
+import view.UrDiceView;
 
 public class GameOfUr_Swing {
 
@@ -31,7 +33,20 @@ public class GameOfUr_Swing {
         try {
             MainMenuView mainMenu = new MainMenuView();
             MainGameView mainGame = new MainGameView();
-            MainGameController mainController = new MainGameController(mainGame);
+            
+            UrPieceModel piece = new UrPieceModel();
+            MainMenuView menu = new MainMenuView();
+            
+            UrDiceModel diceModel = new UrDiceModel();
+            UrDiceView diceView = new UrDiceView();
+            //diceView.setVisible(true);
+            mainGame.add(diceView.getComponent(0));
+            mainGame.revalidate();
+            mainGame.repaint();
+            
+            UrDiceController diceController = new UrDiceController(diceModel, diceView);
+            
+            MainGameController mainController = new MainGameController(mainGame, piece, menu, diceController);
             JFrame mainFrame = new JFrame("CardLayout Trials");
             JPanel panelCont = new JPanel();
             CardLayout card = new CardLayout();

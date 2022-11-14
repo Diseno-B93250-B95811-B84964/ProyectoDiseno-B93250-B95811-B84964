@@ -4,14 +4,23 @@
  */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.LayoutManager;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import model.RulesModel;
 
 /**
  *
@@ -40,7 +49,7 @@ public class MainGameView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SaveButton = new javax.swing.JButton();
+        saveAndLeaveButton = new javax.swing.JButton();
         rulesButton = new javax.swing.JButton();
         playerTurnLabel = new javax.swing.JLabel();
         Player1Panel = new javax.swing.JPanel();
@@ -56,13 +65,6 @@ public class MainGameView extends javax.swing.JPanel {
         firstPlayerPiece2 = new javax.swing.JButton();
         firstPlayerPiece1 = new javax.swing.JButton();
         firstPlayerPiece7 = new javax.swing.JButton();
-        DicePanel = new javax.swing.JPanel();
-        dice1 = new javax.swing.JLabel();
-        dice2 = new javax.swing.JLabel();
-        dice3 = new javax.swing.JLabel();
-        dice4 = new javax.swing.JLabel();
-        throwDiceButton = new javax.swing.JButton();
-        moves = new javax.swing.JLabel();
         Player2Panel = new javax.swing.JPanel();
         playerLabel1 = new javax.swing.JLabel();
         PlayerName2 = new java.awt.Label();
@@ -80,13 +82,13 @@ public class MainGameView extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        SaveButton.setBackground(new java.awt.Color(44, 37, 37));
-        SaveButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        SaveButton.setForeground(new java.awt.Color(255, 255, 255));
-        SaveButton.setText("SAVE AND EXIT");
-        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+        saveAndLeaveButton.setBackground(new java.awt.Color(44, 37, 37));
+        saveAndLeaveButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        saveAndLeaveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveAndLeaveButton.setText("SAVE AND EXIT");
+        saveAndLeaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveButtonActionPerformed(evt);
+                saveAndLeaveButtonActionPerformed(evt);
             }
         });
 
@@ -245,67 +247,6 @@ public class MainGameView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dice1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
-        dice1.setText("dice1");
-
-        dice2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
-        dice2.setText("dice2");
-
-        dice3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
-        dice3.setText("dice3");
-
-        dice4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
-        dice4.setText("dice4");
-
-        throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));
-        throwDiceButton.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
-        throwDiceButton.setForeground(new java.awt.Color(255, 255, 255));
-        throwDiceButton.setText("THROW DICE");
-        throwDiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                throwDiceButtonActionPerformed(evt);
-            }
-        });
-
-        moves.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        moves.setText("Number of moves");
-
-        javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
-        DicePanel.setLayout(DicePanelLayout);
-        DicePanelLayout.setHorizontalGroup(
-            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DicePanelLayout.createSequentialGroup()
-                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DicePanelLayout.createSequentialGroup()
-                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DicePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(throwDiceButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(moves)))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        DicePanelLayout.setVerticalGroup(
-            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DicePanelLayout.createSequentialGroup()
-                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(throwDiceButton)
-                    .addComponent(moves))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
         Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
         Player2Panel.setPreferredSize(new java.awt.Dimension(350, 700));
 
@@ -453,7 +394,7 @@ public class MainGameView extends javax.swing.JPanel {
         );
         boardGamePanelLayout.setVerticalGroup(
             boardGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
+            .addGap(0, 709, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -462,20 +403,15 @@ public class MainGameView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(DicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(boardGamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(saveAndLeaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(33, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -495,26 +431,44 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(boardGamePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveAndLeaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+    private void saveAndLeaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndLeaveButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaveButtonActionPerformed
+    }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
-        // TODO add your handling code here:
+        RulesModel rules = new RulesModel();
+        JFrame frame = new JFrame("Rules");        
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);     
+        final JLabel title = new JLabel();
+        title.setFont(new Font("Century Schoolbook", 1, 36));
+        title.setText(rules.getRules()[0]);
+        panel.add(title);    
+        for (int index = 1; index < rules.getLength(); index++) {
+            final JLabel label = new JLabel();
+            label.setFont(new Font("Century Schoolbook", 0, 18));
+            label.setText(rules.getRules()[index]);
+            panel.add(label);
+        }
+        frame.getContentPane().add(panel, BorderLayout.CENTER);   
+        frame.setSize(600, 420);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_rulesButtonActionPerformed
 
     private void firstPlayerPiece3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece3ActionPerformed
@@ -573,10 +527,11 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_secondPlayerPiece7ActionPerformed
 
-    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_throwDiceButtonActionPerformed
-
+    
+    public void addSaveAndLeaveButtonClickListener(ActionListener listenForButton) {
+        saveAndLeaveButton.addActionListener(listenForButton);
+    }
+    
     public JLabel getLabel(int row, int column){
         return tilesArray[row][column];
     }
@@ -606,24 +561,29 @@ public class MainGameView extends javax.swing.JPanel {
     }
     
     private void makeUrBoard() throws IOException{
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
-        ImageIcon roseIcon = new ImageIcon(image);
-        Image temporalImage = roseIcon.getImage();
-        Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
-        roseIcon = new ImageIcon(resizedImage);
-        tilesArray[4][0].show(false);
-        tilesArray[5][0].show(false);
-        tilesArray[4][2].show(false);
-        tilesArray[5][2].show(false);
-        tilesArray[0][0].setIcon(roseIcon);
-        tilesArray[0][2].setIcon(roseIcon);
-        tilesArray[3][1].setIcon(roseIcon);
-        tilesArray[6][0].setIcon(roseIcon);
-        tilesArray[6][2].setIcon(roseIcon);
+        try {
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
+            ImageIcon roseIcon = new ImageIcon(image);
+            Image temporalImage = roseIcon.getImage();
+            Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
+            roseIcon = new ImageIcon(resizedImage);
+            tilesArray[4][0].show(false);
+            tilesArray[5][0].show(false);
+            tilesArray[4][2].show(false);
+            tilesArray[5][2].show(false);
+            tilesArray[0][0].setIcon(roseIcon);
+            tilesArray[0][2].setIcon(roseIcon);
+            tilesArray[3][1].setIcon(roseIcon);
+            tilesArray[6][0].setIcon(roseIcon);
+            tilesArray[6][2].setIcon(roseIcon);
+        } catch (IOException e) {
+            System.out.println("Sad duck sounds");
+        }
+
     }
-    
+     
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel DicePanel;
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;
     private java.awt.Label PlayerName;
@@ -632,12 +592,7 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JLabel PlayerScore2;
     private javax.swing.JLabel PlayerScoreTitle;
     private javax.swing.JLabel PlayerScoreTitle2;
-    private javax.swing.JButton SaveButton;
     private javax.swing.JPanel boardGamePanel;
-    private javax.swing.JLabel dice1;
-    private javax.swing.JLabel dice2;
-    private javax.swing.JLabel dice3;
-    private javax.swing.JLabel dice4;
     private javax.swing.JButton firstPlayerPiece1;
     private javax.swing.JButton firstPlayerPiece2;
     private javax.swing.JButton firstPlayerPiece3;
@@ -647,11 +602,11 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JButton firstPlayerPiece7;
     private javax.swing.JLabel inventoryTitle2;
     private javax.swing.JLabel inventoryTitle3;
-    private javax.swing.JLabel moves;
     private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel playerLabel1;
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton rulesButton;
+    private javax.swing.JButton saveAndLeaveButton;
     private javax.swing.JButton secondPlayerPiece1;
     private javax.swing.JButton secondPlayerPiece2;
     private javax.swing.JButton secondPlayerPiece3;
@@ -659,7 +614,6 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JButton secondPlayerPiece5;
     private javax.swing.JButton secondPlayerPiece6;
     private javax.swing.JButton secondPlayerPiece7;
-    private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables
 
 }
