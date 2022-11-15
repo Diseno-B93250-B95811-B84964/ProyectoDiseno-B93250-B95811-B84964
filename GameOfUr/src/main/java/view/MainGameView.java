@@ -56,7 +56,7 @@ public class MainGameView extends javax.swing.JPanel {
         rulesButton = new javax.swing.JButton();
         playerTurnLabel = new javax.swing.JLabel();
         Player1Panel = new javax.swing.JPanel();
-        playerLabel = new javax.swing.JLabel();
+        firstPlayerLabel = new javax.swing.JLabel();
         PlayerName = new java.awt.Label();
         PlayerScore = new javax.swing.JLabel();
         PlayerScoreTitle = new javax.swing.JLabel();
@@ -69,7 +69,7 @@ public class MainGameView extends javax.swing.JPanel {
         firstPlayerPiece1 = new javax.swing.JButton();
         firstPlayerPiece7 = new javax.swing.JButton();
         Player2Panel = new javax.swing.JPanel();
-        playerLabel1 = new javax.swing.JLabel();
+        secondPlayerLabel = new javax.swing.JLabel();
         PlayerName2 = new java.awt.Label();
         PlayerScore2 = new javax.swing.JLabel();
         PlayerScoreTitle2 = new javax.swing.JLabel();
@@ -119,9 +119,9 @@ public class MainGameView extends javax.swing.JPanel {
         Player1Panel.setBackground(new java.awt.Color(255, 255, 255));
         Player1Panel.setPreferredSize(new java.awt.Dimension(350, 700));
 
-        playerLabel.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        playerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        playerLabel.setText("Player 1");
+        firstPlayerLabel.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        firstPlayerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        firstPlayerLabel.setText("Player 1");
 
         PlayerName.setAlignment(java.awt.Label.CENTER);
         PlayerName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
@@ -204,7 +204,7 @@ public class MainGameView extends javax.swing.JPanel {
                         .addGap(55, 55, 55)
                         .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(firstPlayerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Player1PanelLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(inventoryTitle2))
@@ -232,7 +232,7 @@ public class MainGameView extends javax.swing.JPanel {
             Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Player1PanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(playerLabel)
+                .addComponent(firstPlayerLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -260,9 +260,9 @@ public class MainGameView extends javax.swing.JPanel {
         Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
         Player2Panel.setPreferredSize(new java.awt.Dimension(350, 700));
 
-        playerLabel1.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        playerLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        playerLabel1.setText("Player 2");
+        secondPlayerLabel.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        secondPlayerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        secondPlayerLabel.setText("Player 2");
 
         PlayerName2.setAlignment(java.awt.Label.CENTER);
         PlayerName2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
@@ -341,7 +341,7 @@ public class MainGameView extends javax.swing.JPanel {
             .addGroup(Player2PanelLayout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(secondPlayerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PlayerName2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Player2PanelLayout.createSequentialGroup()
@@ -372,7 +372,7 @@ public class MainGameView extends javax.swing.JPanel {
             Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Player2PanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(playerLabel1)
+                .addComponent(secondPlayerLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PlayerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -728,6 +728,18 @@ public class MainGameView extends javax.swing.JPanel {
         
     }
     
+    public void setFirstPlayerName(String name){
+        String currentText = firstPlayerLabel.getText();
+        //firstPlayerLabel.setText(currentText+": "+name);
+        firstPlayerLabel.setText(name);
+    }
+    
+    public void setSecondPlayerName(String name){
+        String currentText = secondPlayerLabel.getText();
+        //secondPlayerLabel.setText(currentText+": "+name);
+        secondPlayerLabel.setText(name);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;
@@ -743,6 +755,7 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JLabel dice3;
     private javax.swing.JLabel dice4;
     private javax.swing.JPanel dicePanel;
+    private javax.swing.JLabel firstPlayerLabel;
     private javax.swing.JButton firstPlayerPiece1;
     private javax.swing.JButton firstPlayerPiece2;
     private javax.swing.JButton firstPlayerPiece3;
@@ -753,11 +766,10 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JLabel inventoryTitle2;
     private javax.swing.JLabel inventoryTitle3;
     private javax.swing.JLabel moves;
-    private javax.swing.JLabel playerLabel;
-    private javax.swing.JLabel playerLabel1;
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton rulesButton;
     private javax.swing.JButton saveAndLeaveButton;
+    private javax.swing.JLabel secondPlayerLabel;
     private javax.swing.JButton secondPlayerPiece1;
     private javax.swing.JButton secondPlayerPiece2;
     private javax.swing.JButton secondPlayerPiece3;

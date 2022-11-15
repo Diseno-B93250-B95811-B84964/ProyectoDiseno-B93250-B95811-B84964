@@ -24,13 +24,18 @@ public class SelectColorController {
     tempPlayer playerArray [] = new tempPlayer[2];
     int position = 0;
     
+    ContinueButtonListener a;
+    
     public SelectColorController(int playerNumber){
+        this.playerName = "";
         this.selectColorView = new SelectColorView(playerNumber);
     }
     
     public void start(){
         this.selectColorView.addTextFieldFocusistener(new SetColorClickListener());
-        this.selectColorView.addContinueButtonClickListener(new ContinueButtonListener());
+        
+        a = new ContinueButtonListener();
+        this.selectColorView.addContinueButtonClickListener(a);
     }
     
     public Color getPlayerColor(){
@@ -38,7 +43,9 @@ public class SelectColorController {
     }
     
     public String getPlayerName(){
-        return playerName;
+        //ContinueButtonListener a = new ContinueButtonListener();
+        //return a.getPlayerName();
+        return selectColorView.getPlayerNameTextField().getText();
     }
     
     public tempPlayer[] getTempPlayerArray(){
@@ -69,8 +76,28 @@ public class SelectColorController {
     
     class ContinueButtonListener implements ActionListener{
 
+        private String myPlanerName;
+
+        public ContinueButtonListener() {
+            myPlanerName = "";
+        }
+        
+        
+        
+        public String getPlayerName(){
+            return myPlanerName;
+        }
+        
         @Override
         public void actionPerformed(ActionEvent e) {
+            // || !(selectColorView.getPlayerNameTextField().getText().equals("Enter player name")))
+            System.out.println("continueButton says: " + "[" + selectColorView.getPlayerNameTextField().getText() + "]");
+            if (!(selectColorView.getPlayerNameTextField().getText().equals("Enter player name"))) {
+                this.myPlanerName = selectColorView.getPlayerNameTextField().getText();
+            } else{
+                System.out.println("Cuak");
+            }
+            
             /*
             playerColor = selectColorView.getPlayerColor();
             playerName = selectColorView.getPlayerNameTextField().getText();

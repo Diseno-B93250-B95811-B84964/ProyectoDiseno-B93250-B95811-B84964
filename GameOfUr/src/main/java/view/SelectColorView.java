@@ -224,7 +224,12 @@ public class SelectColorView extends javax.swing.JPanel {
     }//GEN-LAST:event_playerNameTextFieldActionPerformed
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        // TODO add your handling code here:
+        /*System.out.println("continueButton says: " + "[" + playerNameTextField.getText() + "]");
+         if (!(playerNameTextField.getText().equals("Enter player name"))) {
+             this.myPlanerName = selectColorView.getPlayerNameTextField().getText();
+         } else{
+             System.out.println("Cuak");
+         }*/
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void RedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedButtonActionPerformed

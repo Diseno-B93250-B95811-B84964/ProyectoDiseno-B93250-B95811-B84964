@@ -45,7 +45,6 @@ public class MainGameController {
         } catch(IOException e) {
             System.out.println("Images not found! Please check images path");
         }
-
     }
     
     public MainGameView getMainGameView() {
@@ -79,7 +78,15 @@ public class MainGameController {
         gameView.setNextPossibleLabel(2,2);
     }
 
-      
+    public void setFirstPlayerName(String name){
+        gameView.setFirstPlayerName(name);
+    }
+    
+    public void setSecondPlayerName(String name){
+       gameView.setSecondPlayerName(name);
+
+    }
+    
     /* Listeners */
     class TileMouseListener extends MouseAdapter {
         JLabel label;
