@@ -11,6 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import model.UrDiceModel;
@@ -32,15 +33,27 @@ public class MainGameController {
     private MainMenuView mainMenuView;
     private UrDiceModel diceModel;
 
-    public MainGameController(MainGameView gameView, MainMenuView menu){
-        this.diceModel = new UrDiceModel();
-        this.gameView = gameView;
-        this.piece = new UrPieceModel();
-        this.mainMenuView = menu;
-        initializeLabels();
-        chooseNextPossibleLabel();        
-        menuHandler();
+    public MainGameController(){
+        try {
+            this.diceModel = new UrDiceModel();
+            this.gameView = new MainGameView();
+            this.piece = new UrPieceModel();
+            this.mainMenuView = new MainMenuView();
+            initializeLabels();
+            chooseNextPossibleLabel();        
+            menuHandler();
+        } catch(IOException e) {
+            System.out.println("Images not found! Please check images path");
+        }
 
+    }
+    
+    public MainGameView getMainGameView() {
+        return this.gameView;
+    }
+    
+    public MainMenuView getMainMenuView(){
+        return this.mainMenuView;
     }
     
     private void menuHandler(){

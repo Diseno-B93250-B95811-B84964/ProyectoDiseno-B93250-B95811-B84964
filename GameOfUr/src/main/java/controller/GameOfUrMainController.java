@@ -6,6 +6,7 @@
 package controller;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import model.UrDiceModel;
 import model.UrPieceModel; 
+import model.tempPlayer;
 import view.MainGameView;
 import view.MainMenuView;
 import view.MainMenuViewOld;
@@ -33,48 +35,43 @@ public class GameOfUrMainController {
     
     
     private static void startGame() {
-            
-        try {
-            MainMenuView mainMenu = new MainMenuView();
-            MainGameView mainGame = new MainGameView();
-            
-            MainGameController mainController = new MainGameController(mainGame, mainMenu);
-            
-            JFrame mainFrame = new JFrame("Royal Game Of Ur");
-            JPanel panelCont = new JPanel();
-            CardLayout card = new CardLayout();
+                 
+        MainGameController mainController = new MainGameController();
+        MainMenuView mainMenu = mainController.getMainMenuView();
+        MainGameView mainGame = mainController.getMainGameView();
+        
+        JFrame mainFrame = new JFrame("Royal Game Of Ur");
+        JPanel panelCont = new JPanel();
+        CardLayout card = new CardLayout();
 
-            JButton startNewGameButton = mainMenu.getStartNewGameButton();
-            
-            panelCont.setLayout(card);
-            
-            addButtonToPanel(mainMenu, startNewGameButton);
-         
-            addToComponentToPanel(panelCont, mainMenu, "mainMenu");
-            addToComponentToPanel(panelCont, mainGame, "mainGame");              
+        JButton startNewGameButton = mainMenu.getStartNewGameButton();
 
-            addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
-            
-            setPlayersColors(card, panelCont);
-            
-            card.show(panelCont, "mainMenu");
-            mainFrame.add(panelCont);
-            mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            mainFrame.pack();
-            mainFrame.setVisible(true);
-            mainFrame.setLocationRelativeTo(null);
-            mainFrame.setResizable(false);
-        }
-        catch(IOException e) {
-            System.out.println("Images not found! Please check images path");
-        }
+        panelCont.setLayout(card);
+
+        addButtonToPanel(mainMenu, startNewGameButton);
+
+        addToComponentToPanel(panelCont, mainMenu, "mainMenu");
+        addToComponentToPanel(panelCont, mainGame, "mainGame");              
+
+        addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
+
+        
+        setPlayersColors(card, panelCont);
+
+        card.show(panelCont, "mainMenu");
+        mainFrame.add(panelCont);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setResizable(false);
     }
     
     private static void setPlayersColors(CardLayout baseCard, JPanel basePanel){
         int maxPlayers = 2;
         for (int index = 0; index < maxPlayers; index++) {
-            SelectColorView colorView = new SelectColorView(index+1);
-            SelectColorController colorController = new SelectColorController(colorView);
+            SelectColorController colorController = new SelectColorController(index+1);
+            SelectColorView colorView = colorController.getView();
             colorController.start();
             JButton goBackButton = colorView.getBackButton();
             JButton continueButton = colorView.getContinueButton();
@@ -88,6 +85,11 @@ public class GameOfUrMainController {
                 addToComponentToPanel(basePanel, colorView, "colorView"+index);
                 addActionListenerToButton(baseCard, basePanel, continueButton, "mainGame");
             }
+            System.out.println("Going to print color controller data: ");
+            String name = colorController.getPlayerName();
+            Color playerColor = colorController.getPlayerColor();
+            System.out.println("Name is: " + name);
+            System.out.println("Player color is: " + playerColor);
         }
 
     }

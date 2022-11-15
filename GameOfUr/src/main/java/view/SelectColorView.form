@@ -111,6 +111,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="RED"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RedButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BrownButton">
       <Properties>
@@ -176,6 +179,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="BLUE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BlueButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="PurpleButton">
       <Properties>
@@ -190,6 +196,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="PURPLE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PurpleButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>

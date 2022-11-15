@@ -723,6 +723,11 @@ public class MainGameView extends javax.swing.JPanel {
         throwDiceButton.addActionListener(listenForThrowDice); 
     }
     
+    /* Mapping methods from logical matrix to graphical one */
+    public void mapLogicalMatrix(){
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;

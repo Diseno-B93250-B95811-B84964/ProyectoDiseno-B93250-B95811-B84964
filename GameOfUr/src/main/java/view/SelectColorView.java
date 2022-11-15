@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
@@ -14,13 +15,15 @@ import javax.swing.JTextField;
  * @author Ryzen
  */
 public class SelectColorView extends javax.swing.JPanel {
-
+    private Color playerColor;
+    
     /**
      * Creates new form LoadGamePanel
      */
     public SelectColorView(int playerNumber) {
         initComponents();
         setPlayerTitle(playerNumber);
+        playerColor = Color.WHITE;
     }
 
     /**
@@ -50,6 +53,11 @@ public class SelectColorView extends javax.swing.JPanel {
         RedButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         RedButton.setForeground(new java.awt.Color(255, 255, 255));
         RedButton.setText("RED");
+        RedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RedButtonActionPerformed(evt);
+            }
+        });
 
         BrownButton.setBackground(new java.awt.Color(102, 51, 0));
         BrownButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
@@ -85,11 +93,21 @@ public class SelectColorView extends javax.swing.JPanel {
         BlueButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         BlueButton.setForeground(new java.awt.Color(255, 255, 255));
         BlueButton.setText("BLUE");
+        BlueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BlueButtonActionPerformed(evt);
+            }
+        });
 
         PurpleButton.setBackground(new java.awt.Color(102, 0, 102));
         PurpleButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         PurpleButton.setForeground(new java.awt.Color(255, 255, 255));
         PurpleButton.setText("PURPLE");
+        PurpleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PurpleButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setBackground(new java.awt.Color(44, 37, 37));
         backButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
@@ -181,19 +199,24 @@ public class SelectColorView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void YellowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YellowButtonActionPerformed
-        // TODO add your handling code here:
+        playerColor = YellowButton.getBackground();
+        System.out.println(playerColor);
     }//GEN-LAST:event_YellowButtonActionPerformed
 
     private void GreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GreenButtonActionPerformed
-        // TODO add your handling code here:
+        playerColor = GreenButton.getBackground();
+                System.out.println(playerColor);
+
     }//GEN-LAST:event_GreenButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void BrownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrownButtonActionPerformed
-        // TODO add your handling code here:
+        playerColor = BrownButton.getBackground();
+                System.out.println(playerColor);
+
     }//GEN-LAST:event_BrownButtonActionPerformed
 
     private void playerNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerNameTextFieldActionPerformed
@@ -204,6 +227,30 @@ public class SelectColorView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_continueButtonActionPerformed
 
+    private void RedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedButtonActionPerformed
+        playerColor = RedButton.getBackground();
+                System.out.println(playerColor);
+
+    }//GEN-LAST:event_RedButtonActionPerformed
+
+    private void BlueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlueButtonActionPerformed
+        playerColor = BlueButton.getBackground();
+                System.out.println(playerColor);
+
+    }//GEN-LAST:event_BlueButtonActionPerformed
+
+    private void PurpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PurpleButtonActionPerformed
+        playerColor = PurpleButton.getBackground();
+                System.out.println(playerColor);
+
+    }//GEN-LAST:event_PurpleButtonActionPerformed
+
+    /* Button Action Listeners */
+    
+    public void addContinueButtonClickListener(ActionListener listenForButton){
+        continueButton.addActionListener(listenForButton);
+    }
+    
     /* Text setters */
     
     private void setPlayerTitle(int playerNumber){
@@ -222,6 +269,10 @@ public class SelectColorView extends javax.swing.JPanel {
         return playerNameTextField;
     }
 
+    public Color getPlayerColor(){
+        return playerColor;
+    }
+    
     /* Button getters */
     
     public JButton getContinueButton(){
