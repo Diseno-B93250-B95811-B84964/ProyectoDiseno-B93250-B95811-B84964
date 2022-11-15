@@ -18,8 +18,9 @@ public class SelectColorView extends javax.swing.JPanel {
     /**
      * Creates new form LoadGamePanel
      */
-    public SelectColorView() {
+    public SelectColorView(int playerNumber) {
         initComponents();
+        setPlayerTitle(playerNumber);
     }
 
     /**
@@ -203,10 +204,19 @@ public class SelectColorView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_continueButtonActionPerformed
 
-      
-    public void addTextFieldClickListener(FocusListener listenForButton) {
+    /* Text setters */
+    
+    private void setPlayerTitle(int playerNumber){
+        String currentText = Title.getText();
+        Title.setText(currentText + "#" + playerNumber);
+    }
+    
+    /* TextField Listener */
+    public void addTextFieldFocusistener(FocusListener listenForButton) {
         playerNameTextField.addFocusListener(listenForButton);
     }
+    
+    /* Getters */
     
     public JTextField getPlayerNameTextField(){
         return playerNameTextField;

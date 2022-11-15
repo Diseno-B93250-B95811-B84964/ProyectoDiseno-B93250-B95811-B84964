@@ -37,33 +37,25 @@ public class GameOfUrMainController {
         try {
             MainMenuView mainMenu = new MainMenuView();
             MainGameView mainGame = new MainGameView();
-            SelectColorView colorView = new SelectColorView();
-
-            MainGameController mainController = new MainGameController(mainGame, mainMenu);
-            SelectColorController colorController = new SelectColorController(colorView);
-            colorController.start();
             
-            JFrame mainFrame = new JFrame("CardLayout Trials");
+            MainGameController mainController = new MainGameController(mainGame, mainMenu);
+            
+            JFrame mainFrame = new JFrame("Royal Game Of Ur");
             JPanel panelCont = new JPanel();
             CardLayout card = new CardLayout();
 
             JButton startNewGameButton = mainMenu.getStartNewGameButton();
-            JButton goBackFromColorViewToMainMenu = colorView.getBackButton();
-            JButton continueFromColorViewToMainGame = colorView.getContinueButton();
             
             panelCont.setLayout(card);
             
             addButtonToPanel(mainMenu, startNewGameButton);
-            addButtonToPanel(colorView, goBackFromColorViewToMainMenu);
-            addButtonToPanel(colorView, continueFromColorViewToMainGame);
-            
+         
             addToComponentToPanel(panelCont, mainMenu, "mainMenu");
-            addToComponentToPanel(panelCont, mainGame, "mainGame");     
-            addToComponentToPanel(panelCont, colorView, "colorView");
+            addToComponentToPanel(panelCont, mainGame, "mainGame");              
 
             addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
-            addActionListenerToButton(card, panelCont, goBackFromColorViewToMainMenu, "mainMenu"); 
-            addActionListenerToButton(card, panelCont, continueFromColorViewToMainGame, "mainGame");
+            
+            setPlayersColors(card, panelCont);
             
             card.show(panelCont, "mainMenu");
             mainFrame.add(panelCont);
@@ -76,6 +68,28 @@ public class GameOfUrMainController {
         catch(IOException e) {
             System.out.println("Images not found! Please check images path");
         }
+    }
+    
+    private static void setPlayersColors(CardLayout baseCard, JPanel basePanel){
+        int maxPlayers = 2;
+        for (int index = 0; index < maxPlayers; index++) {
+            SelectColorView colorView = new SelectColorView(index+1);
+            SelectColorController colorController = new SelectColorController(colorView);
+            colorController.start();
+            JButton goBackButton = colorView.getBackButton();
+            JButton continueButton = colorView.getContinueButton();
+            addButtonToPanel(colorView, goBackButton);
+            addButtonToPanel(colorView, continueButton);
+            addActionListenerToButton(baseCard, basePanel, goBackButton, "mainMenu");
+            if (index==0) {
+                addToComponentToPanel(basePanel, colorView, "colorView");
+                addActionListenerToButton(baseCard, basePanel, continueButton, "colorView"+(index+1));
+            } else {
+                addToComponentToPanel(basePanel, colorView, "colorView"+index);
+                addActionListenerToButton(baseCard, basePanel, continueButton, "mainGame");
+            }
+        }
+
     }
     
     private static void addActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName){

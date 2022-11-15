@@ -21,7 +21,7 @@ public class SelectColorController {
     }
     
     public void start(){
-        this.selectColorView.addTextFieldClickListener(new SetColorClickListener());
+        this.selectColorView.addTextFieldFocusistener(new SetColorClickListener());
     }
     
     public void getPlayerColor(){
@@ -36,13 +36,17 @@ public class SelectColorController {
         @Override
         public void focusGained(FocusEvent e) {
             JTextField currentInput = selectColorView.getPlayerNameTextField();
-            System.out.println("Texfield controller says hey");
             if (currentInput.getText().equals("Enter player name")) {
                 currentInput.setText("");
-            }        }
+            }        
+        }
 
         @Override
         public void focusLost(FocusEvent e) {
+            JTextField currentInput = selectColorView.getPlayerNameTextField();
+            if (currentInput.getText().equals("")) {
+                currentInput.setText("Enter player name");
+            }     
         }
     }
 }
