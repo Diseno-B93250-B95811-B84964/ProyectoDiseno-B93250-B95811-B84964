@@ -1,25 +1,55 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
+
 package model;
 
 /**
  *
- * @author Mauricio Palma
+ * @author Alvaro Miranda
  */
-public class UrTileModel extends TileModel{
+public class UrTileModel {
+    private int row;
+    private int column;
+    
+    private boolean isVacant;
     private boolean isSafe;
     
+    private UrPieceModel piece;
     
     public UrTileModel(){
-        super();
-        isSafe = false;
+        this.row = -1;
+        this.column = -1;
+        this.isVacant = false;
+        this.isSafe = false;
+        this.piece = null;
     }
     
     public UrTileModel(int row, int column){
-        super(row, column);
-        isSafe = false;
+        this.row = row;
+        this.column = column;
+        this.isVacant = false;
+        this.isSafe = false;
+        this.piece = null;
+    }
+    
+    public int getRow() {
+        return row;
+    }
+    
+    public int getColumn() {
+        return column;
+    }
+    
+    public boolean isVacant(){
+        return isVacant;
+    }
+    
+    public void toggleVacancy(){
+        this.isVacant = !isVacant;
     }
     
     public boolean isSafe(){
@@ -29,4 +59,12 @@ public class UrTileModel extends TileModel{
     public void toggleSafeTile(){
         this.isSafe = !isSafe;
     }
+    
+    public void setPiece(UrPieceModel newPiece){
+        piece = newPiece;
+    }
+    
+    public UrPieceModel getPiece(){
+        return piece;
+    }   
 }

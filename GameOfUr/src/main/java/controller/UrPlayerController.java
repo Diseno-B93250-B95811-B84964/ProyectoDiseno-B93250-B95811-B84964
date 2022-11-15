@@ -4,7 +4,7 @@
  */
 package controller;
 
-import model.PlayerModel;
+import model.UrPlayerModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

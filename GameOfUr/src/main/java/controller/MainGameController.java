@@ -9,11 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+import javax.swing.JFileChooser;
+
 import javax.swing.JLabel;
+
 import model.UrBoardModel;
 import model.UrDiceModel;
 import model.UrPieceModel;
 import model.UrTileModel;
+
 import view.MainGameView;
 import view.MainMenuView;
 import view.UrDiceView;
@@ -88,6 +95,12 @@ public class MainGameController {
         gameView.setNextPossibleLabel(x,y);
     }
       
+    public void save_game() {
+        JFileChooser fileChooser = new JFileChooser();
+        //fileChooser.showSaveDialog(this);
+        //File f = fileChooser.getSelectedFiles();
+    }
+    
     private UrDiceController.DiceListener initializeDice(UrDiceController diceController){ // TODO change it to DiceController
         diceModel = diceController.getDiceModel();
         diceView = diceController.getDiceView();

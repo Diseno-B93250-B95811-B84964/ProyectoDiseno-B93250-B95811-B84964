@@ -1,38 +1,108 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
+
 package model;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 /**
  *
  * @author Mauricio Palma
  */
-public class UrPlayerModel extends PlayerModel{
+public class UrPlayerModel {
     /**
-     * Default constructor that calls super constructor and sets attribute to a default value
+     * Attribute that holds player's color
+     */
+    protected Color playerColor;
+    
+    /**
+     * Attribute that holds player's name
+     */
+    protected String playerName;
+    
+    /**
+     * Attribute that holds player's score
+     */
+    protected int score;
+    
+    /**
+     * Default constructor method that sets everything to default values
      */
     public UrPlayerModel() {
-        super();
+        this.playerColor = Color.WHITE;
+        this.playerName = "Player";
+        this.score = 0;
     }
     
     /**
-     * Constructor method that sets the ID and color of a given Player
-     * @param playerID The ID that will be assigned to the player
-     * @param playerColor The color that will be assigned to the player
+     * Constructor method that sets the PlayerID to the given parameter
+     * @param playerColor Player's Color
      */
-    public UrPlayerModel (int playerID, Color playerColor) {
-        super(playerID);
+    public UrPlayerModel (Color playerColor) {
+        this.playerColor = playerColor;
+        this.playerName = "Player";
+        this.score = 0;
     }
     
     /**
-    * {@inheritDoc}
-    * Within UrPlayerModel, this method will add one point to the current score of the player
-    */
-    @Override
+     * Constructor method that sets the PlayerID to the given parameter
+     * @param playerName Player's Name
+     * @param playerScore Player's Score
+     * @param playerColor Player's Color
+     */
+    public UrPlayerModel (Color playerColor, String playerName, int playerScore) {
+        this.playerColor = playerColor;
+        this.playerName = playerName;
+        this.score = playerScore;
+    }
+    
+    /**
+     * Returns assigned color
+     * @return The Color assigned
+     */
+    public Color getColor(){
+        return this.playerColor;
+    }
+    
+    /**
+     * Assigns color to a player
+     * @param playerColor Chosen color
+     */
+    public void setColor(Color playerColor){
+        this.playerColor = playerColor;
+    }
+    
+    /**
+     * Returns assigned name
+     * @return The String assigned
+     */
+    public String getPlayerName() {
+        return this.playerName;
+    }
+    
+    /**
+     * Assigns name to a player
+     * @param name Chosen name
+     */
+    public void setPlayerName(String name) {
+        this.playerName = name;
+    }
+    
+    /**
+     *
+     * @return An integer indicating the current score of the Player
+     */
+    public int getPlayerScore(){
+        return this.score;
+    }
+    
+    /**
+     * Method that allows to increase score to the Player
+     */
     public void addScoreToPlayer(){
         this.score++;
     }
