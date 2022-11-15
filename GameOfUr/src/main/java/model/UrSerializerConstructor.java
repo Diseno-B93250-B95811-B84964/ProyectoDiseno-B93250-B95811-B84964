@@ -23,7 +23,7 @@ public class UrSerializerConstructor {
     private final static int OCCUPIED_P1 = 1;
     private final static int OCCUPIED_P2 = 2;
     
-    UrSerializerConstructor(UrBoardModel gameBoard, UrPlayerModel player1, UrPlayerModel player2) {
+    public UrSerializerConstructor(UrBoardModel gameBoard, UrPlayerModel player1, UrPlayerModel player2) {
         this.gameBoard = gameBoard;
         this.firstPlayer = player1;
         this.secondPlayer = player2;
