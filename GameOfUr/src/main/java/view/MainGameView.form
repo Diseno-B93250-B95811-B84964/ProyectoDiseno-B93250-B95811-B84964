@@ -80,7 +80,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="Player1Panel" min="-2" pref="514" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Component id="dicePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -149,42 +149,53 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="PlayerName" min="-2" pref="136" max="-2" attributes="0"/>
-                              <Component id="firstPlayerLabel" min="-2" pref="136" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="inventoryTitle2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="PlayerScoreTitle" min="-2" pref="86" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="PlayerScore" min="-2" pref="132" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="firstPlayerPiece3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="firstPlayerPiece2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="firstPlayerPiece1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="firstPlayerLabelName" min="-2" pref="136" max="-2" attributes="0"/>
+                                      <Component id="firstPlayerTitleLabel" min="-2" pref="136" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="firstPlayerPiece4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="firstPlayerPiece6" min="-2" max="-2" attributes="0"/>
-                                  <Component id="firstPlayerPiece5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="firstPlayerPiece7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="inventoryTitle2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="pieceLabelFirstPlayer3" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="pieceLabelFirstPlayer4" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="pieceLabelFirstPlayer6" min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="pieceLabelFirstPlayer1" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="pieceLabelFirstPlayer2" min="-2" pref="70" max="-2" attributes="0"/>
+                                              <Component id="pieceLabelFirstPlayer5" min="-2" pref="70" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="pieceLabelFirstPlayer7" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="PlayerScoreTitle" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="PlayerScore" min="-2" pref="132" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -192,39 +203,44 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="firstPlayerLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="firstPlayerTitleLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PlayerName" min="-2" max="-2" attributes="0"/>
+                  <Component id="firstPlayerLabelName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="inventoryTitle2" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="pieceLabelFirstPlayer4" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelFirstPlayer1" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelFirstPlayer2" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="pieceLabelFirstPlayer3" min="-2" pref="70" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="pieceLabelFirstPlayer5" min="-2" pref="70" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="firstPlayerPiece3" min="-2" max="-2" attributes="0"/>
-                      <Component id="firstPlayerPiece4" min="-2" max="-2" attributes="0"/>
-                      <Component id="firstPlayerPiece5" min="-2" max="-2" attributes="0"/>
+                      <Component id="pieceLabelFirstPlayer6" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="pieceLabelFirstPlayer7" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="firstPlayerPiece6" min="-2" max="-2" attributes="0"/>
-                      <Component id="firstPlayerPiece2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="PlayerScoreTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="PlayerScore" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="firstPlayerPiece7" min="-2" max="-2" attributes="0"/>
-                      <Component id="firstPlayerPiece1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="PlayerScoreTitle" max="32767" attributes="0"/>
-                      <Component id="PlayerScore" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="firstPlayerLabel">
+        <Component class="javax.swing.JLabel" name="firstPlayerTitleLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Schoolbook" size="24" style="1"/>
@@ -233,7 +249,7 @@
             <Property name="text" type="java.lang.String" value="Player 1"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Label" name="PlayerName">
+        <Component class="java.awt.Label" name="firstPlayerLabelName">
           <Properties>
             <Property name="alignment" type="int" value="1"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -267,96 +283,40 @@
             <Property name="text" type="java.lang.String" value="Pieces Left"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece3">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece3ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece5">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer2">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece5ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece6">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer3">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece6ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece4">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer4">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece4ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece2">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer5">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece2ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece1">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer6">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece1ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="firstPlayerPiece7">
+        <Component class="javax.swing.JLabel" name="pieceLabelFirstPlayer7">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstPlayerPiece7ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -376,8 +336,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="secondPlayerLabel" min="-2" pref="136" max="-2" attributes="0"/>
-                      <Component id="PlayerName2" min="-2" pref="136" max="-2" attributes="0"/>
+                      <Component id="secondPlayerTitleLabel" min="-2" pref="136" max="-2" attributes="0"/>
+                      <Component id="secondPlayerLabelName" min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -385,29 +345,32 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="pieceLabelSecondPlayer4" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelSecondPlayer1" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelSecondPlayer7" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="pieceLabelSecondPlayer6" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="pieceLabelSecondPlayer3" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="pieceLabelSecondPlayer5" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="pieceLabelSecondPlayer2" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Component id="PlayerScoreTitle2" min="-2" pref="86" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="PlayerScore2" min="-2" pref="132" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="inventoryTitle3" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="secondPlayerPiece3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="secondPlayerPiece2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="secondPlayerPiece1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="secondPlayerPiece4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="secondPlayerPiece6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="secondPlayerPiece5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="secondPlayerPiece7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="inventoryTitle3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
@@ -418,28 +381,33 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="secondPlayerLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="secondPlayerTitleLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PlayerName2" min="-2" max="-2" attributes="0"/>
+                  <Component id="secondPlayerLabelName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="inventoryTitle3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="secondPlayerPiece3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="secondPlayerPiece4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="secondPlayerPiece5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="pieceLabelSecondPlayer1" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelSecondPlayer6" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="pieceLabelSecondPlayer3" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="pieceLabelSecondPlayer4" min="-2" pref="70" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="pieceLabelSecondPlayer5" min="-2" pref="70" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="secondPlayerPiece6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="secondPlayerPiece2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="pieceLabelSecondPlayer7" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="pieceLabelSecondPlayer2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="secondPlayerPiece7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="secondPlayerPiece1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace pref="66" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="PlayerScoreTitle2" alignment="0" max="32767" attributes="0"/>
                       <Component id="PlayerScore2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -449,7 +417,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="secondPlayerLabel">
+        <Component class="javax.swing.JLabel" name="secondPlayerTitleLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Schoolbook" size="24" style="1"/>
@@ -458,7 +426,7 @@
             <Property name="text" type="java.lang.String" value="Player 2"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Label" name="PlayerName2">
+        <Component class="java.awt.Label" name="secondPlayerLabelName">
           <Properties>
             <Property name="alignment" type="int" value="1"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -492,96 +460,40 @@
             <Property name="text" type="java.lang.String" value="Pieces Left"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece3">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece3ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece5">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer2">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece5ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece6">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer3">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece6ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece4">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer4">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece4ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece2">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer5">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece2ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece1">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer6">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece1ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="secondPlayerPiece7">
+        <Component class="javax.swing.JLabel" name="pieceLabelSecondPlayer7">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondPlayerPiece7ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

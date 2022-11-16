@@ -54,6 +54,10 @@ public class SelectColorController {
         return this.selectColorView;
     }
     
+    public void hideButton(Color color){
+        selectColorView.hideColorButton(color);
+    }
+    
     class SetColorClickListener implements FocusListener{
         @Override
         public void focusGained(FocusEvent e) {
@@ -80,35 +84,15 @@ public class SelectColorController {
             myPlanerName = "";
         }
         
-        
-        
         public String getPlayerName(){
             return myPlanerName;
         }
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            // || !(selectColorView.getPlayerNameTextField().getText().equals("Enter player name")))
-            System.out.println("continueButton says: " + "[" + selectColorView.getPlayerNameTextField().getText() + "]");
             if (!(selectColorView.getPlayerNameTextField().getText().equals("Enter player name"))) {
                 this.myPlanerName = selectColorView.getPlayerNameTextField().getText();
-            } else{
-                System.out.println("Cuak");
             }
-            
-            /*
-            playerColor = selectColorView.getPlayerColor();
-            playerName = selectColorView.getPlayerNameTextField().getText();
-            playerArray[position].setPlayerColor(playerColor);
-            playerArray[position].setPlayerName(playerName);
-            System.out.println("Going to print playerArrayTemp: ");
-            System.out.println("Color: " + playerColor );
-            System.out.println("Name: " + playerName );
-            if (position==0){
-                position +=1;
-            } else {
-                position=0;
-            }*/
         }
     }
 }

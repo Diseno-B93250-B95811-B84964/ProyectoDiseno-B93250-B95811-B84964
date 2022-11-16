@@ -7,8 +7,7 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,12 +15,11 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.PrintWriter;
-import javax.swing.JFileChooser;
 
 import javax.swing.JLabel;
 
 import model.UrBoardModel;
-import javax.swing.JTextField;
+
 import model.UrDiceModel;
 import model.UrPieceModel;
 import model.UrPlayerModel;
@@ -30,14 +28,13 @@ import model.UrTileModel;
 
 import view.MainGameView;
 import view.MainMenuView;
-import view.SelectColorView;
 
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
-public class MainGameController {
+public class GameController {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
     
@@ -58,7 +55,7 @@ public class MainGameController {
     private Color currentPlayer;
     private boolean diceThrown;
     
-    public MainGameController(){
+    public GameController(){
         try {
             this.diceModel = new UrDiceModel();
             this.gameView = new MainGameView();
@@ -82,7 +79,7 @@ public class MainGameController {
     }
     
     /* 
-    public MainGameController(MainGameView gameView, UrPieceModel piece,
+    public GameController(MainGameView gameView, UrPieceModel piece,
         MainMenuView menu, UrDiceController diceController)
     {
         this.gameView = gameView;
@@ -101,10 +98,8 @@ public class MainGameController {
     }*/
     
     private void menuHandler(){
-        //this.mainMenuView.addColorButtonClickListener( new MenuViewListener());
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
-        System.out.println("Going to call exit button of main menu");
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
         this.mainMenuView.addLoadGameButtonClickListener(new LoadGameClickListener());
     }
@@ -152,20 +147,29 @@ public class MainGameController {
     }
 
     public void setFirstPlayerName(String name){
-        gameView.setFirstPlayerName(name);
+        gameView.setFirstPlayerNameToLabel(name);
     }
     
     public void setFirstPlayerColor(Color color){
-        System.out.println("As mainGame controller, color of first player " + color);
+        try {
+            gameView.setFirstPlayerPieceColor(color);
+        } catch (IOException e) {
+            System.out.println("Color piece icon not found");
+        }
     }
     
     public void setSecondPlayerName(String name){
-       gameView.setSecondPlayerName(name);
+       gameView.setSecondPlayerNameToLabel(name);
     }
     
     public void setSecondPlayerColor(Color color){
-        System.out.println("As mainGame controller, color of second player " + color);
+        try {
+            gameView.setSecondPlayerPieceColor(color);
+        } catch (IOException e) {
+            System.out.println("Color piece icon not found");
+        }
     }
+
     
     /* Listeners */
     class TileMouseListener extends MouseAdapter {
@@ -192,19 +196,7 @@ public class MainGameController {
             this.label.setBackground(Color.decode("#2D3553"));
         }
     }
-    
-    class MenuViewListener implements ActionListener {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mainMenuView.chooseColor();
-            Color color = mainMenuView.getChoosenColor();            
-            piece.setColor(color);
-            //menu.setColorChooser();
-            System.out.println("Hey there color picker!");
-        }
-    }
-    
+   
     class SaveAndLeaveClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {

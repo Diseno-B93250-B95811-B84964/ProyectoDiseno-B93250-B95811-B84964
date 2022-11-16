@@ -22,7 +22,7 @@ import model.UrRulesModel;
  * @author Jimena Gdur
  */
 public class MainMenuView extends javax.swing.JPanel {
-    private Color chosenColor;
+   
     /**
      * Creates new form MainMenuViewJPanel
      */
@@ -131,10 +131,7 @@ public class MainMenuView extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     /*Buttons features*/
-    public void addColorButtonClickListener(ActionListener listenForButton) {
-        colorButton.addActionListener(listenForButton);
-    }
-   
+
     public void addExitButtonClickListener(ActionListener listenForButton) {
         exitButton.addActionListener(listenForButton);
     }
@@ -146,45 +143,6 @@ public class MainMenuView extends javax.swing.JPanel {
     /* Button getters */
     public JButton getStartNewGameButton(){
        return startNewGameButton;
-    }
-    
-    /* Color features*/
-    public void chooseColor() {
-        Color initialColor = Color.RED;    
-        chosenColor = JColorChooser.showDialog(this,"Select a color", initialColor);
-    }
-    
-    public Color getChoosenColor() {
-        return chosenColor;
-    }
-    
-    public void showRules() {
-        UrRulesModel rules = new UrRulesModel();
-        
-        JFrame frame = new JFrame("Swing Tester");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);
-        
-        final JLabel title = new JLabel();
-        title.setFont(new Font("Century Schoolbook", 1, 36));
-        title.setText(rules.getRules()[0]);
-        panel.add(title);
-        
-        for (int index = 1; index < rules.getLength(); index++) {
-            final JLabel label = new JLabel();
-            label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
-            panel.add(label);
-        }
-  
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
-        
-        frame.setSize(560, 200);      
-        frame.setLocationRelativeTo(null);  
-        frame.setVisible(true);
     }
     
 

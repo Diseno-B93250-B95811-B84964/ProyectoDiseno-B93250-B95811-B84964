@@ -19,13 +19,13 @@ import view.SelectColorView;
  *
  * @author mauup
  */
-public class mainMainController {
+public class MainController {
     
         tempPlayer playerArray [] = new tempPlayer[2];
         int currentPlayer = 0;
         
         public void startGame() {           
-            MainGameController mainController = new MainGameController();
+            GameController mainController = new GameController();
             MainMenuView mainMenu = mainController.getMainMenuView();
             MainGameView mainGame = mainController.getMainGameView();
 
@@ -56,7 +56,7 @@ public class mainMainController {
             mainFrame.setResizable(false);  
     }
     
-    private  void setPlayersColors(CardLayout baseCard, JPanel basePanel, MainGameController main){
+    private  void setPlayersColors(CardLayout baseCard, JPanel basePanel, GameController main){
         int maxPlayers = 2;
         for (int index = 0; index < maxPlayers; index++) {
             SelectColorController colorController = new SelectColorController(index+1);
@@ -69,48 +69,35 @@ public class mainMainController {
             addActionListenerToButton(baseCard, basePanel, goBackButton, "mainMenu");
             if (index==0) {
                 addToComponentToPanel(basePanel, colorView, "colorView");
-                //addActionListenerToButton(baseCard, basePanel, continueButton, "colorView"+(index+1));
                 addAnotherActionListenerToButton(baseCard, basePanel, continueButton, "colorView"+(index+1), colorController, main);
             } else {
                 addToComponentToPanel(basePanel, colorView, "colorView"+index);
-                //addActionListenerToButton(baseCard, basePanel, continueButton, "mainGame");
                 addAnotherActionListenerToButton(baseCard, basePanel, continueButton, "mainGame", colorController, main);
             }
         }
     }
     
-    private void addAnotherActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName, SelectColorController colorController, MainGameController main){
-        System.out.println("Hello from anotherAction");
-       
+    private void addAnotherActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName, SelectColorController colorController, GameController main){       
         button.addActionListener((ActionEvent arg0) -> {     
             checkColorViewData(baseCard, basePanel,  finalPanelName,  colorController, main);
         });
          // button.doClick();
     }
     
-    private  void checkColorViewData(CardLayout baseCard, JPanel basePanel, String finalPanelName, SelectColorController colorController, MainGameController main){
-        //SelectColorController.ContinueButtonListener a = new SelectColorController(1).ContinueButtonListener();
-        //a.ContinueButtonListener;
-        System.out.println("Controller get player name says: " + "[" + colorController.getPlayerName() + "]");
+    private  void checkColorViewData(CardLayout baseCard, JPanel basePanel, String finalPanelName, SelectColorController colorController, GameController main){
         if (!(colorController.getPlayerName().equals(""))) {
-            System.out.println("It is not empty! it is: " + "[" + colorController.getPlayerName() + "]");
-            System.out.println("It should NOT be a valid color..." + "[" + colorController.getPlayerColor() + "]");
             if (!(("Enter player name").equals(colorController.getPlayerName()))
-                /*&&  !(colorController.getPlayerColor() != Color.WHITE)  */) {
-                System.out.println("It should be a valid name..." + "[" + colorController.getPlayerName() + "]");
-                System.out.println("It should be a valid color..." + "[" + colorController.getPlayerColor() + "]");
-      
+                &&  (colorController.getPlayerColor() != Color.WHITE)) {  
                 if (currentPlayer == 0) {
-
                     main.setFirstPlayerName(colorController.getPlayerName());
                     main.setFirstPlayerColor(colorController.getPlayerColor());
                     currentPlayer+=1;
                 } else {
-
                     main.setSecondPlayerName(colorController.getPlayerName());
                     main.setSecondPlayerColor(colorController.getPlayerColor());
                     currentPlayer-=1;
                 }
+                //colorController.hideButton(colorController.getPlayerColor());
                 baseCard.show(basePanel, finalPanelName);
             }    
         }

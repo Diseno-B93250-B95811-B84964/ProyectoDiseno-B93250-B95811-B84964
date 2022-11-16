@@ -16,6 +16,12 @@ import javax.swing.JTextField;
  */
 public class SelectColorView extends javax.swing.JPanel {
     private Color playerColor;
+    private final static Color BLUE = new Color (0,102,255);
+    private final static Color BROWN = new Color (102,51,0);
+    private final static Color GREEN = new Color (102,204,0);
+    private final static Color PURPLE = new Color (102,0,102);
+    private final static Color RED = new Color (255,0,0);
+    private final static Color YELLOW = new Color (255,204,0);
     
     /**
      * Creates new form LoadGamePanel
@@ -50,7 +56,7 @@ public class SelectColorView extends javax.swing.JPanel {
         Title.setText("SET UP PLAYER");
 
         RedButton.setBackground(new java.awt.Color(255, 0, 0));
-        RedButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        RedButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         RedButton.setForeground(new java.awt.Color(255, 255, 255));
         RedButton.setText("RED");
         RedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +66,7 @@ public class SelectColorView extends javax.swing.JPanel {
         });
 
         BrownButton.setBackground(new java.awt.Color(102, 51, 0));
-        BrownButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        BrownButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         BrownButton.setForeground(new java.awt.Color(255, 255, 255));
         BrownButton.setText("BROWN");
         BrownButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +76,7 @@ public class SelectColorView extends javax.swing.JPanel {
         });
 
         YellowButton.setBackground(new java.awt.Color(255, 204, 0));
-        YellowButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        YellowButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         YellowButton.setForeground(new java.awt.Color(255, 255, 255));
         YellowButton.setText("YELLOW");
         YellowButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +86,7 @@ public class SelectColorView extends javax.swing.JPanel {
         });
 
         GreenButton.setBackground(new java.awt.Color(102, 204, 0));
-        GreenButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        GreenButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         GreenButton.setForeground(new java.awt.Color(255, 255, 255));
         GreenButton.setText("GREEN");
         GreenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +96,7 @@ public class SelectColorView extends javax.swing.JPanel {
         });
 
         BlueButton.setBackground(new java.awt.Color(0, 102, 255));
-        BlueButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        BlueButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         BlueButton.setForeground(new java.awt.Color(255, 255, 255));
         BlueButton.setText("BLUE");
         BlueButton.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +106,7 @@ public class SelectColorView extends javax.swing.JPanel {
         });
 
         PurpleButton.setBackground(new java.awt.Color(102, 0, 102));
-        PurpleButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        PurpleButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
         PurpleButton.setForeground(new java.awt.Color(255, 255, 255));
         PurpleButton.setText("PURPLE");
         PurpleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -141,33 +147,33 @@ public class SelectColorView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(RedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(YellowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BlueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(237, 237, 237)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PurpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BrownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(265, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(playerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(388, 388, 388))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Title)
-                        .addGap(342, 342, 342))))
+                .addComponent(Title)
+                .addGap(342, 342, 342))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(RedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(YellowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BlueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(237, 237, 237)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PurpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BrownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(GreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(406, 406, 406)
+                        .addComponent(playerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,12 +206,10 @@ public class SelectColorView extends javax.swing.JPanel {
 
     private void YellowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YellowButtonActionPerformed
         playerColor = YellowButton.getBackground();
-        System.out.println(playerColor);
     }//GEN-LAST:event_YellowButtonActionPerformed
 
     private void GreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GreenButtonActionPerformed
         playerColor = GreenButton.getBackground();
-                System.out.println(playerColor);
 
     }//GEN-LAST:event_GreenButtonActionPerformed
 
@@ -215,7 +219,6 @@ public class SelectColorView extends javax.swing.JPanel {
 
     private void BrownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrownButtonActionPerformed
         playerColor = BrownButton.getBackground();
-                System.out.println(playerColor);
 
     }//GEN-LAST:event_BrownButtonActionPerformed
 
@@ -233,21 +236,17 @@ public class SelectColorView extends javax.swing.JPanel {
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void RedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedButtonActionPerformed
-        playerColor = RedButton.getBackground();
-                System.out.println(playerColor);
+       playerColor = RedButton.getBackground();
 
     }//GEN-LAST:event_RedButtonActionPerformed
 
     private void BlueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlueButtonActionPerformed
         playerColor = BlueButton.getBackground();
-                System.out.println(playerColor);
 
     }//GEN-LAST:event_BlueButtonActionPerformed
 
     private void PurpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PurpleButtonActionPerformed
         playerColor = PurpleButton.getBackground();
-                System.out.println(playerColor);
-
     }//GEN-LAST:event_PurpleButtonActionPerformed
 
     /* Button Action Listeners */
@@ -287,6 +286,30 @@ public class SelectColorView extends javax.swing.JPanel {
     public JButton getBackButton(){
         return backButton;
     }
+    
+    /* Miscellaneous */
+    public void hideColorButton(Color color){
+        if (color.getRGB() == BLUE.getRGB()) {
+            BlueButton.setVisible(false);
+            BlueButton.setEnabled(false);
+        } else if (color.getRGB() == BROWN.getRGB()) {
+            BrownButton.setVisible(false);
+            BrownButton.setEnabled(false);
+        } else if (color.getRGB() == GREEN.getRGB()) {
+            GreenButton.setVisible(false);
+            GreenButton.setEnabled(false);
+        } else if (color.getRGB() == PURPLE.getRGB()) {
+            PurpleButton.setVisible(false);
+            PurpleButton.setEnabled(false);
+        } else if (color.getRGB() == RED.getRGB()) {
+            RedButton.setVisible(false);
+            RedButton.setEnabled(false);
+        } else if (color.getRGB() == YELLOW.getRGB()) {
+            YellowButton.setVisible(false);
+            YellowButton.setEnabled(false);
+        }
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BlueButton;

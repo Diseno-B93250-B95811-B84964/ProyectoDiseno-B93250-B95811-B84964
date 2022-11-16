@@ -16,33 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="RedButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="YellowButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="BlueButton" alignment="1" min="-2" pref="143" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PurpleButton" min="-2" pref="143" max="-2" attributes="0"/>
-                  <Component id="BrownButton" min="-2" pref="143" max="-2" attributes="0"/>
-                  <Component id="GreenButton" min="-2" pref="143" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="265" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="playerNameTextField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="388" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="Title" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="342" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="Title" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="342" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -50,6 +27,29 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="continueButton" min="-2" pref="216" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="RedButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="YellowButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BlueButton" alignment="1" min="-2" pref="143" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="PurpleButton" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="BrownButton" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="GreenButton" min="-2" pref="143" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="406" max="-2" attributes="0"/>
+                      <Component id="playerNameTextField" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="265" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,7 +104,7 @@
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -121,7 +121,7 @@
           <Color blue="0" green="33" red="66" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -138,7 +138,7 @@
           <Color blue="0" green="cc" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -155,7 +155,7 @@
           <Color blue="0" green="cc" red="66" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -172,7 +172,7 @@
           <Color blue="ff" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -189,7 +189,7 @@
           <Color blue="66" green="0" red="66" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Schoolbook" size="24" style="1"/>
+          <Font name="Century Schoolbook" size="22" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
