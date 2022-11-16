@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,7 +69,7 @@ public class MainGameView extends javax.swing.JPanel {
         Player1Panel = new javax.swing.JPanel();
         firstPlayerTitleLabel = new javax.swing.JLabel();
         firstPlayerLabelName = new java.awt.Label();
-        PlayerScore = new javax.swing.JLabel();
+        firstPlayerScore = new javax.swing.JLabel();
         PlayerScoreTitle = new javax.swing.JLabel();
         inventoryTitle2 = new javax.swing.JLabel();
         pieceLabelFirstPlayer1 = new javax.swing.JLabel();
@@ -81,7 +82,7 @@ public class MainGameView extends javax.swing.JPanel {
         Player2Panel = new javax.swing.JPanel();
         secondPlayerTitleLabel = new javax.swing.JLabel();
         secondPlayerLabelName = new java.awt.Label();
-        PlayerScore2 = new javax.swing.JLabel();
+        secondPlayerScore2 = new javax.swing.JLabel();
         PlayerScoreTitle2 = new javax.swing.JLabel();
         inventoryTitle3 = new javax.swing.JLabel();
         pieceLabelSecondPlayer1 = new javax.swing.JLabel();
@@ -137,9 +138,9 @@ public class MainGameView extends javax.swing.JPanel {
         firstPlayerLabelName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         firstPlayerLabelName.setText("label1");
 
-        PlayerScore.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
-        PlayerScore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PlayerScore.setText("0");
+        firstPlayerScore.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
+        firstPlayerScore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        firstPlayerScore.setText("0");
 
         PlayerScoreTitle.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         PlayerScoreTitle.setText("Score");
@@ -199,7 +200,7 @@ public class MainGameView extends javax.swing.JPanel {
                             .addGroup(Player1PanelLayout.createSequentialGroup()
                                 .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(PlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(firstPlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(38, Short.MAX_VALUE))))
         );
         Player1PanelLayout.setVerticalGroup(
@@ -230,7 +231,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PlayerScoreTitle)
-                    .addComponent(PlayerScore))
+                    .addComponent(firstPlayerScore))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -245,9 +246,9 @@ public class MainGameView extends javax.swing.JPanel {
         secondPlayerLabelName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         secondPlayerLabelName.setText("label1");
 
-        PlayerScore2.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
-        PlayerScore2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PlayerScore2.setText("0");
+        secondPlayerScore2.setFont(new java.awt.Font("Century Schoolbook", 0, 24)); // NOI18N
+        secondPlayerScore2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        secondPlayerScore2.setText("0");
 
         PlayerScoreTitle2.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         PlayerScoreTitle2.setText("Score");
@@ -299,7 +300,7 @@ public class MainGameView extends javax.swing.JPanel {
                     .addGroup(Player2PanelLayout.createSequentialGroup()
                         .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(PlayerScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(secondPlayerScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Player2PanelLayout.createSequentialGroup()
                         .addComponent(inventoryTitle3)
                         .addGap(88, 88, 88)))
@@ -314,7 +315,6 @@ public class MainGameView extends javax.swing.JPanel {
                 .addComponent(secondPlayerLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(inventoryTitle3)
-                .addGap(18, 18, 18)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Player2PanelLayout.createSequentialGroup()
                         .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -330,10 +330,10 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pieceLabelSecondPlayer7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pieceLabelSecondPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PlayerScore2)))
+                    .addComponent(secondPlayerScore2)))
         );
 
         javax.swing.GroupLayout boardGamePanelLayout = new javax.swing.GroupLayout(boardGamePanel);
@@ -519,25 +519,27 @@ public class MainGameView extends javax.swing.JPanel {
     /* Main Board Methods  */
     private void makeUrBoard() throws IOException{
         try {
-            /*For JAR FILE*/
-            // BufferedImage image = loadImagesForJarFile("icon2_rounded");
-            
-            /*For NetBeans*/
-            BufferedImage image = loadImagesForIDEFile("icon2_rounded");
-            
-            ImageIcon roseIcon = resizeImage(image, 80,80);
             tilesArray[4][0].show(false);
             tilesArray[5][0].show(false);
             tilesArray[4][2].show(false);
             tilesArray[5][2].show(false);
-            tilesArray[0][0].setIcon(roseIcon);
-            tilesArray[0][2].setIcon(roseIcon);
-            tilesArray[3][1].setIcon(roseIcon);
-            tilesArray[6][0].setIcon(roseIcon);
-            tilesArray[6][2].setIcon(roseIcon);
+            setRosesToBoard();
         } catch (IOException e) {
             System.out.println("Rose icon not found");
         }
+    }
+    
+    private void setRosesToBoard() throws IOException{
+        /*For JAR FILE*/
+        // BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
+        /*For NetBeans*/
+        BufferedImage image = loadImagesForIDEFile("icon2_rounded");  
+        ImageIcon roseIcon = resizeImage(image, 80,80);
+        tilesArray[0][0].setIcon(roseIcon);
+        tilesArray[0][2].setIcon(roseIcon);
+        tilesArray[3][1].setIcon(roseIcon);
+        tilesArray[6][0].setIcon(roseIcon);
+        tilesArray[6][2].setIcon(roseIcon);
     }
     
     private void  initializeTilesArray(){
@@ -565,8 +567,20 @@ public class MainGameView extends javax.swing.JPanel {
         return tilesArray[row][column];
     }
     
-    public void setNextPossibleLabel(int row, int column) {
-        tilesArray[row][column].setBackground(Color.WHITE);
+    public void setNextPossibleLabel(int row, int column, Icon icon) {
+        tilesArray[row][column].setIcon(icon);
+    }
+    
+    public void removeIconFromLabel(int row, int column)throws IOException{
+        tilesArray[row][column].setIcon(null);
+        if ((row == 0 && column == 0) ||
+            (row == 0 && column == 2) ||
+            (row == 3 && column == 1) ||
+            (row == 6 && column == 0) ||
+            (row == 6 && column == 2)
+            ){
+            setRosesToBoard();
+        }
     }
 
     /* Color choose Pieces Feature */
@@ -696,6 +710,16 @@ public class MainGameView extends javax.swing.JPanel {
         
     }
     
+    /*Get players pieces icons*/
+    
+    public Icon getFirsPlayerIcon(){
+        return pieceLabelFirstPlayer1.getIcon();
+    }
+
+    public Icon getSecondPlayerIcon(){
+        return pieceLabelSecondPlayer1.getIcon();
+    }
+    
     /*Personalized match */
     public void setFirstPlayerNameToLabel(String name){
         firstPlayerLabelName.setText(name);
@@ -725,11 +749,23 @@ public class MainGameView extends javax.swing.JPanel {
         pieceLabelSecondPlayer7.setIcon(icon);
     }
     
+    /* Add score to players */
+    
+    private void addScoreToFirstPlayer() {
+        int currentScore = Integer.parseInt(firstPlayerScore.getText());
+        currentScore+=1;
+        firstPlayerScore.setText(Integer.toString(currentScore));
+    }
+    
+    private void addScoreToSecondPlayer() {
+        int currentScore = Integer.parseInt(secondPlayerScore2.getText());
+        currentScore+=1;
+        secondPlayerScore2.setText(Integer.toString(currentScore));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;
-    private javax.swing.JLabel PlayerScore;
-    private javax.swing.JLabel PlayerScore2;
     private javax.swing.JLabel PlayerScoreTitle;
     private javax.swing.JLabel PlayerScoreTitle2;
     private javax.swing.JPanel boardGamePanel;
@@ -739,6 +775,7 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JLabel dice4;
     private javax.swing.JPanel dicePanel;
     private java.awt.Label firstPlayerLabelName;
+    private javax.swing.JLabel firstPlayerScore;
     private javax.swing.JLabel firstPlayerTitleLabel;
     private javax.swing.JLabel inventoryTitle2;
     private javax.swing.JLabel inventoryTitle3;
@@ -761,6 +798,7 @@ public class MainGameView extends javax.swing.JPanel {
     private javax.swing.JButton rulesButton;
     private javax.swing.JButton saveAndLeaveButton;
     private java.awt.Label secondPlayerLabelName;
+    private javax.swing.JLabel secondPlayerScore2;
     private javax.swing.JLabel secondPlayerTitleLabel;
     private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables

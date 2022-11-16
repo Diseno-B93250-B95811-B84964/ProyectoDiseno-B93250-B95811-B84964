@@ -19,8 +19,7 @@ import view.SelectColorView;
  * @author mauup
  */
 public class MainController {
-    
-        int currentPlayer = 0;
+            int currentPlayer = 0;
         
         public void startGame() {           
             GameController mainController = new GameController();

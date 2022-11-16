@@ -190,7 +190,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="PlayerScoreTitle" min="-2" pref="86" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="PlayerScore" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="firstPlayerScore" min="-2" pref="132" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="38" max="32767" attributes="0"/>
@@ -232,7 +232,7 @@
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="PlayerScoreTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PlayerScore" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="firstPlayerScore" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
@@ -258,7 +258,7 @@
             <Property name="text" type="java.lang.String" value="label1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="PlayerScore">
+        <Component class="javax.swing.JLabel" name="firstPlayerScore">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Schoolbook" size="24" style="0"/>
@@ -366,7 +366,7 @@
                       <Group type="102" attributes="0">
                           <Component id="PlayerScoreTitle2" min="-2" pref="86" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="PlayerScore2" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="secondPlayerScore2" min="-2" pref="132" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="inventoryTitle3" min="-2" max="-2" attributes="0"/>
@@ -386,7 +386,6 @@
                   <Component id="secondPlayerLabelName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="inventoryTitle3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -407,10 +406,10 @@
                       <Component id="pieceLabelSecondPlayer7" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                       <Component id="pieceLabelSecondPlayer2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="66" max="32767" attributes="0"/>
+                  <EmptySpace pref="84" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="PlayerScoreTitle2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="PlayerScore2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="secondPlayerScore2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -435,7 +434,7 @@
             <Property name="text" type="java.lang.String" value="label1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="PlayerScore2">
+        <Component class="javax.swing.JLabel" name="secondPlayerScore2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Schoolbook" size="24" style="0"/>
