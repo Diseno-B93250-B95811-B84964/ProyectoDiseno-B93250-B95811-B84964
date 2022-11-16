@@ -620,11 +620,12 @@ public class MainGameView extends javax.swing.JPanel {
     
     private void makeUrBoard() throws IOException{
         try {
-            //BufferedImage image = ImageIO.read(getClass().getResourceAsStream("GameOfUr/src/main/java/images/icon2_rounded.png"));
-            BufferedImage image = ImageIO.read(new FileInputStream("images/icon2_rounded.png"));            
-            // this.icon = ImageIO.read(new FileInputStream("res/test.txt"));
-            //GameOfUr\images
-            // \GameOfUr\src\main\java\images
+            /*For JAR FILE*/
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
+
+            /*For NetBeans*/
+            //BufferedImage image = ImageIO.read(new FileInputStream("images/icon2_rounded.png"));   
+            
             ImageIcon roseIcon = new ImageIcon(image);
             Image temporalImage = roseIcon.getImage();
             Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
@@ -676,13 +677,16 @@ public class MainGameView extends javax.swing.JPanel {
     private void makeDices(){
         try{
             diceLabelArray = new JLabel[4];
-            //BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("images/result_0_1.png"));
+            
+            /*For JAR file*/
+            BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
             BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
             
-            //BufferedImage diceState1Image = ImageIO.read(new FileInputStream("/src/main/java/images/result_0_1.png")); 
-            //BufferedImage diceState2Image = ImageIO.read(new FileInputStream("main/java/images/result_1_1.png")); 
+            /*For NetBeans*/
+            //BufferedImage diceState1Image = ImageIO.read(new FileInputStream("images/result_0_1.png")); 
+            //BufferedImage diceState2Image = ImageIO.read(new FileInputStream("images/result_1_1.png")); 
             
-            //noScoreDiceState = resizeImage(diceState1Image);
+            noScoreDiceState = resizeImage(diceState1Image);
             scoreDiceState = resizeImage(diceState2Image);
 
             diceLabelArray[0] = dice1;
