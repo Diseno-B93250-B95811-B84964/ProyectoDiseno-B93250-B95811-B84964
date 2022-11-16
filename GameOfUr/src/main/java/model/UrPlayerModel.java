@@ -12,11 +12,18 @@ import java.util.ArrayList;
  * @author Mauricio Palma
  */
 public class UrPlayerModel extends PlayerModel{
+    
+    public final static int NUMBER_OF_PIECES = 7;
+    ArrayList<UrPieceModel> playerPieces;
     /**
      * Default constructor that calls super constructor and sets attribute to a default value
      */
     public UrPlayerModel() {
         super();
+        playerPieces = new ArrayList<UrPieceModel>();
+        for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
+            playerPieces.add(new UrPieceModel(this.playerColor));
+        }
     }
     
     /**

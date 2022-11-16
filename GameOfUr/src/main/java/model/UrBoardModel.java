@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class UrBoardModel {
     private UrTileModel[][] urBoard;
+    //private PlayerModel playerOne;
+    //private PlayerModel playerTwo;
     private Color playerOneColor;
     private Color playerTwoColor;
     private final static int ROWS = 8;
@@ -24,9 +26,11 @@ public class UrBoardModel {
     protected HashMap<Color, ArrayList<UrTileModel>> playerPaths;
     
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
+        //this.playerOne = new UrPlayerModel(1, playerOneColor);
+        //this.playerTwo = new UrPlayerModel(2, playerTwoColor);
         this.playerOneColor = playerOneColor;
         this.playerTwoColor = playerTwoColor;
-
+        urBoard = new UrTileModel[ROWS][COLUMNS];
         for(int row = 0; row < ROWS; row++){
             for(int col = 0; col < COLUMNS; col++){
                 urBoard[row][col] = new UrTileModel(row,col); 
@@ -88,7 +92,7 @@ public class UrBoardModel {
         if(canMove(currentTile, amountOfMoves, playerColor)){
             tileLocation = calculateTileLocation(currentTile, playerColor);
             possibleMoveIndex = tileLocation + amountOfMoves;
-            if (tileLocation < 10 || winCondition(possibleMoveIndex)) {
+            if (tileLocation < 10 || winCondition(possibleMoveIndex, playerColor)) {
                 possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex); 
             }
         }
@@ -111,14 +115,18 @@ public class UrBoardModel {
         return tileLocation;
     }
     
-    private boolean winCondition(int possibleMoveIndex){
+    private boolean winCondition(int possibleMoveIndex, Color playerColor){
         boolean canWin = false;
-        if (possibleMoveIndex < playerPaths.size()) {
+        if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
             if(possibleMoveIndex == 14){
                 canWin = true;
             }
         }
         return canWin;
+    }
+    
+    public void addScoreToPlayer(UrPlayerModel player){
+        player.addScoreToPlayer();
     }
 
     public UrTileModel getTile(int x, int y) {
