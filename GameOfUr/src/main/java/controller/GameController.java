@@ -67,7 +67,8 @@ public class GameController {
             this.mainMenuView = new MainMenuView();
             
             possiblePaths =  new HashMap<>();
-            
+            player1 = new UrPlayerModel();
+            player2 = new UrPlayerModel();
             board = new UrBoardModel(player1.getColor(), player2.getColor());
             
             initializeLabels();
