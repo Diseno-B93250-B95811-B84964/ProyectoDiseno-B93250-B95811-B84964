@@ -130,7 +130,7 @@ public class GameController {
         int x = possibleTile.getRow();
         int y = possibleTile.getColumn();
         
-        gameView.setNextPossibleLabel(x,y);
+        //gameView.setNextPossibleLabel(x,y);
     }
       
     public void save_game() {
@@ -143,7 +143,7 @@ public class GameController {
     }
     /*Setters */
     private void chooseNextPossibleLabel(){
-        gameView.setNextPossibleLabel(2,2);
+        //gameView.setNextPossibleLabel(2,2);
     }
 
     public void setFirstPlayerName(String name){
@@ -187,12 +187,18 @@ public class GameController {
         public void mousePressed(MouseEvent entered){
             if(diceThrown == true) {
                 this.label.setBackground(Color.red);
-                chooseNextPossibleLabel(row, column);
+                gameView.setNextPossibleLabel(0,0,gameView.getFirsPlayerIcon());
+                //chooseNextPossibleLabel(row, column);
             }
         }
 
         @Override
         public void mouseEntered(MouseEvent entered){
+            try {
+                gameView.removeIconFromLabel(0,0); // TODO these numbers are not used yet.
+            } catch (IOException e) {
+                System.out.println("Images not found!");
+            }
             this.label.setBackground(Color.decode("#2D3553"));
         }
     }

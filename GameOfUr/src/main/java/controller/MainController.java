@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import model.tempPlayer;
 import view.MainGameView;
 import view.MainMenuView;
 import view.SelectColorView;
@@ -20,9 +19,7 @@ import view.SelectColorView;
  * @author mauup
  */
 public class MainController {
-    
-        tempPlayer playerArray [] = new tempPlayer[2];
-        int currentPlayer = 0;
+            int currentPlayer = 0;
         
         public void startGame() {           
             GameController mainController = new GameController();
