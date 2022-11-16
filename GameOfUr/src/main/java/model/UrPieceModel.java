@@ -13,32 +13,95 @@ import java.awt.Color;
  *
  * @author Jimena Gdur
  */
-public class UrPieceModel extends PieceModel {
+public class UrPieceModel {
 
-    protected Color color;
+    /**
+     * Coordinate x
+     */
+    protected int x;
 
+    /**
+     * Coordinate y
+     */
+    protected int y;
+
+    /**
+     * Piece Color
+     */
+    protected Color pieceColor;
+
+    /**
+     * Determines if piece is safe
+     */
     protected boolean isSafe;
     
+    /**
+     * Basic Constructor
+     */
     public UrPieceModel() {
-        super();
-        color = Color.RED;
+        x = 0;
+        y = 0;
+        pieceColor = Color.WHITE;
         isSafe = false;
     }
     
     /**
-     * Sets color received by parameters
-     * @param chosenColor
+     * Constructor with a Color
+     * @param playerColor Value to be assigned
      */
-    public void setColor(Color chosenColor) {
-        color = chosenColor;
+    public UrPieceModel(Color playerColor) {
+        x = 0;
+        y = 0;
+        pieceColor = playerColor;
+        isSafe = false;
     }
     
     /**
-     * Gets selected color
-     * @return Returns selected color
+     * Sets variable x with given parameter
+     * @param xValue Value to be assigned
      */
-    public Color getColor() {
-        return color;
+    public void setX(int xValue) {
+        x = xValue;
+    }
+    
+    /**
+     * Sets variable pieceColor with given parameter
+     * @param yValue Value to be assigned
+     */
+    public void setY(int yValue) {
+        y = yValue;
+    }
+    
+    /**
+     * Gets variable value x
+     * @return Returns an int value.
+     */
+    public int getX() {
+        return x;
+    }
+    
+    /**
+     * Gets variable value y
+     * @return Returns an int value.
+     */
+    public int getY() {
+        return y;
+    }
+    
+    /**
+     * Sets variable pieceColor with given parameter
+     * @param pieceColor Value to be assigned
+     */
+    public void setColor(Color pieceColor){
+        this.pieceColor = pieceColor;
+    }
+    
+    /**
+     * Gets variable value pieceColor
+     * @return Returns a Color value.
+     */
+    public Color getColor(){
+        return pieceColor;
     }
     
     /**

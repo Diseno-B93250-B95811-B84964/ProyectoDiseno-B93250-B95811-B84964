@@ -8,10 +8,10 @@ package model;
  *
  * @author Jimena Gdur
  */
-public class RulesModel {
+public class UrRulesModel {
     private String rules[];
     
-    public RulesModel(){
+    public UrRulesModel(){
         rules = new String[11];
         rules[0] = "Game Rules";
         rules[1] = "1. Throw the dice to decide who plays first - highest score";

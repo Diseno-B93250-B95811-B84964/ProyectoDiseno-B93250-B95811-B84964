@@ -11,11 +11,23 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.PrintWriter;
+import javax.swing.JFileChooser;
+
 import javax.swing.JLabel;
+
+import model.UrBoardModel;
 import javax.swing.JTextField;
 import model.UrDiceModel;
 import model.UrPieceModel;
+import model.UrPlayerModel;
+import model.UrSerializerConstructor;
+import model.UrTileModel;
+
 import view.MainGameView;
 import view.MainMenuView;
 import view.SelectColorView;
@@ -28,7 +40,9 @@ import view.UrDiceView;
 public class MainGameController {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
-    private MainGameView gameView;
+    
+    private UrBoardModel board;
+    private UrDiceModel diceModel;
     private UrPieceModel piece;
     private MainMenuView mainMenuView;
     private UrDiceModel diceModel;
@@ -53,6 +67,33 @@ public class MainGameController {
     
     public MainMenuView getMainMenuView(){
         return this.mainMenuView;
+    private UrPlayerModel player1;
+    private UrPlayerModel player2;
+    private UrSerializerConstructor serializer;
+    
+    private MainGameView gameView;
+    private MainMenuView menu;
+    private UrDiceView diceView;
+    
+    private Color currentPlayer;
+    private boolean diceThrown;
+
+    public MainGameController(MainGameView gameView, UrPieceModel piece,
+        MainMenuView menu, UrDiceController diceController)
+    {
+        this.gameView = gameView;
+        this.piece = piece;
+        this.menu = menu;
+        
+        this.diceThrown = false;
+        
+        this.serializer = new UrSerializerConstructor(board, player1, player2);
+        
+        initializeLabels();
+        //chooseNextPossibleLabel();        
+        menuHandler();
+        UrDiceController.DiceListener diceListener = initializeDice(diceController); // TODO move this
+        this.diceView.addDiceListener(diceListener);  
     }
     
     private void menuHandler(){
@@ -73,6 +114,33 @@ public class MainGameController {
             }
         }
     }
+    
+    private void playerTurn() {
+        // while
+            // tirar el dado
+            // esperar que se estripe
+            // chooseNextPossibleLabel
+            
+    }
+    
+    private void chooseNextPossibleLabel(int row, int column){
+        UrTileModel chosenTile = board.getTile(row, column);
+        int diceValue = diceModel.getRollResult();
+        UrTileModel possibleTile = board.getPossibleTile(chosenTile, diceValue, currentPlayer);
+        
+        int x = possibleTile.getRow();
+        int y = possibleTile.getColumn();
+        
+        gameView.setNextPossibleLabel(x,y);
+    }
+      
+    public void save_game() {
+        try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
+            writer.write(serializer.saveGameState());
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     
     /*Setters */
     private void chooseNextPossibleLabel(){
@@ -109,8 +177,10 @@ public class MainGameController {
 
         @Override
         public void mousePressed(MouseEvent entered){
-            this.label.setBackground(Color.red);
-            chooseNextPossibleLabel();     
+            if(diceThrown == true) {
+                this.label.setBackground(Color.red);
+                chooseNextPossibleLabel(row, column);
+            }
         }
 
         @Override
@@ -145,7 +215,8 @@ public class MainGameController {
         }
         
         private int getDiceResult(){
-            gameView.cleanDice();
+            diceView.cleanDice();
+            diceThrown  = true;
             diceModel.rollDice();
             int diceResult = diceModel.getRollResult();
             gameView.showThrow(diceResult);

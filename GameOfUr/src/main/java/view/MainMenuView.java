@@ -15,7 +15,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.RulesModel;
+import model.UrRulesModel;
 
 /**
  *
@@ -157,7 +157,37 @@ public class MainMenuView extends javax.swing.JPanel {
     public Color getChoosenColor() {
         return chosenColor;
     }
-
+    
+    public void showRules() {
+        UrRulesModel rules = new UrRulesModel();
+        
+        JFrame frame = new JFrame("Swing Tester");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);
+        
+        final JLabel title = new JLabel();
+        title.setFont(new Font("Century Schoolbook", 1, 36));
+        title.setText(rules.getRules()[0]);
+        panel.add(title);
+        
+        for (int index = 1; index < rules.getLength(); index++) {
+            final JLabel label = new JLabel();
+            label.setFont(new Font("Century Schoolbook", 0, 18));
+            label.setText(rules.getRules()[index]);
+            panel.add(label);
+        }
+  
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        
+        frame.setSize(560, 200);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true);
+    }
+    
+    private Color chosenColor;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
