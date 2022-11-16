@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JTextField;
-import model.tempPlayer;
 import view.SelectColorView;
 
 /**
@@ -21,7 +20,6 @@ public class SelectColorController {
     SelectColorView selectColorView;
     Color playerColor;
     String playerName;
-    tempPlayer playerArray [] = new tempPlayer[2];
     int position = 0;
     
     ContinueButtonListener a;
@@ -44,10 +42,6 @@ public class SelectColorController {
     
     public String getPlayerName(){
         return selectColorView.getPlayerNameTextField().getText();
-    }
-    
-    public tempPlayer[] getTempPlayerArray(){
-        return playerArray;
     }
     
     public SelectColorView getView(){
