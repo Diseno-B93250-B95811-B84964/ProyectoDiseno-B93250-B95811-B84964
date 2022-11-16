@@ -18,14 +18,14 @@ public class TileModel {
     public TileModel(){
         row = -1;
         column = -1;
-        isVacant = false;
+        isVacant = true;
         piece = null;
     }
     
     public TileModel(int row, int column){
         this.row = row;
         this.column = column;
-        isVacant = false;
+        isVacant = true;
         piece = null;
     }
     
