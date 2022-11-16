@@ -61,33 +61,21 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="dice4">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/result_0_1.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="dice4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="dice3">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/result_0_1.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="dice3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="dice2">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/result_0_1.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="dice2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="dice1">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/result_0_1.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="dice1"/>
       </Properties>
     </Component>

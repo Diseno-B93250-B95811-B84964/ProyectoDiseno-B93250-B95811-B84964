@@ -1,1 +1,0 @@
-java -jar GameOfUr_Swing-1.0-SNAPSHOT.jar

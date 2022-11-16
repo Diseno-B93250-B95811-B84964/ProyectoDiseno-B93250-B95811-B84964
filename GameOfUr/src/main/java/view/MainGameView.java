@@ -138,6 +138,7 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle2.setText("Pieces Left");
 
+        firstPlayerPiece3.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece3.setBorder(null);
         firstPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +146,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece5.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece5.setBorder(null);
         firstPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +154,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece6.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece6.setBorder(null);
         firstPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +162,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece4.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece4.setBorder(null);
         firstPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +170,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece2.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece2.setBorder(null);
         firstPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +178,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece1.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece1.setBorder(null);
         firstPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +186,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        firstPlayerPiece7.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\blueCircle.png")); // NOI18N
         firstPlayerPiece7.setBorder(null);
         firstPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +227,7 @@ public class MainGameView extends javax.swing.JPanel {
                                 .addComponent(firstPlayerPiece5)
                                 .addComponent(firstPlayerPiece7))
                             .addGap(72, 72, 72))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Player1PanelLayout.setVerticalGroup(
             Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +255,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -272,6 +279,7 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle3.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle3.setText("Pieces Left");
 
+        secondPlayerPiece3.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece3.setBorder(null);
         secondPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +287,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece5.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece5.setBorder(null);
         secondPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +295,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece6.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece6.setBorder(null);
         secondPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +303,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece4.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece4.setBorder(null);
         secondPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,6 +311,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece2.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece2.setBorder(null);
         secondPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +319,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece1.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece1.setBorder(null);
         secondPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +327,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
+        secondPlayerPiece7.setIcon(new javax.swing.ImageIcon("D:\\Respaldo Escritorio DELL\\DESKTOP\\Escritorio 2\\Repositorio_Diseño_Soft\\ProyectoDiseno-B93250-B95811-B84964\\GameOfUr\\images\\redCircle.png")); // NOI18N
         secondPlayerPiece7.setBorder(null);
         secondPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,7 +391,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(secondPlayerPiece7)
                     .addComponent(secondPlayerPiece1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore2)))
@@ -662,12 +676,13 @@ public class MainGameView extends javax.swing.JPanel {
     private void makeDices(){
         try{
             diceLabelArray = new JLabel[4];
-            //BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
-            //BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
-            BufferedImage diceState1Image = ImageIO.read(new FileInputStream("images/result_0_1.png")); 
-            BufferedImage diceState2Image = ImageIO.read(new FileInputStream("images/result_1_1.png")); 
+            //BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("images/result_0_1.png"));
+            BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
             
-            noScoreDiceState = resizeImage(diceState1Image);
+            //BufferedImage diceState1Image = ImageIO.read(new FileInputStream("/src/main/java/images/result_0_1.png")); 
+            //BufferedImage diceState2Image = ImageIO.read(new FileInputStream("main/java/images/result_1_1.png")); 
+            
+            //noScoreDiceState = resizeImage(diceState1Image);
             scoreDiceState = resizeImage(diceState2Image);
 
             diceLabelArray[0] = dice1;

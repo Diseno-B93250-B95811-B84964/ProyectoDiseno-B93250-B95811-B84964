@@ -184,7 +184,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -218,7 +218,7 @@
                       <Component id="PlayerScoreTitle" max="32767" attributes="0"/>
                       <Component id="PlayerScore" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="216" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -269,6 +269,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -279,6 +282,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece5">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -289,6 +295,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece6">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -299,6 +308,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece4">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -309,6 +321,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -319,6 +334,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -329,6 +347,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="firstPlayerPiece7">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\blueCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -418,7 +439,7 @@
                       <Component id="secondPlayerPiece7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="secondPlayerPiece1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="270" max="32767" attributes="0"/>
+                  <EmptySpace pref="60" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="PlayerScoreTitle2" alignment="0" max="32767" attributes="0"/>
                       <Component id="PlayerScore2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -473,6 +494,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -483,6 +507,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece5">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -493,6 +520,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece6">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -503,6 +533,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece4">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -513,6 +546,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -523,6 +559,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -533,6 +572,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="secondPlayerPiece7">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Dise&#xf1;o_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\images\redCircle.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

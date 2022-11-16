@@ -103,16 +103,12 @@ public class UrDiceView extends javax.swing.JPanel {
         throwDiceButton = new javax.swing.JButton();
         moves = new javax.swing.JLabel();
 
-        dice4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice4.setText("dice4");
 
-        dice3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice3.setText("dice3");
 
-        dice2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice2.setText("dice2");
 
-        dice1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/result_0_1.png"))); // NOI18N
         dice1.setText("dice1");
 
         throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));

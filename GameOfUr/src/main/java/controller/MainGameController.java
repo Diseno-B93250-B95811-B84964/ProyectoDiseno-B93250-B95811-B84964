@@ -31,7 +31,7 @@ import model.UrTileModel;
 import view.MainGameView;
 import view.MainMenuView;
 import view.SelectColorView;
-import view.UrDiceView;
+
 
 /**
  *
@@ -53,7 +53,7 @@ public class MainGameController {
     
     private MainGameView gameView;
     private MainMenuView menu;
-    private UrDiceView diceView;
+
     
     private Color currentPlayer;
     private boolean diceThrown;
@@ -64,6 +64,7 @@ public class MainGameController {
             this.gameView = new MainGameView();
             this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
+
             initializeLabels();
             chooseNextPossibleLabel();        
             menuHandler();
@@ -218,7 +219,7 @@ public class MainGameController {
         }
         
         private int getDiceResult(){
-            diceView.cleanDice();
+            gameView.cleanDice();
             diceThrown  = true;
             diceModel.rollDice();
             int diceResult = diceModel.getRollResult();
