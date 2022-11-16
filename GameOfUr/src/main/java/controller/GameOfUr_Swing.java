@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import model.UrDiceModel;
 import model.UrPieceModel; 
+import model.UrSerializerConstructor;
 import view.MainGameView;
 import view.MainMenuView;
 import view.MainMenuViewOld;

@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import model.RulesModel;
+import model.UrRulesModel;
 
 /**
  *
@@ -449,7 +449,7 @@ public class MainGameView extends javax.swing.JPanel {
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
-        RulesModel rules = new RulesModel();
+        UrRulesModel rules = new UrRulesModel();
         JFrame frame = new JFrame("Rules");        
         JPanel panel = new JPanel();
         LayoutManager layout = new FlowLayout();

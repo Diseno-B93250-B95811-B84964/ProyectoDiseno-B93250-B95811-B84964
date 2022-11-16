@@ -9,11 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.PrintWriter;
+import javax.swing.JFileChooser;
+
 import javax.swing.JLabel;
+
 import model.UrBoardModel;
 import model.UrDiceModel;
 import model.UrPieceModel;
+import model.UrPlayerModel;
+import model.UrSerializerConstructor;
 import model.UrTileModel;
+
 import view.MainGameView;
 import view.MainMenuView;
 import view.UrDiceView;
@@ -26,12 +37,15 @@ public class MainGameController {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
     
-    private UrPieceModel piece;
+    private UrBoardModel board;
     private UrDiceModel diceModel;
+    private UrPieceModel piece;
+    private UrPlayerModel player1;
+    private UrPlayerModel player2;
+    private UrSerializerConstructor serializer;
     
     private MainGameView gameView;
     private MainMenuView menu;
-    private UrBoardModel board;
     private UrDiceView diceView;
     
     private Color currentPlayer;
@@ -45,6 +59,8 @@ public class MainGameController {
         this.menu = menu;
         
         this.diceThrown = false;
+        
+        this.serializer = new UrSerializerConstructor(board, player1, player2);
         
         initializeLabels();
         //chooseNextPossibleLabel();        
@@ -88,6 +104,15 @@ public class MainGameController {
         gameView.setNextPossibleLabel(x,y);
     }
       
+    public void save_game() {
+        try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
+            writer.write(serializer.saveGameState());
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     private UrDiceController.DiceListener initializeDice(UrDiceController diceController){ // TODO change it to DiceController
         diceModel = diceController.getDiceModel();
         diceView = diceController.getDiceView();

@@ -4,7 +4,7 @@
  */
 package controller;
 
-import model.PlayerModel;
+import model.UrPlayerModel;
 
 
 /**
@@ -14,15 +14,15 @@ import model.PlayerModel;
 public abstract class PlayerController {
 
     /**
-     * Array of PlayerModels to keep track of every player playing a game
+     * Array of UrPlayerModels to keep track of every player playing a game
      */
-    protected PlayerModel playersArray[];
+    protected UrPlayerModel playersArray[];
     
     /**
-     * Default contructor that creates two players
+     * Default constructor that creates two players
      */
     public PlayerController(){
-        playersArray = new PlayerModel[2];
+        playersArray = new UrPlayerModel[2];
     }
     
     /**
@@ -31,7 +31,7 @@ public abstract class PlayerController {
     */
     
     public PlayerController(int numberOfPlayers){
-        playersArray = new PlayerModel[numberOfPlayers];
+        playersArray = new UrPlayerModel[numberOfPlayers];
     }
     
     /**
@@ -39,7 +39,7 @@ public abstract class PlayerController {
      * @param firstPlayer The first player that will be playing the game
      * @param secondPlayer The second player that will be playing the game
      */
-    public void setPlayers(PlayerModel firstPlayer, PlayerModel secondPlayer){ // make it abstract and remove attributes
+    public void setPlayers(UrPlayerModel firstPlayer, UrPlayerModel secondPlayer){ // make it abstract and remove attributes
         playersArray[0] = firstPlayer;
         playersArray[1] = secondPlayer;
     }

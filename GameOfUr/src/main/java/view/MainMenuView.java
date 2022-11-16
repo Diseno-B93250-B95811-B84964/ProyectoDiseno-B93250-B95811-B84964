@@ -14,7 +14,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.RulesModel;
+import model.UrRulesModel;
 
 /**
  *
@@ -165,7 +165,7 @@ public class MainMenuView extends javax.swing.JPanel {
     }
     
     public void showRules() {
-        RulesModel rules = new RulesModel();
+        UrRulesModel rules = new UrRulesModel();
         
         JFrame frame = new JFrame("Swing Tester");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

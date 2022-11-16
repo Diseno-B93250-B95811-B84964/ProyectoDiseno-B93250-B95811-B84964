@@ -1,7 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
+
 package model;
 
 import java.awt.Color;
@@ -22,7 +25,8 @@ public class UrBoardModel {
     private final static int NON_OCCUPIED = 0;
     private final static int OCCUPIED_P1 = 1;
     private final static int OCCUPIED_P2 = 2;
-    
+    public int playerTurn;
+
     protected HashMap<Color, ArrayList<UrTileModel>> playerPaths;
     
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
@@ -47,24 +51,6 @@ public class UrBoardModel {
         playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
     }
     
-    public ArrayList<Integer> indicateGameState() {
-        ArrayList<Integer> gameState = new ArrayList<>();
-        for(int rows = 0; rows < ROWS; rows++){
-            for(int cols = 0; cols < COLUMNS; cols++){
-                if( !urBoard[rows][cols].isVacant()){
-                    if(playerOneColor == urBoard[rows][cols].getPiece().getColor()){
-                        gameState.add(OCCUPIED_P1);
-                    }else{
-                        gameState.add(OCCUPIED_P2);
-                    }
-                }else{
-                    gameState.add(NON_OCCUPIED);
-                }
-            }
-        }
-        return gameState;
-    }
-    
     private ArrayList<UrTileModel> setPlayerPath(int column) {
         ArrayList<UrTileModel> possiblePath =  new ArrayList<>();
         int middleColumn = 1;
@@ -83,6 +69,14 @@ public class UrBoardModel {
         possiblePath.add(urBoard[5][column]);
         
         return possiblePath;
+    }
+    
+    public void setPiece(int x, int y, UrPieceModel tile) {
+        urBoard[x][y].setPiece(tile);
+    }
+    
+    public UrTileModel getTile(int x, int y) {
+        return urBoard[x][y];
     }
     
     public UrTileModel getPossibleTile(UrTileModel currentTile, int amountOfMoves, Color playerColor) {
