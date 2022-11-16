@@ -74,6 +74,7 @@ public class MainGameController {
         }
     }
     
+    /*Setters */
     private void chooseNextPossibleLabel(){
         gameView.setNextPossibleLabel(2,2);
     }
@@ -82,9 +83,16 @@ public class MainGameController {
         gameView.setFirstPlayerName(name);
     }
     
+    public void setFirstPlayerColor(Color color){
+        System.out.println("As mainGame controller, color of first player " + color);
+    }
+    
     public void setSecondPlayerName(String name){
        gameView.setSecondPlayerName(name);
-
+    }
+    
+    public void setSecondPlayerColor(Color color){
+        System.out.println("As mainGame controller, color of second player " + color);
     }
     
     /* Listeners */

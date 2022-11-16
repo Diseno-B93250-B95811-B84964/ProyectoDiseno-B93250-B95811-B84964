@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import model.tempPlayer;
 import view.MainGameView;
 import view.MainMenuView;
 import view.SelectColorView;
@@ -19,39 +20,40 @@ import view.SelectColorView;
  * @author mauup
  */
 public class mainMainController {
-        public void startGame() {
-                 
-        MainGameController mainController = new MainGameController();
-        MainMenuView mainMenu = mainController.getMainMenuView();
-        MainGameView mainGame = mainController.getMainGameView();
+    
+        tempPlayer playerArray [] = new tempPlayer[2];
+        int currentPlayer = 0;
         
-        JFrame mainFrame = new JFrame("Royal Game Of Ur");
-        JPanel panelCont = new JPanel();
-        CardLayout card = new CardLayout();
+        public void startGame() {           
+            MainGameController mainController = new MainGameController();
+            MainMenuView mainMenu = mainController.getMainMenuView();
+            MainGameView mainGame = mainController.getMainGameView();
 
-        JButton startNewGameButton = mainMenu.getStartNewGameButton();
+            JFrame mainFrame = new JFrame("Royal Game Of Ur");
+            JPanel panelCont = new JPanel();
+            CardLayout card = new CardLayout();
 
-        panelCont.setLayout(card);
+            JButton startNewGameButton = mainMenu.getStartNewGameButton();
 
-        addButtonToPanel(mainMenu, startNewGameButton);
+            panelCont.setLayout(card);
 
-        addToComponentToPanel(panelCont, mainMenu, "mainMenu");
-        addToComponentToPanel(panelCont, mainGame, "mainGame");              
+            addButtonToPanel(mainMenu, startNewGameButton);
 
-        addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
+            addToComponentToPanel(panelCont, mainMenu, "mainMenu");
+            addToComponentToPanel(panelCont, mainGame, "mainGame");              
 
-        
-        setPlayersColors(card, panelCont, mainController);
+            addActionListenerToButton(card, panelCont, startNewGameButton, "colorView");       
 
-        card.show(panelCont, "mainMenu");
-        mainFrame.add(panelCont);
-        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setResizable(false);
-        
-        
+
+            setPlayersColors(card, panelCont, mainController);
+
+            card.show(panelCont, "mainMenu");
+            mainFrame.add(panelCont);
+            mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            mainFrame.pack();
+            mainFrame.setVisible(true);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setResizable(false);  
     }
     
     private  void setPlayersColors(CardLayout baseCard, JPanel basePanel, MainGameController main){
@@ -80,8 +82,7 @@ public class mainMainController {
     private void addAnotherActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName, SelectColorController colorController, MainGameController main){
         System.out.println("Hello from anotherAction");
        
-        button.addActionListener((ActionEvent arg0) -> {
-            
+        button.addActionListener((ActionEvent arg0) -> {     
             checkColorViewData(baseCard, basePanel,  finalPanelName,  colorController, main);
         });
          // button.doClick();
@@ -93,14 +94,26 @@ public class mainMainController {
         System.out.println("Controller get player name says: " + "[" + colorController.getPlayerName() + "]");
         if (!(colorController.getPlayerName().equals(""))) {
             System.out.println("It is not empty! it is: " + "[" + colorController.getPlayerName() + "]");
-            if (!(("Enter player name").equals(colorController.getPlayerName()))) {
-            System.out.println("It should be a valid name..." + "[" + colorController.getPlayerName() + "]");
-            baseCard.show(basePanel, finalPanelName);
-            main.setFirstPlayerName(colorController.getPlayerName());
-            main.setSecondPlayerName(colorController.getPlayerName());
+            System.out.println("It should NOT be a valid color..." + "[" + colorController.getPlayerColor() + "]");
+            if (!(("Enter player name").equals(colorController.getPlayerName()))
+                &&  !(colorController.getPlayerColor() != Color.WHITE)  ) {
+                System.out.println("It should be a valid name..." + "[" + colorController.getPlayerName() + "]");
+                System.out.println("It should be a valid color..." + "[" + colorController.getPlayerColor() + "]");
+      
+                if (currentPlayer == 0) {
+
+                    main.setFirstPlayerName(colorController.getPlayerName());
+                    main.setFirstPlayerColor(colorController.getPlayerColor());
+                    currentPlayer+=1;
+                } else {
+
+                    main.setSecondPlayerName(colorController.getPlayerName());
+                    main.setSecondPlayerColor(colorController.getPlayerColor());
+                    currentPlayer-=1;
+                }
+                baseCard.show(basePanel, finalPanelName);
             }    
         }
-
     }
     
     private  void addActionListenerToButton(CardLayout baseCard, JPanel basePanel, JButton button, String finalPanelName){

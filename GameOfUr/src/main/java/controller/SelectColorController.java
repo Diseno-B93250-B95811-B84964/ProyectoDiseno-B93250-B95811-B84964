@@ -39,12 +39,10 @@ public class SelectColorController {
     }
     
     public Color getPlayerColor(){
-        return playerColor;
+        return selectColorView.getPlayerColor();
     }
     
     public String getPlayerName(){
-        //ContinueButtonListener a = new ContinueButtonListener();
-        //return a.getPlayerName();
         return selectColorView.getPlayerNameTextField().getText();
     }
     
