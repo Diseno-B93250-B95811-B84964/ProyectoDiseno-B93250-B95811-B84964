@@ -118,4 +118,8 @@ public class UrPlayerModel{
     public void addScoreToPlayer(){
         this.score++;
     }
+    
+    public ArrayList<UrPieceModel> getPlayerPieces(){
+        return playerPieces;
+    }
 }
