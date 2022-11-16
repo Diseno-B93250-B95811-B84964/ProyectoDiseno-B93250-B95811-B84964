@@ -96,7 +96,7 @@ public class mainMainController {
             System.out.println("It is not empty! it is: " + "[" + colorController.getPlayerName() + "]");
             System.out.println("It should NOT be a valid color..." + "[" + colorController.getPlayerColor() + "]");
             if (!(("Enter player name").equals(colorController.getPlayerName()))
-                &&  !(colorController.getPlayerColor() != Color.WHITE)  ) {
+                /*&&  !(colorController.getPlayerColor() != Color.WHITE)  */) {
                 System.out.println("It should be a valid name..." + "[" + colorController.getPlayerName() + "]");
                 System.out.println("It should be a valid color..." + "[" + colorController.getPlayerColor() + "]");
       

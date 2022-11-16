@@ -8,12 +8,13 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
  * @author Mauricio Palma
  */
-public class UrPlayerModel extends PlayerModel{
+public class UrPlayerModel{
     
     public final static int NUMBER_OF_PIECES = 7;
     ArrayList<UrPieceModel> playerPieces;

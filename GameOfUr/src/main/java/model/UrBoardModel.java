@@ -18,10 +18,10 @@ public class UrBoardModel {
     private UrTileModel[][] urBoard;
     //private PlayerModel playerOne;
     //private PlayerModel playerTwo;
-    private Color playerOneColor;
-    private Color playerTwoColor;
-    private final static int ROWS = 8;
-    private final static int COLUMNS = 3;
+    public Color playerOneColor; // TODO change this to private!
+    public Color playerTwoColor;
+    public final static int ROWS = 8;
+    public final static int COLUMNS = 3;
     private final static int NON_OCCUPIED = 0;
     private final static int OCCUPIED_P1 = 1;
     private final static int OCCUPIED_P2 = 2;
@@ -123,7 +123,9 @@ public class UrBoardModel {
         player.addScoreToPlayer();
     }
 
+    /*Duplicated */ 
+    /*
     public UrTileModel getTile(int x, int y) {
         return urBoard[x][y];
-    }
+    }*/
 }

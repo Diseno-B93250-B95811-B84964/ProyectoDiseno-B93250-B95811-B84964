@@ -45,8 +45,19 @@ public class MainGameController {
     private UrDiceModel diceModel;
     private UrPieceModel piece;
     private MainMenuView mainMenuView;
-    private UrDiceModel diceModel;
 
+    /*Atributos serializador?*/
+    private UrPlayerModel player1;
+    private UrPlayerModel player2;
+    private UrSerializerConstructor serializer;
+    
+    private MainGameView gameView;
+    private MainMenuView menu;
+    private UrDiceView diceView;
+    
+    private Color currentPlayer;
+    private boolean diceThrown;
+    
     public MainGameController(){
         try {
             this.diceModel = new UrDiceModel();
@@ -67,17 +78,9 @@ public class MainGameController {
     
     public MainMenuView getMainMenuView(){
         return this.mainMenuView;
-    private UrPlayerModel player1;
-    private UrPlayerModel player2;
-    private UrSerializerConstructor serializer;
+    }
     
-    private MainGameView gameView;
-    private MainMenuView menu;
-    private UrDiceView diceView;
-    
-    private Color currentPlayer;
-    private boolean diceThrown;
-
+    /* 
     public MainGameController(MainGameView gameView, UrPieceModel piece,
         MainMenuView menu, UrDiceController diceController)
     {
@@ -94,7 +97,7 @@ public class MainGameController {
         menuHandler();
         UrDiceController.DiceListener diceListener = initializeDice(diceController); // TODO move this
         this.diceView.addDiceListener(diceListener);  
-    }
+    }*/
     
     private void menuHandler(){
         //this.mainMenuView.addColorButtonClickListener( new MenuViewListener());
@@ -141,7 +144,7 @@ public class MainGameController {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-    
+    }
     /*Setters */
     private void chooseNextPossibleLabel(){
         gameView.setNextPossibleLabel(2,2);

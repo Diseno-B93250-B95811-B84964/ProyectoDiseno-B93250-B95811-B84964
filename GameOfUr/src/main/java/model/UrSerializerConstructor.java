@@ -39,6 +39,7 @@ public class UrSerializerConstructor {
         for(int row = 0; row < UrBoardModel.ROWS; row++){
             for(int col = 0; col < UrBoardModel.COLUMNS; col++){
                 if( !gameBoard.getTile(row, col).isVacant()){
+                    /*TODO change this to a Method. DO NOT call the attribute directly*/
                     if(gameBoard.playerOneColor == gameBoard.getTile(row, col).getPiece().getColor()) {
                         gameState += OCCUPIED_P1;
                     } else {

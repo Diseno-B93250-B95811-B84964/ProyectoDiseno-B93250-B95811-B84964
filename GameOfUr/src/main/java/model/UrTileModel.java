@@ -55,7 +55,6 @@ public class UrTileModel {
     }
     
     public UrTileModel(int row, int column, UrPieceModel possiblePiece){
-        super(row, column);
         isSafe = false;
         this.possiblePiece = possiblePiece;
     }

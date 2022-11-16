@@ -13,6 +13,7 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -137,7 +138,6 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle2.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle2.setText("Pieces Left");
 
-        firstPlayerPiece3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece3.setBorder(null);
         firstPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +145,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece5.setBorder(null);
         firstPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +152,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece6.setBorder(null);
         firstPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +159,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece4.setBorder(null);
         firstPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +166,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece2.setBorder(null);
         firstPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +173,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece1.setBorder(null);
         firstPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +180,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        firstPlayerPiece7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blueCircle.png"))); // NOI18N
         firstPlayerPiece7.setBorder(null);
         firstPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +220,7 @@ public class MainGameView extends javax.swing.JPanel {
                                 .addComponent(firstPlayerPiece5)
                                 .addComponent(firstPlayerPiece7))
                             .addGap(72, 72, 72))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         Player1PanelLayout.setVerticalGroup(
             Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +248,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         Player2Panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -278,7 +272,6 @@ public class MainGameView extends javax.swing.JPanel {
         inventoryTitle3.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         inventoryTitle3.setText("Pieces Left");
 
-        secondPlayerPiece3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece3.setBorder(null);
         secondPlayerPiece3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,7 +279,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece5.setBorder(null);
         secondPlayerPiece5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +286,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece6.setBorder(null);
         secondPlayerPiece6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,7 +293,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece4.setBorder(null);
         secondPlayerPiece4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +300,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece2.setBorder(null);
         secondPlayerPiece2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +307,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece1.setBorder(null);
         secondPlayerPiece1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +314,6 @@ public class MainGameView extends javax.swing.JPanel {
             }
         });
 
-        secondPlayerPiece7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/redCircle.png"))); // NOI18N
         secondPlayerPiece7.setBorder(null);
         secondPlayerPiece7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,7 +377,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(secondPlayerPiece7)
                     .addComponent(secondPlayerPiece1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PlayerScore2)))
@@ -525,7 +512,7 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
-    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
+    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         UrRulesModel rules = new UrRulesModel();
         JFrame frame = new JFrame("Rules");        
         JPanel panel = new JPanel();
@@ -546,7 +533,7 @@ public class MainGameView extends javax.swing.JPanel {
         frame.setLocationRelativeTo(null);  
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_rulesButtonActionPerformed
+    }                                           
 
     private void firstPlayerPiece3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstPlayerPiece3ActionPerformed
         // TODO add your handling code here:
@@ -609,28 +596,6 @@ public class MainGameView extends javax.swing.JPanel {
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
     /* Main Panel Buttons */
-    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
-        RulesModel rules = new RulesModel();
-        JFrame frame = new JFrame("Rules");        
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);     
-        final JLabel title = new JLabel();
-        title.setFont(new Font("Century Schoolbook", 1, 36));
-        title.setText(rules.getRules()[0]);
-        panel.add(title);    
-        for (int index = 1; index < rules.getLength(); index++) {
-            final JLabel label = new JLabel();
-            label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
-            panel.add(label);
-        }
-        frame.getContentPane().add(panel, BorderLayout.CENTER);   
-        frame.setSize(600, 420);      
-        frame.setLocationRelativeTo(null);  
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_rulesButtonActionPerformed
 
     public void addSaveAndLeaveButtonClickListener(ActionListener listenForButton) {
         saveAndLeaveButton.addActionListener(listenForButton);
@@ -641,7 +606,11 @@ public class MainGameView extends javax.swing.JPanel {
     
     private void makeUrBoard() throws IOException{
         try {
-            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/images/icon2_rounded.png"));
+            //BufferedImage image = ImageIO.read(getClass().getResourceAsStream("GameOfUr/src/main/java/images/icon2_rounded.png"));
+            BufferedImage image = ImageIO.read(new FileInputStream("images/icon2_rounded.png"));            
+            // this.icon = ImageIO.read(new FileInputStream("res/test.txt"));
+            //GameOfUr\images
+            // \GameOfUr\src\main\java\images
             ImageIcon roseIcon = new ImageIcon(image);
             Image temporalImage = roseIcon.getImage();
             Image resizedImage = temporalImage.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
@@ -693,8 +662,11 @@ public class MainGameView extends javax.swing.JPanel {
     private void makeDices(){
         try{
             diceLabelArray = new JLabel[4];
-            BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
-            BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
+            //BufferedImage diceState1Image = ImageIO.read(getClass().getResourceAsStream("/images/result_0_1.png"));
+            //BufferedImage diceState2Image = ImageIO.read(getClass().getResourceAsStream("/images/result_1_1.png"));
+            BufferedImage diceState1Image = ImageIO.read(new FileInputStream("images/result_0_1.png")); 
+            BufferedImage diceState2Image = ImageIO.read(new FileInputStream("images/result_1_1.png")); 
+            
             noScoreDiceState = resizeImage(diceState1Image);
             scoreDiceState = resizeImage(diceState2Image);
 

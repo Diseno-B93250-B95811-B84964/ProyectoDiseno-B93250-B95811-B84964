@@ -187,7 +187,6 @@ public class MainMenuView extends javax.swing.JPanel {
         frame.setVisible(true);
     }
     
-    private Color chosenColor;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
