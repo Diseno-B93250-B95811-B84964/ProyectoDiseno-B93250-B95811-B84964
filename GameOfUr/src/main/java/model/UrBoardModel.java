@@ -13,8 +13,10 @@ import java.util.*;
  */
 public class UrBoardModel {
     private UrTileModel[][] urBoard;
-    private Color playerOneColor;
-    private Color playerTwoColor;
+    private PlayerModel playerOne;
+    private PlayerModel playerTwo;
+    //private Color playerOneColor;
+    //private Color playerTwoColor;
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
     private final static int NON_OCCUPIED = 0;
@@ -24,8 +26,10 @@ public class UrBoardModel {
     protected HashMap<Color, ArrayList<UrTileModel>> playerPaths;
     
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
-        this.playerOneColor = playerOneColor;
-        this.playerTwoColor = playerTwoColor;
+        this.playerOne = new UrPlayerModel(1, playerOneColor);
+        this.playerTwo = new UrPlayerModel(2, playerTwoColor);
+        //this.playerOneColor = playerOneColor;
+        //this.playerTwoColor = playerTwoColor;
 
         for(int row = 0; row < ROWS; row++){
             for(int col = 0; col < COLUMNS; col++){
@@ -39,8 +43,8 @@ public class UrBoardModel {
         urBoard[6][2].isSafe();
         
         playerPaths = new HashMap<Color, ArrayList<UrTileModel>>(2);
-        playerPaths.put(playerOneColor, setPlayerPath(0)); //check for possible change to not use magic variables
-        playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
+        playerPaths.put(playerOne.getColor(), setPlayerPath(0)); //check for possible change to not use magic variables
+        playerPaths.put(playerTwo.getColor(), setPlayerPath(2)); //check for possible change to not use magic variables
     }
     
     public ArrayList<Integer> indicateGameState() {
@@ -48,7 +52,7 @@ public class UrBoardModel {
         for(int rows = 0; rows < ROWS; rows++){
             for(int cols = 0; cols < COLUMNS; cols++){
                 if( !urBoard[rows][cols].isVacant()){
-                    if(playerOneColor == urBoard[rows][cols].getPiece().getColor()){
+                    if(playerOne.getColor() == urBoard[rows][cols].getPiece().getColor()){
                         gameState.add(OCCUPIED_P1);
                     }else{
                         gameState.add(OCCUPIED_P2);
@@ -88,7 +92,7 @@ public class UrBoardModel {
         if(canMove(currentTile, amountOfMoves, playerColor)){
             tileLocation = calculateTileLocation(currentTile, playerColor);
             possibleMoveIndex = tileLocation + amountOfMoves;
-            if (tileLocation < 10 || winCondition(possibleMoveIndex)) {
+            if (tileLocation < 10 || winCondition(possibleMoveIndex, playerColor)) {
                 possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex); 
             }
         }
@@ -111,14 +115,18 @@ public class UrBoardModel {
         return tileLocation;
     }
     
-    private boolean winCondition(int possibleMoveIndex){
+    private boolean winCondition(int possibleMoveIndex, Color playerColor){
         boolean canWin = false;
-        if (possibleMoveIndex < playerPaths.size()) {
+        if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
             if(possibleMoveIndex == 14){
                 canWin = true;
             }
         }
         return canWin;
+    }
+    
+    public void addScoreToPlayer(UrPlayerModel player){
+        player.addScoreToPlayer();
     }
 
     public UrTileModel getTile(int x, int y) {
