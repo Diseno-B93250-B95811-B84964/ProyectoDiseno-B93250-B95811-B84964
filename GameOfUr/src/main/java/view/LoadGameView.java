@@ -4,16 +4,20 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 /**
  *
- * @author Ryzen
+ * @author Ximena Gdur
  */
-public class LoadGame extends javax.swing.JPanel {
+public class LoadGameView extends javax.swing.JPanel {
 
     /**
      * Creates new form LoadGamePanel
      */
-    public LoadGame() {
+    public LoadGameView() {
         initComponents();
     }
 
@@ -27,30 +31,30 @@ public class LoadGame extends javax.swing.JPanel {
     private void initComponents() {
 
         gameName = new javax.swing.JLabel();
-        jFileChooser1 = new javax.swing.JFileChooser();
-        rules1 = new javax.swing.JButton();
-        rules2 = new javax.swing.JButton();
+        fileChooser = new javax.swing.JFileChooser();
+        goBackButton = new javax.swing.JButton();
+        continueButton = new javax.swing.JButton();
 
         gameName.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         gameName.setText("Load Game");
 
-        rules1.setBackground(new java.awt.Color(44, 37, 37));
-        rules1.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        rules1.setForeground(new java.awt.Color(255, 255, 255));
-        rules1.setText("BACK");
-        rules1.addActionListener(new java.awt.event.ActionListener() {
+        goBackButton.setBackground(new java.awt.Color(44, 37, 37));
+        goBackButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        goBackButton.setForeground(new java.awt.Color(255, 255, 255));
+        goBackButton.setText("BACK");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules1ActionPerformed(evt);
+                goBackButtonActionPerformed(evt);
             }
         });
 
-        rules2.setBackground(new java.awt.Color(44, 37, 37));
-        rules2.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        rules2.setForeground(new java.awt.Color(255, 255, 255));
-        rules2.setText("CONTINUE");
-        rules2.addActionListener(new java.awt.event.ActionListener() {
+        continueButton.setBackground(new java.awt.Color(44, 37, 37));
+        continueButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        continueButton.setForeground(new java.awt.Color(255, 255, 255));
+        continueButton.setText("CONTINUE");
+        continueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules2ActionPerformed(evt);
+                continueButtonActionPerformed(evt);
             }
         });
 
@@ -59,47 +63,64 @@ public class LoadGame extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(322, 322, 322)
+                .addGap(68, 68, 68)
+                .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
+                        .addGap(378, 378, 378)
                         .addComponent(gameName))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(rules1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rules2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(324, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(72, 72, 72)
                 .addComponent(gameName)
-                .addGap(50, 50, 50)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(30, 30, 30)
+                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rules1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rules2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                    .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rules1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rules1ActionPerformed
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rules1ActionPerformed
+    }//GEN-LAST:event_goBackButtonActionPerformed
 
-    private void rules2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rules2ActionPerformed
+    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rules2ActionPerformed
+    }//GEN-LAST:event_continueButtonActionPerformed
 
+    public void addButtonToFileChooser(ActionListener listenForButton){
+        fileChooser.addActionListener(listenForButton);
+    }
 
+    /*Button getters */
+    public JButton getContinueButton(){
+        return continueButton;
+    }
+    
+    public JButton getBackButton(){
+        return goBackButton;
+    }
+    
+    public JFileChooser getFileChooser(){
+        return fileChooser;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton continueButton;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel gameName;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JButton rules1;
-    private javax.swing.JButton rules2;
+    private javax.swing.JButton goBackButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,9 +75,13 @@ public class GameController {
             this.gameView = new MainGameView();
             this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
-            this.pathMap = new HashMap();
+            //this.pathMap = new HashMap();
+            this.possiblePaths = new HashMap();
             this.winner = false;
             this.playerArray = new UrPlayerModel[2];
+            for (int index = 0; index < playerArray.length; index++) {
+                playerArray[index] = new UrPlayerModel();
+            }
                     
             initializeLabels();
             chooseNextPossibleLabel();        
@@ -117,7 +121,6 @@ public class GameController {
     private void menuHandler(){
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
-        this.mainMenuView.addLoadGameButtonClickListener(new LoadGameClickListener());
     }
     
     private void initializeLabels(){
@@ -157,14 +160,17 @@ public class GameController {
             System.out.println(e.getMessage());
         }
     }
-    /*Setters */
+    
     private void chooseNextPossibleLabel(){
         //gameView.setNextPossibleLabel(2,2);
     }
+        
+    /*Setters */
+
 
     public void setFirstPlayerName(String name){
         gameView.setFirstPlayerNameToLabel(name);
-        this.playerArray[0].setPlayerName(name);
+        playerArray[0].setPlayerName(name);
     }
     
     public void setFirstPlayerColor(Color color){
@@ -222,11 +228,11 @@ public class GameController {
         //Cada vez que se tira dado:
         //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
         //Por cada piece de getPlayerNPieces()		
-    //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
-      //  buscarEnMapa(atributoMapa) {
-        //    atributoMap = atributoMap.search(todo lo que NO sea NULL
+        //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
+        //buscarEnMapa(atributoMapa) {
+        //atributoMap = atributoMap.search(todo lo que NO sea NULL
        
-    }
+    //}
 
     public void startGame() {
         
@@ -238,8 +244,11 @@ public class GameController {
             result = getDiceResult();
             if (result>0){
                 //CalculateAllPossiblePathsPerTurn();
-                if (!pathMap.isEmpty()) {
+                if (!possiblePaths.isEmpty()) {
                     //gameLogic(int x, int y)
+                    /*if (playerArray[currentPlayerNum]) {
+                    
+                    }*/
                 }
             }
         }
@@ -259,8 +268,8 @@ public class GameController {
     }
     
     private void gameLogic() {
-       GameController.TileMouseListener a = new GameController().new TileMouseListener();
-             //  .this.sayHey();
+       //GameController.TileMouseListener a = new GameController().new TileMouseListener();
+       
     }
     
     /* Listeners */
@@ -269,17 +278,10 @@ public class GameController {
         int row;
         int column;
         
-        TileMouseListener(){
-        }
-        
         TileMouseListener(JLabel label, int row, int column){
             this.label = label;
             this.row = row;
             this.column = column;
-        }
-        
-        public void sayHey(){
-            System.out.println("Hola");
         }
 
         @Override
@@ -315,12 +317,5 @@ public class GameController {
             System.exit(0);
         }
     }
-    
-    class LoadGameClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Teach me how to load a game!");
-            
-        }
-    }
+   
 }

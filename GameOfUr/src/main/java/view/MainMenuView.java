@@ -136,15 +136,15 @@ public class MainMenuView extends javax.swing.JPanel {
         exitButton.addActionListener(listenForButton);
     }
     
-    public void addLoadGameButtonClickListener(ActionListener listenForButton){
-        loadGameButton.addActionListener(listenForButton);
-    }
     
     /* Button getters */
     public JButton getStartNewGameButton(){
        return startNewGameButton;
     }
     
+    public JButton getLoadFormerGameButton(){
+       return loadGameButton;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;

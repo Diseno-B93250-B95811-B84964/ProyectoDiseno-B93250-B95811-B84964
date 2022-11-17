@@ -22,7 +22,6 @@ public class SelectColorController {
     String playerName;
     int position = 0;
     
-    ContinueButtonListener a;
     
     public SelectColorController(int playerNumber){
         this.playerName = "";
@@ -31,9 +30,7 @@ public class SelectColorController {
     
     public void start(){
         this.selectColorView.addTextFieldFocusistener(new SetColorClickListener());
-        
-        a = new ContinueButtonListener();
-        this.selectColorView.addContinueButtonClickListener(a);
+        this.selectColorView.addContinueButtonClickListener(new ContinueButtonListener());
     }
     
     public Color getPlayerColor(){
