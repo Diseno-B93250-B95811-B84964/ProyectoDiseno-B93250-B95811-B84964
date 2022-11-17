@@ -4,13 +4,10 @@
  */
 package controller;
 
-import model.UrPlayerModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.UrDiceModel;
 import view.PlayerView;
-import view.UrDiceView;
 import view.WinnerView;
 
 /**
@@ -33,8 +30,6 @@ public class UrPlayerController {
 
     
     class GameViewListener implements ActionListener{
-
-        @Override
         public void actionPerformed(ActionEvent event) {
             int diceResult = -1;
             try {
@@ -53,12 +48,7 @@ public class UrPlayerController {
                 System.out.println(exception);
             }
         }
-        
 
-        
-        /**
-        * Method that checks if a player won the match to stop the game
-        */
         private void checkIfWinner(int player) {
             if (playersArray[player].getPlayerScore()>= 7) {
              gameView.setVisible(false);

@@ -171,7 +171,7 @@ public class PlayerView extends javax.swing.JPanel {
      * Method that allows to set the id of the plaer who will be playing at a given turn
      * @param playerID The id that will be printed on the screen
      */
-    public void setplayerTurnsText(int playerID){
+    public void setPlayerTurnsText(int playerID){
         playerTurnText.setText("Player: " + playerID + " plays!");
     }
     

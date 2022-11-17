@@ -55,7 +55,7 @@ public class GameController {
     private UrSerializerConstructor serializer;
     
     private MainGameView gameView;
-    private MainMenuView menu;
+
 
     
     private Color currentPlayer;

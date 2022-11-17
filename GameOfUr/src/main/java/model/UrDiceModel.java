@@ -7,8 +7,6 @@
 
 package model;
 
-import java.lang.Math;
-
 /**
  *
  * @author Alvaro Miranda
@@ -16,12 +14,10 @@ import java.lang.Math;
 public class UrDiceModel {
     protected int numberOfSides;
     protected int rollResult;
-    private int urNumberOfSides;
+
     
     public UrDiceModel()
     {
-        urNumberOfSides = 5;
-        this.numberOfSides = urNumberOfSides;
         rollResult = 0;
     }
 

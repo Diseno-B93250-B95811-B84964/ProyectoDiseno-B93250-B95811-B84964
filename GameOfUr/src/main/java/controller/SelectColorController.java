@@ -17,10 +17,10 @@ import view.SelectColorView;
  * @author mauup
  */
 public class SelectColorController {
-    SelectColorView selectColorView;
-    Color playerColor;
-    String playerName;
-    int position = 0;
+    private SelectColorView selectColorView;
+    private Color playerColor;
+    private String playerName;
+    private int position = 0;
     
     
     public SelectColorController(int playerNumber){
