@@ -76,9 +76,9 @@ public class UrTileModel {
         return this.piece;
     }
     
-    public void setSafePiece(int x, int y, UrPieceModel piece){
+    public void setSafePiece(int x, int y, UrPieceModel piece) {
         if(this.isSafe()){
-            piece.setSafe();
+            piece.setSafe(true);
         }
         piece.setX(x);
         piece.setY(y);

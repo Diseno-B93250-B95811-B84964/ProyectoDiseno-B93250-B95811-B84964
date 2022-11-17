@@ -40,12 +40,11 @@ public class UrPlayerModel {
         this.playerColor = Color.WHITE;
         this.playerName = "Player";
         this.score = 0;
-        /*
+        
         playerPieces = new ArrayList<UrPieceModel>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
             playerPieces.add(new UrPieceModel(this.playerColor));
         }
-        */
     }
     
     /**
@@ -123,6 +122,10 @@ public class UrPlayerModel {
      */
     public void addScoreToPlayer(){
         this.score++;
+    }
+    
+    public ArrayList<UrPieceModel> getPlayerPieces(){
+        return playerPieces;
     }
     
     public UrPieceModel getPlayerPiece(int pieceId) {

@@ -15,6 +15,10 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.PrintWriter;
+import java.util.HashMap;
+import javax.swing.JFileChooser;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 
@@ -43,9 +47,9 @@ public class GameController {
     private UrPieceModel piece;
     private MainMenuView mainMenuView;
 
-    /*Atributos serializador?*/
-    private UrPlayerModel player1;
-    private UrPlayerModel player2;
+    /* Atributos serializador? */
+    private UrPlayerModel[] playerArray;
+    
     private UrSerializerConstructor serializer;
     
     private MainGameView gameView;
@@ -55,13 +59,25 @@ public class GameController {
     private Color currentPlayer;
     private boolean diceThrown;
     
+    private HashMap<UrPieceModel, UrTileModel> possiblePaths;
+    
+    private boolean winner;
+    
+    private int currentPlayerNum;
+    
     public GameController(){
         try {
             this.diceModel = new UrDiceModel();
             this.gameView = new MainGameView();
             this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
-
+            this.possiblePaths = new HashMap();
+            this.winner = false;
+            this.playerArray = new UrPlayerModel[2];
+            for (int index = 0; index < playerArray.length; index++) {
+                playerArray[index] = new UrPlayerModel();
+            }
+                    
             initializeLabels();
             chooseNextPossibleLabel();        
             menuHandler();
@@ -99,9 +115,7 @@ public class GameController {
     
     private void menuHandler(){
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
-        this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
-        this.mainMenuView.addLoadGameButtonClickListener(new LoadGameClickListener());
     }
     
     private void initializeLabels(){
@@ -161,13 +175,13 @@ public class GameController {
         // read player colors and score
         int fileContentsIndex = 0;
         int pieceIndex = 0;
-        player1 = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        playerArray[0] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
         
         fileContentsIndex++;
-        player2 = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        playerArray[1] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
         
         fileContentsIndex++;
-        board = new UrBoardModel(player1.getColor(), player2.getColor());
+        board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
         
         int actualCol = 0;
         for(int row = 0; row < UrBoardModel.ROWS; row++) {
@@ -176,32 +190,37 @@ public class GameController {
                 if (character != ',') {
                     UrPieceModel piece;
                     if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P1) {
-                        piece = player1.getPlayerPiece(pieceIndex);
-                        gameBoard.setPiece(row, actualCol, piece);
+                        piece = playerArray[0].getPlayerPiece(pieceIndex);
+                        board.setPiece(row, actualCol, piece);
                     } else if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P2) {
-                        piece = player2.getPlayerPiece(pieceIndex);
-                        gameBoard.setPiece(row, actualCol, piece);
+                        piece = playerArray[1].getPlayerPiece(pieceIndex);
+                        board.setPiece(row, actualCol, piece);
                     }
                     actualCol++;
                 }
             }
             fileContentsIndex++;
         }
-        gameBoard.setPlayerTurn(new Color(Integer.parseInt(fileContents[fileContentsIndex])));
+        board.setPlayerTurn(new Color(Integer.parseInt(fileContents[fileContentsIndex])));
     }
     
     /*Setters */
     private void chooseNextPossibleLabel(){
         //gameView.setNextPossibleLabel(2,2);
     }
+        
+    /*Setters */
+
 
     public void setFirstPlayerName(String name){
         gameView.setFirstPlayerNameToLabel(name);
+        playerArray[0].setPlayerName(name);
     }
     
     public void setFirstPlayerColor(Color color){
         try {
             gameView.setFirstPlayerPieceColor(color);
+            this.playerArray[0].setColor(color);
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
@@ -209,23 +228,100 @@ public class GameController {
     
     public void setSecondPlayerName(String name){
        gameView.setSecondPlayerNameToLabel(name);
+       this.playerArray[1].setPlayerName(name);
     }
     
     public void setSecondPlayerColor(Color color){
         try {
             gameView.setSecondPlayerPieceColor(color);
+            this.playerArray[1].setColor(color);
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
     }
+    
+    public void resetMapPiecesPerTurn(UrPlayerModel currentPlayer){
+        possiblePaths.clear();
+        for(int pieces = 0; pieces < currentPlayer.getPlayerPieces().size(); pieces++) {
+            if(currentPlayer.getPlayerPieces().get(pieces).isInPlay()){
+                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), 
+                    new UrTileModel(currentPlayer.getPlayerPieces().get(pieces).getX(), 
+                    currentPlayer.getPlayerPieces().get(pieces).getY()));
+            } else{
+                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), null);
+            }
+        }
+    }
+    
+    public void calculateAllPossiblePathsPerTurn(UrPlayerModel currentPlayer, int amountOfMoves){
+        Color playerColor = currentPlayer.getColor();
+        UrTileModel currentTile = new UrTileModel();
+        UrTileModel auxTile = new UrTileModel();
+        if(diceThrown){
+            for(int pieces = 0; pieces < possiblePaths.size(); pieces++){
+                if(possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces)) != null){
+                    currentTile = possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces));
+                    auxTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
+                    possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), auxTile);
+                }
+            }
+        }
+    }
+    
+   // CalculateAllPossiblePathsPerTurn() {
+        //Cada vez que se tira dado:
+        //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
+        //Por cada piece de getPlayerNPieces()		
+        //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
+        //buscarEnMapa(atributoMapa) {
+        //atributoMap = atributoMap.search(todo lo que NO sea NULL
+       
+    //}
 
+    public void startGame() {
+        
+        this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
+        Color currentColor = new Color(255,255,255);
+        int result = -1;
+        while(!winner) {
+            currentColor = playerArray[currentPlayerNum].getColor();
+            result = getDiceResult();
+            if (result>0){
+                //CalculateAllPossiblePathsPerTurn();
+                if (!possiblePaths.isEmpty()) {
+                    //gameLogic(int x, int y)
+                    /*if (playerArray[currentPlayerNum]) {
+                    
+                    }*/
+                }
+            }
+        }
+        // TODO destroy frame
+        // TODO create winningFrame
+        // TODO exit
+    }
+    
+    public int getDiceResult(){
+        gameView.cleanDice();
+        diceThrown  = true;
+        diceModel.rollDice();
+        int diceResult = diceModel.getRollResult();
+        gameView.showThrow(diceResult);
+        gameView.setMoves(diceResult);
+        return diceResult;
+    }
+    
+    private void gameLogic() {
+       //GameController.TileMouseListener a = new GameController().new TileMouseListener();
+       
+    }
     
     /* Listeners */
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;
         int column;
-
+        
         TileMouseListener(JLabel label, int row, int column){
             this.label = label;
             this.row = row;
@@ -259,36 +355,11 @@ public class GameController {
         } 
     }
     
-    class ThrowDiceClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int diceResult = getDiceResult();
-        }
-        
-        private int getDiceResult(){
-            gameView.cleanDice();
-            diceThrown  = true;
-            diceModel.rollDice();
-            int diceResult = diceModel.getRollResult();
-            gameView.showThrow(diceResult);
-            gameView.setMoves(diceResult);
-            return diceResult;
-        }
-
-    }
-    
     class ExitClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
-    
-    class LoadGameClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Teach me how to load a game!");
-            
-        }
-    }
+   
 }

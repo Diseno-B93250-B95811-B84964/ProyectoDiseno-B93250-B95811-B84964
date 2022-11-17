@@ -22,6 +22,25 @@ public class UrBoardModel {
     public final static int ROWS = 8;
     public final static int COLUMNS = 3;
     
+        
+    public UrBoardModel(){
+        urBoard = new UrTileModel[ROWS][COLUMNS];
+        for(int row = 0; row < ROWS; row++){
+            for(int col = 0; col < COLUMNS; col++){
+                urBoard[row][col] = new UrTileModel(row,col); 
+            }
+        }
+        urBoard[0][0].isSafe();
+        urBoard[0][2].isSafe();
+        urBoard[3][1].isSafe();
+        urBoard[6][0].isSafe();
+        urBoard[6][2].isSafe();
+        
+        playerPaths = new HashMap<Color, ArrayList<UrTileModel>>(2);
+        playerPaths.put(Color.WHITE, setPlayerPath(0)); //check for possible change to not use magic variables
+        playerPaths.put(Color.BLACK, setPlayerPath(2)); //check for possible change to not use magic variables
+    }
+    
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
         urBoard = new UrTileModel[ROWS][COLUMNS];
         for(int row = 0; row < ROWS; row++){

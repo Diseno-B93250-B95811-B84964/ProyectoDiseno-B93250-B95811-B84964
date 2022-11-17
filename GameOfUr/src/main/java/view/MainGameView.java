@@ -98,7 +98,6 @@ public class MainGameView extends javax.swing.JPanel {
         dice3 = new javax.swing.JLabel();
         dice2 = new javax.swing.JLabel();
         dice1 = new javax.swing.JLabel();
-        throwDiceButton = new javax.swing.JButton();
         moves = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -355,16 +354,6 @@ public class MainGameView extends javax.swing.JPanel {
 
         dice1.setText("dice1");
 
-        throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));
-        throwDiceButton.setFont(new java.awt.Font("Century Schoolbook", 1, 18)); // NOI18N
-        throwDiceButton.setForeground(new java.awt.Color(255, 255, 255));
-        throwDiceButton.setText("THROW DICE");
-        throwDiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                throwDiceButtonActionPerformed(evt);
-            }
-        });
-
         moves.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         moves.setText("Number of moves");
 
@@ -374,19 +363,16 @@ public class MainGameView extends javax.swing.JPanel {
             dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dicePanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dicePanelLayout.createSequentialGroup()
-                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(dicePanelLayout.createSequentialGroup()
-                        .addComponent(throwDiceButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(moves)))
+                    .addComponent(moves))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dicePanelLayout.setVerticalGroup(
@@ -399,10 +385,8 @@ public class MainGameView extends javax.swing.JPanel {
                     .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(throwDiceButton)
-                    .addComponent(moves))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addComponent(moves)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -455,7 +439,7 @@ public class MainGameView extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addComponent(dicePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
@@ -487,10 +471,6 @@ public class MainGameView extends javax.swing.JPanel {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }                                           
-
-    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_throwDiceButtonActionPerformed
 
     /* Main Panel Buttons */
 
@@ -700,11 +680,6 @@ public class MainGameView extends javax.swing.JPanel {
         moves.setText(movesResult);
     }
     
-    public void addthrowDiceButtonClickListener(ActionListener listenForThrowDice)
-    {
-        throwDiceButton.addActionListener(listenForThrowDice); 
-    }
-    
     /* Mapping methods from logical matrix to graphical one */
     public void mapLogicalMatrix(){
         
@@ -800,7 +775,6 @@ public class MainGameView extends javax.swing.JPanel {
     private java.awt.Label secondPlayerLabelName;
     private javax.swing.JLabel secondPlayerScore2;
     private javax.swing.JLabel secondPlayerTitleLabel;
-    private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables
 
 }
