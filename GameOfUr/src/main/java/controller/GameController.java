@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.PrintWriter;
 import java.util.HashMap;
+import javax.swing.JFileChooser;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -59,7 +61,9 @@ public class GameController {
     private Color currentPlayer;
     private boolean diceThrown;
     
-    private Map pathMap;
+    private HashMap<UrPieceModel, UrTileModel> possiblePaths;
+    
+    //private Map pathMap;
     
     private boolean winner;
     
@@ -184,6 +188,44 @@ public class GameController {
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
+    }
+    
+    public void resetMapPiecesPerTurn(UrPlayerModel currentPlayer){
+        possiblePaths.clear();
+        for(int pieces = 0; pieces < currentPlayer.getPlayerPieces().size(); pieces++){
+            if(currentPlayer.getPlayerPieces().get(pieces).isInPlay()){
+                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), 
+                    new UrTileModel(currentPlayer.getPlayerPieces().get(pieces).getX(), 
+                    currentPlayer.getPlayerPieces().get(pieces).getY()));
+            }else{
+                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), null);
+            }
+        }
+    }
+    
+    public void calculateAllPossiblePathsPerTurn(UrPlayerModel currentPlayer, int amountOfMoves){
+        Color playerColor = currentPlayer.getColor();
+        UrTileModel currentTile = new UrTileModel();
+        UrTileModel auxTile = new UrTileModel();
+        if(diceThrown){
+            for(int pieces = 0; pieces < possiblePaths.size(); pieces++){
+                if(possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces)) != null){
+                    currentTile = possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces));
+                    auxTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
+                    possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), auxTile);
+                }
+            }
+        }
+    }
+    
+   // CalculateAllPossiblePathsPerTurn() {
+        //Cada vez que se tira dado:
+        //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
+        //Por cada piece de getPlayerNPieces()		
+    //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
+      //  buscarEnMapa(atributoMapa) {
+        //    atributoMap = atributoMap.search(todo lo que NO sea NULL
+       
     }
 
     public void startGame() {

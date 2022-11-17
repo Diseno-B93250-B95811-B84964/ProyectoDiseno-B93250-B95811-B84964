@@ -36,6 +36,11 @@ public class UrPieceModel {
     protected boolean isSafe;
     
     /**
+     * Determines if piece is safe
+     */
+    protected boolean isInPlay;
+    
+    /**
      * Basic Constructor
      */
     public UrPieceModel() {
@@ -43,6 +48,7 @@ public class UrPieceModel {
         y = 0;
         pieceColor = Color.WHITE;
         isSafe = false;
+        isInPlay = false;
     }
     
     /**
@@ -54,6 +60,7 @@ public class UrPieceModel {
         y = 0;
         pieceColor = playerColor;
         isSafe = false;
+        isInPlay = false;
     }
     
     /**
@@ -113,9 +120,17 @@ public class UrPieceModel {
     }
     
     /**
-     * Sets variable isSafe as true.
+     * Sets variable isSafe.
      */
-    public void setSafe() {
-        isSafe = true;
+    public void setSafe(boolean isSafe) {
+        this.isSafe = isSafe;
+    }
+    
+    public boolean isInPlay(){
+        return isInPlay;
+    }
+    
+    public void setIsInPlay(boolean isInPlay){
+        this.isInPlay = isInPlay;
     }
 }

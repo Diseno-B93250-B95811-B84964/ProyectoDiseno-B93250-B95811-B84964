@@ -38,6 +38,11 @@ public class UrTileModel {
         this.piece = null;
     }
     
+    public UrTileModel(int row, int column, UrPieceModel possiblePiece){
+        isSafe = false;
+        this.possiblePiece = possiblePiece;
+    }
+    
     public int getRow() {
         return row;
     }
@@ -52,11 +57,6 @@ public class UrTileModel {
     
     public void toggleVacancy(){
         this.isVacant = !isVacant;
-    }
-    
-    public UrTileModel(int row, int column, UrPieceModel possiblePiece){
-        isSafe = false;
-        this.possiblePiece = possiblePiece;
     }
     
     public boolean isSafe(){
@@ -76,8 +76,9 @@ public class UrTileModel {
     }
     
     public void setSafePiece(int x, int y, UrPieceModel piece){
+        boolean isSafe = true;
         if(this.isSafe()){
-            piece.setSafe();
+            piece.setSafe(isSafe);
         }
         piece.setX(x);
         piece.setY(y);

@@ -29,6 +29,27 @@ public class UrBoardModel {
 
     protected HashMap<Color, ArrayList<UrTileModel>> playerPaths;
     
+        
+    public UrBoardModel(){
+        this.playerOneColor = Color.WHITE;
+        this.playerTwoColor = Color.WHITE;
+        urBoard = new UrTileModel[ROWS][COLUMNS];
+        for(int row = 0; row < ROWS; row++){
+            for(int col = 0; col < COLUMNS; col++){
+                urBoard[row][col] = new UrTileModel(row,col); 
+            }
+        }
+        urBoard[0][0].isSafe();
+        urBoard[0][2].isSafe();
+        urBoard[3][1].isSafe();
+        urBoard[6][0].isSafe();
+        urBoard[6][2].isSafe();
+        
+        playerPaths = new HashMap<Color, ArrayList<UrTileModel>>(2);
+        playerPaths.put(playerOneColor, setPlayerPath(0)); //check for possible change to not use magic variables
+        playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
+    }
+    
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
         //this.playerOne = new UrPlayerModel(1, playerOneColor);
         //this.playerTwo = new UrPlayerModel(2, playerTwoColor);
