@@ -14,14 +14,12 @@ import java.lang.Math;
  * @author Alvaro Miranda
  */
 public class UrDiceModel {
-    protected int numberOfSides;
-    protected int rollResult;
-    private int urNumberOfSides;
+    private int numberOfSides;
+    private int rollResult;
     
     public UrDiceModel()
     {
-        urNumberOfSides = 5;
-        this.numberOfSides = urNumberOfSides;
+        numberOfSides = 5;
         rollResult = 0;
     }
 

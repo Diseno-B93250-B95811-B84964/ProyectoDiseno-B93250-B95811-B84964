@@ -133,7 +133,7 @@ public class GameController {
         //gameView.setNextPossibleLabel(x,y);
     }
       
-    public void save_game() {
+    public void saveGame() {
         try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
             writer.write(serializer.saveGameState());
             writer.close();
@@ -141,6 +141,55 @@ public class GameController {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void loadGame() {
+        // file chooser returns file name
+        // open file name and get string
+        // create array of strings by splitting by \n
+        String fileContents = "";
+        loadGameState(fileContents.split("\n", 0));
+    }
+    
+    private UrPlayerModel createPlayer(String[] player) {
+        Color playerColor = new Color(Integer.parseInt(player[0]));
+        int playerScore = Integer.parseInt(player[2]);
+        // Color playerColor, String playerName, int playerScore
+        return new UrPlayerModel(playerColor, player[1], playerScore);
+    }
+    
+    private void loadGameState(String[] fileContents) {
+        // read player colors and score
+        int fileContentsIndex = 0;
+        int pieceIndex = 0;
+        player1 = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        
+        fileContentsIndex++;
+        player2 = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        
+        fileContentsIndex++;
+        board = new UrBoardModel(player1.getColor(), player2.getColor());
+        
+        int actualCol = 0;
+        for(int row = 0; row < UrBoardModel.ROWS; row++) {
+            for(int col = 0; col < UrBoardModel.COLUMNS + 2; col++) {
+                char character = fileContents[fileContentsIndex].charAt(col);
+                if (character != ',') {
+                    UrPieceModel piece;
+                    if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P1) {
+                        piece = player1.getPlayerPiece(pieceIndex);
+                        gameBoard.setPiece(row, actualCol, piece);
+                    } else if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P2) {
+                        piece = player2.getPlayerPiece(pieceIndex);
+                        gameBoard.setPiece(row, actualCol, piece);
+                    }
+                    actualCol++;
+                }
+            }
+            fileContentsIndex++;
+        }
+        gameBoard.setPlayerTurn(new Color(Integer.parseInt(fileContents[fileContentsIndex])));
+    }
+    
     /*Setters */
     private void chooseNextPossibleLabel(){
         //gameView.setNextPossibleLabel(2,2);

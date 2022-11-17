@@ -14,24 +14,24 @@ import java.util.ArrayList;
  *
  * @author Mauricio Palma
  */
-public class UrPlayerModel{
-    
+public class UrPlayerModel {
     public final static int NUMBER_OF_PIECES = 7;
-    ArrayList<UrPieceModel> playerPieces;
+    private ArrayList<UrPieceModel> playerPieces;
+    
     /**
      * Attribute that holds player's color
      */
-    protected Color playerColor;
+    private Color playerColor;
     
     /**
      * Attribute that holds player's name
      */
-    protected String playerName;
+    private String playerName;
     
     /**
      * Attribute that holds player's score
      */
-    protected int score;
+    private int score;
     
     /**
      * Default constructor method that sets everything to default values
@@ -40,6 +40,12 @@ public class UrPlayerModel{
         this.playerColor = Color.WHITE;
         this.playerName = "Player";
         this.score = 0;
+        /*
+        playerPieces = new ArrayList<UrPieceModel>();
+        for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
+            playerPieces.add(new UrPieceModel(this.playerColor));
+        }
+        */
     }
     
     /**
@@ -66,7 +72,7 @@ public class UrPlayerModel{
         this.playerColor = playerColor;
         this.playerName = playerName;
         this.score = playerScore;
-        playerPieces = new ArrayList<UrPieceModel>();
+        playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
             playerPieces.add(new UrPieceModel(this.playerColor));
         }
@@ -117,5 +123,9 @@ public class UrPlayerModel{
      */
     public void addScoreToPlayer(){
         this.score++;
+    }
+    
+    public UrPieceModel getPlayerPiece(int pieceId) {
+        return playerPieces.get(pieceId);
     }
 }

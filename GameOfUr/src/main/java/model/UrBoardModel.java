@@ -15,25 +15,14 @@ import java.util.*;
  * @author Usuario1
  */
 public class UrBoardModel {
-    private UrTileModel[][] urBoard;
-    //private PlayerModel playerOne;
-    //private PlayerModel playerTwo;
-    public Color playerOneColor; // TODO change this to private!
-    public Color playerTwoColor;
+    private final UrTileModel[][] urBoard;
+    private HashMap<Color, ArrayList<UrTileModel>> playerPaths;
+    private Color playerTurn;
+    
     public final static int ROWS = 8;
     public final static int COLUMNS = 3;
-    private final static int NON_OCCUPIED = 0;
-    private final static int OCCUPIED_P1 = 1;
-    private final static int OCCUPIED_P2 = 2;
-    public int playerTurn;
-
-    protected HashMap<Color, ArrayList<UrTileModel>> playerPaths;
     
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
-        //this.playerOne = new UrPlayerModel(1, playerOneColor);
-        //this.playerTwo = new UrPlayerModel(2, playerTwoColor);
-        this.playerOneColor = playerOneColor;
-        this.playerTwoColor = playerTwoColor;
         urBoard = new UrTileModel[ROWS][COLUMNS];
         for(int row = 0; row < ROWS; row++){
             for(int col = 0; col < COLUMNS; col++){
@@ -46,27 +35,26 @@ public class UrBoardModel {
         urBoard[6][0].isSafe();
         urBoard[6][2].isSafe();
         
-        playerPaths = new HashMap<Color, ArrayList<UrTileModel>>(2);
+        playerPaths = new HashMap<>(2);
         playerPaths.put(playerOneColor, setPlayerPath(0)); //check for possible change to not use magic variables
         playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
     }
     
-    private ArrayList<UrTileModel> setPlayerPath(int column) {
+    private ArrayList<UrTileModel> setPlayerPath(int playerColumn) {
         ArrayList<UrTileModel> possiblePath =  new ArrayList<>();
         int middleColumn = 1;
         
-        possiblePath.add(urBoard[3][column]);
-        possiblePath.add(urBoard[2][column]);
-        possiblePath.add(urBoard[1][column]);
-        possiblePath.add(urBoard[0][column]);
+        for(int playerRow = 3; playerRow > 0; playerRow--){
+            possiblePath.add(urBoard[playerRow][playerColumn]);
+        }
         
         for(int playerRow = 0; playerRow < ROWS; playerRow++){
             possiblePath.add(urBoard[playerRow][middleColumn]);
         }
         
-        possiblePath.add(urBoard[7][column]);
-        possiblePath.add(urBoard[6][column]);
-        possiblePath.add(urBoard[5][column]);
+        for(int playerRow = 7; playerRow >= 5; playerRow--){
+            possiblePath.add(urBoard[playerRow][playerColumn]);
+        }
         
         return possiblePath;
     }
@@ -122,10 +110,12 @@ public class UrBoardModel {
     public void addScoreToPlayer(UrPlayerModel player){
         player.addScoreToPlayer();
     }
-
-    /*Duplicated */ 
-    /*
-    public UrTileModel getTile(int x, int y) {
-        return urBoard[x][y];
-    }*/
+    
+    public Color getPlayerTurn() {
+        return playerTurn;
+    }
+    
+    public void setPlayerTurn(Color playerColor) {
+        playerTurn = playerColor;
+    }
 }
