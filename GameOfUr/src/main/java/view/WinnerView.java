@@ -50,21 +50,21 @@ public class WinnerView extends javax.swing.JPanel {
         congratulationsTextPanelLayout.setHorizontalGroup(
             congratulationsTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, congratulationsTextPanelLayout.createSequentialGroup()
-                .addContainerGap(208, Short.MAX_VALUE)
+                .addContainerGap(312, Short.MAX_VALUE)
                 .addComponent(congratulationsText)
-                .addGap(177, 177, 177))
+                .addGap(306, 306, 306))
         );
         congratulationsTextPanelLayout.setVerticalGroup(
             congratulationsTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(congratulationsTextPanelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(30, 30, 30)
                 .addComponent(congratulationsText)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         winnerTextPanel.setBackground(new java.awt.Color(153, 153, 153));
 
-        winnerText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        winnerText.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         winnerText.setText("Who won?");
 
         javax.swing.GroupLayout winnerTextPanelLayout = new javax.swing.GroupLayout(winnerTextPanel);
@@ -72,37 +72,40 @@ public class WinnerView extends javax.swing.JPanel {
         winnerTextPanelLayout.setHorizontalGroup(
             winnerTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(winnerTextPanelLayout.createSequentialGroup()
-                .addGap(263, 263, 263)
+                .addGap(381, 381, 381)
                 .addComponent(winnerText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         winnerTextPanelLayout.setVerticalGroup(
             winnerTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, winnerTextPanelLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(121, Short.MAX_VALUE)
                 .addComponent(winnerText)
-                .addGap(45, 45, 45))
+                .addGap(95, 95, 95))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(winnerTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(winnerTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(42, 42, 42)
                 .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(winnerTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGap(125, 125, 125))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -11,7 +11,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +20,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import model.UrRulesModel;
 
 /**
@@ -68,7 +66,6 @@ public class MainGameView extends javax.swing.JPanel {
     private void initComponents() {
 
         saveAndLeaveButton = new javax.swing.JButton();
-        rulesButton = new javax.swing.JButton();
         playerTurnLabel = new javax.swing.JLabel();
         Player1Panel = new javax.swing.JPanel();
         firstPlayerTitleLabel = new javax.swing.JLabel();
@@ -103,6 +100,8 @@ public class MainGameView extends javax.swing.JPanel {
         dice2 = new javax.swing.JLabel();
         dice1 = new javax.swing.JLabel();
         moves = new javax.swing.JLabel();
+        throwDiceButton = new javax.swing.JButton();
+        rulesButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -113,16 +112,6 @@ public class MainGameView extends javax.swing.JPanel {
         saveAndLeaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveAndLeaveButtonActionPerformed(evt);
-            }
-        });
-
-        rulesButton.setBackground(new java.awt.Color(44, 37, 37));
-        rulesButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
-        rulesButton.setForeground(new java.awt.Color(255, 255, 255));
-        rulesButton.setText("GAME RULES");
-        rulesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rulesButtonActionPerformed(evt);
             }
         });
 
@@ -284,30 +273,32 @@ public class MainGameView extends javax.swing.JPanel {
                     .addComponent(secondPlayerLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(Player2PanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(36, 36, 36)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Player2PanelLayout.createSequentialGroup()
-                        .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pieceLabelSecondPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pieceLabelSecondPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pieceLabelSecondPlayer7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player2PanelLayout.createSequentialGroup()
-                                .addComponent(pieceLabelSecondPlayer6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pieceLabelSecondPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pieceLabelSecondPlayer5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(pieceLabelSecondPlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inventoryTitle2)
+                        .addGap(88, 88, 88))
                     .addGroup(Player2PanelLayout.createSequentialGroup()
                         .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(secondPlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Player2PanelLayout.createSequentialGroup()
-                        .addComponent(inventoryTitle2)
-                        .addGap(88, 88, 88)))
+                        .addGap(18, 18, 18)
+                        .addComponent(secondPlayerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player2PanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pieceLabelSecondPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pieceLabelSecondPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pieceLabelSecondPlayer7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Player2PanelLayout.createSequentialGroup()
+                        .addComponent(pieceLabelSecondPlayer6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pieceLabelSecondPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pieceLabelSecondPlayer5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pieceLabelSecondPlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
         Player2PanelLayout.setVerticalGroup(
             Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,6 +309,7 @@ public class MainGameView extends javax.swing.JPanel {
                 .addComponent(secondPlayerLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(inventoryTitle2)
+                .addGap(30, 30, 30)
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Player2PanelLayout.createSequentialGroup()
                         .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -333,10 +325,11 @@ public class MainGameView extends javax.swing.JPanel {
                 .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pieceLabelSecondPlayer7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pieceLabelSecondPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PlayerScoreTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(secondPlayerScore)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(Player2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PlayerScoreTitle2)
+                    .addComponent(secondPlayerScore))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout boardGamePanelLayout = new javax.swing.GroupLayout(boardGamePanel);
@@ -358,8 +351,18 @@ public class MainGameView extends javax.swing.JPanel {
 
         dice1.setText("dice1");
 
-        moves.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        moves.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         moves.setText("Number of moves");
+
+        throwDiceButton.setBackground(new java.awt.Color(44, 37, 37));
+        throwDiceButton.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
+        throwDiceButton.setForeground(new java.awt.Color(255, 255, 255));
+        throwDiceButton.setText("THROW DICE");
+        throwDiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwDiceButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dicePanelLayout = new javax.swing.GroupLayout(dicePanel);
         dicePanel.setLayout(dicePanelLayout);
@@ -367,16 +370,21 @@ public class MainGameView extends javax.swing.JPanel {
             dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dicePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dicePanelLayout.createSequentialGroup()
+                        .addComponent(dice1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(throwDiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dicePanelLayout.createSequentialGroup()
-                        .addComponent(dice2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(moves))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dicePanelLayout.createSequentialGroup()
+                        .addComponent(moves)
+                        .addGap(28, 28, 28)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dicePanelLayout.setVerticalGroup(
@@ -389,9 +397,23 @@ public class MainGameView extends javax.swing.JPanel {
                     .addComponent(dice3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dice4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(moves)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGroup(dicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dicePanelLayout.createSequentialGroup()
+                        .addComponent(moves)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(throwDiceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        rulesButton.setBackground(new java.awt.Color(44, 37, 37));
+        rulesButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        rulesButton.setForeground(new java.awt.Color(255, 255, 255));
+        rulesButton.setText("GAME RULES");
+        rulesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -408,16 +430,16 @@ public class MainGameView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(boardGamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(saveAndLeaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(33, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(playerTurnLabel)
@@ -437,7 +459,7 @@ public class MainGameView extends javax.swing.JPanel {
                                 .addComponent(Player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(saveAndLeaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(15, 15, 15)))
                         .addContainerGap())
@@ -453,7 +475,10 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
-    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt){
+    }
+    
+    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
         UrRulesModel rules = new UrRulesModel();
         JFrame frame = new JFrame("Rules");        
         JPanel panel = new JPanel();
@@ -473,8 +498,7 @@ public class MainGameView extends javax.swing.JPanel {
         frame.setSize(600, 420);      
         frame.setLocationRelativeTo(null);  
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }                                           
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    }//GEN-LAST:event_rulesButtonActionPerformed
 
     /* Main Panel Buttons */
 
@@ -482,9 +506,13 @@ public class MainGameView extends javax.swing.JPanel {
         saveAndLeaveButton.addActionListener(listenForButton);
     }
     
+    public void throwDiceButtonClickListener(ActionListener listenForButton) {
+        throwDiceButton.addActionListener(listenForButton);
+    }
+    
     /* Button feature */
-    public void desactiveAPieceForFirstPlayer(int number){
-        switch (number) {
+    public void desactiveAPieceForFirstPlayer(){
+        switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(false);
                 pieceLabelFirstPlayer1.setVisible(false);
@@ -523,10 +551,11 @@ public class MainGameView extends javax.swing.JPanel {
             default -> {
             }
         }
+        usedPiecesFirstPlayer++;
     } 
     
-    public void desactiveAPieceForSecondPlayer(int number){
-            switch (number) {
+    public void desactiveAPieceForSecondPlayer(){
+        switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(false);
                 pieceLabelSecondPlayer1.setVisible(false);
@@ -565,6 +594,7 @@ public class MainGameView extends javax.swing.JPanel {
             default -> {
             }
         }
+        usedPiecesSecondPlayer++;
     } 
     
     /*Load Images Methods*/
@@ -651,8 +681,8 @@ public class MainGameView extends javax.swing.JPanel {
         }
     }
 
-    /* Color choose Pieces Feature */
-    public void setFirstPlayerPieceColor(Color color) throws IOException {
+    public ImageIcon getPieceImageColor(Color color) {
+        ImageIcon colorIcon = null;
         try {
             BufferedImage image = null;
             if (color.getRGB() == BLUE.getRGB()) {
@@ -674,42 +704,23 @@ public class MainGameView extends javax.swing.JPanel {
                 //image = loadImagesForJarFile("yellow_piece_rbg");
                 image = loadImagesForIDEFile("yellow_piece_rbg");
             }
-            ImageIcon colorIcon = resizeImage(image, 78, 78);
-            modifiyFirstPlayerPieces(colorIcon);
-            
+            colorIcon = resizeImage(image, 78, 78);
+           
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
+      return colorIcon;
+    }
+    
+    /* Color choose Pieces Feature */
+    public void setFirstPlayerPieceColor(Color color) throws IOException {
+        ImageIcon colorIcon = getPieceImageColor(color);
+        modifiyFirstPlayerPieces(colorIcon);
     }
     
     public void setSecondPlayerPieceColor(Color color) throws IOException{
-            try {
-            BufferedImage image = null;
-            if (color.getRGB() == BLUE.getRGB()) {
-                //image = loadImagesForJarFile("blue_piece_rbg");
-                image = loadImagesForIDEFile("blue_piece_rbg");
-            } else if (color.getRGB() == BROWN.getRGB()) {
-                //image = loadImagesForJarFile("brown_piece_rbg");
-                image = loadImagesForIDEFile("brown_piece_rbg");
-            } else if (color.getRGB() == GREEN.getRGB()) {
-                //image = loadImagesForJarFile("green_piece_rbg");
-                image = loadImagesForIDEFile("green_piece_rbg");
-            } else if (color.getRGB() == PURPLE.getRGB()) {
-                //image = loadImagesForJarFile("purple_piece_rbg");
-                image = loadImagesForIDEFile("purple_piece_rbg");
-            } else if (color.getRGB() == RED.getRGB()) {
-                //image = loadImagesForJarFile("red_piece_rbg");
-                image = loadImagesForIDEFile("red_piece_rbg");
-            } else if (color.getRGB() == YELLOW.getRGB()) {
-                //image = loadImagesForJarFile("yellow_piece_rbg");
-                image = loadImagesForIDEFile("yellow_piece_rbg");
-            }
-            ImageIcon colorIcon = resizeImage(image, 78, 78);
-            modifySecondPlayerPieces(colorIcon);
-            
-        } catch (IOException e) {
-            System.out.println("Color piece icon not found");
-        }
+        ImageIcon colorIcon = getPieceImageColor(color);
+        modifySecondPlayerPieces(colorIcon);
     }
     
     /* Main Frame Dices Feature */
@@ -826,6 +837,18 @@ public class MainGameView extends javax.swing.JPanel {
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
     
+    public void addScoreToFirstPlayer(int points) {
+        int currentScore = Integer.parseInt(firstPlayerScore.getText());
+        currentScore+=points;
+        firstPlayerScore.setText(Integer.toString(currentScore));
+    }
+    
+    public void addScoreToSecondPlayer(int points) {
+        int currentScore = Integer.parseInt(secondPlayerScore.getText());
+        currentScore+=points;
+        secondPlayerScore.setText(Integer.toString(currentScore));
+    }
+    
     public void changePlayerTurn(int number){
         String playerTurn = "Player " + number+"'s" + "turn";
         playerTurnLabel.setText(playerTurn);
@@ -867,6 +890,7 @@ public class MainGameView extends javax.swing.JPanel {
     private java.awt.Label secondPlayerLabelName;
     private javax.swing.JLabel secondPlayerScore;
     private javax.swing.JLabel secondPlayerTitleLabel;
+    private javax.swing.JButton throwDiceButton;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -7,27 +7,22 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import java.io.File;  // Import the File class
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JFileChooser;
-import java.util.HashMap;
-import java.util.Map;
-
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import model.UrBoardModel;
-
 import model.UrDiceModel;
 import model.UrPieceModel;
 import model.UrPlayerModel;
-import model.UrSerializerConstructor;
+import model.UrSerializerModel;
 import model.UrTileModel;
 
 import view.MainGameView;
@@ -36,7 +31,7 @@ import view.MainMenuView;
 
 /**
  *
- * @author Mauricio Palma
+ * @author Mauricio Palma, Ximena Gdur, Alvaro Villegas
  */
 public class GameController {
     private final static int ROWS = 8;
@@ -44,16 +39,12 @@ public class GameController {
     
     private UrBoardModel board;
     private UrDiceModel diceModel;
-    private UrPieceModel piece;
     private MainMenuView mainMenuView;
 
-    /* Atributos serializador? */
+    /* Atributos serializador */
     private UrPlayerModel[] playerArray;
-    
-    private UrSerializerConstructor serializer;
-    
+    private UrSerializerModel serializer;
     private MainGameView gameView;
-
 
     
     private Color currentPlayer;
@@ -69,15 +60,13 @@ public class GameController {
         try {
             this.diceModel = new UrDiceModel();
             this.gameView = new MainGameView();
-            this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
             this.possiblePaths = new HashMap();
             this.winner = false;
             this.playerArray = new UrPlayerModel[2];
             for (int index = 0; index < playerArray.length; index++) {
                 playerArray[index] = new UrPlayerModel();
-            }
-                    
+            }          
             initializeLabels();
             chooseNextPossibleLabel();        
             menuHandler();
@@ -104,7 +93,7 @@ public class GameController {
         
         this.diceThrown = false;
         
-        this.serializer = new UrSerializerConstructor(board, player1, player2);
+        this.serializer = new UrSerializerModel(board, player1, player2);
         
         initializeLabels();
         //chooseNextPossibleLabel();        
@@ -116,6 +105,7 @@ public class GameController {
     private void menuHandler(){
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
+        this.gameView.throwDiceButtonClickListener(new ThrowDiceClickListener());
     }
     
     private void initializeLabels(){
@@ -156,29 +146,73 @@ public class GameController {
         }
     }
     
-    public void loadGame() {
-        // file chooser returns file name
-        // open file name and get string
-        // create array of strings by splitting by \n
-        String fileContents = "";
-        loadGameState(fileContents.split("\n", 0));
+    public void loadGame(ArrayList<String> fileContents) {
+        loadGameState(fileContents);
+        gameView.setFirstPlayerNameToLabel(playerArray[0].getPlayerName());
+        gameView.setSecondPlayerNameToLabel(playerArray[1].getPlayerName());
+        gameView.addScoreToFirstPlayer(6);
+        gameView.addScoreToSecondPlayer(6);
+        try {
+            System.out.println("Color first player" + playerArray[0].getColor());
+            gameView.setFirstPlayerPieceColor(playerArray[0].getColor());
+            System.out.println("Color second player" + playerArray[1].getColor());    
+            Color color = new Color(0,102,255);
+            gameView.setSecondPlayerPieceColor(color);
+        } catch(IOException e) {
+            System.out.println("Images not found! Please check images path");
+        }
+        for (int index = 0; index < playerArray[0].getPlayerScore(); index++) {
+            gameView.desactiveAPieceForFirstPlayer();
+        }
+        for (int index = 0; index < playerArray[1].getPlayerScore(); index++) {
+            gameView.desactiveAPieceForSecondPlayer();
+        }
+        
+        int limit = playerArray[0].getPlayerPieces().size();
+        for (int index = 0; index < limit; index++) {
+            if (playerArray[0].getPlayerPiece(index).getX() != -1) {
+                gameView.desactiveAPieceForFirstPlayer();
+            } else {
+                int x = playerArray[0].getPlayerPiece(index).getX();
+                int y = playerArray[0].getPlayerPiece(index).getY();
+                Color color = playerArray[0].getColor();
+                ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
+                gameView.setNextPossibleLabel(x,y,colorPieceIcon);
+            }
+        }
+            
+        limit = playerArray[1].getPlayerPieces().size();
+        for (int index = 0; index < limit; index++) {
+            if (playerArray[1].getPlayerPiece(index).getX() != -1) {
+                gameView.desactiveAPieceForSecondPlayer();
+            } else {
+                int x = playerArray[1].getPlayerPiece(index).getX();
+                int y = playerArray[1].getPlayerPiece(index).getY();
+                Color color = playerArray[1].getColor();
+                ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
+                gameView.setNextPossibleLabel(x,y,colorPieceIcon);
+            }
+        }
+
+        // mapear fichas en juego
+        
     }
     
     private UrPlayerModel createPlayer(String[] player) {
         Color playerColor = new Color(Integer.parseInt(player[0]));
         int playerScore = Integer.parseInt(player[2]);
-        // Color playerColor, String playerName, int playerScore
+        /// Color playerColor, String playerName, int playerScore
         return new UrPlayerModel(playerColor, player[1], playerScore);
     }
     
-    private void loadGameState(String[] fileContents) {
+    private void loadGameState(ArrayList<String> fileContents) {
         // read player colors and score
         int fileContentsIndex = 0;
         int pieceIndex = 0;
-        playerArray[0] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        playerArray[0] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0));
         
         fileContentsIndex++;
-        playerArray[1] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        playerArray[1] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0));
         
         fileContentsIndex++;
         board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
@@ -186,13 +220,13 @@ public class GameController {
         int actualCol = 0;
         for(int row = 0; row < UrBoardModel.ROWS; row++) {
             for(int col = 0; col < UrBoardModel.COLUMNS + 2; col++) {
-                char character = fileContents[fileContentsIndex].charAt(col);
+                char character = fileContents.get(fileContentsIndex).charAt(col);
                 if (character != ',') {
                     UrPieceModel piece;
-                    if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P1) {
+                    if (Character.getNumericValue(character) == UrSerializerModel.OCCUPIED_P1) {
                         piece = playerArray[0].getPlayerPiece(pieceIndex);
                         board.setPiece(row, actualCol, piece);
-                    } else if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P2) {
+                    } else if (Character.getNumericValue(character) == UrSerializerModel.OCCUPIED_P2) {
                         piece = playerArray[1].getPlayerPiece(pieceIndex);
                         board.setPiece(row, actualCol, piece);
                     }
@@ -201,8 +235,9 @@ public class GameController {
             }
             fileContentsIndex++;
         }
-        board.setPlayerTurn(new Color(Integer.parseInt(fileContents[fileContentsIndex])));
+        board.setPlayerTurn(new Color(Integer.parseInt(fileContents.get(fileContentsIndex))));    
     }
+    
     
     /*Setters */
     private void chooseNextPossibleLabel(){
@@ -285,7 +320,7 @@ public class GameController {
         int result = -1;
         while(!winner) {
             currentColor = playerArray[currentPlayerNum].getColor();
-            result = getDiceResult();
+            result = /*getDiceResult()*/0;
             if (result>0){
                 //CalculateAllPossiblePathsPerTurn();
                 if (!possiblePaths.isEmpty()) {
@@ -300,16 +335,7 @@ public class GameController {
         // TODO create winningFrame
         // TODO exit
     }
-    
-    public int getDiceResult(){
-        gameView.cleanDice();
-        diceThrown  = true;
-        diceModel.rollDice();
-        int diceResult = diceModel.getRollResult();
-        gameView.showThrow(diceResult);
-        gameView.setMoves(diceResult);
-        return diceResult;
-    }
+  
     
     private void gameLogic() {
        //GameController.TileMouseListener a = new GameController().new TileMouseListener();
@@ -317,6 +343,24 @@ public class GameController {
     }
     
     /* Listeners */
+    
+    class ThrowDiceClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int result = getDiceResult();
+        } 
+        
+        private int getDiceResult(){
+            gameView.cleanDice();
+            diceThrown  = true;
+            diceModel.rollDice();
+            int diceResult = diceModel.getRollResult();
+            gameView.showThrow(diceResult);
+            gameView.setMoves(diceResult);
+            return diceResult; 
+        }
+    }
+    
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;

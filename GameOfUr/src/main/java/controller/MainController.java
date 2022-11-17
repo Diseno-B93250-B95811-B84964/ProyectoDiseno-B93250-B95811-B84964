@@ -78,22 +78,10 @@ public class MainController {
     }
     
     private  void checkFormerGameData(CardLayout baseCard, JPanel basePanel, String finalPanelName, FileChooserController loadController, GameController main){
-        /*if (!(colorController.getPlayerName().equals(""))) {
-            if (!(("Enter player name").equals(colorController.getPlayerName()))
-                &&  (colorController.getPlayerColor() != Color.WHITE)) {  
-                if (currentPlayer == 0) {
-                    main.setFirstPlayerName(colorController.getPlayerName());
-                    main.setFirstPlayerColor(colorController.getPlayerColor());
-                    currentPlayer+=1;
-                } else {
-                    main.setSecondPlayerName(colorController.getPlayerName());
-                    main.setSecondPlayerColor(colorController.getPlayerColor());
-                    currentPlayer-=1;
-                }
-                //colorController.hideButton(colorController.getPlayerColor());
-                baseCard.show(basePanel, finalPanelName);
-            }    
-        }*/
+        if (!loadController.getFileAsString().isEmpty()) {
+            main.loadGame(loadController.getFileAsString());
+            baseCard.show(basePanel, finalPanelName);
+        }
     }
     
     private  void setPlayersAttributesForNewGame(CardLayout baseCard, JPanel basePanel, GameController main){

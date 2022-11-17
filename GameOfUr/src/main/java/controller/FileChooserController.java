@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import view.LoadGameView;
@@ -19,6 +20,7 @@ import view.LoadGameView;
 public class FileChooserController {
 
     private LoadGameView fileChooser;
+    private ArrayList<String> fileAsStringArray = new ArrayList();
     
     public FileChooserController(){
         this.fileChooser = new LoadGameView();
@@ -27,6 +29,10 @@ public class FileChooserController {
     
     public LoadGameView getLoadGameView(){
         return this.fileChooser;
+    }
+    
+    public ArrayList<String> getFileAsString(){
+        return fileAsStringArray;
     }
     
     class FileChooserClickListener implements ActionListener{
@@ -39,13 +45,12 @@ public class FileChooserController {
                 Scanner lineScanner = new Scanner(file);
                 if (lineScanner != null) {
                     while (lineScanner.hasNextLine()) {
-                        System.out.println("Contenido"+ lineScanner.nextLine());
+                        fileAsStringArray.add(lineScanner.nextLine());
                     }
                 }
             } catch (FileNotFoundException ev) {
                 System.out.println("File not found!");
             }
-            
         } 
     }
     

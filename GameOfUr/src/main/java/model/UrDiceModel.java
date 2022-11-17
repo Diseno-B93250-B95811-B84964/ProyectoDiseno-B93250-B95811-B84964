@@ -12,12 +12,10 @@ package model;
  * @author Alvaro Miranda
  */
 public class UrDiceModel {
-    private int numberOfSides;
     private int rollResult;
     
     public UrDiceModel()
     {
-        numberOfSides = 5;
         rollResult = 0;
     }
 

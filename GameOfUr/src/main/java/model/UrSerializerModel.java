@@ -11,7 +11,7 @@ package model;
  *
  * @author Jimena Gdur
  */
-public class UrSerializerConstructor {
+public class UrSerializerModel {
     public UrBoardModel gameBoard; // make gets?
     public UrPlayerModel firstPlayer;
     public UrPlayerModel secondPlayer;
@@ -20,7 +20,7 @@ public class UrSerializerConstructor {
     public final static int OCCUPIED_P1 = 1;
     public final static int OCCUPIED_P2 = 2;
     
-    public UrSerializerConstructor(UrBoardModel gameBoard, UrPlayerModel player1, UrPlayerModel player2) {
+    public UrSerializerModel(UrBoardModel gameBoard, UrPlayerModel player1, UrPlayerModel player2) {
         this.gameBoard = gameBoard;
         this.firstPlayer = player1;
         this.secondPlayer = player2;
