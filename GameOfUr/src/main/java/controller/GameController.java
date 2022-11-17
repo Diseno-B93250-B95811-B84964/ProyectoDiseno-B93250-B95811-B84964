@@ -15,6 +15,8 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 
@@ -44,8 +46,10 @@ public class GameController {
     private MainMenuView mainMenuView;
 
     /*Atributos serializador?*/
-    private UrPlayerModel player1;
-    private UrPlayerModel player2;
+    //private UrPlayerModel player1;
+    //private UrPlayerModel player2;
+    private UrPlayerModel[] playerArray;
+    
     private UrSerializerConstructor serializer;
     
     private MainGameView gameView;
@@ -55,13 +59,22 @@ public class GameController {
     private Color currentPlayer;
     private boolean diceThrown;
     
+    private Map pathMap;
+    
+    private boolean winner;
+    
+    private int currentPlayerNum;
+    
     public GameController(){
         try {
             this.diceModel = new UrDiceModel();
             this.gameView = new MainGameView();
             this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
-
+            this.pathMap = new HashMap();
+            this.winner = false;
+            this.playerArray = new UrPlayerModel[2];
+                    
             initializeLabels();
             chooseNextPossibleLabel();        
             menuHandler();
@@ -99,7 +112,6 @@ public class GameController {
     
     private void menuHandler(){
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
-        this.gameView.addthrowDiceButtonClickListener(new ThrowDiceClickListener());
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
         this.mainMenuView.addLoadGameButtonClickListener(new LoadGameClickListener());
     }
@@ -148,11 +160,13 @@ public class GameController {
 
     public void setFirstPlayerName(String name){
         gameView.setFirstPlayerNameToLabel(name);
+        this.playerArray[0].setPlayerName(name);
     }
     
     public void setFirstPlayerColor(Color color){
         try {
             gameView.setFirstPlayerPieceColor(color);
+            this.playerArray[0].setColor(color);
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
@@ -160,27 +174,70 @@ public class GameController {
     
     public void setSecondPlayerName(String name){
        gameView.setSecondPlayerNameToLabel(name);
+       this.playerArray[1].setPlayerName(name);
     }
     
     public void setSecondPlayerColor(Color color){
         try {
             gameView.setSecondPlayerPieceColor(color);
+            this.playerArray[1].setColor(color);
         } catch (IOException e) {
             System.out.println("Color piece icon not found");
         }
     }
 
+    public void startGame() {
+        
+        this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
+        Color currentColor = new Color(255,255,255);
+        int result = -1;
+        while(!winner) {
+            currentColor = playerArray[currentPlayerNum].getColor();
+            result = getDiceResult();
+            if (result>0){
+                //CalculateAllPossiblePathsPerTurn();
+                if (!pathMap.isEmpty()) {
+                    //gameLogic(int x, int y)
+                }
+            }
+        }
+        // TODO destroy frame
+        // TODO create winningFrame
+        // TODO exit
+    }
+    
+    public int getDiceResult(){
+        gameView.cleanDice();
+        diceThrown  = true;
+        diceModel.rollDice();
+        int diceResult = diceModel.getRollResult();
+        gameView.showThrow(diceResult);
+        gameView.setMoves(diceResult);
+        return diceResult;
+    }
+    
+    private void gameLogic() {
+       GameController.TileMouseListener a = new GameController().new TileMouseListener();
+             //  .this.sayHey();
+    }
     
     /* Listeners */
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;
         int column;
-
+        
+        TileMouseListener(){
+        }
+        
         TileMouseListener(JLabel label, int row, int column){
             this.label = label;
             this.row = row;
             this.column = column;
+        }
+        
+        public void sayHey(){
+            System.out.println("Hola");
         }
 
         @Override
@@ -208,24 +265,6 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         } 
-    }
-    
-    class ThrowDiceClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int diceResult = getDiceResult();
-        }
-        
-        private int getDiceResult(){
-            gameView.cleanDice();
-            diceThrown  = true;
-            diceModel.rollDice();
-            int diceResult = diceModel.getRollResult();
-            gameView.showThrow(diceResult);
-            gameView.setMoves(diceResult);
-            return diceResult;
-        }
-
     }
     
     class ExitClickListener implements ActionListener {
