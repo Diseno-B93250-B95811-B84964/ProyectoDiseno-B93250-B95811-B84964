@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 
@@ -13,7 +12,6 @@ import view.WinnerView;
 /**
  *
  * @author Mauricio Palma
- */
 public class UrPlayerController {
 
 
@@ -22,7 +20,6 @@ public class UrPlayerController {
      * @param aGameView
      * @param aWinnerView
      * @param diceController
-     */
     public UrPlayerController(PlayerView aGameView, WinnerView aWinnerView, UrDiceController diceController){
         playerNumber  = (int)(Math.random()*2);
 
@@ -48,7 +45,11 @@ public class UrPlayerController {
                 System.out.println(exception);
             }
         }
+        
 
+        
+        /**
+        * Method that checks if a player won the match to stop the game
         private void checkIfWinner(int player) {
             if (playersArray[player].getPlayerScore()>= 7) {
              gameView.setVisible(false);
@@ -58,3 +59,5 @@ public class UrPlayerController {
         }
     }
 }
+
+        */

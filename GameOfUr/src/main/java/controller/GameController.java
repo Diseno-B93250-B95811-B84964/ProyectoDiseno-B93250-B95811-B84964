@@ -47,9 +47,7 @@ public class GameController {
     private UrPieceModel piece;
     private MainMenuView mainMenuView;
 
-    /*Atributos serializador?*/
-    //private UrPlayerModel player1;
-    //private UrPlayerModel player2;
+    /* Atributos serializador? */
     private UrPlayerModel[] playerArray;
     
     private UrSerializerConstructor serializer;
@@ -63,8 +61,6 @@ public class GameController {
     
     private HashMap<UrPieceModel, UrTileModel> possiblePaths;
     
-    //private Map pathMap;
-    
     private boolean winner;
     
     private int currentPlayerNum;
@@ -75,7 +71,6 @@ public class GameController {
             this.gameView = new MainGameView();
             this.piece = new UrPieceModel();
             this.mainMenuView = new MainMenuView();
-            //this.pathMap = new HashMap();
             this.possiblePaths = new HashMap();
             this.winner = false;
             this.playerArray = new UrPlayerModel[2];
@@ -152,7 +147,7 @@ public class GameController {
         //gameView.setNextPossibleLabel(x,y);
     }
       
-    public void save_game() {
+    public void saveGame() {
         try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
             writer.write(serializer.saveGameState());
             writer.close();
@@ -161,6 +156,55 @@ public class GameController {
         }
     }
     
+    public void loadGame() {
+        // file chooser returns file name
+        // open file name and get string
+        // create array of strings by splitting by \n
+        String fileContents = "";
+        loadGameState(fileContents.split("\n", 0));
+    }
+    
+    private UrPlayerModel createPlayer(String[] player) {
+        Color playerColor = new Color(Integer.parseInt(player[0]));
+        int playerScore = Integer.parseInt(player[2]);
+        // Color playerColor, String playerName, int playerScore
+        return new UrPlayerModel(playerColor, player[1], playerScore);
+    }
+    
+    private void loadGameState(String[] fileContents) {
+        // read player colors and score
+        int fileContentsIndex = 0;
+        int pieceIndex = 0;
+        playerArray[0] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        
+        fileContentsIndex++;
+        playerArray[1] = createPlayer(fileContents[fileContentsIndex].split("[,]", 0));
+        
+        fileContentsIndex++;
+        board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
+        
+        int actualCol = 0;
+        for(int row = 0; row < UrBoardModel.ROWS; row++) {
+            for(int col = 0; col < UrBoardModel.COLUMNS + 2; col++) {
+                char character = fileContents[fileContentsIndex].charAt(col);
+                if (character != ',') {
+                    UrPieceModel piece;
+                    if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P1) {
+                        piece = playerArray[0].getPlayerPiece(pieceIndex);
+                        board.setPiece(row, actualCol, piece);
+                    } else if (Character.getNumericValue(character) == UrSerializerConstructor.OCCUPIED_P2) {
+                        piece = playerArray[1].getPlayerPiece(pieceIndex);
+                        board.setPiece(row, actualCol, piece);
+                    }
+                    actualCol++;
+                }
+            }
+            fileContentsIndex++;
+        }
+        board.setPlayerTurn(new Color(Integer.parseInt(fileContents[fileContentsIndex])));
+    }
+    
+    /*Setters */
     private void chooseNextPossibleLabel(){
         //gameView.setNextPossibleLabel(2,2);
     }
@@ -198,12 +242,12 @@ public class GameController {
     
     public void resetMapPiecesPerTurn(UrPlayerModel currentPlayer){
         possiblePaths.clear();
-        for(int pieces = 0; pieces < currentPlayer.getPlayerPieces().size(); pieces++){
+        for(int pieces = 0; pieces < currentPlayer.getPlayerPieces().size(); pieces++) {
             if(currentPlayer.getPlayerPieces().get(pieces).isInPlay()){
                 possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), 
                     new UrTileModel(currentPlayer.getPlayerPieces().get(pieces).getX(), 
                     currentPlayer.getPlayerPieces().get(pieces).getY()));
-            }else{
+            } else{
                 possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), null);
             }
         }
