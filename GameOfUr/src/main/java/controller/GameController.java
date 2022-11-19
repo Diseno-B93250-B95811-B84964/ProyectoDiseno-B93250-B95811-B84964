@@ -128,12 +128,9 @@ public class GameController {
     }
     
     private void chooseNextPossibleLabel(int row, int column) {
-        
-        
-        
-        UrPieceModel chosenPiece = currentPlayer.getPiece();
+        UrTileModel chosenPiece = board.getTile(row, column);
         int diceValue = diceModel.getRollResult();
-        UrTileModel possibleTile = board.getPossibleTile(chosenPiece, diceValue, currentPlayer);
+        UrTileModel possibleTile = board.getPossibleTile(chosenPiece, diceValue, currentPlayer.getColor());
         
         int x = possibleTile.getRow();
         int y = possibleTile.getColumn();
@@ -202,21 +199,21 @@ public class GameController {
         
     }
     
-    private UrPlayerModel createPlayer(String[] player) {
+    private UrPlayerModel createPlayer(String[] player, int currentPlayerColumn) {
         Color playerColor = new Color(Integer.parseInt(player[0]));
         int playerScore = Integer.parseInt(player[2]);
         /// Color playerColor, String playerName, int playerScore
-        return new UrPlayerModel(playerColor, player[1], playerScore);
+        return new UrPlayerModel(playerColor, player[1], playerScore, currentPlayerColumn);
     }
     
     private void loadGameState(ArrayList<String> fileContents) {
         // read player colors and score
         int fileContentsIndex = 0;
         int pieceIndex = 0;
-        playerArray[0] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0));
+        playerArray[0] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0), 0);
         
         fileContentsIndex++;
-        playerArray[1] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0));
+        playerArray[1] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0), 2);
         
         fileContentsIndex++;
         board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());

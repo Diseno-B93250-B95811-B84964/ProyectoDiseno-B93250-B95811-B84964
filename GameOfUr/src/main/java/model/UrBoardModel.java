@@ -86,13 +86,13 @@ public class UrBoardModel {
         return urBoard[x][y];
     }
     
-    public UrTileModel getPossibleTile(UrPieceModel currentPiece, int amountOfMoves, Color playerColor) {
+    public UrTileModel getPossibleTile(UrTileModel currentTile, int amountOfMoves, Color playerColor) {
         ArrayList<UrTileModel> playerPath = playerPaths.get(playerColor);
      
         int possibleMoveIndex = 0;
         UrTileModel possibleTile = null;
         
-        int tileLocation = calculateTileLocation(currentPiece, playerColor);
+        int tileLocation = calculateTileLocation(currentTile, playerColor);
         System.out.println("tileLocation " + tileLocation);
         
         if (tileLocation != -1 && amountOfMoves != 0) {
@@ -100,7 +100,7 @@ public class UrBoardModel {
             possibleMoveIndex = tileLocation + amountOfMoves;
             if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
 
-                System.out.println("Can move: " + currentPiece.getX() + " " + currentPiece.getY());
+                System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
 
                 if (tileLocation < 10 || winCondition(possibleMoveIndex, playerColor)) {
                     possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
@@ -119,10 +119,10 @@ public class UrBoardModel {
             ((pieceInTile.getColor().getRGB() != playerColor.getRGB()) && !possibleTile.isSafe()));
     }
 
-    private int calculateTileLocation(UrPieceModel currentPiece, Color playerColor){
+    private int calculateTileLocation(UrTileModel currentPiece, Color playerColor){
         int tileLocation = -1;
-        int pieceX = currentPiece.getX();
-        int pieceY = currentPiece.getY();
+        int pieceX = currentPiece.getRow();
+        int pieceY = currentPiece.getColumn();
         
         ArrayList<UrTileModel> curentPlayerPath = playerPaths.get(playerColor);
         int tileX = 0;
