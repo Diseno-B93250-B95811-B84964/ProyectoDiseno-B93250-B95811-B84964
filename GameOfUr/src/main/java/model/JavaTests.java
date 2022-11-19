@@ -26,7 +26,7 @@ public class JavaTests {
         board.setPiece(1, 0, piece2);
         
         // player 2 quiere mover pieza 2 a pieza 1
-        UrTileModel tileExample1 = board.getPossibleTile(piece2, 2, player2.getColor());
+        UrTileModel tileExample1 = board.getPossibleTile(board.getTile(1, 0), 2, player2.getColor());
         System.out.println("tileExample1: " + tileExample1);
         
         // falta reemplazar y quitar safe

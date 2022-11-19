@@ -28,7 +28,6 @@ import model.UrTileModel;
 import view.MainGameView;
 import view.MainMenuView;
 
-
 /**
  *
  * @author Mauricio Palma, Ximena Gdur, Alvaro Villegas
@@ -38,22 +37,23 @@ public class GameController {
     private final static int COLUMNS = 3;
     
     private UrBoardModel board;
+    
     private UrDiceModel diceModel;
-    private MainMenuView mainMenuView;
-
-    /* Atributos serializador */
-    private UrPlayerModel[] playerArray;
-    private UrSerializerModel serializer;
-    private MainGameView gameView;
-
-    private UrPlayerModel currentPlayer;
     private boolean diceThrown;
+    
+    private UrPlayerModel[] playerArray;
+    private UrPlayerModel currentPlayer;
+    private int currentPlayerNum;
+    private boolean winner;
     
     private HashMap<UrPieceModel, UrTileModel> possiblePaths;
     
-    private boolean winner;
+    private UrSerializerModel serializer;
     
-    private int currentPlayerNum;
+    private MainGameView gameView;
+    private MainMenuView mainMenuView;
+ 
+    /* Initialize Game Controller */
     
     public GameController(){
         try {
@@ -67,45 +67,11 @@ public class GameController {
             playerArray[0] = new UrPlayerModel(0);
             playerArray[1] = new UrPlayerModel(2);
             
-            initializeLabels();
-            chooseNextPossibleLabel();        
+            initializeLabels();        
             menuHandler();
         } catch(IOException e) {
             System.out.println("Images not found! Please check images path");
         }
-    }
-    
-    public MainGameView getMainGameView() {
-        return this.gameView;
-    }
-    
-    public MainMenuView getMainMenuView(){
-        return this.mainMenuView;
-    }
-    
-    /* 
-    public GameController(MainGameView gameView, UrPieceModel piece,
-        MainMenuView menu, UrDiceController diceController)
-    {
-        this.gameView = gameView;
-        this.piece = piece;
-        this.menu = menu;
-        
-        this.diceThrown = false;
-        
-        this.serializer = new UrSerializerModel(board, player1, player2);
-        
-        initializeLabels();
-        //chooseNextPossibleLabel();        
-        menuHandler();
-        UrDiceController.DiceListener diceListener = initializeDice(diceController); // TODO move this
-        this.diceView.addDiceListener(diceListener);  
-    }*/
-    
-    private void menuHandler(){
-        this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
-        this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
-        this.gameView.throwDiceButtonClickListener(new ThrowDiceClickListener());
     }
     
     private void initializeLabels(){
@@ -118,8 +84,91 @@ public class GameController {
         }
     }
     
+    private void menuHandler(){
+        this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
+        this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
+        this.gameView.throwDiceButtonClickListener(new ThrowDiceClickListener());
+    }
+    
+    /* Start Game Logic */
+    
+    public void startGame() {
+        this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
+        int result = -1;
+        while(!winner) {
+            currentPlayer = playerArray[currentPlayerNum];
+            //result = getDiceResult();
+            if (result > 0){
+                //calculateAllPossiblePathsPerTurn();
+                if (!possiblePaths.isEmpty()) {
+                    // player selects possible path and confirms
+                    //confirmChosenTile()
+                    /*if (playerArray[currentPlayerNum]) {
+                    
+                    }*/
+                }
+            }
+        }
+        // TODO destroy frame
+        // TODO create winningFrame
+        // TODO exit
+    }
+    
+    public void calculateAllPossiblePathsPerTurn(UrPlayerModel currentPlayer, int amountOfMoves){
+        Color playerColor = currentPlayer.getColor();
+        UrTileModel currentTile = new UrTileModel();
+        UrTileModel auxTile = new UrTileModel();
+        if(diceThrown){
+            for(int pieces = 0; pieces < possiblePaths.size(); pieces++){
+                if(possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces)) != null){
+                    currentTile = possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces));
+                    auxTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
+                    possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), auxTile);
+                }
+            }
+        }
+    }
+    
+   // CalculateAllPossiblePathsPerTurn() {
+        //Cada vez que se tira dado:
+        //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
+        //Por cada piece de getPlayerNPieces()		
+        //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
+        //buscarEnMapa(atributoMapa) {
+        //atributoMap = atributoMap.search(todo lo que NO sea NULL
+       
+    //}
+    
+    private void chooseNextPossibleLabel(int row, int column) {
+        UrTileModel chosenTile = board.getTile(row, column);
+        int diceValue = diceModel.getRollResult();
+        UrTileModel possibleTile = board.getPossibleTile(chosenTile, diceValue, currentPlayer.getColor());
+        
+        
+    }
+    
+    private boolean confirmChosenTile(UrTileModel chosenTile, UrTileModel possibleTile) {
+        boolean choseTile = false;
+        // if person confirms
+        if (possibleTile != null /*&& person confirms*/) {
+            // sets piece in possible tile
+            board.setPieceTile(chosenTile, possibleTile);
+
+            int x = possibleTile.getRow();
+            int y = possibleTile.getColumn();
+            
+            // parte visual
+            // tile viejo ya no tiene pieza
+            // pieza del otro jugador vuelve a estado original
+            //gameView.setNextPossibleLabel(x,y);
+        }
+        return choseTile;
+    }
+    
+    
+    
     private void playerTurn() {
-        // while
+        // whil
             // tirar el dado
             // si cae en roseta tirar doble
             // esperar que se estripe
@@ -127,16 +176,7 @@ public class GameController {
             
     }
     
-    private void chooseNextPossibleLabel(int row, int column) {
-        UrTileModel chosenPiece = board.getTile(row, column);
-        int diceValue = diceModel.getRollResult();
-        UrTileModel possibleTile = board.getPossibleTile(chosenPiece, diceValue, currentPlayer.getColor());
-        
-        int x = possibleTile.getRow();
-        int y = possibleTile.getColumn();
-        
-        //gameView.setNextPossibleLabel(x,y);
-    }
+    /* Serializer */
       
     public void saveGame() {
         try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
@@ -239,14 +279,7 @@ public class GameController {
         board.setPlayerTurn(new Color(Integer.parseInt(fileContents.get(fileContentsIndex))));    
     }
     
-    
-    /*Setters */
-    private void chooseNextPossibleLabel(){
-        //gameView.setNextPossibleLabel(2,2);
-    }
-        
-    /*Setters */
-
+    /* Gets and sets */
 
     public void setFirstPlayerName(String name){
         gameView.setFirstPlayerNameToLabel(name);
@@ -289,57 +322,12 @@ public class GameController {
         }
     }
     
-    public void calculateAllPossiblePathsPerTurn(UrPlayerModel currentPlayer, int amountOfMoves){
-        Color playerColor = currentPlayer.getColor();
-        UrTileModel currentTile = new UrTileModel();
-        UrTileModel auxTile = new UrTileModel();
-        if(diceThrown){
-            for(int pieces = 0; pieces < possiblePaths.size(); pieces++){
-                if(possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces)) != null){
-                    currentTile = possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces));
-                    auxTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
-                    possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), auxTile);
-                }
-            }
-        }
+    public MainGameView getMainGameView() {
+        return this.gameView;
     }
     
-   // CalculateAllPossiblePathsPerTurn() {
-        //Cada vez que se tira dado:
-        //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
-        //Por cada piece de getPlayerNPieces()		
-        //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
-        //buscarEnMapa(atributoMapa) {
-        //atributoMap = atributoMap.search(todo lo que NO sea NULL
-       
-    //}
-
-    public void startGame() {
-        
-        this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
-        int result = -1;
-        while(!winner) {
-            currentPlayer = playerArray[currentPlayerNum];
-            result = /*getDiceResult()*/0;
-            if (result>0){
-                //CalculateAllPossiblePathsPerTurn();
-                if (!possiblePaths.isEmpty()) {
-                    //gameLogic(int x, int y)
-                    /*if (playerArray[currentPlayerNum]) {
-                    
-                    }*/
-                }
-            }
-        }
-        // TODO destroy frame
-        // TODO create winningFrame
-        // TODO exit
-    }
-  
-    
-    private void gameLogic() {
-       //GameController.TileMouseListener a = new GameController().new TileMouseListener();
-       
+    public MainMenuView getMainMenuView(){
+        return this.mainMenuView;
     }
     
     /* Listeners */

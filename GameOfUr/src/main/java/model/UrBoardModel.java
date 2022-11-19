@@ -148,6 +148,25 @@ public class UrBoardModel {
         return canWin;
     }
     
+    // Sets piece in tile and checks if tile is safe to reset old tile
+    public void setPieceTile(UrTileModel clickedTile, UrTileModel possibleTile) {
+        System.out.println("Setting piece");
+        
+        // checks if possible tile has a piece inside
+        if (possibleTile.getPiece() != null) {
+            // resets other player's piece to original position
+            possibleTile.getPiece().resetPieceToOriginalPosition();
+        }
+        
+        // sets piece in possible tile
+        int x = possibleTile.getRow();
+        int y = possibleTile.getColumn();
+        setPiece(x, y, clickedTile.getPiece());
+        
+        // chosenTile no longer has reference to current piece
+        clickedTile.setPiece(null);
+    }
+    
     public void addScoreToPlayer(UrPlayerModel player){
         player.addScoreToPlayer();
     }

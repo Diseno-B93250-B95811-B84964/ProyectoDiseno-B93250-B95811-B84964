@@ -24,6 +24,10 @@ public class UrPieceModel {
      * Coordinate y
      */
     protected int y;
+    
+    private int initialRow = 4;
+    
+    private int initialCol;
 
     /**
      * Piece Color
@@ -45,8 +49,10 @@ public class UrPieceModel {
      * @param column
      */
     public UrPieceModel(int column) {
-        x = 4;
-        y = column;
+        initialCol = column;
+        
+        x = initialRow;
+        y = initialCol;
         pieceColor = Color.WHITE;
         isSafe = false;
         isInPlay = false;
@@ -58,8 +64,10 @@ public class UrPieceModel {
      * @param column
      */
     public UrPieceModel(Color playerColor, int column) {
-        x = 4;
-        y = column;
+        initialCol = column;
+        
+        x = initialRow;
+        y = initialCol;
         pieceColor = playerColor;
         isSafe = false;
         isInPlay = false;
@@ -119,5 +127,10 @@ public class UrPieceModel {
     
     public void setIsInPlay(boolean isInPlay){
         this.isInPlay = isInPlay;
+    }
+    
+    public void resetPieceToOriginalPosition() {
+        x = initialRow;
+        y = initialCol;
     }
 }
