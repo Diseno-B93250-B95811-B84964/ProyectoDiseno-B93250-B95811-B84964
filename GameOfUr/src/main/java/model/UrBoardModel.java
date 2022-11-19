@@ -93,22 +93,21 @@ public class UrBoardModel {
         UrTileModel possibleTile = null;
         
         int tileLocation = calculateTileLocation(currentTile, playerColor);
-        System.out.println("tileLocation " + tileLocation);
+        //System.out.println("tileLocation " + tileLocation);
         
         if (tileLocation != -1 && amountOfMoves != 0) {
-            System.out.println("\nplayerPath[" + tileLocation + "] " + playerPath.get(tileLocation).getRow() + ", " + playerPath.get(tileLocation).getColumn());
+            //System.out.println("\nplayerPath[" + tileLocation + "] " + playerPath.get(tileLocation).getRow() + ", " + playerPath.get(tileLocation).getColumn());
             possibleMoveIndex = tileLocation + amountOfMoves;
             if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
 
-                System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
+                //System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
 
-                if (tileLocation < 10 || winCondition(possibleMoveIndex, playerColor)) {
+                if (tileLocation < 10 || pointCondition(possibleMoveIndex, playerColor)) {
                     possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
-                    System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
+                    //System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
                 }
             }
         }
-        
         return possibleTile;
     }
 
@@ -138,20 +137,21 @@ public class UrBoardModel {
         return tileLocation;
     }
     
-    private boolean winCondition(int possibleMoveIndex, Color playerColor){
-        boolean canWin = false;
+    private boolean pointCondition(int possibleMoveIndex, Color playerColor){
+        boolean canScore = false;
         if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
             if(possibleMoveIndex == 14){
-                canWin = true;
+                canScore = true;
             }
         }
-        return canWin;
+        return canScore;
     }
     
     // Sets piece in tile and checks if tile is safe to reset old tile
     public void setPieceTile(UrTileModel clickedTile, UrTileModel possibleTile) {
-        System.out.println("Setting piece");
-        
+        //System.out.println("Setting piece");
+        int x = possibleTile.getRow();
+        int y = possibleTile.getColumn();
         // checks if possible tile has a piece inside
         if (possibleTile.getPiece() != null) {
             // resets other player's piece to original position
@@ -159,12 +159,29 @@ public class UrBoardModel {
         }
         
         // sets piece in possible tile
-        int x = possibleTile.getRow();
-        int y = possibleTile.getColumn();
         setPiece(x, y, clickedTile.getPiece());
         
         // chosenTile no longer has reference to current piece
-        clickedTile.setPiece(null);
+        clickedTile.resetTile();
+    }
+    
+    public void move(){
+        //metodo que encapsula el getPossibleTile y el setPieceTile
+        
+        
+        
+        
+        // FALTA: Calculo de puntos de cada jugador
+        // Calculo de condicion de ganador alcanzada
+        // Una vez que una pieza alcanza un punto, falta indicarle con el nuevo
+            // atributo de hasScored, que ya la ficha no puede volver a jugar y 
+            // salir del tablero
+        // Vista del Ganador
+        // Falta corregir el mapa y el cargado del mismo en el controlador
+        // Creacion de archivo con el POM
+        // Arreglar el cargado CSV
+        // Cambio de turnos entre jugadores
+        // Encapsular flujo del juego
     }
     
     public void addScoreToPlayer(UrPlayerModel player){

@@ -71,10 +71,15 @@ public class UrTileModel {
         piece.setX(row);
         piece.setY(column);
         
-        System.out.println("piece in tile: " + piece.getColor());
+        //System.out.println("piece in tile: " + piece.getColor());
     }
     
     public UrPieceModel getPiece(){
         return this.piece;
+    }
+    
+    public void resetTile(){
+        this.piece = null;
+        toggleVacancy();
     }
 }

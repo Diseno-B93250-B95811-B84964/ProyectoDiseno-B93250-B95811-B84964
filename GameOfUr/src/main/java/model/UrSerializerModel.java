@@ -37,10 +37,12 @@ public class UrSerializerModel {
             for(int col = 0; col < UrBoardModel.COLUMNS; col++){
                 if( !gameBoard.getTile(row, col).isVacant()){
                     /*TODO change this to a Method. DO NOT call the attribute directly*/
-                    if(firstPlayer.getColor() == gameBoard.getTile(row, col).getPiece().getColor()) {
-                        gameState += OCCUPIED_P1;
-                    } else {
-                        gameState += OCCUPIED_P2;
+                    if(gameBoard.getTile(row, col).getPiece() != null) {
+                        if(firstPlayer.getColor() == gameBoard.getTile(row, col).getPiece().getColor()) {
+                            gameState += OCCUPIED_P1;
+                        } else {
+                            gameState += OCCUPIED_P2;
+                        }
                     }
                 } else{
                     gameState += NON_OCCUPIED;
@@ -52,7 +54,7 @@ public class UrSerializerModel {
             gameState += "\n";
         }
         
-        gameState += gameBoard.getPlayerTurn().getRGB();
+        //gameState += gameBoard.getPlayerTurn().getRGB();
         
         return gameState;
     }

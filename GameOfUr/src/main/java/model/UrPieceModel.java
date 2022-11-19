@@ -18,16 +18,18 @@ public class UrPieceModel {
     /**
      * Coordinate x
      */
-    protected int x;
+    private int x;
 
     /**
      * Coordinate y
      */
-    protected int y;
+    private int y;
     
-    private int initialRow = 4;
+    private int initialRow;
     
     private int initialCol;
+    
+    private boolean hasScored;
 
     /**
      * Piece Color
@@ -49,6 +51,7 @@ public class UrPieceModel {
      * @param column
      */
     public UrPieceModel(int column) {
+        initialRow = 4;
         initialCol = column;
         
         x = initialRow;
@@ -56,6 +59,7 @@ public class UrPieceModel {
         pieceColor = Color.WHITE;
         isSafe = false;
         isInPlay = false;
+        hasScored = false;
     }
     
     /**
@@ -71,6 +75,7 @@ public class UrPieceModel {
         pieceColor = playerColor;
         isSafe = false;
         isInPlay = false;
+        hasScored = false;
     }
     
     /**
@@ -132,5 +137,13 @@ public class UrPieceModel {
     public void resetPieceToOriginalPosition() {
         x = initialRow;
         y = initialCol;
+    }
+    
+    public void setHasScored(){
+        this.hasScored = true;
+    }
+    
+    public boolean getHasScored(){
+        return hasScored;
     }
 }
