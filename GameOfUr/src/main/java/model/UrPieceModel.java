@@ -42,10 +42,11 @@ public class UrPieceModel {
     
     /**
      * Basic Constructor
+     * @param column
      */
-    public UrPieceModel() {
-        x = 0;
-        y = 0;
+    public UrPieceModel(int column) {
+        x = 4;
+        y = column;
         pieceColor = Color.WHITE;
         isSafe = false;
         isInPlay = false;
@@ -54,10 +55,11 @@ public class UrPieceModel {
     /**
      * Constructor with a Color
      * @param playerColor Value to be assigned
+     * @param column
      */
-    public UrPieceModel(Color playerColor) {
-        x = 0;
-        y = 0;
+    public UrPieceModel(Color playerColor, int column) {
+        x = 4;
+        y = column;
         pieceColor = playerColor;
         isSafe = false;
         isInPlay = false;
@@ -109,21 +111,6 @@ public class UrPieceModel {
      */
     public Color getColor(){
         return pieceColor;
-    }
-    
-    /**
-     * Gets variable value isSafe
-     * @return Returns a true or false value.
-     */
-    public boolean isSafe() {
-        return isSafe;
-    }
-    
-    /**
-     * Sets variable isSafe.
-     */
-    public void setSafe(boolean isSafe) {
-        this.isSafe = isSafe;
     }
     
     public boolean isInPlay(){

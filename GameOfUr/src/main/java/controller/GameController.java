@@ -46,8 +46,7 @@ public class GameController {
     private UrSerializerModel serializer;
     private MainGameView gameView;
 
-    
-    private Color currentPlayer;
+    private UrPlayerModel currentPlayer;
     private boolean diceThrown;
     
     private HashMap<UrPieceModel, UrTileModel> possiblePaths;
@@ -64,9 +63,10 @@ public class GameController {
             this.possiblePaths = new HashMap();
             this.winner = false;
             this.playerArray = new UrPlayerModel[2];
-            for (int index = 0; index < playerArray.length; index++) {
-                playerArray[index] = new UrPlayerModel();
-            }          
+            
+            playerArray[0] = new UrPlayerModel(0);
+            playerArray[1] = new UrPlayerModel(2);
+            
             initializeLabels();
             chooseNextPossibleLabel();        
             menuHandler();
@@ -121,15 +121,19 @@ public class GameController {
     private void playerTurn() {
         // while
             // tirar el dado
+            // si cae en roseta tirar doble
             // esperar que se estripe
             // chooseNextPossibleLabel
             
     }
     
-    private void chooseNextPossibleLabel(int row, int column){
-        UrTileModel chosenTile = board.getTile(row, column);
+    private void chooseNextPossibleLabel(int row, int column) {
+        
+        
+        
+        UrPieceModel chosenPiece = currentPlayer.getPiece();
         int diceValue = diceModel.getRollResult();
-        UrTileModel possibleTile = board.getPossibleTile(chosenTile, diceValue, currentPlayer);
+        UrTileModel possibleTile = board.getPossibleTile(chosenPiece, diceValue, currentPlayer);
         
         int x = possibleTile.getRow();
         int y = possibleTile.getColumn();
@@ -316,10 +320,9 @@ public class GameController {
     public void startGame() {
         
         this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
-        Color currentColor = new Color(255,255,255);
         int result = -1;
         while(!winner) {
-            currentColor = playerArray[currentPlayerNum].getColor();
+            currentPlayer = playerArray[currentPlayerNum];
             result = /*getDiceResult()*/0;
             if (result>0){
                 //CalculateAllPossiblePathsPerTurn();
