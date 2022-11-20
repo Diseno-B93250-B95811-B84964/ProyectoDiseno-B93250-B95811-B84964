@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class UrPlayerModel {
     public final static int NUMBER_OF_PIECES = 7;
-    private ArrayList<UrPieceModel> playerPieces;
+    private final ArrayList<UrPieceModel> playerPieces;
 
     private Color playerColor;
     private String playerName;
@@ -37,9 +37,13 @@ public class UrPlayerModel {
         this.playerColor = playerColor;
         this.playerName = "Player";
         this.score = 0;
-        playerPieces = new ArrayList<UrPieceModel>();
+        
+        playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
+            System.out.println("playerColor: " + playerColor + " ");
+            UrPieceModel piece = new UrPieceModel(this.playerColor, playerColumn);
+            playerPieces.add(piece);
+            System.out.println("piece: " + piece.getColor());
         }
     }
 
@@ -47,10 +51,17 @@ public class UrPlayerModel {
         this.playerColor = playerColor;
         this.playerName = playerName;
         this.score = playerScore;
+        
         playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
             playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
         }
+    }
+    
+    public void changePlayerInfo(Color playerColor, String playerName, int playerScore) {
+        this.playerColor = playerColor;
+        this.playerName = playerName;
+        this.score = playerScore;
     }
 
     public Color getColor(){
