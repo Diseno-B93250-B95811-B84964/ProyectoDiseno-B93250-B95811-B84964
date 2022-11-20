@@ -67,6 +67,7 @@ public class UrTileModel {
     
     public void setPiece(UrPieceModel piece){
         this.piece = piece;
+        this.piece.setIsInPlay(true);
         isVacant = false;
         
         piece.setX(row);

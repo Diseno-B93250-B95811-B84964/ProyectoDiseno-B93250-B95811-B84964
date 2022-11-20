@@ -150,7 +150,8 @@ public class GameController {
     
     private UrTileModel movePiece(UrTileModel chosenTile, UrTileModel possibleTile) {
         // sets piece in possible tile
-        board.setPieceTile(chosenTile, possibleTile);
+        UrPieceModel possiblePieceToMove = board.getPieceToPlay(currentPlayer);
+        board.setPieceTile(possiblePieceToMove, chosenTile, possibleTile);
 
 
 

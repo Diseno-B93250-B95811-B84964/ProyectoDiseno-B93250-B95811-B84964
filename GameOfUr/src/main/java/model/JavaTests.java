@@ -30,7 +30,7 @@ public class JavaTests {
         System.out.println("piece4: " + piece4.getColor());
         
         // jugador 1
-        board.setPiece(4, 0, piece1);
+        //board.setPiece(4, 0, piece1);
         
         /*
         // jugador 2
@@ -47,7 +47,7 @@ public class JavaTests {
         // falta reemplazar y quitar safe
         if (tileExample1 != null) {
             System.out.println("Setting piece");
-            board.setPieceTile(board.getTile(piece2.getX(), piece2.getY()), tileExample1);
+            board.setPieceTile(piece1, board.getTile(piece2.getX(), piece2.getY()), tileExample1);
         }
         System.out.println(state.saveGameState());
         System.out.println(piece1.getX() + " " + piece1.getY());
