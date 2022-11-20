@@ -123,8 +123,7 @@ public class MainController {
                     main.setSecondPlayerName(colorController.getPlayerName());
                     main.setSecondPlayerColor(colorController.getPlayerColor());
                     currentPlayer-=1;
-                    main.startGame();
-                    
+                    main.makeBoard();
                 }
                 //colorController.hideButton(colorController.getPlayerColor());
                 // Create array of available colors and give it to ColorController

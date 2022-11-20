@@ -11,15 +11,18 @@ model\UrBoardModel.class
 model\UrRulesModel.class
 controller\MainController.class
 view\LoadGameView$1.class
+model\JavaTests.class
 model\UrPlayerModel.class
 controller\SelectColorController$ContinueButtonListener.class
 view\MainGameView$1.class
 view\MainMenuView$2.class
 controller\FileChooserController.class
+model\UrSerializerModel.class
 view\SelectColorView$8.class
 model\UrTileModel.class
 controller\SelectColorController.class
 view\MainMenuView.class
+controller\NewMain.class
 controller\GameController$ExitClickListener.class
 view\SelectColorView.class
 view\LoadGameView$2.class
@@ -32,6 +35,7 @@ view\SelectColorView$7.class
 model\UrPieceModel.class
 view\MainGameView.class
 view\MainGameView$2.class
+view\MainGameView$3.class
 view\MainMenuView$3.class
 controller\GameController$TileMouseListener.class
 view\SelectColorView$9.class
