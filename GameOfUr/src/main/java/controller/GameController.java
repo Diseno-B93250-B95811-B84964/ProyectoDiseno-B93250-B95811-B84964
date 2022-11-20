@@ -331,6 +331,27 @@ public class GameController {
     
     /* Listeners */
     
+    public void printHello(){
+        System.out.println("Hello from 348!!!");
+    }
+    
+    class ThrowDiceClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int result = getDiceResult();
+        } 
+        
+        private int getDiceResult(){
+            gameView.cleanDice();
+            diceThrown  = true;
+            diceModel.rollDice();
+            int diceResult = diceModel.getRollResult();
+            gameView.showThrow(diceResult);
+            gameView.setMoves(diceResult);
+            return diceResult; 
+        }
+    }
+    
     class TileMouseListener extends MouseAdapter {
         JLabel label;
         int row;
@@ -340,6 +361,7 @@ public class GameController {
             this.label = label;
             this.row = row;
             this.column = column;
+            
         }
 
         @Override
@@ -349,6 +371,7 @@ public class GameController {
                 gameView.setNextPossibleLabel(0,0,gameView.getFirsPlayerIcon());
                 //chooseNextPossibleLabel(row, column);
             }
+            printHello();
         }
 
         @Override
