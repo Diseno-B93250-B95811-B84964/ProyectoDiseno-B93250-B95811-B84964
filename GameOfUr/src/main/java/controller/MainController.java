@@ -79,7 +79,7 @@ public class MainController {
     }
     
     private  void checkFormerGameData(CardLayout baseCard, JPanel basePanel, String finalPanelName, FileChooserController loadController, GameController main){
-        ArrayList<String> fileArray = loadController.getFileAsStringArray();
+        ArrayList<String[]> fileArray = loadController.getFileAsStringArray();
         if (!fileArray.isEmpty()) {
             // TODO FIX THIS
             //main.loadGame(fileArray);
