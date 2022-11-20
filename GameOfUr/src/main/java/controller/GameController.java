@@ -87,7 +87,7 @@ public class GameController {
     private void menuHandler(){
         this.gameView.addSaveAndLeaveButtonClickListener(new SaveAndLeaveClickListener());
         this.mainMenuView.addExitButtonClickListener(new ExitClickListener());
-        this.gameView.throwDiceButtonClickListener(new ThrowDiceClickListener());
+        //this.gameView.throwDiceButtonClickListener(new ThrowDiceClickListener());
     }
     
     /* Start Game Logic */
@@ -95,85 +95,97 @@ public class GameController {
     public void startGame() {
         this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
         int result = -1;
+        UrTileModel chosenTile, possibleTile;
         while(!winner) {
             currentPlayer = playerArray[currentPlayerNum];
-            //result = getDiceResult();
+            result = throwDice();
             if (result > 0){
-                //calculateAllPossiblePathsPerTurn();
+                possiblePaths.clear();
+                calculateAllPossiblePathsPerTurn(result);
                 if (!possiblePaths.isEmpty()) {
-                    // player selects possible path and confirms
-                    //confirmChosenTile()
-                    /*if (playerArray[currentPlayerNum]) {
-                    
-                    }*/
+                    // wait for action listener or something
+                    int x = 0, y = 0;
+                    possibleTile = getPossibleTile(x, y);
+                    // wait for user conformation
+                    chosenTile = board.getTile(x, y);
+                    saveChosenTile(chosenTile, possibleTile);
+                    addToScore(possibleTile);
+                } else {
+                    // show no possible moves
                 }
             }
+            winner = determineIfWinnerElseChangePlayer();
         }
         // TODO destroy frame
         // TODO create winningFrame
         // TODO exit
     }
     
-    public void calculateAllPossiblePathsPerTurn(UrPlayerModel currentPlayer, int amountOfMoves){
+    private int throwDice(){
+        gameView.cleanDice();
+        diceThrown  = true;
+        diceModel.rollDice();
+        int diceResult = diceModel.getRollResult();
+        gameView.showThrow(diceResult);
+        gameView.setMoves(diceResult);
+        return diceResult; 
+    }
+    
+    private void calculateAllPossiblePathsPerTurn(int amountOfMoves){
         Color playerColor = currentPlayer.getColor();
-        UrTileModel currentTile = new UrTileModel();
-        UrTileModel auxTile = new UrTileModel();
-        if(diceThrown){
-            for(int pieces = 0; pieces < possiblePaths.size(); pieces++){
-                if(possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces)) != null){
-                    currentTile = possiblePaths.get(currentPlayer.getPlayerPieces().get(pieces));
-                    auxTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
-                    possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), auxTile);
-                }
+        
+        UrTileModel currentTile;
+        UrTileModel nextPossibleTile;
+        
+        for(UrPieceModel piece : currentPlayer.getPlayerPieces()){
+            currentTile = board.getTile(piece.getX(), piece.getY());
+            nextPossibleTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
+            
+            if(nextPossibleTile != null) {
+                possiblePaths.put(piece, nextPossibleTile);
             }
         }
     }
     
-   // CalculateAllPossiblePathsPerTurn() {
-        //Cada vez que se tira dado:
-        //atributoMap<PieceOriginalPosition, TilePossiblePosition>          	
-        //Por cada piece de getPlayerNPieces()		
-        //Map.TilePossiblePath = choosePlayerPossiblePath(PieceOriginalPosition)
-        //buscarEnMapa(atributoMapa) {
-        //atributoMap = atributoMap.search(todo lo que NO sea NULL
-       
-    //}
-    
-    private void chooseNextPossibleLabel(int row, int column) {
-        UrTileModel chosenTile = board.getTile(row, column);
-        int diceValue = diceModel.getRollResult();
-        UrTileModel possibleTile = board.getPossibleTile(chosenTile, diceValue, currentPlayer.getColor());
+    private UrTileModel getPossibleTile(int x, int y) {
+        UrPieceModel currentPiece = board.getTile(x,y).getPiece();
+        UrTileModel possibleTile = possiblePaths.get(currentPiece);
         
-        
+        return possibleTile;
     }
     
-    private boolean confirmChosenTile(UrTileModel chosenTile, UrTileModel possibleTile) {
-        boolean choseTile = false;
-        // if person confirms
-        if (possibleTile != null /*&& person confirms*/) {
-            // sets piece in possible tile
-            board.setPieceTile(chosenTile, possibleTile);
+    private void saveChosenTile(UrTileModel chosenTile, UrTileModel possibleTile) {
+        // sets piece in possible tile
+        board.setPieceTile(chosenTile, possibleTile);
 
-            int x = possibleTile.getRow();
-            int y = possibleTile.getColumn();
-            
-            // parte visual
-            // tile viejo ya no tiene pieza
-            // pieza del otro jugador vuelve a estado original
-            //gameView.setNextPossibleLabel(x,y);
-        }
-        return choseTile;
+        int x = possibleTile.getRow();
+        int y = possibleTile.getColumn();
+
+        // parte visual
+        // tile viejo ya no tiene pieza
+        // pieza del otro jugador vuelve a estado original
+        //gameView.setNextPossibleLabel(x,y);
     }
     
+    private void addToScore(UrTileModel definitiveTile) {
+        int x = definitiveTile.getRow();
+        int y = definitiveTile.getColumn();
+        if (x == 4 && (y == 0 || y == 2) ) {
+            currentPlayer.addScoreToPlayer();
+            //currentPlayer.removePiece(definitiveTile.getPiece());
+            definitiveTile.setPiece(null);
+        }
+    }
     
-    
-    private void playerTurn() {
-        // whil
-            // tirar el dado
-            // si cae en roseta tirar doble
-            // esperar que se estripe
-            // chooseNextPossibleLabel
-            
+    private boolean determineIfWinnerElseChangePlayer() {
+        boolean winner = false;
+        if (currentPlayer.getPlayerScore() == 7) {
+            winner = true;
+        } else {
+            currentPlayerNum ++;
+            currentPlayerNum %= playerArray.length;
+        }
+        return winner;
     }
     
     /* Serializer */
@@ -309,19 +321,6 @@ public class GameController {
         }
     }
     
-    public void resetMapPiecesPerTurn(UrPlayerModel currentPlayer){
-        possiblePaths.clear();
-        for(int pieces = 0; pieces < currentPlayer.getPlayerPieces().size(); pieces++) {
-            if(currentPlayer.getPlayerPieces().get(pieces).isInPlay()){
-                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), 
-                    new UrTileModel(currentPlayer.getPlayerPieces().get(pieces).getX(), 
-                    currentPlayer.getPlayerPieces().get(pieces).getY()));
-            } else{
-                possiblePaths.put(currentPlayer.getPlayerPieces().get(pieces), null);
-            }
-        }
-    }
-    
     public MainGameView getMainGameView() {
         return this.gameView;
     }
@@ -331,23 +330,6 @@ public class GameController {
     }
     
     /* Listeners */
-    
-    class ThrowDiceClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int result = getDiceResult();
-        } 
-        
-        private int getDiceResult(){
-            gameView.cleanDice();
-            diceThrown  = true;
-            diceModel.rollDice();
-            int diceResult = diceModel.getRollResult();
-            gameView.showThrow(diceResult);
-            gameView.setMoves(diceResult);
-            return diceResult; 
-        }
-    }
     
     class TileMouseListener extends MouseAdapter {
         JLabel label;

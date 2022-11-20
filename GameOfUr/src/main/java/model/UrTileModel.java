@@ -68,6 +68,7 @@ public class UrTileModel {
     public void setPiece(UrPieceModel piece){
         this.piece = piece;
         isVacant = false;
+        
         piece.setX(row);
         piece.setY(column);
         

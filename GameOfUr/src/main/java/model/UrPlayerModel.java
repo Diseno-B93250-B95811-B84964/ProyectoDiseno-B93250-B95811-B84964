@@ -132,4 +132,8 @@ public class UrPlayerModel {
     public UrPieceModel getPlayerPiece(int pieceId) {
         return playerPieces.get(pieceId);
     }
+    
+    /*public removePiece(UrPieceModel piece) {
+        
+    }*/
 }

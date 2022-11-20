@@ -161,6 +161,8 @@ public class UrBoardModel {
         // sets piece in possible tile
         setPiece(x, y, clickedTile.getPiece());
         
+        
+        
         // chosenTile no longer has reference to current piece
         clickedTile.resetTile();
     }
