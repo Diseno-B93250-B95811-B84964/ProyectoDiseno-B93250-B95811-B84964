@@ -35,10 +35,12 @@ public class UrBoardModel {
         urBoard[3][1].setSafe();
         urBoard[6][0].setSafe();
         urBoard[6][2].setSafe();
-        
+    }
+    
+    public void createPlayerPaths(Color player1, Color player2) {
         playerPaths = new HashMap<>(2);
-        playerPaths.put(Color.WHITE, setPlayerPath(0)); //check for possible change to not use magic variables
-        playerPaths.put(Color.BLACK, setPlayerPath(2)); //check for possible change to not use magic variables
+        playerPaths.put(player1, setPlayerPath(0));
+        playerPaths.put(player2, setPlayerPath(2));
     }
     
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
@@ -161,24 +163,8 @@ public class UrBoardModel {
         // sets piece in possible tile
         setPiece(x, y, clickedTile.getPiece());
         
-        
-        
         // chosenTile no longer has reference to current piece
         clickedTile.resetTile();
-    }
-    
-    public void move(){
-        //metodo que encapsula el getPossibleTile y el setPieceTile
-        
-        
-        
-        
-
-        // Vista del Ganador
-        // Creacion de archivo con el POM
-        // Arreglar el cargado CSV
-        // Cambio de turnos entre jugadores
-        // Encapsular flujo del juego
     }
     
     public void addScoreToPlayer(UrPlayerModel player){
