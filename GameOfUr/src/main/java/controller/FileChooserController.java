@@ -20,7 +20,7 @@ import view.LoadGameView;
 public class FileChooserController {
 
     private LoadGameView fileChooser;
-    private ArrayList<String> fileAsStringArray = new ArrayList();
+    private ArrayList<String[]> fileAsStringArray = new ArrayList();
     
     public FileChooserController(){
         this.fileChooser = new LoadGameView();
@@ -31,7 +31,7 @@ public class FileChooserController {
         return this.fileChooser;
     }
     
-    public ArrayList<String> getFileAsStringArray(){
+    public ArrayList<String[]> getFileAsStringArray(){
         return fileAsStringArray;
     }
     
@@ -45,7 +45,8 @@ public class FileChooserController {
                 Scanner lineScanner = new Scanner(file);
                 if (lineScanner != null) {
                     while (lineScanner.hasNextLine()) {
-                        fileAsStringArray.add(lineScanner.nextLine());
+                        String[] lineAsArray = lineScanner.nextLine().split(",");
+                        fileAsStringArray.add(lineAsArray);
                     }
                 }
             } catch (FileNotFoundException ev) {

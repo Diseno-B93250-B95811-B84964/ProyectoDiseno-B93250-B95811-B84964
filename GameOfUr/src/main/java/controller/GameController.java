@@ -189,7 +189,9 @@ public class GameController {
       
     public void saveGame() {
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter("testData//sample.csv"));
+            new File("\\saves").mkdirs();
+            
+            CSVWriter writer = new CSVWriter(new FileWriter("saves\\gameState.csv"));
             ArrayList<String[]> array = serializer.saveGameState();
 
             for (String[] rowString : array) {
