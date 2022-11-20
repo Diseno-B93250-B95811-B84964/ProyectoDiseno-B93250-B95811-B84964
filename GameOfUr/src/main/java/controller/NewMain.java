@@ -33,10 +33,9 @@ public class NewMain {
      * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        UrPlayerModel player1 = new UrPlayerModel(Color.RED, 0);
-        UrPlayerModel player2 = new UrPlayerModel(Color.BLUE, 2);
+        UrPlayerModel player1 = new UrPlayerModel(Color.RED, "Rodolfo", 0, 0);
+        UrPlayerModel player2 = new UrPlayerModel(Color.BLUE, "Maria", 0, 2);
         UrBoardModel board = new UrBoardModel(Color.RED, Color.BLUE);
-        
         UrSerializerModel state = new UrSerializerModel(board, player1, player2);
         
         // jugador 1

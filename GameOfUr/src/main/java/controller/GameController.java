@@ -218,8 +218,10 @@ public class GameController {
     private void loadGameView() {
         gameView.setFirstPlayerNameToLabel(playerArray[0].getPlayerName());
         gameView.setSecondPlayerNameToLabel(playerArray[1].getPlayerName());
-        gameView.addScoreToFirstPlayer(6);
-        gameView.addScoreToSecondPlayer(6);
+        gameView.addScoreToFirstPlayer(playerArray[0].getPlayerScore());
+        gameView.addScoreToSecondPlayer(playerArray[1].getPlayerScore());
+        System.out.println("Player 1 score: "+ playerArray[0].getPlayerScore());
+        System.out.println("Player 2 score: "+ playerArray[1].getPlayerScore());
         try {
             System.out.println("Color first player" + playerArray[0].getColor());
             gameView.setFirstPlayerPieceColor(playerArray[0].getColor());

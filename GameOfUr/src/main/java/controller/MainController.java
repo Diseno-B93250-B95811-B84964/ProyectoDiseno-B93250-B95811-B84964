@@ -82,7 +82,7 @@ public class MainController {
         ArrayList<String> fileArray = loadController.getFileAsStringArray();
         if (!fileArray.isEmpty()) {
             // TODO FIX THIS
-            //main.loadGame(fileArray);
+            main.loadGame(fileArray);
             baseCard.show(basePanel, finalPanelName);
         }
     }
