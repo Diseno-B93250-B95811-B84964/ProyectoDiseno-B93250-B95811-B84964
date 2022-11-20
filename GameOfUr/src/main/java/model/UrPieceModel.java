@@ -13,46 +13,87 @@ import java.awt.Color;
  *
  * @author Jimena Gdur
  */
-public class UrPieceModel extends PieceModel {
+public class UrPieceModel {
 
-    protected Color color;
+    private int x;
+
+    private int y;
+    
+    private int initialRow;
+    
+    private final int initialCol;
+
+   
+    protected Color pieceColor;
+
 
     protected boolean isSafe;
+
+    protected boolean isInPlay;
     
-    public UrPieceModel() {
-        super();
-        color = Color.RED;
+
+    public UrPieceModel(int column) {
+        initialRow = 4;
+        initialCol = column;
+        
+        x = initialRow;
+        y = initialCol;
+        pieceColor = Color.WHITE;
         isSafe = false;
+        isInPlay = false;
     }
     
-    /**
-     * Sets color received by parameters
-     * @param chosenColor
-     */
-    public void setColor(Color chosenColor) {
-        color = chosenColor;
+    public UrPieceModel(Color playerColor, int column) {
+        initialRow = 4;
+        initialCol = column;
+       
+        x = initialRow;
+        y = initialCol;
+        pieceColor = playerColor;
+        isSafe = false;
+        isInPlay = false;
     }
     
-    /**
-     * Gets selected color
-     * @return Returns selected color
-     */
-    public Color getColor() {
-        return color;
+    public void setX(int xValue) {
+        x = xValue;
     }
     
-    /**
-     * Gets variable value isSafe
-     * @return Returns a true or false value.
-     */
-    public boolean isSafe() {
-        return isSafe;
+
+    public void setY(int yValue) {
+        y = yValue;
     }
     
-    /**
-     * Sets variable isSafe as true.
-     */
-    public void setSafe() {
-        isSafe = true;
+
+    public int getX() {
+        return x;
+    }
+    
+  
+    public int getY() {
+        return y;
+    }
+    
+
+    public void setColor(Color pieceColor){
+        this.pieceColor = pieceColor;
+    }
+    
+   
+    public Color getColor(){
+        return pieceColor;
+    }
+    
+    public boolean isInPlay(){
+        return isInPlay;
+    }
+    
+    public void setIsInPlay(boolean isInPlay){
+        this.isInPlay = isInPlay;
+    }
+    
+    public void resetPieceToOriginalPosition() {
+        x = initialRow;
+        y = initialCol;
+        this.isInPlay = false;
     }
 }

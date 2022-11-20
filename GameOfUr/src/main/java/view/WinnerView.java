@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
 
@@ -8,16 +8,16 @@ package view;
  *
  * @author Mauricio Palma
  */
-public class WinnerView extends javax.swing.JFrame {
+public class WinnerView extends javax.swing.JPanel {
 
     /**
-     * Creates new form WinnerView
+     * Creates new form WinnerViewPanel
      */
     public WinnerView() {
         initComponents();
     }
 
-    /**
+     /**
      * Method that allows to set the id of the plaer who won the match
      * @param playerID The id that will be printed on the screen
      */
@@ -40,8 +40,6 @@ public class WinnerView extends javax.swing.JFrame {
         winnerTextPanel = new javax.swing.JPanel();
         winnerText = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         congratulationsTextPanel.setBackground(new java.awt.Color(153, 153, 153));
 
         congratulationsText.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -52,21 +50,21 @@ public class WinnerView extends javax.swing.JFrame {
         congratulationsTextPanelLayout.setHorizontalGroup(
             congratulationsTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, congratulationsTextPanelLayout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
+                .addContainerGap(312, Short.MAX_VALUE)
                 .addComponent(congratulationsText)
-                .addGap(177, 177, 177))
+                .addGap(306, 306, 306))
         );
         congratulationsTextPanelLayout.setVerticalGroup(
             congratulationsTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(congratulationsTextPanelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(30, 30, 30)
                 .addComponent(congratulationsText)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         winnerTextPanel.setBackground(new java.awt.Color(153, 153, 153));
 
-        winnerText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        winnerText.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         winnerText.setText("Who won?");
 
         javax.swing.GroupLayout winnerTextPanelLayout = new javax.swing.GroupLayout(winnerTextPanel);
@@ -74,82 +72,46 @@ public class WinnerView extends javax.swing.JFrame {
         winnerTextPanelLayout.setHorizontalGroup(
             winnerTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(winnerTextPanelLayout.createSequentialGroup()
-                .addGap(263, 263, 263)
+                .addGap(381, 381, 381)
                 .addComponent(winnerText)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         winnerTextPanelLayout.setVerticalGroup(
             winnerTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, winnerTextPanelLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(121, Short.MAX_VALUE)
                 .addComponent(winnerText)
-                .addGap(45, 45, 45))
+                .addGap(95, 95, 95))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(winnerTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(winnerTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(42, 42, 42)
                 .addComponent(congratulationsTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(winnerTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(125, 125, 125))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * {@inheritDoc}
-     * Main method that starts graphic aspects of WinnerView
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WinnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WinnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WinnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WinnerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WinnerView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel congratulationsText;
-	
     private javax.swing.JPanel congratulationsTextPanel;
     private javax.swing.JLabel winnerText;
     private javax.swing.JPanel winnerTextPanel;

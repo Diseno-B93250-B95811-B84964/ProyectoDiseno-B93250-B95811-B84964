@@ -1,24 +1,24 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
+
 package model;
+
 /**
  *
  * @author Alvaro Miranda
  */
-public class UrDiceModel extends DiceModel {
-    
-    int urNumberOfSides;
+public class UrDiceModel {
+    private int rollResult;
     
     public UrDiceModel()
     {
-        urNumberOfSides = 5;
-        this.numberOfSides = urNumberOfSides;
         rollResult = 0;
     }
-    
-    @Override
+
     public void rollDice()
     {
         int min = 0;
@@ -27,7 +27,6 @@ public class UrDiceModel extends DiceModel {
         rollResult = (int)(Math.random() * range) + min;
     }
     
-    @Override
     public int getRollResult()
     {
         return rollResult;
