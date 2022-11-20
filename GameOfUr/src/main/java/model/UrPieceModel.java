@@ -28,8 +28,6 @@ public class UrPieceModel {
     private int initialRow;
     
     private final int initialCol;
-    
-    //private boolean hasScored;
 
     /**
      * Piece Color
@@ -59,7 +57,6 @@ public class UrPieceModel {
         pieceColor = Color.WHITE;
         isSafe = false;
         isInPlay = false;
-        //hasScored = false;
     }
     
     /**
@@ -75,7 +72,6 @@ public class UrPieceModel {
         pieceColor = playerColor;
         isSafe = false;
         isInPlay = false;
-        //hasScored = false;
     }
     
     /**
@@ -138,12 +134,4 @@ public class UrPieceModel {
         x = initialRow;
         y = initialCol;
     }
-    
-    /*public void setHasScored(){
-        this.hasScored = true;
-    }
-    
-    public boolean getHasScored(){
-        return hasScored;
-    }*/
 }

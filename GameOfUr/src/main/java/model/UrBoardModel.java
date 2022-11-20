@@ -102,7 +102,7 @@ public class UrBoardModel {
 
                 //System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
 
-                if (tileLocation < 10 || pointCondition(possibleMoveIndex, playerColor)) {
+                if (tileLocation < 10 || canScore(possibleMoveIndex, playerColor)) {
                     possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
                     //System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
                 }
@@ -137,7 +137,7 @@ public class UrBoardModel {
         return tileLocation;
     }
     
-    private boolean pointCondition(int possibleMoveIndex, Color playerColor){
+    private boolean canScore(int possibleMoveIndex, Color playerColor){
         boolean canScore = false;
         if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
             if(possibleMoveIndex == 14){
@@ -173,13 +173,8 @@ public class UrBoardModel {
         
         
         
-        // FALTA: Calculo de puntos de cada jugador
-        // Calculo de condicion de ganador alcanzada
-        // Una vez que una pieza alcanza un punto, falta indicarle con el nuevo
-            // atributo de hasScored, que ya la ficha no puede volver a jugar y 
-            // salir del tablero
+
         // Vista del Ganador
-        // Falta corregir el mapa y el cargado del mismo en el controlador
         // Creacion de archivo con el POM
         // Arreglar el cargado CSV
         // Cambio de turnos entre jugadores
