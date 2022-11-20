@@ -213,6 +213,7 @@ public class GameController {
     }
     
     private void loadGameState(ArrayList<String[]> fileContents) {
+        makeBoard();
         deSerializer = new UrDeserializerModel(playerArray, board);
         deSerializer.loadGameState(fileContents);
     }
