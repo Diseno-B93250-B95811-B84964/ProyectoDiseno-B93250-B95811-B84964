@@ -513,7 +513,7 @@ public class MainGameView extends javax.swing.JPanel {
     }
     
     /* Button feature */
-    public void desactiveAPieceForFirstPlayer(){
+        public void desactiveAPieceForFirstPlayer(){
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(false);
@@ -555,6 +555,50 @@ public class MainGameView extends javax.swing.JPanel {
         }
         usedPiecesFirstPlayer++;
     } 
+        
+    public void activeAPieceForFirstPlayer(){
+        switch (usedPiecesFirstPlayer) {
+            case 1 -> {
+                pieceLabelFirstPlayer1.setEnabled(true);
+                pieceLabelFirstPlayer1.setVisible(true);
+                break;
+            }
+            case 2 -> {
+                pieceLabelFirstPlayer2.setEnabled(true);
+                pieceLabelFirstPlayer2.setVisible(true);
+                break;
+            }
+            case 3 -> {
+                pieceLabelFirstPlayer3.setEnabled(true);
+                pieceLabelFirstPlayer3.setVisible(true);
+                break;
+            }
+            case 4 -> {
+                pieceLabelFirstPlayer4.setEnabled(true);
+                pieceLabelFirstPlayer4.setVisible(true);
+                break;
+            }
+            case 5 -> {
+                pieceLabelFirstPlayer5.setEnabled(true);
+                pieceLabelFirstPlayer5.setVisible(true);
+                break;
+            }
+            case 6 -> {
+                pieceLabelFirstPlayer6.setEnabled(true);
+                pieceLabelFirstPlayer6.setVisible(true);
+                break;
+            }
+            case 7 -> {
+                pieceLabelFirstPlayer7.setEnabled(true);
+                pieceLabelFirstPlayer7.setVisible(true);
+                break;
+            }
+            default -> {
+            }
+        }
+        usedPiecesFirstPlayer--;
+    } 
+   
     
     public void desactiveAPieceForSecondPlayer(){
         switch (usedPiecesSecondPlayer) {
@@ -597,6 +641,49 @@ public class MainGameView extends javax.swing.JPanel {
             }
         }
         usedPiecesSecondPlayer++;
+    } 
+    
+    public void activeAPieceForSecondPlayer(){
+        switch (usedPiecesFirstPlayer) {
+            case 1 -> {
+                pieceLabelFirstPlayer1.setEnabled(true);
+                pieceLabelFirstPlayer1.setVisible(true);
+                break;
+            }
+            case 2 -> {
+                pieceLabelFirstPlayer2.setEnabled(true);
+                pieceLabelFirstPlayer2.setVisible(true);
+                break;
+            }
+            case 3 -> {
+                pieceLabelFirstPlayer3.setEnabled(true);
+                pieceLabelFirstPlayer3.setVisible(true);
+                break;
+            }
+            case 4 -> {
+                pieceLabelFirstPlayer4.setEnabled(true);
+                pieceLabelFirstPlayer4.setVisible(true);
+                break;
+            }
+            case 5 -> {
+                pieceLabelFirstPlayer5.setEnabled(true);
+                pieceLabelFirstPlayer5.setVisible(true);
+                break;
+            }
+            case 6 -> {
+                pieceLabelFirstPlayer6.setEnabled(true);
+                pieceLabelFirstPlayer6.setVisible(true);
+                break;
+            }
+            case 7 -> {
+                pieceLabelFirstPlayer7.setEnabled(true);
+                pieceLabelFirstPlayer7.setVisible(true);
+                break;
+            }
+            default -> {
+            }
+        }
+        usedPiecesFirstPlayer--;
     } 
     
     /*Load Images Methods*/
