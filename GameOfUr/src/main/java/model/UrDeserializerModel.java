@@ -39,7 +39,6 @@ public class UrDeserializerModel {
     }
     
     private void setPlayerInfo(int playerId, String[] playerInfo) {
-        System.out.println("Player info en pos 0: "+ playerInfo[0]);
         Color playerColor = new Color(Integer.parseInt(playerInfo[0]));
         int playerScore = Integer.parseInt(playerInfo[2]);
         /// Color playerColor, String playerName, int playerScore

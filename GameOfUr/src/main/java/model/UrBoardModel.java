@@ -186,10 +186,6 @@ public class UrBoardModel {
         }
         
         makeInitialMove(piece, clickedTile, possibleTile);
-        
-        
-        
-
     }
     
     public void addScoreToPlayer(UrPlayerModel player){

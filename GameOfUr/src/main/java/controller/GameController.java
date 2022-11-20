@@ -71,6 +71,7 @@ public class GameController {
             this.playerArray[0] = new UrPlayerModel(0);
             this.playerArray[1] = new UrPlayerModel(2);
             
+            
             this.currentPlayerNum = 0;
             
             initializeLabels();        
@@ -157,8 +158,6 @@ public class GameController {
         UrPieceModel possiblePieceToMove = board.getPieceToPlay(currentPlayer);
         board.setPieceTile(possiblePieceToMove, chosenTile, possibleTile);
 
-
-
         // parte visual
         // tile viejo ya no tiene pieza
         // pieza del otro jugador vuelve a estado original
@@ -189,11 +188,10 @@ public class GameController {
       
     public void saveGame() {
         try {
-            new File("\\saves").mkdirs();
-            
+            this.serializer = new UrSerializerModel(this.board, this.playerArray[0], this.playerArray[1]);
+            boolean dir = new File("saves").mkdirs();
             CSVWriter writer = new CSVWriter(new FileWriter("saves\\gameState.csv"));
             ArrayList<String[]> array = serializer.saveGameState();
-
             for (String[] rowString : array) {
                 for (String string : rowString) {
                     System.out.print(string + ",");
@@ -236,9 +234,11 @@ public class GameController {
         }
         for (int index = 0; index < playerArray[0].getPlayerScore(); index++) {
             gameView.desactiveAPieceForFirstPlayer();
+            System.out.println("Eliminado desde primer for " + index + " veces");
         }
         for (int index = 0; index < playerArray[1].getPlayerScore(); index++) {
             gameView.desactiveAPieceForSecondPlayer();
+            System.out.println("Eliminado desde segundo for " + index + " veces");
         }
         
         int limit = playerArray[0].getPlayerPieces().size();
@@ -350,10 +350,17 @@ public class GameController {
         public UrTileModel startListening() {
             board = getBoard();
             UrTileModel movedTile = null;
+            System.out.println("Estado de diceThrown: " + diceThrown);
+            System.out.println("Estado de Winner: " + winner);
+            
             if (diceThrown) {
                 System.out.println("Tir[e un dado!!!");
                 if(!winner) { // winner == false
+                    System.out.println("Printing Color of player turn: " +currentPlayer.getColor());
+                    System.out.println("Que es CurrentPlayer? "+ currentPlayer);
                     currentPlayer = playerArray[currentPlayerNum];
+                    board.setPlayerTurn(currentPlayer.getColor());
+
                     if (diceResult > 0){
                         System.out.println("Dice result es: " + diceResult);
                         possiblePaths.clear();
@@ -374,6 +381,7 @@ public class GameController {
                     winner = checkIfWinner();
                     currentPlayerNum ++;
                     currentPlayerNum %= playerArray.length;   
+                    
                 }
                 diceThrown = false;
             }
@@ -384,7 +392,12 @@ public class GameController {
     class SaveAndLeaveClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            if (diceThrown) {
+                currentPlayer = playerArray[currentPlayerNum];
+                board.setPlayerTurn(currentPlayer.getColor());
+                saveGame();
+                System.exit(0);
+            }
         } 
     }
     
@@ -396,7 +409,6 @@ public class GameController {
     }
    
     class ThrowDiceClickListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             diceResult = 0;
