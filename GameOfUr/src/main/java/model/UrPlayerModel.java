@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class UrPlayerModel {
     public final static int NUMBER_OF_PIECES = 7;
     private ArrayList<UrPieceModel> playerPieces;
-    
+
     /**
      * Attribute that holds player's color
      */
@@ -36,14 +36,14 @@ public class UrPlayerModel {
     /**
      * Default constructor method that sets everything to default values
      */
-    public UrPlayerModel() {
+    public UrPlayerModel(int playerColumn) {
         this.playerColor = Color.WHITE;
         this.playerName = "Player";
         this.score = 0;
         
         playerPieces = new ArrayList<UrPieceModel>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            playerPieces.add(new UrPieceModel(this.playerColor));
+            playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
         }
     }
     
@@ -51,13 +51,13 @@ public class UrPlayerModel {
      * Constructor method that sets the PlayerID to the given parameter
      * @param playerColor Player's Color
      */
-    public UrPlayerModel (Color playerColor) {
+    public UrPlayerModel (Color playerColor, int playerColumn) {
         this.playerColor = playerColor;
         this.playerName = "Player";
         this.score = 0;
         playerPieces = new ArrayList<UrPieceModel>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            playerPieces.add(new UrPieceModel(this.playerColor));
+            playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
         }
     }
     
@@ -66,14 +66,15 @@ public class UrPlayerModel {
      * @param playerName Player's Name
      * @param playerScore Player's Score
      * @param playerColor Player's Color
+     * @param playerColumn
      */
-    public UrPlayerModel (Color playerColor, String playerName, int playerScore) {
+    public UrPlayerModel (Color playerColor, String playerName, int playerScore, int playerColumn) {
         this.playerColor = playerColor;
         this.playerName = playerName;
         this.score = playerScore;
         playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            playerPieces.add(new UrPieceModel(this.playerColor));
+            playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
         }
     }
     
@@ -131,4 +132,8 @@ public class UrPlayerModel {
     public UrPieceModel getPlayerPiece(int pieceId) {
         return playerPieces.get(pieceId);
     }
+    
+    /*public removePiece(UrPieceModel piece) {
+        
+    }*/
 }

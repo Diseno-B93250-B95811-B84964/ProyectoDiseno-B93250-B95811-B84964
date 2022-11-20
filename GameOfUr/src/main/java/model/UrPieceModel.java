@@ -18,12 +18,18 @@ public class UrPieceModel {
     /**
      * Coordinate x
      */
-    protected int x;
+    private int x;
 
     /**
      * Coordinate y
      */
-    protected int y;
+    private int y;
+    
+    private int initialRow;
+    
+    private final int initialCol;
+    
+    //private boolean hasScored;
 
     /**
      * Piece Color
@@ -42,25 +48,34 @@ public class UrPieceModel {
     
     /**
      * Basic Constructor
+     * @param column
      */
-    public UrPieceModel() {
-        x = 0;
-        y = 0;
+    public UrPieceModel(int column) {
+        initialRow = 4;
+        initialCol = column;
+        
+        x = initialRow;
+        y = initialCol;
         pieceColor = Color.WHITE;
         isSafe = false;
         isInPlay = false;
+        //hasScored = false;
     }
     
     /**
      * Constructor with a Color
      * @param playerColor Value to be assigned
+     * @param column
      */
-    public UrPieceModel(Color playerColor) {
-        x = 0;
-        y = 0;
+    public UrPieceModel(Color playerColor, int column) {
+        initialCol = column;
+        
+        x = initialRow;
+        y = initialCol;
         pieceColor = playerColor;
         isSafe = false;
         isInPlay = false;
+        //hasScored = false;
     }
     
     /**
@@ -111,21 +126,6 @@ public class UrPieceModel {
         return pieceColor;
     }
     
-    /**
-     * Gets variable value isSafe
-     * @return Returns a true or false value.
-     */
-    public boolean isSafe() {
-        return isSafe;
-    }
-    
-    /**
-     * Sets variable isSafe.
-     */
-    public void setSafe(boolean isSafe) {
-        this.isSafe = isSafe;
-    }
-    
     public boolean isInPlay(){
         return isInPlay;
     }
@@ -133,4 +133,17 @@ public class UrPieceModel {
     public void setIsInPlay(boolean isInPlay){
         this.isInPlay = isInPlay;
     }
+    
+    public void resetPieceToOriginalPosition() {
+        x = initialRow;
+        y = initialCol;
+    }
+    
+    /*public void setHasScored(){
+        this.hasScored = true;
+    }
+    
+    public boolean getHasScored(){
+        return hasScored;
+    }*/
 }

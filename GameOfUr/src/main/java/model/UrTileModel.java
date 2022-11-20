@@ -61,26 +61,26 @@ public class UrTileModel {
         return isSafe;
     }
     
-    public void toggleSafeTile(){
-        this.isSafe = !isSafe;
+    public void setSafe(){
+        this.isSafe = true;
     }
     
     public void setPiece(UrPieceModel piece){
         this.piece = piece;
         isVacant = false;
+        
         piece.setX(row);
         piece.setY(column);
+        
+        //System.out.println("piece in tile: " + piece.getColor());
     }
     
     public UrPieceModel getPiece(){
         return this.piece;
     }
     
-    public void setSafePiece(int x, int y, UrPieceModel piece) {
-        if(this.isSafe()){
-            piece.setSafe(true);
-        }
-        piece.setX(x);
-        piece.setY(y);
+    public void resetTile(){
+        this.piece = null;
+        toggleVacancy();
     }
 }
