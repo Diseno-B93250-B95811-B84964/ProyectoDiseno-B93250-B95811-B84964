@@ -20,10 +20,12 @@ public class UrPlayerModel {
 
     private Color playerColor;
     private String playerName;
+    private int playerColumn;
     private int score;
     
     public UrPlayerModel(int playerColumn) { // TODO delete this
         this.playerColor = Color.WHITE;
+        this.playerColumn = playerColumn;
         this.playerName = "Player";
         this.score = 0;
         
@@ -36,6 +38,7 @@ public class UrPlayerModel {
     public UrPlayerModel (Color playerColor, int playerColumn) {
         this.playerColor = playerColor;
         this.playerName = "Player";
+        this.playerColumn = playerColumn;
         this.score = 0;
         
         playerPieces = new ArrayList<>();
@@ -51,6 +54,7 @@ public class UrPlayerModel {
         this.playerColor = playerColor;
         this.playerName = playerName;
         this.score = playerScore;
+        this.playerColumn = playerColumn;
         
         playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
@@ -62,6 +66,11 @@ public class UrPlayerModel {
         this.playerColor = playerColor;
         this.playerName = playerName;
         this.score = playerScore;
+        
+        playerPieces.clear();
+        for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
+            playerPieces.add(new UrPieceModel(this.playerColor, playerColumn));
+        }
     }
 
     public Color getColor(){
