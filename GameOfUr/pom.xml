@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
-        <exec.mainClass>controller.GameOfUr_Swing</exec.mainClass>
+        <exec.mainClass>controller.GameOfUrMain</exec.mainClass>
     </properties>
     	<build>
 		<plugins>
@@ -19,7 +19,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>controller.GameOfUrMainController</mainClass>
+							<mainClass>controller.GameOfUrMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

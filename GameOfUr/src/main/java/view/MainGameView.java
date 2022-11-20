@@ -475,8 +475,6 @@ public class MainGameView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
-    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt){
-    }
     
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
         UrRulesModel rules = new UrRulesModel();
@@ -500,13 +498,17 @@ public class MainGameView extends javax.swing.JPanel {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    }//GEN-LAST:event_rulesButtonActionPerformed
 
+    private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_throwDiceButtonActionPerformed
+
     /* Main Panel Buttons */
 
     public void addSaveAndLeaveButtonClickListener(ActionListener listenForButton) {
         saveAndLeaveButton.addActionListener(listenForButton);
     }
     
-    public void throwDiceButtonClickListener(ActionListener listenForButton) {
+    public void addthrowDiceButtonButtonClickListener(ActionListener listenForButton) {
         throwDiceButton.addActionListener(listenForButton);
     }
     
@@ -629,7 +631,8 @@ public class MainGameView extends javax.swing.JPanel {
     
     private void setRosesToBoard() throws IOException{
         /*For JAR FILE*/
-        // BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
+        //BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
+        
         /*For NetBeans*/
         BufferedImage image = loadImagesForIDEFile("icon2_rounded");  
         ImageIcon roseIcon = resizeImage(image, 80,80);
@@ -786,7 +789,7 @@ public class MainGameView extends javax.swing.JPanel {
     
     /*Get players pieces icons*/
     
-    public Icon getFirsPlayerIcon(){
+    public Icon getFirstPlayerIcon(){
         return pieceLabelFirstPlayer1.getIcon();
     }
 
@@ -851,6 +854,11 @@ public class MainGameView extends javax.swing.JPanel {
     
     public void changePlayerTurn(int number){
         String playerTurn = "Player " + number+"'s" + "turn";
+        playerTurnLabel.setText(playerTurn);
+    }
+    
+    public void declarePlayerWinner(int number) {
+        String playerTurn = "Player " + number+"'s" + "won!";
         playerTurnLabel.setText(playerTurn);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

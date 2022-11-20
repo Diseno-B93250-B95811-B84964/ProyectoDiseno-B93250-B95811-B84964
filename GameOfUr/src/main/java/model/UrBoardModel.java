@@ -65,7 +65,7 @@ public class UrBoardModel {
         ArrayList<UrTileModel> possiblePath =  new ArrayList<>();
         int middleColumn = 1;
         
-        for(int playerRow = 3; playerRow >= 0; playerRow--){
+        for(int playerRow = 4; playerRow >= 0; playerRow--){
             possiblePath.add(urBoard[playerRow][playerColumn]);
         }
         
@@ -95,18 +95,18 @@ public class UrBoardModel {
         UrTileModel possibleTile = null;
         
         int tileLocation = calculateTileLocation(currentTile, playerColor);
-        //System.out.println("tileLocation " + tileLocation);
+        System.out.println("tileLocation " + tileLocation);
         
         if (tileLocation != -1 && amountOfMoves != 0) {
-            //System.out.println("\nplayerPath[" + tileLocation + "] " + playerPath.get(tileLocation).getRow() + ", " + playerPath.get(tileLocation).getColumn());
+            System.out.println("\nplayerPath[" + tileLocation + "] " + playerPath.get(tileLocation).getRow() + ", " + playerPath.get(tileLocation).getColumn());
             possibleMoveIndex = tileLocation + amountOfMoves;
             if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
 
-                //System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
+                System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
 
                 if (tileLocation < 10 || canScore(possibleMoveIndex, playerColor)) {
                     possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
-                    //System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
+                    System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
                 }
             }
         }

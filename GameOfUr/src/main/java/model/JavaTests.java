@@ -30,15 +30,18 @@ public class JavaTests {
         System.out.println("piece4: " + piece4.getColor());
         
         // jugador 1
-        board.setPiece(0, 1, piece1);
+        board.setPiece(4, 0, piece1);
+        
+        /*
         // jugador 2
         board.setPiece(1, 2, piece2);
         // jugador 2
         board.setPiece(6, 1, piece3);
         // jugador 1
-        board.setPiece(3, 0, piece4);
+        board.setPiece(3, 0, piece4);*/
+        
         // player 2 quiere mover pieza 2 a pieza 1
-        UrTileModel tileExample1 = board.getPossibleTile(board.getTile(1, 2), 4, player2.getColor());
+        UrTileModel tileExample1 = board.getPossibleTile(board.getTile(4, 0), 2, player1.getColor());
         System.out.println("tileExample1: " + tileExample1.getRow() + " " + tileExample1.getColumn());
         //System.out.println(piece2.getX());
         // falta reemplazar y quitar safe

@@ -26,7 +26,7 @@ import view.SelectColorView;
 public class MainController {
             int currentPlayer = 0;
         
-        public void startGame() {           
+        public void run() {           
             GameController mainController = new GameController();
             MainMenuView mainMenu = mainController.getMainMenuView();
             MainGameView mainGame = mainController.getMainGameView();
@@ -81,7 +81,8 @@ public class MainController {
     private  void checkFormerGameData(CardLayout baseCard, JPanel basePanel, String finalPanelName, FileChooserController loadController, GameController main){
         ArrayList<String> fileArray = loadController.getFileAsStringArray();
         if (!fileArray.isEmpty()) {
-            main.loadGame(fileArray);
+            // TODO FIX THIS
+            //main.loadGame(fileArray);
             baseCard.show(basePanel, finalPanelName);
         }
     }
@@ -125,8 +126,10 @@ public class MainController {
                     main.setSecondPlayerName(colorController.getPlayerName());
                     main.setSecondPlayerColor(colorController.getPlayerColor());
                     currentPlayer-=1;
+                    main.makeBoard();
                 }
                 //colorController.hideButton(colorController.getPlayerColor());
+                // Create array of available colors and give it to ColorController
                 baseCard.show(basePanel, finalPanelName);
             }    
         }
