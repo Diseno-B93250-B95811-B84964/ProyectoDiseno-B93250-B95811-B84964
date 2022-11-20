@@ -7,6 +7,8 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jimena Gdur
@@ -26,35 +28,43 @@ public class UrSerializerModel {
         this.secondPlayer = player2;
     }
     
-    public String saveGameState() {
-        String gameState = "";
+    public ArrayList<String[]> saveGameState() {
+        ArrayList<String[]> gameState = new ArrayList<>();
         
-        // Color playerColor, String playerName, int playerScore
-        gameState += firstPlayer.getColor().getRGB() + "," + firstPlayer.getPlayerName() + "," + firstPlayer.getPlayerScore() + "\n";
-        gameState += secondPlayer.getColor().getRGB() + "," + secondPlayer.getPlayerName() + "," + secondPlayer.getPlayerScore() + "\n";
+        int playerRGB = 0;
+        int playerScore = 0;
         
+        playerRGB = firstPlayer.getColor().getRGB();
+        playerScore = firstPlayer.getPlayerScore();
+        String[] player1 = {Integer.toString(playerRGB), firstPlayer.getPlayerName(), Integer.toString(playerScore)};
+        gameState.add(player1);
+        
+        playerRGB = secondPlayer.getColor().getRGB();
+        playerScore = secondPlayer.getPlayerScore();
+        String[] player2 = {Integer.toString(playerRGB), secondPlayer.getPlayerName(), Integer.toString(playerScore)};
+        gameState.add(player2);
+
         for(int row = 0; row < UrBoardModel.ROWS; row++){
+            String[] boardRow = new String[UrBoardModel.COLUMNS];
             for(int col = 0; col < UrBoardModel.COLUMNS; col++){
                 if( !gameBoard.getTile(row, col).isVacant()){
-                    /*TODO change this to a Method. DO NOT call the attribute directly*/
                     if(gameBoard.getTile(row, col).getPiece() != null) {
                         if(firstPlayer.getColor() == gameBoard.getTile(row, col).getPiece().getColor()) {
-                            gameState += OCCUPIED_P1;
+                            boardRow[col] = Integer.toString(OCCUPIED_P1);
                         } else {
-                            gameState += OCCUPIED_P2;
+                            boardRow[col] = Integer.toString(OCCUPIED_P2);
                         }
                     }
                 } else{
-                    gameState += NON_OCCUPIED;
-                }
-                if (col != UrBoardModel.COLUMNS - 1) {
-                    gameState += ",";
+                    boardRow[col] = Integer.toString(NON_OCCUPIED);
                 }
             }
-            gameState += "\n";
+            gameState.add(boardRow);
         }
         
-        //gameState += gameBoard.getPlayerTurn().getRGB();
+        int currentPlayerRGB = gameBoard.getPlayerTurn().getRGB();
+        String[] currentPlayerRGBString = { Integer.toString(currentPlayerRGB) };
+        gameState.add(currentPlayerRGBString);
         
         return gameState;
     }

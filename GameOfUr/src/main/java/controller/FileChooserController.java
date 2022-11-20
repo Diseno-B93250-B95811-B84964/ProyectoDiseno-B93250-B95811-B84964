@@ -31,7 +31,7 @@ public class FileChooserController {
         return this.fileChooser;
     }
     
-    public ArrayList<String> getFileAsString(){
+    public ArrayList<String> getFileAsStringArray(){
         return fileAsStringArray;
     }
     

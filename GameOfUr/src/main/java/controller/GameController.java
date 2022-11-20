@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.opencsv.CSVWriter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +12,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import model.UrDeserializerModel;
 
 import model.UrBoardModel;
 import model.UrDiceModel;
@@ -49,6 +52,7 @@ public class GameController {
     
     private HashMap<UrPieceModel, UrTileModel> possiblePaths;
     
+    private UrDeserializerModel deSerializer;
     private UrSerializerModel serializer;
     
     private MainGameView gameView;
@@ -150,7 +154,8 @@ public class GameController {
     
     private UrTileModel movePiece(UrTileModel chosenTile, UrTileModel possibleTile) {
         // sets piece in possible tile
-        board.setPieceTile(chosenTile, possibleTile);
+        UrPieceModel possiblePieceToMove = board.getPieceToPlay(currentPlayer);
+        board.setPieceTile(possiblePieceToMove, chosenTile, possibleTile);
 
 
 
@@ -183,16 +188,34 @@ public class GameController {
     /* Serializer */
       
     public void saveGame() {
-        try (PrintWriter writer = new PrintWriter(new File("gameState.csv"))) {
-            writer.write(serializer.saveGameState());
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+        try {
+            CSVWriter writer = new CSVWriter(new FileWriter("testData//sample.csv"));
+            ArrayList<String[]> array = serializer.saveGameState();
+
+            for (String[] rowString : array) {
+                for (String string : rowString) {
+                    System.out.print(string + ",");
+                }
+                System.out.println();
+                writer.writeNext(rowString);
+            }
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
-    public void loadGame(ArrayList<String> fileContents) {
+    public void loadGame(ArrayList<String[]> fileContents) {
         loadGameState(fileContents);
+        loadGameView();
+    }
+    
+    private void loadGameState(ArrayList<String[]> fileContents) {
+        deSerializer = new UrDeserializerModel(playerArray, board);
+        deSerializer.loadGameState(fileContents);
+    }
+    
+    private void loadGameView() {
         gameView.setFirstPlayerNameToLabel(playerArray[0].getPlayerName());
         gameView.setSecondPlayerNameToLabel(playerArray[1].getPlayerName());
         gameView.addScoreToFirstPlayer(6);
@@ -238,49 +261,6 @@ public class GameController {
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
             }
         }
-
-        // mapear fichas en juego
-        
-    }
-    
-    private UrPlayerModel createPlayer(String[] player, int currentPlayerColumn) {
-        Color playerColor = new Color(Integer.parseInt(player[0]));
-        int playerScore = Integer.parseInt(player[2]);
-        /// Color playerColor, String playerName, int playerScore
-        return new UrPlayerModel(playerColor, player[1], playerScore, currentPlayerColumn);
-    }
-    
-    private void loadGameState(ArrayList<String> fileContents) {
-        // read player colors and score
-        int fileContentsIndex = 0;
-        int pieceIndex = 0;
-        playerArray[0] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0), 0);
-        
-        fileContentsIndex++;
-        playerArray[1] = createPlayer(fileContents.get(fileContentsIndex).split("[,]", 0), 2);
-        
-        fileContentsIndex++;
-        board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
-        
-        int actualCol = 0;
-        for(int row = 0; row < UrBoardModel.ROWS; row++) {
-            for(int col = 0; col < UrBoardModel.COLUMNS + 2; col++) {
-                char character = fileContents.get(fileContentsIndex).charAt(col);
-                if (character != ',') {
-                    UrPieceModel piece;
-                    if (Character.getNumericValue(character) == UrSerializerModel.OCCUPIED_P1) {
-                        piece = playerArray[0].getPlayerPiece(pieceIndex);
-                        board.setPiece(row, actualCol, piece);
-                    } else if (Character.getNumericValue(character) == UrSerializerModel.OCCUPIED_P2) {
-                        piece = playerArray[1].getPlayerPiece(pieceIndex);
-                        board.setPiece(row, actualCol, piece);
-                    }
-                    actualCol++;
-                }
-            }
-            fileContentsIndex++;
-        }
-        board.setPlayerTurn(new Color(Integer.parseInt(fileContents.get(fileContentsIndex))));    
     }
     
     /* Gets and sets */

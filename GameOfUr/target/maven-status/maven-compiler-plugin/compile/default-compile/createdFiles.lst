@@ -34,6 +34,7 @@ view\SelectColorView$1.class
 view\SelectColorView$7.class
 model\UrPieceModel.class
 view\MainGameView.class
+model\UrDeserializerModel.class
 view\MainGameView$2.class
 view\MainGameView$3.class
 view\MainMenuView$3.class
