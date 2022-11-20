@@ -221,51 +221,46 @@ public class GameController {
         gameView.setSecondPlayerNameToLabel(playerArray[1].getPlayerName());
         gameView.addScoreToFirstPlayer(playerArray[0].getPlayerScore());
         gameView.addScoreToSecondPlayer(playerArray[1].getPlayerScore());
-        System.out.println("Player 1 score: "+ playerArray[0].getPlayerScore());
-        System.out.println("Player 2 score: "+ playerArray[1].getPlayerScore());
+
         try {
-            System.out.println("Color first player" + playerArray[0].getColor());
             gameView.setFirstPlayerPieceColor(playerArray[0].getColor());
-            System.out.println("Color second player" + playerArray[1].getColor());    
-            Color color = new Color(0,102,255);
-            gameView.setSecondPlayerPieceColor(color);
+            gameView.setSecondPlayerPieceColor(playerArray[1].getColor());
         } catch(IOException e) {
             System.out.println("Images not found! Please check images path");
         }
         for (int index = 0; index < playerArray[0].getPlayerScore(); index++) {
             gameView.desactiveAPieceForFirstPlayer();
-            System.out.println("Eliminado desde primer for " + index + " veces");
         }
         for (int index = 0; index < playerArray[1].getPlayerScore(); index++) {
             gameView.desactiveAPieceForSecondPlayer();
-            System.out.println("Eliminado desde segundo for " + index + " veces");
         }
         
-        int limit = playerArray[0].getPlayerPieces().size();
-        for (int index = 0; index < limit; index++) {
-            if (playerArray[0].getPlayerPiece(index).getX() != -1) {
+        for (var currentPiece : playerArray[0].getPlayerPieces()) {
+            System.out.println("Is in play de J1" + currentPiece.isInPlay());
+            if (currentPiece.isInPlay()) {
                 gameView.desactiveAPieceForFirstPlayer();
-            } else {
-                int x = playerArray[0].getPlayerPiece(index).getX();
-                int y = playerArray[0].getPlayerPiece(index).getY();
+                int x = currentPiece.getX();
+                int y = currentPiece.getY();
                 Color color = playerArray[0].getColor();
                 ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
-            }
+                System.out.println("Nueva pieza?");
+            } 
         }
-            
-        limit = playerArray[1].getPlayerPieces().size();
-        for (int index = 0; index < limit; index++) {
-            if (playerArray[1].getPlayerPiece(index).getX() != -1) {
+        
+        for (var currentPiece : playerArray[1].getPlayerPieces()) {
+            System.out.println("Is in play de J2" + currentPiece.isInPlay());
+            if (currentPiece.isInPlay()) {
                 gameView.desactiveAPieceForSecondPlayer();
-            } else {
-                int x = playerArray[1].getPlayerPiece(index).getX();
-                int y = playerArray[1].getPlayerPiece(index).getY();
+                int x = currentPiece.getX();
+                int y = currentPiece.getY();
                 Color color = playerArray[1].getColor();
                 ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
-            }
+                System.out.println("Nueva pieza?");
+            } 
         }
+       
     }
     
     /* Gets and sets */

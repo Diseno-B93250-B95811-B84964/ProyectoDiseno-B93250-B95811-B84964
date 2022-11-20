@@ -52,8 +52,8 @@ public class MainGameView extends javax.swing.JPanel {
         initializeTilesArray();
         makeUrBoard();
         makeDices();
-        this.usedPiecesFirstPlayer = 0;
-        this.usedPiecesSecondPlayer = 0;
+        this.usedPiecesFirstPlayer = 1;
+        this.usedPiecesSecondPlayer = 1;
     }
 
     /**
@@ -514,6 +514,7 @@ public class MainGameView extends javax.swing.JPanel {
     
     /* Button feature */
         public void desactiveAPieceForFirstPlayer(){
+            System.out.println("Deleting..." + usedPiecesFirstPlayer);
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(false);
@@ -601,6 +602,7 @@ public class MainGameView extends javax.swing.JPanel {
    
     
     public void desactiveAPieceForSecondPlayer(){
+        System.out.println("Me estoy llamando con la pieza: ");
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(false);
