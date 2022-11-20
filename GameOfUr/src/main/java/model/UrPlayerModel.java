@@ -133,7 +133,12 @@ public class UrPlayerModel {
         return playerPieces.get(pieceId);
     }
     
-    /*public removePiece(UrPieceModel piece) {
-        
-    }*/
+    public void removePiece(UrPieceModel piece) {
+        for (UrPieceModel playerPiece : this.playerPieces) {
+            if((piece.getX() == playerPiece.getX() && (piece.getY() == playerPiece.getY()))){
+                playerPieces.remove(playerPiece);
+                break;
+            }
+        }
+    }
 }

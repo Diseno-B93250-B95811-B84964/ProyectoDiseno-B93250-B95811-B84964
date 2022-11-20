@@ -172,7 +172,7 @@ public class GameController {
         if (x == 4 && (y == 0 || y == 2) ) {
             currentPlayer.addScoreToPlayer();
             currentPlayer.removePiece(definitiveTile.getPiece());
-            definitiveTile.setPiece(null);
+            definitiveTile.resetTile();
         }
     }
     
