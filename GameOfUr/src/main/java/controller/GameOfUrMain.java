@@ -5,6 +5,8 @@
 
 package controller;
 
+import javax.swing.SwingUtilities;
+
     /**
     *
     * @author Mauricio Palma, Alvaro Miranda, Ximena Gdur
@@ -12,7 +14,10 @@ package controller;
 public class GameOfUrMain {
 
     public static void main(String[] args) {
-        MainController main = new MainController();
-        main.startGame();
+        SwingUtilities.invokeLater(() -> {
+            MainController main = new MainController();
+            //app.setVisible(true);
+            main.startGame();
+        });
     }
 }

@@ -344,6 +344,10 @@ public class GameController {
     
     /* Listeners */
     
+    public void printHello(){
+        System.out.println("Hello from 348!!!");
+    }
+    
     class ThrowDiceClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -370,6 +374,7 @@ public class GameController {
             this.label = label;
             this.row = row;
             this.column = column;
+            
         }
 
         @Override
@@ -379,6 +384,7 @@ public class GameController {
                 gameView.setNextPossibleLabel(0,0,gameView.getFirsPlayerIcon());
                 //chooseNextPossibleLabel(row, column);
             }
+            printHello();
         }
 
         @Override
