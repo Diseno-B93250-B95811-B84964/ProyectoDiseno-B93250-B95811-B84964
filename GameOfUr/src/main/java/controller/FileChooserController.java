@@ -35,6 +35,14 @@ public class FileChooserController {
         return fileAsStringArray;
     }
     
+    public String[] removeQuotationMarks(String[] dirtyString) {
+        String[] returnedString = new String[dirtyString.length];
+        for (int index = 0; index < dirtyString.length; index++) {
+            returnedString[index] = dirtyString[index].replaceAll("\"", "");
+        }        
+        return returnedString;
+    }
+    
     class FileChooserClickListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -45,8 +53,8 @@ public class FileChooserController {
                 Scanner lineScanner = new Scanner(file);
                 if (lineScanner != null) {
                     while (lineScanner.hasNextLine()) {
-                        String[] lineAsArray = lineScanner.nextLine().split(",");
-                        fileAsStringArray.add(lineAsArray);
+                        String[] lineAsArray = lineScanner.nextLine().split(",");         
+                        fileAsStringArray.add(removeQuotationMarks(lineAsArray));
                     }
                 }
             } catch (FileNotFoundException ev) {
