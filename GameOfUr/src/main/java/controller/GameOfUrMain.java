@@ -16,8 +16,7 @@ public class GameOfUrMain {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainController main = new MainController();
-            //app.setVisible(true);
-            main.startGame();
+            main.run();
         });
     }
 }

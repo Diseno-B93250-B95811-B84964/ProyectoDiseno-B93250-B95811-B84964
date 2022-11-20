@@ -25,7 +25,7 @@ import view.SelectColorView;
 public class MainController {
             int currentPlayer = 0;
         
-        public void startGame() {           
+        public void run() {           
             GameController mainController = new GameController();
             MainMenuView mainMenu = mainController.getMainMenuView();
             MainGameView mainGame = mainController.getMainGameView();
@@ -123,8 +123,11 @@ public class MainController {
                     main.setSecondPlayerName(colorController.getPlayerName());
                     main.setSecondPlayerColor(colorController.getPlayerColor());
                     currentPlayer-=1;
+                    main.startGame();
+                    
                 }
                 //colorController.hideButton(colorController.getPlayerColor());
+                // Create array of available colors and give it to ColorController
                 baseCard.show(basePanel, finalPanelName);
             }    
         }

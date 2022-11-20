@@ -63,9 +63,9 @@ public class GameController {
             this.possiblePaths = new HashMap();
             this.winner = false;
             this.playerArray = new UrPlayerModel[2];
-            
-            playerArray[0] = new UrPlayerModel(0);
-            playerArray[1] = new UrPlayerModel(2);
+            this.playerArray[0] = new UrPlayerModel(0);
+            this.playerArray[1] = new UrPlayerModel(2);
+            this.currentPlayerNum = 0;
             
             initializeLabels();        
             menuHandler();
@@ -96,14 +96,14 @@ public class GameController {
         this.board = new UrBoardModel(playerArray[0].getColor(), playerArray[1].getColor());
         int result = -1;
         UrTileModel chosenTile, possibleTile;
-        while(!winner) {
+        while(!winner) { // winner == false
             currentPlayer = playerArray[currentPlayerNum];
             result = throwDice();
             if (result > 0){
                 possiblePaths.clear();
                 calculateAllPossiblePathsPerTurn(result);
                 if (!possiblePaths.isEmpty()) {
-                    // wait for action listener or something
+                    
                     int x = 0, y = 0;
                     possibleTile = getPossibleTile(x, y);
                     // wait for user conformation
@@ -114,11 +114,10 @@ public class GameController {
                     // show no possible moves
                 }
             }
-            winner = determineIfWinnerElseChangePlayer();
+            winner = checkIfWinner();
+            currentPlayerNum ++;
+            currentPlayerNum %= playerArray.length;
         }
-        // TODO destroy frame
-        // TODO create winningFrame
-        // TODO exit
     }
     
     private int throwDice(){
@@ -172,18 +171,15 @@ public class GameController {
         int y = definitiveTile.getColumn();
         if (x == 4 && (y == 0 || y == 2) ) {
             currentPlayer.addScoreToPlayer();
-            //currentPlayer.removePiece(definitiveTile.getPiece());
+            currentPlayer.removePiece(definitiveTile.getPiece());
             definitiveTile.setPiece(null);
         }
     }
     
-    private boolean determineIfWinnerElseChangePlayer() {
+    private boolean checkIfWinner() {
         boolean winner = false;
         if (currentPlayer.getPlayerScore() == 7) {
             winner = true;
-        } else {
-            currentPlayerNum ++;
-            currentPlayerNum %= playerArray.length;
         }
         return winner;
     }
@@ -333,23 +329,6 @@ public class GameController {
     
     public void printHello(){
         System.out.println("Hello from 348!!!");
-    }
-    
-    class ThrowDiceClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int result = getDiceResult();
-        } 
-        
-        private int getDiceResult(){
-            gameView.cleanDice();
-            diceThrown  = true;
-            diceModel.rollDice();
-            int diceResult = diceModel.getRollResult();
-            gameView.showThrow(diceResult);
-            gameView.setMoves(diceResult);
-            return diceResult; 
-        }
     }
     
     class TileMouseListener extends MouseAdapter {

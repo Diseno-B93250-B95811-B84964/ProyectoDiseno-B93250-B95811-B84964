@@ -629,9 +629,10 @@ public class MainGameView extends javax.swing.JPanel {
     
     private void setRosesToBoard() throws IOException{
         /*For JAR FILE*/
-        // BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
+        BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
+        
         /*For NetBeans*/
-        BufferedImage image = loadImagesForIDEFile("icon2_rounded");  
+        //BufferedImage image = loadImagesForIDEFile("icon2_rounded");  
         ImageIcon roseIcon = resizeImage(image, 80,80);
         tilesArray[0][0].setIcon(roseIcon);
         tilesArray[0][2].setIcon(roseIcon);
@@ -686,23 +687,23 @@ public class MainGameView extends javax.swing.JPanel {
         try {
             BufferedImage image = null;
             if (color.getRGB() == BLUE.getRGB()) {
-                //image = loadImagesForJarFile("blue_piece_rbg");
-                image = loadImagesForIDEFile("blue_piece_rbg");
+                image = loadImagesForJarFile("blue_piece_rbg");
+                //image = loadImagesForIDEFile("blue_piece_rbg");
             } else if (color.getRGB() == BROWN.getRGB()) {
-                //image = loadImagesForJarFile("brown_piece_rbg");
-                image = loadImagesForIDEFile("brown_piece_rbg");
+                image = loadImagesForJarFile("brown_piece_rbg");
+                //image = loadImagesForIDEFile("brown_piece_rbg");
             } else if (color.getRGB() == GREEN.getRGB()) {
                 //image = loadImagesForJarFile("green_piece_rbg");
                 image = loadImagesForIDEFile("green_piece_rbg");
             } else if (color.getRGB() == PURPLE.getRGB()) {
                 //image = loadImagesForJarFile("purple_piece_rbg");
-                image = loadImagesForIDEFile("purple_piece_rbg");
+                //image = loadImagesForIDEFile("purple_piece_rbg");
             } else if (color.getRGB() == RED.getRGB()) {
                 //image = loadImagesForJarFile("red_piece_rbg");
-                image = loadImagesForIDEFile("red_piece_rbg");
+                //image = loadImagesForIDEFile("red_piece_rbg");
             } else if (color.getRGB() == YELLOW.getRGB()) {
                 //image = loadImagesForJarFile("yellow_piece_rbg");
-                image = loadImagesForIDEFile("yellow_piece_rbg");
+                //image = loadImagesForIDEFile("yellow_piece_rbg");
             }
             colorIcon = resizeImage(image, 78, 78);
            
@@ -728,12 +729,12 @@ public class MainGameView extends javax.swing.JPanel {
         try{
             diceLabelArray = new JLabel[4];      
             /*For JAR file*/
-            //BufferedImage diceState1Image = loadImagesForJarFile("result_0_1");
-            //BufferedImage diceState2Image = loadImagesForJarFile("result_1_1");
+            BufferedImage diceState1Image = loadImagesForJarFile("result_0_1");
+            BufferedImage diceState2Image = loadImagesForJarFile("result_1_1");
             
             /*For NetBeans*/   
-            BufferedImage diceState1Image = loadImagesForIDEFile("result_0_1");
-            BufferedImage diceState2Image = loadImagesForIDEFile("result_1_1");
+            //BufferedImage diceState1Image = loadImagesForIDEFile("result_0_1");
+            //BufferedImage diceState2Image = loadImagesForIDEFile("result_1_1");
 
             noScoreDiceState = resizeImage(diceState1Image, 77, 77);
             scoreDiceState = resizeImage(diceState2Image, 77, 77 );
@@ -851,6 +852,11 @@ public class MainGameView extends javax.swing.JPanel {
     
     public void changePlayerTurn(int number){
         String playerTurn = "Player " + number+"'s" + "turn";
+        playerTurnLabel.setText(playerTurn);
+    }
+    
+    public void declarePlayerWinner(int number) {
+        String playerTurn = "Player " + number+"'s" + "won!";
         playerTurnLabel.setText(playerTurn);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
