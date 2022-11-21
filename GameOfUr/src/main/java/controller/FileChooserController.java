@@ -61,6 +61,5 @@ public class FileChooserController {
                 System.out.println("File not found!");
             }
         } 
-    }
-    
+    } 
 }

@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @author Jimena Gdur
  */
 public class UrSerializerModel {
-    public UrBoardModel gameBoard; // make gets?
-    public UrPlayerModel firstPlayer;
-    public UrPlayerModel secondPlayer;
+    private UrBoardModel gameBoard;
+    private UrPlayerModel firstPlayer;
+    private UrPlayerModel secondPlayer;
     
     public final static int NON_OCCUPIED = 0;
     public final static int OCCUPIED_P1 = 1;
@@ -61,11 +61,9 @@ public class UrSerializerModel {
             }
             gameState.add(boardRow);
         }
-        
         int currentPlayerRGB = gameBoard.getPlayerTurn().getRGB();
         String[] currentPlayerRGBString = { Integer.toString(currentPlayerRGB) };
-        gameState.add(currentPlayerRGBString);
-        
+        gameState.add(currentPlayerRGBString); 
         return gameState;
     }
 }

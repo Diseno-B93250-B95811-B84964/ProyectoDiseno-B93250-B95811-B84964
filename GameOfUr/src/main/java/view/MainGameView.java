@@ -499,8 +499,7 @@ public class MainGameView extends javax.swing.JPanel {
     }
     
     /* Button feature */
-        public void desactiveAPieceForFirstPlayer(){
-            System.out.println("Deleting for first player..." + usedPiecesFirstPlayer);
+    public void desactiveAPieceForFirstPlayer(){
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(false);
@@ -545,7 +544,6 @@ public class MainGameView extends javax.swing.JPanel {
         
     public void activeAPieceForFirstPlayer(){
         usedPiecesFirstPlayer--;
-        System.out.println("Activate for first player..." + usedPiecesFirstPlayer);
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(true);
@@ -586,10 +584,8 @@ public class MainGameView extends javax.swing.JPanel {
             }
         }
     } 
-   
     
     public void desactiveAPieceForSecondPlayer(){
-        System.out.println("Deleting for second player..." + usedPiecesSecondPlayer);
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(false);
@@ -634,7 +630,6 @@ public class MainGameView extends javax.swing.JPanel {
     
     public void activeAPieceForSecondPlayer(){
         usedPiecesSecondPlayer--;
-        System.out.println("Activate for second player..." + usedPiecesSecondPlayer);
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(true);
@@ -673,8 +668,7 @@ public class MainGameView extends javax.swing.JPanel {
             }
             default -> {
             }
-        }
-        
+        }      
     } 
     
     /*Load Images Methods*/
@@ -707,13 +701,19 @@ public class MainGameView extends javax.swing.JPanel {
         }
     }
     
-    private void setRosesToBoard() throws IOException{
+    private ImageIcon getImageIconRose() throws IOException{
         /*For JAR FILE*/
         //BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
         
         /*For NetBeans*/
-        BufferedImage image = loadImagesForIDEFile("icon2_rounded");  
+        BufferedImage image = loadImagesForIDEFile("icon2_rounded");
+        
         ImageIcon roseIcon = resizeImage(image, 80,80);
+        return roseIcon;
+    }
+    
+    private void setRosesToBoard() throws IOException{
+        ImageIcon roseIcon = getImageIconRose();
         tilesArray[0][0].setIcon(roseIcon);
         tilesArray[0][2].setIcon(roseIcon);
         tilesArray[3][1].setIcon(roseIcon);
@@ -752,14 +752,31 @@ public class MainGameView extends javax.swing.JPanel {
     
     public void removeIconFromLabel(int row, int column)throws IOException{
         tilesArray[row][column].setIcon(null);
-        if ((row == 0 && column == 0) ||
-            (row == 0 && column == 2) ||
-            (row == 3 && column == 1) ||
-            (row == 6 && column == 0) ||
-            (row == 6 && column == 2)
-            ){
-            setRosesToBoard();
-        }
+    }
+    
+    public void removeIconFromRose0_0() throws IOException{
+        ImageIcon image = getImageIconRose();
+        tilesArray[0][0].setIcon(image);
+    }
+
+    public void removeIconFromRose0_2() throws IOException{
+        ImageIcon image = getImageIconRose();
+        tilesArray[0][2].setIcon(image);
+    }
+
+    public void removeIconFromRose3_1() throws IOException{
+        ImageIcon image = getImageIconRose();
+        tilesArray[3][1].setIcon(image);
+    }
+
+    public void removeIconFromRose6_0() throws IOException{
+        ImageIcon image = getImageIconRose();
+        tilesArray[6][0].setIcon(image);
+    }
+
+    public void removeIconFromRose6_2() throws IOException{
+        ImageIcon image = getImageIconRose();
+        tilesArray[6][2].setIcon(image);
     }
 
     public ImageIcon getPieceImageColor(Color color) {

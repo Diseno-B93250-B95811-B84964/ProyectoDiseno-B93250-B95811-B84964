@@ -68,12 +68,9 @@ public class UrTileModel {
     public void setPiece(UrPieceModel piece){
         this.piece = piece;
         this.piece.setIsInPlay(true);
-        isVacant = false;
-        
+        isVacant = false; 
         piece.setX(row);
-        piece.setY(column);
-        
-        //System.out.println("piece in tile: " + piece.getColor());
+        piece.setY(column);   
     }
     
     public UrPieceModel getPiece(){

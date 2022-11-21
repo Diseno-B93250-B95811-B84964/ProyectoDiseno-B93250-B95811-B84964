@@ -14,15 +14,14 @@ import view.SelectColorView;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class SelectColorController {
     private SelectColorView selectColorView;
     private Color playerColor;
     private String playerName;
     private int position = 0;
-    
-    
+       
     public SelectColorController(int playerNumber){
         this.playerName = "";
         this.selectColorView = new SelectColorView(playerNumber);
