@@ -1,6 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
 package model;
 
@@ -58,7 +60,6 @@ public class UrDeserializerModel {
                     value = Integer.parseInt(cellValue);
                     if (value == OCCUPIED_P1) {
                         piece = playerArray[0].getPlayerPiece(pieceIndexPlayer1);
-                        System.out.println("piece color: " + piece.getColor());
                         board.setPiece(row, col, piece);
                         pieceIndexPlayer1++;
                     } else if (value == OCCUPIED_P2) {

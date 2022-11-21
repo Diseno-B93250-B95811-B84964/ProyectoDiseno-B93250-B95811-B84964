@@ -25,38 +25,37 @@ public class UrTileModel {
         this.isVacant = true;
         this.isSafe = false;
         this.piece = null;
-        
     }
-    
-    public UrTileModel(int row, int column){
+
+    public UrTileModel(int row, int column) {
         this.row = row;
         this.column = column;
         this.isVacant = true;
         this.isSafe = false;
         this.piece = null;
     }
-    
-    public int getRow() {
-        return row;
-    }
-    
-    public int getColumn() {
-        return column;
-    }
-    
-    public boolean isVacant(){
-        return isVacant;
-    }
-    
-    public void toggleVacancy(){
-        this.isVacant = !isVacant;
-    }
-    
+
     public UrTileModel(int row, int column, UrPieceModel piece){
         isSafe = false;
         this.piece = piece;
     }
-    
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public boolean isVacant(){
+        return isVacant;
+    }
+
+    public void setVacancy(){
+        this.isVacant = true;
+    }
+
     public boolean isSafe(){
         return isSafe;
     }
@@ -68,12 +67,9 @@ public class UrTileModel {
     public void setPiece(UrPieceModel piece){
         this.piece = piece;
         this.piece.setIsInPlay(true);
-        isVacant = false;
-        
+        isVacant = false; 
         piece.setX(row);
-        piece.setY(column);
-        
-        //System.out.println("piece in tile: " + piece.getColor());
+        piece.setY(column);   
     }
     
     public UrPieceModel getPiece(){
@@ -82,6 +78,6 @@ public class UrTileModel {
     
     public void resetTile(){
         this.piece = null;
-        toggleVacancy();
+        setVacancy();
     }
 }

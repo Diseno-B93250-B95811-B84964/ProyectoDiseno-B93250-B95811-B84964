@@ -48,7 +48,6 @@ public class FileChooserController {
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = fileChooser.getFileChooser();
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
-            System.out.println("File content is: ");
             try {
                 Scanner lineScanner = new Scanner(file);
                 if (lineScanner != null) {
@@ -61,6 +60,5 @@ public class FileChooserController {
                 System.out.println("File not found!");
             }
         } 
-    }
-    
+    } 
 }

@@ -43,10 +43,8 @@ public class UrPlayerModel {
         
         playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            System.out.println("playerColor: " + playerColor + " ");
             UrPieceModel piece = new UrPieceModel(this.playerColor, playerColumn);
             playerPieces.add(piece);
-            System.out.println("piece: " + piece.getColor());
         }
     }
 
@@ -76,12 +74,10 @@ public class UrPlayerModel {
     public Color getColor(){
         return this.playerColor;
     }
-    
 
     public void setColor(Color playerColor){
         this.playerColor = playerColor;
     }
-    
 
     public String getPlayerName() {
         return this.playerName;
@@ -92,7 +88,6 @@ public class UrPlayerModel {
         this.playerName = name;
     }
     
-
     public int getPlayerScore(){
         return this.score;
     }

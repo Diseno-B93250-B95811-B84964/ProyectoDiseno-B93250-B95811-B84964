@@ -1,9 +1,3 @@
-/*
- * User Story # 
- * Jimena Gdur Vargas B93250
- * Álvaro Miranda Villegas B84964
- * Ronald Palma Villegas B95811
- */
 
 package model;
 
@@ -11,17 +5,16 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- *
- * @author Usuario1
+ * @author Alvaro Miranda
  */
+
 public class UrBoardModel {
-    private final UrTileModel[][] urBoard;
-    private HashMap<Color, ArrayList<UrTileModel>> playerPaths;
-    private Color playerTurn;
-    
     public final static int ROWS = 8;
     public final static int COLUMNS = 3;
     
+    private final UrTileModel[][] urBoard;
+    private HashMap<Color, ArrayList<UrTileModel>> playerPaths;
+    private Color playerTurn;   
         
     public UrBoardModel(){
         urBoard = new UrTileModel[ROWS][COLUMNS];
@@ -36,13 +29,7 @@ public class UrBoardModel {
         urBoard[6][0].setSafe();
         urBoard[6][2].setSafe();
     }
-    
-    public void createPlayerPaths(Color player1, Color player2) {
-        playerPaths = new HashMap<>(2);
-        playerPaths.put(player1, setPlayerPath(0));
-        playerPaths.put(player2, setPlayerPath(2));
-    }
-    
+
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
         urBoard = new UrTileModel[ROWS][COLUMNS];
         for(int row = 0; row < ROWS; row++){
@@ -57,8 +44,14 @@ public class UrBoardModel {
         urBoard[6][2].setSafe();
         
         playerPaths = new HashMap<>(2);
-        playerPaths.put(playerOneColor, setPlayerPath(0)); //check for possible change to not use magic variables
-        playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
+        playerPaths.put(playerOneColor, setPlayerPath(0));
+        playerPaths.put(playerTwoColor, setPlayerPath(2));
+    }
+    
+    public void createPlayerPaths(Color player1, Color player2) {
+        playerPaths = new HashMap<>(2);
+        playerPaths.put(player1, setPlayerPath(0));
+        playerPaths.put(player2, setPlayerPath(2));
     }
     
     private ArrayList<UrTileModel> setPlayerPath(int playerColumn) {
@@ -89,24 +82,17 @@ public class UrBoardModel {
     }
     
     public UrTileModel getPossibleTile(UrTileModel currentTile, int amountOfMoves, Color playerColor) {
-        ArrayList<UrTileModel> playerPath = playerPaths.get(playerColor);
-     
+        ArrayList<UrTileModel> playerPath = playerPaths.get(playerColor);   
         int possibleMoveIndex = 0;
-        UrTileModel possibleTile = null;
-        
-        int tileLocation = calculateTileLocation(currentTile, playerColor);
-        System.out.println("tileLocation " + tileLocation);
-        
+        UrTileModel possibleTile = null;      
+        int tileLocation = calculateTileLocation(currentTile, playerColor);  
         if (tileLocation != -1 && amountOfMoves != 0) {
-            System.out.println("\nplayerPath[" + tileLocation + "] " + playerPath.get(tileLocation).getRow() + ", " + playerPath.get(tileLocation).getColumn());
             possibleMoveIndex = tileLocation + amountOfMoves;
-            if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
-
-                System.out.println("Can move: " + currentTile.getRow() + " " + currentTile.getColumn());
-
-                if (tileLocation < 10 || canScore(possibleMoveIndex, playerColor)) {
-                    possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
-                    System.out.println("Get Possible TILE: " + possibleTile.getRow() + " " + possibleTile.getColumn());
+            if (possibleMoveIndex <= 15 ) { // TODO CHECK THIS
+                if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
+                    if (tileLocation <= 15) {
+                        possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
+                    }
                 }
             }
         }
@@ -138,54 +124,27 @@ public class UrBoardModel {
         }
         return tileLocation;
     }
-    
-    public void makeInitialMove(UrPieceModel piece, UrTileModel clickedTile, UrTileModel nextMoveTile){
-        int x = nextMoveTile.getRow();
-        int y = nextMoveTile.getColumn();
-        System.out.println("Inside makeInitialMove: " + x + " " + y);
-        System.out.println("Inside makeInitialMove piece location: " + piece.getX() + " " + piece.getY());
-        if (piece != null) {
-            if(piece.getX() == 4 && (piece.getY() == 0 || piece.getY() == 2)){
-                urBoard[nextMoveTile.getRow()][nextMoveTile.getColumn()].setPiece(piece);
-            }
-        } else {
-            setPiece(x, y, clickedTile.getPiece());
-            // chosenTile no longer has reference to current piece
-            clickedTile.resetTile();
+
+    private boolean canScore(int possibleMoveIndex){
+        boolean canScore = false;       
+        if(possibleMoveIndex == 14){
+            canScore = true;
         }
-    }
-    
-    public UrPieceModel getPieceToPlay(UrPlayerModel player){
-        UrPieceModel pieceToPlay = null;
-        for(int currentPiece = 0; currentPiece < player.getPlayerPieces().size(); currentPiece++){
-            if(!player.getPlayerPieces().get(currentPiece).isInPlay()){
-                pieceToPlay = player.getPlayerPieces().get(currentPiece);
-            }
-        }
-        return pieceToPlay;
-    }
-    
-    private boolean canScore(int possibleMoveIndex, Color playerColor){
-        boolean canScore = false;
-        if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
-            if(possibleMoveIndex == 14){
-                canScore = true;
-            }
-        }
+        
         return canScore;
     }
     
     // Sets piece in tile and checks if tile is safe to reset old tile
-    public void setPieceTile(UrPieceModel piece, UrTileModel clickedTile, UrTileModel possibleTile) {
-        //System.out.println("Setting piece");
-
+    public boolean setPieceTile(UrPieceModel piece, UrTileModel possibleTile) {
+        boolean eaten = false;
         // checks if possible tile has a piece inside
         if (possibleTile.getPiece() != null) {
             // resets other player's piece to original position
             possibleTile.getPiece().resetPieceToOriginalPosition();
+            eaten = true;
         }
-        
-        makeInitialMove(piece, clickedTile, possibleTile);
+        possibleTile.setPiece(piece);
+        return eaten;
     }
     
     public void addScoreToPlayer(UrPlayerModel player){
