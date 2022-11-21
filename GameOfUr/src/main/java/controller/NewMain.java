@@ -132,25 +132,20 @@ public class NewMain {
         System.out.println("Data entered!");*/
     }
     
-    // Pasar OpenCSV a la hora de guardar datos.
+
     // Opcional? Si al hacer el jar se crea la carpeta
     // Hacer ventana de ganador
     // Llamar métodos de oontrolador desde cada Listener
     // Hacer global para comprobar en cada Listener 
-    // Probar cargado de datos que funcione correctamente, debuggearlo
-    // Quitar else de la 113 de GameController
     // Opcional? Ver si hay forma de esperar?
     // Hacer random en GameController!
     // Tirar dado de forma automatica en cada inicio de partida
-    // Comprobar que el getPossibleTile grafico se encienda segun corresponda
     // ¿hacer variable global para saber cual pieza estoy moviendo al tile final de destino?
     // Hacer un activeLabel si uan ficha es comida y vuelve al tablero
     // Cambiar desactive por una variable que le mande un valor entre 1 y 7, ver como y quien tiene esa información
     // Hacer video probando juego
     
     /* Orden de las cosas
-    1. Meter el código de NewMain dentro de GameController a la hora de guardar un archivo. ¿Cambiar nombre de carpeta?
-    2. Debugguear el cargado de un archivo, actualmente tiene valores quemados y no funcionaba bien. Posibles errores de for
     3. Implementar métodos con Action Listeners
     4. Quitar clases de prueba del proyecto y revisar comentarios basura 
     5. Revisar el LucidChart, actualizar

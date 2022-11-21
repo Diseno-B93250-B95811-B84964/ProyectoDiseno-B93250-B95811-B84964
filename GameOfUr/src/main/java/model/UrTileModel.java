@@ -48,8 +48,8 @@ public class UrTileModel {
         return isVacant;
     }
     
-    public void toggleVacancy(){
-        this.isVacant = !isVacant;
+    public void setVacancy(){
+        this.isVacant = true;
     }
     
     public UrTileModel(int row, int column, UrPieceModel piece){
@@ -82,6 +82,6 @@ public class UrTileModel {
     
     public void resetTile(){
         this.piece = null;
-        toggleVacancy();
+        setVacancy();
     }
 }

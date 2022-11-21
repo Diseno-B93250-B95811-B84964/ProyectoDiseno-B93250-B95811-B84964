@@ -92,6 +92,7 @@ public class UrPieceModel {
     }
     
     public void resetPieceToOriginalPosition() {
+
         x = initialRow;
         y = initialCol;
         this.isInPlay = false;

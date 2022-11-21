@@ -107,19 +107,21 @@ public class GameController {
     
     /* Start Game Logic */
     
-    public UrTileModel interactWithTile(int x, int y) {
+   /* public UrTileModel interactWithTile(int x, int y) {
         UrTileModel chosenTile; 
         UrTileModel nextMove;
         chosenTile = board.getTile(x, y); // current
         nextMove = getPossibleTile(x, y); // next possible tile
         System.out.println("Dentro de interactWithTile");
+        System.out.println("NextMove: " + nextMove);
+
         if (nextMove != null) {
             System.out.println("InteractWithTile NO es null!");
             nextMove = movePiece(chosenTile, nextMove);
             checkIfScored(nextMove);
         }
         return nextMove;
-    }
+    }*/
     
     private void calculateAllPossiblePathsPerTurn(int amountOfMoves){
         Color playerColor = currentPlayer.getColor(); 
@@ -127,14 +129,8 @@ public class GameController {
         UrTileModel nextPossibleTile;
         for(UrPieceModel piece : currentPlayer.getPlayerPieces()){
             currentTile = board.getTile(piece.getX(), piece.getY());
-            System.out.println("------Dentro de calculateAllPossiblePathsPerturn ---------");
-            System.out.println("Current tile" + currentTile.getRow() + " " + currentTile.getColumn());
-            System.out.println("Amount of moves es: " + amountOfMoves);
-            System.out.println("Player color: " + playerColor);
             nextPossibleTile = board.getPossibleTile(currentTile, amountOfMoves, playerColor);
-            System.out.println("Printing nextPossibleTile " + nextPossibleTile);
             if(nextPossibleTile != null) {
-                System.out.println("En 127, calculateAllPossiblePath, la pieza a meter es: " + piece.getX() + " " + piece.getY());
                 possiblePaths.put(piece, nextPossibleTile);
             }
         }
@@ -143,26 +139,14 @@ public class GameController {
     private UrTileModel getPossibleTile(int x, int y) {
         UrTileModel possibleTile = null;
         UrPieceModel currentPiece = null;
-        if (board.getTile(x,y).getPiece() != null) {
         System.out.println("Dentro de getPossibleTile");
-            if (board.getTile(x,y).getPiece().getColor() == currentPlayer.getColor()) {
-                currentPiece = board.getTile(x,y).getPiece();
-                possibleTile = possiblePaths.get(currentPiece);
-            }
-        }
-        return possibleTile;
-    }
-    
-    private UrTileModel movePiece(UrTileModel chosenTile, UrTileModel possibleTile) {
-        // sets piece in possible tile
-        UrPieceModel possiblePieceToMove = board.getPieceToPlay(currentPlayer);
-        board.setPieceTile(possiblePieceToMove, chosenTile, possibleTile);
 
-        // parte visual
-        // tile viejo ya no tiene pieza
-        // pieza del otro jugador vuelve a estado original
-        //gameView.setNextPossibleLabel(x,y);
-        
+        if (board.getTile(x,y).getPiece() != null) {
+                if (board.getTile(x,y).getPiece().getColor() == currentPlayer.getColor()) {
+                    currentPiece = board.getTile(x,y).getPiece();
+                    possibleTile = possiblePaths.get(currentPiece);
+                }
+            }
         return possibleTile;
     }
     
@@ -185,7 +169,6 @@ public class GameController {
     }
     
     /* Serializer */
-      
     public void saveGame() {
         try {
             this.serializer = new UrSerializerModel(this.board, this.playerArray[0], this.playerArray[1]);
@@ -259,8 +242,7 @@ public class GameController {
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
                 System.out.println("Nueva pieza?");
             } 
-        }
-       
+        }    
     }
     
     /* Gets and sets */
@@ -300,10 +282,40 @@ public class GameController {
     public MainMenuView getMainMenuView(){
         return this.mainMenuView;
     }
+
+    private void makeNormalMove(UrTileModel clickedTile){
+        UrTileModel possibleTile = null;
+        UrPieceModel clickedPiece = clickedTile.getPiece();
+        int x = clickedTile.getRow();
+        int y = clickedTile.getColumn();
+        if (!clickedTile.isVacant()) {
+            possibleTile = possiblePaths.get(clickedPiece);
+            board.setPieceTile(clickedPiece, possibleTile);
+            checkIfScored(possibleTile);
+        }
+    }  
+    
+    private void makeInitialMove() {
+        UrPieceModel piece = getPieceToPlay();
+        UrTileModel possibleTile = possiblePaths.get(piece);
+        possibleTile.setPiece(piece);
+        checkIfScored(possibleTile);
+    }
+    
+    public UrPieceModel getPieceToPlay(){
+        UrPieceModel pieceToPlay = null;
+        for(int currentPiece = 0; currentPiece < currentPlayer.getPlayerPieces().size(); currentPiece++){
+            if(!currentPlayer.getPlayerPieces().get(currentPiece).isInPlay()){
+                pieceToPlay = currentPlayer.getPlayerPieces().get(currentPiece);
+            }
+        }
+        return pieceToPlay;
+    }
     
     /* Listeners */
     
     class TileMouseListener extends MouseAdapter {
+        UrTileModel tile;
         JLabel label;
         int row;
         int column;
@@ -311,7 +323,8 @@ public class GameController {
         TileMouseListener(JLabel label, int row, int column){
             this.label = label;
             this.row = row;
-            this.column = column;     
+            this.column = column;    
+            
         }
 
         @Override
@@ -344,18 +357,16 @@ public class GameController {
         
         public UrTileModel startListening() {
             board = getBoard();
+            tile = board.getTile(this.row, this.column); // TODO Delete?
             UrTileModel movedTile = null;
             System.out.println("Estado de diceThrown: " + diceThrown);
-            System.out.println("Estado de Winner: " + winner);
-            
+            System.out.println("Estado de Winner: " + winner);    
             if (diceThrown) {
-                System.out.println("Tir[e un dado!!!");
+                System.out.println("El dado ha sido tirado");
                 if(!winner) { // winner == false
-                    System.out.println("Printing Color of player turn: " +currentPlayer.getColor());
-                    System.out.println("Que es CurrentPlayer? "+ currentPlayer);
                     currentPlayer = playerArray[currentPlayerNum];
                     board.setPlayerTurn(currentPlayer.getColor());
-
+                    System.out.println("Printing Color of player turn: " +currentPlayer.getColor());
                     if (diceResult > 0){
                         System.out.println("Dice result es: " + diceResult);
                         possiblePaths.clear();
@@ -367,16 +378,19 @@ public class GameController {
                             });
                         if (!possiblePaths.isEmpty()) {
                             System.out.println("Possible path encontro algo!, printing it...");
-                            
-
-                            
-                            movedTile = interactWithTile(this.row, this.column);
+                            // check if it is first move
+                            if (this.row == 4 && this.column != 1) {
+                                makeInitialMove();           // Grafico               
+                            } else {
+                                makeNormalMove(tile);
+                            }
+                            /// Removes piece if there was one
+                            tile.resetTile();
                         } 
                     }
                     winner = checkIfWinner();
                     currentPlayerNum ++;
-                    currentPlayerNum %= playerArray.length;   
-                    
+                    currentPlayerNum %= playerArray.length;          
                 }
                 diceThrown = false;
             }

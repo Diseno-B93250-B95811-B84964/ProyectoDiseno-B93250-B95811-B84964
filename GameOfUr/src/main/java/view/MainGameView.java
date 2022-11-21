@@ -708,9 +708,9 @@ public class MainGameView extends javax.swing.JPanel {
     /* Main Board Methods  */
     private void makeUrBoard() throws IOException{
         try {
-            tilesArray[4][0].show(false);
+            tilesArray[4][0].setBackground(Color.decode("#E0E0E0"));
             tilesArray[5][0].show(false);
-            tilesArray[4][2].show(false);
+            tilesArray[4][2].setBackground(Color.decode("#E0E0E0")); 
             tilesArray[5][2].show(false);
             setRosesToBoard();
         } catch (IOException e) {
