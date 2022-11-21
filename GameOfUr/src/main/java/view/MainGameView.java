@@ -858,8 +858,6 @@ public class MainGameView extends javax.swing.JPanel {
         moves.setText(movesResult);
     }
 
-    }
-
     /*Get players pieces icons*/
 
     public Icon getFirstPlayerIcon(){
