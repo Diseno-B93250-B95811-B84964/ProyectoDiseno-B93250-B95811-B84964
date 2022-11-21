@@ -498,8 +498,8 @@ public class MainGameView extends javax.swing.JPanel {
     }
     
     /* Button feature */
-    public void desactiveAPieceForFirstPlayer(){
-        System.out.println("Deleting..." + usedPiecesFirstPlayer);
+        public void desactiveAPieceForFirstPlayer(){
+            System.out.println("Deleting for first player..." + usedPiecesFirstPlayer);
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(false);
@@ -543,6 +543,8 @@ public class MainGameView extends javax.swing.JPanel {
     }
 
     public void activeAPieceForFirstPlayer(){
+        usedPiecesFirstPlayer--;
+        System.out.println("Activate for first player..." + usedPiecesFirstPlayer);
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
                 pieceLabelFirstPlayer1.setEnabled(true);
@@ -582,11 +584,10 @@ public class MainGameView extends javax.swing.JPanel {
             default -> {
             }
         }
-        usedPiecesFirstPlayer--;
     } 
 
     public void desactiveAPieceForSecondPlayer(){
-        System.out.println("Me estoy llamando con la pieza: ");
+        System.out.println("Deleting for second player..." + usedPiecesSecondPlayer);
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(false);
@@ -630,46 +631,48 @@ public class MainGameView extends javax.swing.JPanel {
     }
 
     public void activeAPieceForSecondPlayer(){
-        switch (usedPiecesFirstPlayer) {
+        usedPiecesSecondPlayer--;
+        System.out.println("Activate for second player..." + usedPiecesSecondPlayer);
+        switch (usedPiecesSecondPlayer) {
             case 1 -> {
-                pieceLabelFirstPlayer1.setEnabled(true);
-                pieceLabelFirstPlayer1.setVisible(true);
+                pieceLabelSecondPlayer1.setEnabled(true);
+                pieceLabelSecondPlayer1.setVisible(true);
                 break;
             }
             case 2 -> {
-                pieceLabelFirstPlayer2.setEnabled(true);
-                pieceLabelFirstPlayer2.setVisible(true);
+                pieceLabelSecondPlayer2.setEnabled(true);
+                pieceLabelSecondPlayer2.setVisible(true);
                 break;
             }
             case 3 -> {
-                pieceLabelFirstPlayer3.setEnabled(true);
-                pieceLabelFirstPlayer3.setVisible(true);
+                pieceLabelSecondPlayer3.setEnabled(true);
+                pieceLabelSecondPlayer3.setVisible(true);
                 break;
             }
             case 4 -> {
-                pieceLabelFirstPlayer4.setEnabled(true);
-                pieceLabelFirstPlayer4.setVisible(true);
+                pieceLabelSecondPlayer4.setEnabled(true);
+                pieceLabelSecondPlayer4.setVisible(true);
                 break;
             }
             case 5 -> {
-                pieceLabelFirstPlayer5.setEnabled(true);
-                pieceLabelFirstPlayer5.setVisible(true);
+                pieceLabelSecondPlayer5.setEnabled(true);
+                pieceLabelSecondPlayer5.setVisible(true);
                 break;
             }
             case 6 -> {
-                pieceLabelFirstPlayer6.setEnabled(true);
-                pieceLabelFirstPlayer6.setVisible(true);
+                pieceLabelSecondPlayer6.setEnabled(true);
+                pieceLabelSecondPlayer6.setVisible(true);
                 break;
             }
             case 7 -> {
-                pieceLabelFirstPlayer7.setEnabled(true);
-                pieceLabelFirstPlayer7.setVisible(true);
+                pieceLabelSecondPlayer7.setEnabled(true);
+                pieceLabelSecondPlayer7.setVisible(true);
                 break;
             }
             default -> {
             }
         }
-        usedPiecesFirstPlayer--;
+        
     } 
     
     /*Load Images Methods*/

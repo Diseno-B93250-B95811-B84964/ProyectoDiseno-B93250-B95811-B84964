@@ -141,15 +141,16 @@ public class UrBoardModel {
     }
     
     // Sets piece in tile and checks if tile is safe to reset old tile
-    public void setPieceTile(UrPieceModel piece, UrTileModel possibleTile) {
-
+    public boolean setPieceTile(UrPieceModel piece, UrTileModel possibleTile) {
+        boolean eaten = false;
         // checks if possible tile has a piece inside
         if (possibleTile.getPiece() != null) {
             // resets other player's piece to original position
             possibleTile.getPiece().resetPieceToOriginalPosition();
+            eaten = true;
         }
         possibleTile.setPiece(piece);
-
+        return eaten;
     }
     
     public void addScoreToPlayer(UrPlayerModel player){

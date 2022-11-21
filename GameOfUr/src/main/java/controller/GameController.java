@@ -288,7 +288,15 @@ public class GameController {
         if (!clickedTile.isVacant()) {
             possibleTile = possiblePaths.get(clickedPiece);
             System.out.println("Moviendo pieza a " + possibleTile.getRow() + ", " + possibleTile.getColumn());
-            board.setPieceTile(clickedPiece, possibleTile);
+            boolean eaten = board.setPieceTile(clickedPiece, possibleTile);
+            if (eaten) {
+                System.out.println("Has been eaten!");
+                if (currentPlayer == playerArray[0]) {
+                    gameView.activeAPieceForSecondPlayer();
+                } else {
+                    gameView.activeAPieceForFirstPlayer();
+                }
+            }
             checkIfScored(possibleTile);
             ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
             gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
@@ -356,16 +364,6 @@ public class GameController {
             } else {
                 this.label.setBackground(Color.decode("#2D3553"));
             }
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent entered){
-           /* try {
-                gameView.removeIconFromLabel(0,0); // TODO these numbers are not used yet.
-            } catch (IOException e) {
-                System.out.println("Images not found!");
-            }*/
-            //this.label.setBackground(Color.decode("#2D3553"));
         }
         
         public UrTileModel startListening() {
@@ -448,7 +446,8 @@ public class GameController {
     // FALTA
     /*
         CUANDO SE COME, VOLVER LA PIEZA COMIDA AL INVENTARIO
-        ACOMODAR PIEZAS EMPEZANDO EN 1 EN LA ESQUINA INFERIOR DERECHA
         VER BUG CUANDO SE REINICIA ROSETA, SE REINICIAN TODAS
+        REVISAR CUANDO LA POSICION NO ES POSIBLE!
+        BUG CUANDO LE DA CLICK A UNA POSICION QUE NO HAY NADA
     */
 }
