@@ -941,13 +941,13 @@ public class MainGameView extends javax.swing.JPanel {
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
     
-    public void changePlayerTurn(int number){
-        String playerTurn = "Player " + number+"'s" + "turn";
+    public void changePlayerTurn(int number) {
+        String playerTurn = "Player " + number+"'s" + " turn";
         playerTurnLabel.setText(playerTurn);
     }
     
     public void declarePlayerWinner(int number) {
-        String playerTurn = "Player " + number+"'s" + "won!";
+        String playerTurn = "Player " + number+"'s" + " won!";
         playerTurnLabel.setText(playerTurn);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
