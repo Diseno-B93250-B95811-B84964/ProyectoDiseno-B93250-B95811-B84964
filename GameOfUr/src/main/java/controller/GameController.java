@@ -114,7 +114,7 @@ public class GameController {
         boolean hasScored = false;
         int x = definitiveTile.getRow();
         int y = definitiveTile.getColumn();
-        if (x == 4 && (y == 0 || y == 2) ) {
+        if (x == 5 && (y == 0 || y == 2) ) {
             currentPlayer.addScoreToPlayer();
             currentPlayer.removePiece(definitiveTile.getPiece());
             definitiveTile.resetTile();
@@ -140,10 +140,6 @@ public class GameController {
             CSVWriter writer = new CSVWriter(new FileWriter("saves\\gameState.csv"));
             ArrayList<String[]> array = serializer.saveGameState();
             for (String[] rowString : array) {
-                for (String string : rowString) {
-                    System.out.print(string + ",");
-                }
-                System.out.println();
                 writer.writeNext(rowString);
             }
             writer.flush();
@@ -226,7 +222,6 @@ public class GameController {
                     }
                     boolean hasScored = checkIfScored(possibleTile);
                     if (hasScored) {
-                        System.out.println("Score!!");
                         if (currentPlayer == playerArray[0]) {
                             gameView.addScoreToFirstPlayer();
                         } else {
@@ -355,7 +350,8 @@ public class GameController {
                     board.setPlayerTurn(currentPlayer.getColor());
                     if (diceResult > 0){
                         possiblePaths.clear();
-                        calculateAllPossiblePathsPerTurn(diceResult);                       
+                        calculateAllPossiblePathsPerTurn(diceResult);
+                        
                         // check if it is first move
                         if (this.row == 4 && this.column != 1) {
                             validMove = makeInitialMove();               
