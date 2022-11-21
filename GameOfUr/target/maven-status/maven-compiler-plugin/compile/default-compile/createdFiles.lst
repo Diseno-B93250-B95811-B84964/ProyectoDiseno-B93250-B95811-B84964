@@ -1,3 +1,4 @@
+controller\GameController$ThrowDiceClickListener.class
 controller\GameOfUrMain.class
 model\UrDiceModel.class
 view\LoadGameView.class
