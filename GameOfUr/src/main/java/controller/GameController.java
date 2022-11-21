@@ -211,6 +211,7 @@ public class GameController {
         } catch(IOException e) {
             System.out.println("Images not found! Please check images path");
         }
+        
         for (int index = 0; index < playerArray[0].getPlayerScore(); index++) {
             gameView.desactiveAPieceForFirstPlayer();
         }
@@ -219,7 +220,6 @@ public class GameController {
         }
         
         for (var currentPiece : playerArray[0].getPlayerPieces()) {
-            System.out.println("Is in play de J1" + currentPiece.isInPlay());
             if (currentPiece.isInPlay()) {
                 gameView.desactiveAPieceForFirstPlayer();
                 int x = currentPiece.getX();
@@ -227,12 +227,10 @@ public class GameController {
                 Color color = playerArray[0].getColor();
                 ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
-                System.out.println("Nueva pieza?");
             } 
         }
         
         for (var currentPiece : playerArray[1].getPlayerPieces()) {
-            System.out.println("Is in play de J2" + currentPiece.isInPlay());
             if (currentPiece.isInPlay()) {
                 gameView.desactiveAPieceForSecondPlayer();
                 int x = currentPiece.getX();
@@ -240,7 +238,6 @@ public class GameController {
                 Color color = playerArray[1].getColor();
                 ImageIcon colorPieceIcon = gameView.getPieceImageColor(color);
                 gameView.setNextPossibleLabel(x,y,colorPieceIcon);
-                System.out.println("Nueva pieza?");
             } 
         }    
     }
@@ -293,6 +290,8 @@ public class GameController {
             System.out.println("Moviendo pieza a " + possibleTile.getRow() + ", " + possibleTile.getColumn());
             board.setPieceTile(clickedPiece, possibleTile);
             checkIfScored(possibleTile);
+            ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
+            gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
         }
     }  
     
@@ -302,6 +301,13 @@ public class GameController {
         UrTileModel possibleTile = possiblePaths.get(piece);
         possibleTile.setPiece(piece);
         checkIfScored(possibleTile);
+        ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
+        gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
+        if (currentPlayer == playerArray[0]) {
+            gameView.desactiveAPieceForFirstPlayer();
+        } else {
+            gameView.desactiveAPieceForSecondPlayer();
+        }
         System.out.println("Moviendo pieza a " + possibleTile.getRow() + ", " + possibleTile.getColumn());
     }
     
@@ -387,6 +393,12 @@ public class GameController {
                             }
                             /// Removes piece if there was one
                             tile.resetTile();
+                            try {
+                                gameView.removeIconFromLabel(this.row,this.column);
+                            } catch (IOException e) {
+                                System.out.println("There was a problem going back to blank state. Check images folder");
+                            }
+                            
                         } 
                     }
                     winner = checkIfWinner();          
@@ -432,4 +444,11 @@ public class GameController {
 
         }
     }
+    
+    // FALTA
+    /*
+        CUANDO SE COME, VOLVER LA PIEZA COMIDA AL INVENTARIO
+        ACOMODAR PIEZAS EMPEZANDO EN 1 EN LA ESQUINA INFERIOR DERECHA
+        VER BUG CUANDO SE REINICIA ROSETA, SE REINICIAN TODAS
+    */
 }

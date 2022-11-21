@@ -58,7 +58,6 @@ public class UrDeserializerModel {
                     value = Integer.parseInt(cellValue);
                     if (value == OCCUPIED_P1) {
                         piece = playerArray[0].getPlayerPiece(pieceIndexPlayer1);
-                        System.out.println("piece color: " + piece.getColor());
                         board.setPiece(row, col, piece);
                         pieceIndexPlayer1++;
                     } else if (value == OCCUPIED_P2) {
