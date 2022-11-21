@@ -29,13 +29,7 @@ public class UrBoardModel {
         urBoard[6][0].setSafe();
         urBoard[6][2].setSafe();
     }
-    
-    public void createPlayerPaths(Color player1, Color player2) {
-        playerPaths = new HashMap<>(2);
-        playerPaths.put(player1, setPlayerPath(0));
-        playerPaths.put(player2, setPlayerPath(2));
-    }
-    
+
     public UrBoardModel(Color playerOneColor, Color playerTwoColor){
         urBoard = new UrTileModel[ROWS][COLUMNS];
         for(int row = 0; row < ROWS; row++){
@@ -52,6 +46,12 @@ public class UrBoardModel {
         playerPaths = new HashMap<>(2);
         playerPaths.put(playerOneColor, setPlayerPath(0));
         playerPaths.put(playerTwoColor, setPlayerPath(2));
+    }
+    
+    public void createPlayerPaths(Color player1, Color player2) {
+        playerPaths = new HashMap<>(2);
+        playerPaths.put(player1, setPlayerPath(0));
+        playerPaths.put(player2, setPlayerPath(2));
     }
     
     private ArrayList<UrTileModel> setPlayerPath(int playerColumn) {

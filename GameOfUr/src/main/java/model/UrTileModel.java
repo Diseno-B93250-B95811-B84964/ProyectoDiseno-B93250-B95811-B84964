@@ -25,38 +25,37 @@ public class UrTileModel {
         this.isVacant = true;
         this.isSafe = false;
         this.piece = null;
-        
     }
-    
-    public UrTileModel(int row, int column){
+
+    public UrTileModel(int row, int column) {
         this.row = row;
         this.column = column;
         this.isVacant = true;
         this.isSafe = false;
         this.piece = null;
     }
-    
-    public int getRow() {
-        return row;
-    }
-    
-    public int getColumn() {
-        return column;
-    }
-    
-    public boolean isVacant(){
-        return isVacant;
-    }
-    
-    public void setVacancy(){
-        this.isVacant = true;
-    }
-    
+
     public UrTileModel(int row, int column, UrPieceModel piece){
         isSafe = false;
         this.piece = piece;
     }
-    
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public boolean isVacant(){
+        return isVacant;
+    }
+
+    public void setVacancy(){
+        this.isVacant = true;
+    }
+
     public boolean isSafe(){
         return isSafe;
     }

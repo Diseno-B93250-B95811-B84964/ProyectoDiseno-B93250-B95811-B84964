@@ -42,8 +42,7 @@ public class MainGameView extends javax.swing.JPanel {
     private final static Color PURPLE = new Color (102,0,102);
     private final static Color RED = new Color (255,0,0);
     private final static Color YELLOW = new Color (255,204,0);
-    
-    
+
     /**
      * Creates new form MainGame
      */
@@ -540,8 +539,8 @@ public class MainGameView extends javax.swing.JPanel {
             }
         }
         usedPiecesFirstPlayer++;
-    } 
-        
+    }
+
     public void activeAPieceForFirstPlayer(){
         usedPiecesFirstPlayer--;
         switch (usedPiecesFirstPlayer) {
@@ -626,8 +625,8 @@ public class MainGameView extends javax.swing.JPanel {
             }
         }
         usedPiecesSecondPlayer++;
-    } 
-    
+    }
+
     public void activeAPieceForSecondPlayer(){
         usedPiecesSecondPlayer--;
         switch (usedPiecesSecondPlayer) {
@@ -721,7 +720,7 @@ public class MainGameView extends javax.swing.JPanel {
         tilesArray[6][2].setIcon(roseIcon);
     }
     
-    private void  initializeTilesArray(){
+    private void initializeTilesArray(){
         int intialXGap = 39;
         int intialYGap = 18;
         int horizontalGapTuning = 89;
@@ -876,14 +875,11 @@ public class MainGameView extends javax.swing.JPanel {
         String movesResult = String.valueOf(rollResult);
         moves.setText(movesResult);
     }
-    
-    /* Mapping methods from logical matrix to graphical one */
-    public void mapLogicalMatrix(){
-        
+
     }
-    
+
     /*Get players pieces icons*/
-    
+
     public Icon getFirstPlayerIcon(){
         return pieceLabelFirstPlayer1.getIcon();
     }
@@ -891,16 +887,16 @@ public class MainGameView extends javax.swing.JPanel {
     public Icon getSecondPlayerIcon(){
         return pieceLabelSecondPlayer1.getIcon();
     }
-    
+
     /*Personalized match */
     public void setFirstPlayerNameToLabel(String name){
         firstPlayerLabelName.setText(name);
     }
-    
+
     public void setSecondPlayerNameToLabel(String name){
         secondPlayerLabelName.setText(name);
     }
-    
+
     private void modifiyFirstPlayerPieces(ImageIcon icon) {
         pieceLabelFirstPlayer1.setIcon(icon);
         pieceLabelFirstPlayer2.setIcon(icon);
@@ -928,34 +924,35 @@ public class MainGameView extends javax.swing.JPanel {
         currentScore+=1;
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
-    
+
     public void addScoreToSecondPlayer() {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=1;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
-    
+
     public void addScoreToFirstPlayer(int points) {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
         currentScore+=points;
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
-    
+
     public void addScoreToSecondPlayer(int points) {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=points;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
-    
+
     public void changePlayerTurn(int number) {
         String playerTurn = "Player " + number+"'s" + " turn";
         playerTurnLabel.setText(playerTurn);
     }
-    
+
     public void declarePlayerWinner(int number) {
         String playerTurn = "Player " + number+"'s" + " won!";
         playerTurnLabel.setText(playerTurn);
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
     private javax.swing.JPanel Player2Panel;

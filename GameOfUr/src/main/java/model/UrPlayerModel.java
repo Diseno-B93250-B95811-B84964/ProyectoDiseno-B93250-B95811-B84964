@@ -76,12 +76,10 @@ public class UrPlayerModel {
     public Color getColor(){
         return this.playerColor;
     }
-    
 
     public void setColor(Color playerColor){
         this.playerColor = playerColor;
     }
-    
 
     public String getPlayerName() {
         return this.playerName;
