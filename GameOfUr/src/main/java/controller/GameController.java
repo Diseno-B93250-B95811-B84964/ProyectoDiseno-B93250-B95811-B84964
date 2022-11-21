@@ -11,10 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
@@ -39,25 +37,21 @@ public class GameController {
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
     
+    private HashMap<UrPieceModel, UrTileModel> possiblePaths;
     private UrBoardModel board;
-    
     private UrDiceModel diceModel;
-    private boolean diceThrown;
-    private int diceResult;
-    
     private UrPlayerModel[] playerArray;
     private UrPlayerModel currentPlayer;
-    private int currentPlayerNum;
-    private boolean winner;
-    
-    private HashMap<UrPieceModel, UrTileModel> possiblePaths;
-    
     private UrDeserializerModel deSerializer;
     private UrSerializerModel serializer;
-    
     private MainGameView gameView;
     private MainMenuView mainMenuView;
- 
+    
+    private boolean diceThrown;
+    private int diceResult;
+    private int currentPlayerNum;
+    private boolean winner;
+
     /* Initialize Game Controller */
     
     public GameController(){
@@ -70,8 +64,6 @@ public class GameController {
             this.playerArray = new UrPlayerModel[2];
             this.playerArray[0] = new UrPlayerModel(0);
             this.playerArray[1] = new UrPlayerModel(2);
-            
-            
             this.currentPlayerNum = 0;
             
             initializeLabels();        
@@ -104,25 +96,7 @@ public class GameController {
     public UrBoardModel getBoard(){
         return this.board;
     }
-    
-    /* Start Game Logic */
-    
-   /* public UrTileModel interactWithTile(int x, int y) {
-        UrTileModel chosenTile; 
-        UrTileModel nextMove;
-        chosenTile = board.getTile(x, y); // current
-        nextMove = getPossibleTile(x, y); // next possible tile
-        System.out.println("Dentro de interactWithTile");
-        System.out.println("NextMove: " + nextMove);
-
-        if (nextMove != null) {
-            System.out.println("InteractWithTile NO es null!");
-            nextMove = movePiece(chosenTile, nextMove);
-            checkIfScored(nextMove);
-        }
-        return nextMove;
-    }*/
-    
+ 
     private void calculateAllPossiblePathsPerTurn(int amountOfMoves){
         Color playerColor = currentPlayer.getColor(); 
         UrTileModel currentTile;
@@ -136,34 +110,24 @@ public class GameController {
         }
     }
     
-    private UrTileModel getPossibleTile(int x, int y) {
-        UrTileModel possibleTile = null;
-        UrPieceModel currentPiece = null;
-        System.out.println("Dentro de getPossibleTile");
-
-        if (board.getTile(x,y).getPiece() != null) {
-                if (board.getTile(x,y).getPiece().getColor() == currentPlayer.getColor()) {
-                    currentPiece = board.getTile(x,y).getPiece();
-                    possibleTile = possiblePaths.get(currentPiece);
-                }
-            }
-        return possibleTile;
-    }
-    
-    private void checkIfScored(UrTileModel definitiveTile) {
+    private boolean checkIfScored(UrTileModel definitiveTile) {
+        boolean hasScored = false;
         int x = definitiveTile.getRow();
         int y = definitiveTile.getColumn();
         if (x == 4 && (y == 0 || y == 2) ) {
             currentPlayer.addScoreToPlayer();
             currentPlayer.removePiece(definitiveTile.getPiece());
             definitiveTile.resetTile();
+            hasScored = true;
         }
+        return hasScored;
     }
     
     private boolean checkIfWinner() {
         boolean isWinner = false;
         if (currentPlayer.getPlayerScore() == 7) {
             isWinner = true;
+            gameView.declarePlayerWinner(currentPlayerNum+1);
         }
         return isWinner;
     }
@@ -204,7 +168,6 @@ public class GameController {
         gameView.setSecondPlayerNameToLabel(playerArray[1].getPlayerName());
         gameView.addScoreToFirstPlayer(playerArray[0].getPlayerScore());
         gameView.addScoreToSecondPlayer(playerArray[1].getPlayerScore());
-
         try {
             gameView.setFirstPlayerPieceColor(playerArray[0].getColor());
             gameView.setSecondPlayerPieceColor(playerArray[1].getColor());
@@ -215,6 +178,7 @@ public class GameController {
         for (int index = 0; index < playerArray[0].getPlayerScore(); index++) {
             gameView.desactiveAPieceForFirstPlayer();
         }
+        
         for (int index = 0; index < playerArray[1].getPlayerScore(); index++) {
             gameView.desactiveAPieceForSecondPlayer();
         }
@@ -242,6 +206,61 @@ public class GameController {
         }    
     }
     
+    private boolean makeNormalMove(UrTileModel clickedTile){
+        boolean validMove = false;
+        UrTileModel possibleTile = null;
+        UrPieceModel clickedPiece = clickedTile.getPiece();
+        int x = clickedTile.getRow();
+        int y = clickedTile.getColumn();
+        if (!clickedTile.isVacant()) {
+            if (possiblePaths.containsKey (clickedPiece)) {
+                possibleTile = possiblePaths.get(clickedPiece);
+                if (possibleTile != null) {
+                    boolean eaten = board.setPieceTile(clickedPiece, possibleTile);
+                    if (eaten) {
+                        if (currentPlayer == playerArray[0]) {
+                            gameView.activeAPieceForSecondPlayer();
+                        } else {
+                            gameView.activeAPieceForFirstPlayer();
+                        }
+                    }
+                    boolean hasScored = checkIfScored(possibleTile);
+                    if (hasScored) {
+                        System.out.println("Score!!");
+                        if (currentPlayer == playerArray[0]) {
+                            gameView.addScoreToFirstPlayer();
+                        } else {
+                            gameView.addScoreToSecondPlayer();
+                        }
+                    }
+                    ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
+                    gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
+                }
+                validMove = true;
+            }
+        }
+        return validMove;
+    }  
+    
+    private boolean makeInitialMove() {
+        boolean validMove = false;
+        UrPieceModel piece = getPieceToPlay();
+        if (possiblePaths.containsKey (piece)) {
+            UrTileModel possibleTile = possiblePaths.get(piece);
+            possibleTile.setPiece(piece);
+            checkIfScored(possibleTile);
+            ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
+            gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
+            if (currentPlayer == playerArray[0]) {
+                gameView.desactiveAPieceForFirstPlayer();
+            } else {
+                gameView.desactiveAPieceForSecondPlayer();
+            }
+            validMove = true;
+        }
+        return validMove;
+    }     
+        
     /* Gets and sets */
 
     public void setFirstPlayerName(String name){
@@ -279,45 +298,6 @@ public class GameController {
     public MainMenuView getMainMenuView(){
         return this.mainMenuView;
     }
-
-    private void makeNormalMove(UrTileModel clickedTile){
-        UrTileModel possibleTile = null;
-        UrPieceModel clickedPiece = clickedTile.getPiece();
-        int x = clickedTile.getRow();
-        int y = clickedTile.getColumn();
-        if (!clickedTile.isVacant()) {
-            possibleTile = possiblePaths.get(clickedPiece);
-            System.out.println("Moviendo pieza a " + possibleTile.getRow() + ", " + possibleTile.getColumn());
-            boolean eaten = board.setPieceTile(clickedPiece, possibleTile);
-            if (eaten) {
-                System.out.println("Has been eaten!");
-                if (currentPlayer == playerArray[0]) {
-                    gameView.activeAPieceForSecondPlayer();
-                } else {
-                    gameView.activeAPieceForFirstPlayer();
-                }
-            }
-            checkIfScored(possibleTile);
-            ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
-            gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
-        }
-    }  
-    
-    private void makeInitialMove() {
-        UrPieceModel piece = getPieceToPlay();
-        System.out.println("La ficha seleccionada no esta en juego..");
-        UrTileModel possibleTile = possiblePaths.get(piece);
-        possibleTile.setPiece(piece);
-        checkIfScored(possibleTile);
-        ImageIcon icon = gameView.getPieceImageColor(currentPlayer.getColor());
-        gameView.setNextPossibleLabel(possibleTile.getRow(), possibleTile.getColumn(), icon);
-        if (currentPlayer == playerArray[0]) {
-            gameView.desactiveAPieceForFirstPlayer();
-        } else {
-            gameView.desactiveAPieceForSecondPlayer();
-        }
-        System.out.println("Moviendo pieza a " + possibleTile.getRow() + ", " + possibleTile.getColumn());
-    }
     
     public UrPieceModel getPieceToPlay(){
         UrPieceModel pieceToPlay = null;
@@ -340,8 +320,7 @@ public class GameController {
         TileMouseListener(JLabel label, int row, int column){
             this.label = label;
             this.row = row;
-            this.column = column;    
-            
+            this.column = column;        
         }
 
         @Override
@@ -350,7 +329,6 @@ public class GameController {
             this.label.setBackground(Color.decode("#DC3333")); 
             movedTile = startListening();
             if (movedTile != null) {
-                System.out.println("movedTile en 334 NO es nulo");
                 int x = movedTile.getRow();
                 int y = movedTile.getColumn();
                 if (currentPlayer == playerArray[0]) {
@@ -370,34 +348,41 @@ public class GameController {
             board = getBoard();
             tile = board.getTile(this.row, this.column); // TODO Delete?
             UrTileModel movedTile = null; 
+            boolean validMove = false;
             if (diceThrown) {
-                System.out.println("El jugador " + currentPlayerNum + " le salio un: " + diceResult);
-                if(!winner) { // winner == false
-                    System.out.println("No hay ganador");
+                if(!winner) {
                     currentPlayer = playerArray[currentPlayerNum];
                     board.setPlayerTurn(currentPlayer.getColor());
                     if (diceResult > 0){
                         possiblePaths.clear();
-                        calculateAllPossiblePathsPerTurn(diceResult);
-                        if (!possiblePaths.isEmpty()) {
-                            System.out.println("El jugador tiene jugadas");
-                            // check if it is first move
-                            if (this.row == 4 && this.column != 1) {
-                                System.out.println("El tile actual es: " + this.row + ", " + this.column);
-                                makeInitialMove();           // Grafico               
-                            } else {
-                                System.out.println("El tile actual es: " + this.row + ", " + this.column);
-                                makeNormalMove(tile);
-                            }
-                            /// Removes piece if there was one
+                        calculateAllPossiblePathsPerTurn(diceResult);                       
+                        // check if it is first move
+                        if (this.row == 4 && this.column != 1) {
+                            validMove = makeInitialMove();               
+                        } else {
+                            validMove = makeNormalMove(tile);
+                        }
+                        /// Removes piece if there was one
+                        if (validMove) {
                             tile.resetTile();
-                            try {
-                                gameView.removeIconFromLabel(this.row,this.column);
+                            try { 
+                                if (this.row == 0 && this.column == 0) {
+                                    gameView.removeIconFromRose0_0();
+                                } else if (this.row == 0 && this.column == 2){
+                                    gameView.removeIconFromRose0_2();
+                                } else if (this.row == 3 && this.column == 1){
+                                    gameView.removeIconFromRose3_1();
+                                } else if (this.row == 6 && this.column == 0) {
+                                    gameView.removeIconFromRose6_0();
+                                } else if (this.row == 6 && this.column == 2) {
+                                    gameView.removeIconFromRose6_2();
+                                } else {
+                                    gameView.removeIconFromLabel(this.row,this.column);
+                            }
                             } catch (IOException e) {
                                 System.out.println("There was a problem going back to blank state. Check images folder");
                             }
-                            
-                        } 
+                        }                                                 
                     }
                     winner = checkIfWinner();          
                 }
@@ -439,15 +424,6 @@ public class GameController {
             gameView.showThrow(diceResult);
             gameView.setMoves(diceResult);
             gameView.changePlayerTurn(currentPlayerNum + 1);
-
         }
     }
-    
-    // FALTA
-    /*
-        CUANDO SE COME, VOLVER LA PIEZA COMIDA AL INVENTARIO
-        VER BUG CUANDO SE REINICIA ROSETA, SE REINICIAN TODAS
-        REVISAR CUANDO LA POSICION NO ES POSIBLE!
-        BUG CUANDO LE DA CLICK A UNA POSICION QUE NO HAY NADA
-    */
 }

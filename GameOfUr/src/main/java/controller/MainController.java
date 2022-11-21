@@ -7,11 +7,8 @@ package controller;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import view.LoadGameView;
@@ -21,7 +18,7 @@ import view.SelectColorView;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class MainController {
             int currentPlayer = 0;

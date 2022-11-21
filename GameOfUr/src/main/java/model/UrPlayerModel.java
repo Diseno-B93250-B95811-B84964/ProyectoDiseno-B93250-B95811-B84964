@@ -90,7 +90,6 @@ public class UrPlayerModel {
         this.playerName = name;
     }
     
-
     public int getPlayerScore(){
         return this.score;
     }

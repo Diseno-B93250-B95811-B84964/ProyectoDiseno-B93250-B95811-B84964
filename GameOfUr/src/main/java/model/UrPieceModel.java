@@ -14,27 +14,18 @@ import java.awt.Color;
  * @author Jimena Gdur
  */
 public class UrPieceModel {
-
+    
+    private Color pieceColor;
     private int x;
-
-    private int y;
-    
+    private int y;   
     private int initialRow;
-    
     private final int initialCol;
-
-   
-    protected Color pieceColor;
-
-    protected boolean isSafe;
-
-    protected boolean isInPlay;
+    private boolean isSafe;
+    private boolean isInPlay;
     
-
     public UrPieceModel(int column) {
         initialRow = 4;
-        initialCol = column;
-        
+        initialCol = column;        
         x = initialRow;
         y = initialCol;
         pieceColor = Color.WHITE;
@@ -44,8 +35,7 @@ public class UrPieceModel {
     
     public UrPieceModel(Color playerColor, int column) {
         initialRow = 4;
-        initialCol = column;
-       
+        initialCol = column;     
         x = initialRow;
         y = initialCol;
         pieceColor = playerColor;
@@ -55,25 +45,24 @@ public class UrPieceModel {
     
     public void setX(int xValue) {
         x = xValue;
-    }
-    
+    }   
 
     public void setY(int yValue) {
         y = yValue;
-    }
+    }  
 
     public int getX() {
         return x;
-    }
-
+    }  
+  
     public int getY() {
         return y;
-    }
+    }   
 
     public void setColor(Color pieceColor){
         this.pieceColor = pieceColor;
-    }
-
+    }  
+   
     public Color getColor(){
         return pieceColor;
     }
@@ -87,7 +76,6 @@ public class UrPieceModel {
     }
     
     public void resetPieceToOriginalPosition() {
-
         x = initialRow;
         y = initialCol;
         this.isInPlay = false;

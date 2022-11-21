@@ -1,9 +1,3 @@
-/*
- * User Story # 
- * Jimena Gdur Vargas B93250
- * Álvaro Miranda Villegas B84964
- * Ronald Palma Villegas B95811
- */
 
 package model;
 
@@ -11,17 +5,16 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- *
- * @author Usuario1
+ * @author Alvaro Miranda
  */
+
 public class UrBoardModel {
-    private final UrTileModel[][] urBoard;
-    private HashMap<Color, ArrayList<UrTileModel>> playerPaths;
-    private Color playerTurn;
-    
     public final static int ROWS = 8;
     public final static int COLUMNS = 3;
     
+    private final UrTileModel[][] urBoard;
+    private HashMap<Color, ArrayList<UrTileModel>> playerPaths;
+    private Color playerTurn;   
         
     public UrBoardModel(){
         urBoard = new UrTileModel[ROWS][COLUMNS];
@@ -51,8 +44,8 @@ public class UrBoardModel {
         urBoard[6][2].setSafe();
         
         playerPaths = new HashMap<>(2);
-        playerPaths.put(playerOneColor, setPlayerPath(0)); //check for possible change to not use magic variables
-        playerPaths.put(playerTwoColor, setPlayerPath(2)); //check for possible change to not use magic variables
+        playerPaths.put(playerOneColor, setPlayerPath(0));
+        playerPaths.put(playerTwoColor, setPlayerPath(2));
     }
     
     public void createPlayerPaths(Color player1, Color player2) {
@@ -95,9 +88,11 @@ public class UrBoardModel {
         int tileLocation = calculateTileLocation(currentTile, playerColor);  
         if (tileLocation != -1 && amountOfMoves != 0) {
             possibleMoveIndex = tileLocation + amountOfMoves;
-            if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
-                if (tileLocation < 10 || canScore(possibleMoveIndex, playerColor)) {
-                    possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
+            if (possibleMoveIndex <= 14 ) { // TODO CHECK THIS
+                if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
+                    if (tileLocation < 10 || canScore(possibleMoveIndex)) {
+                        possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
+                    }
                 }
             }
         }
@@ -130,13 +125,12 @@ public class UrBoardModel {
         return tileLocation;
     }
 
-    private boolean canScore(int possibleMoveIndex, Color playerColor){
-        boolean canScore = false;
-        if (possibleMoveIndex < playerPaths.get(playerColor).size()) {
-            if(possibleMoveIndex == 14){
-                canScore = true;
-            }
+    private boolean canScore(int possibleMoveIndex){
+        boolean canScore = false;       
+        if(possibleMoveIndex == 14){
+            canScore = true;
         }
+        
         return canScore;
     }
     
