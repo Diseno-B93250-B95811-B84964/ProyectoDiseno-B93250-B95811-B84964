@@ -26,7 +26,6 @@ public class UrPieceModel {
    
     protected Color pieceColor;
 
-
     protected boolean isSafe;
 
     protected boolean isInPlay;
@@ -62,23 +61,19 @@ public class UrPieceModel {
     public void setY(int yValue) {
         y = yValue;
     }
-    
 
     public int getX() {
         return x;
     }
-    
-  
+
     public int getY() {
         return y;
     }
-    
 
     public void setColor(Color pieceColor){
         this.pieceColor = pieceColor;
     }
-    
-   
+
     public Color getColor(){
         return pieceColor;
     }

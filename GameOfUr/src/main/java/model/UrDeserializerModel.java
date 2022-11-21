@@ -1,6 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * User Story # 
+ * Jimena Gdur Vargas B93250
+ * Álvaro Miranda Villegas B84964
+ * Ronald Palma Villegas B95811
  */
 package model;
 
