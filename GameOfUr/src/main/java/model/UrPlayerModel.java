@@ -43,10 +43,8 @@ public class UrPlayerModel {
         
         playerPieces = new ArrayList<>();
         for(int pieces = 0; pieces < NUMBER_OF_PIECES; pieces++) {
-            System.out.println("playerColor: " + playerColor + " ");
             UrPieceModel piece = new UrPieceModel(this.playerColor, playerColumn);
             playerPieces.add(piece);
-            System.out.println("piece: " + piece.getColor());
         }
     }
 

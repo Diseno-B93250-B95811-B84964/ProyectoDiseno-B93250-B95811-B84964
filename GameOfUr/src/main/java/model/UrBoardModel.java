@@ -88,9 +88,9 @@ public class UrBoardModel {
         int tileLocation = calculateTileLocation(currentTile, playerColor);  
         if (tileLocation != -1 && amountOfMoves != 0) {
             possibleMoveIndex = tileLocation + amountOfMoves;
-            if (possibleMoveIndex <= 14 ) { // TODO CHECK THIS
+            if (possibleMoveIndex <= 15 ) { // TODO CHECK THIS
                 if(canMove(playerPath.get(possibleMoveIndex), playerColor)){
-                    if (tileLocation < 10 || canScore(possibleMoveIndex)) {
+                    if (tileLocation <= 15) {
                         possibleTile = playerPaths.get(playerColor).get(possibleMoveIndex);
                     }
                 }
