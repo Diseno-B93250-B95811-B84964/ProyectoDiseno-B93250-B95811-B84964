@@ -1,22 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ * Game of Ur based on MARDA framework.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
-
 package controller;
 
 import javax.swing.SwingUtilities;
+import model.Tile;
+import model.UrTile;
 
     /**
-    *
-    * @author Mauricio Palma, Alvaro Miranda, Ximena Gdur
+    * Main class that starts program.
+    * @author Mauricio Palma, Alvaro Miranda, Jimena Gdur
     */
 public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            //MainController main = new MainController();
-            //main.run();
+            System.out.println("Testing classes");
+            Tile tile1 = new UrTile(2,3, false);
+            System.out.println("tile: " + tile1.toString());
         });
     }
 }

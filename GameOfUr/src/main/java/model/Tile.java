@@ -35,7 +35,7 @@ abstract public class Tile
      * @param tileRow The row in which the tile is located.
      * @param tileColumn The column in which the tile is located.
     */
-    protected Tile(int tileRow, int tileColumn) {
+    public Tile(int tileRow, int tileColumn) {
         this.row = tileRow;
         this.column = tileColumn;
         this.piece = null;
@@ -45,28 +45,28 @@ abstract public class Tile
      * Gets the row in which the tile is located.
      * @return this tile's row
     */
-    protected int getRow() {
+    public int getRow() {
         return this.row;
     }
     /**
      * Gets the column in which the tile is located.
      * @return this tile's column
     */
-    protected int getColumn() {
+    public int getColumn() {
         return this.column;
     }
     /**
      * Determines if the tile is currently occupied by a piece.
      * @return value of isVacant.
     */
-    protected boolean isVacant() {
+    public boolean isVacant() {
         return this.isVacant;
     }
     /**
      * Sets given piece in current tile.
      * @param givenPiece The piece that is located in current tile.
     */
-    protected void setPiece(Piece givenPiece) {
+    public void setPiece(Piece givenPiece) {
         this.piece = givenPiece;
         this.isVacant = false;
     }
@@ -74,14 +74,18 @@ abstract public class Tile
      * Gets the piece placed in current tile.
      * @return piece stored in tile.
     */
-    protected Piece getPiece() {
+    public Piece getPiece() {
         return this.piece;
     }
     /**
      * Indicates piece has been moved from tile.
     */
-    protected void removePiece() {
+    public void removePiece() {
         this.piece = null;
         this.isVacant = true;
     }
+    
+    // TODO CHANGE
+    @Override
+    public abstract String toString();
 }
