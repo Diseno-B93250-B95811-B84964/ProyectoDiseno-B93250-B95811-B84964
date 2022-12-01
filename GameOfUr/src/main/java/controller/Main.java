@@ -11,12 +11,12 @@ import javax.swing.SwingUtilities;
     *
     * @author Mauricio Palma, Alvaro Miranda, Ximena Gdur
     */
-public class GameOfUrMain {
+public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainController main = new MainController();
-            main.run();
+            //MainController main = new MainController();
+            //main.run();
         });
     }
 }
