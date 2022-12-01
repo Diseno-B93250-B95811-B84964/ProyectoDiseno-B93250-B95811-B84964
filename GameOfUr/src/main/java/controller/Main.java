@@ -6,21 +6,32 @@
  */
 package controller;
 
+import java.awt.Color;
 import javax.swing.SwingUtilities;
+
+import model.Piece;
 import model.Tile;
+import model.UrPiece;
 import model.UrTile;
 
-    /**
-    * Main class that starts program.
-    * @author Mauricio Palma, Alvaro Miranda, Jimena Gdur
-    */
+/**
+* Main class that starts program.
+* @author Mauricio Palma, Alvaro Miranda, Jimena Gdur
+*/
 public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            // Doesn't test other methods that can't be accesed through parent
             System.out.println("Testing classes");
-            Tile tile1 = new UrTile(2,3, false);
-            System.out.println("tile: " + tile1.toString());
+            
+            Tile tile = new UrTile(2,3, false);
+            System.out.println("tile: " + tile.toString());
+            
+            Piece piece = new UrPiece(Color.RED);
+            System.out.println("tile: " + piece.toString());
+            
+            
         });
     }
 }

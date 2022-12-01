@@ -11,7 +11,7 @@ package model;
  * Represents a game tile that belongs to a game board.
  * @author Jimena Gdur.
  */
-abstract public class Tile
+abstract public class Tile extends GameObject
 {
     /**
     * A tile's row position.
@@ -84,8 +84,4 @@ abstract public class Tile
         this.piece = null;
         this.isVacant = true;
     }
-    
-    // TODO CHANGE
-    @Override
-    public abstract String toString();
 }
