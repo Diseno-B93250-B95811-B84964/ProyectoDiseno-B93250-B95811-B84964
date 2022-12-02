@@ -84,4 +84,13 @@ abstract public class Tile extends GameObject
         this.piece = null;
         this.isVacant = true;
     }
+    @Override
+    public String toString() {
+        String string  = 
+            "row: " + this.row + ", " + 
+            "column: " + this.column + ", " +
+            "isVacant: " + this.isVacant + ", " +
+            "piece: " + this.piece; // By printing type piece it calls toString method
+        return string;
+    }
 }

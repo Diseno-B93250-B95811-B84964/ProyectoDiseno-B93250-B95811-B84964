@@ -38,7 +38,9 @@ public class UrTile extends Tile
     
     @Override
     public String toString() {
-        String string  = this.row + ", " + this.column + ", " + this.isSafe;
+        String string  = 
+            super.toString() + ", " +
+            "isSafe: " + this.isSafe;
         return string;
     }
 }

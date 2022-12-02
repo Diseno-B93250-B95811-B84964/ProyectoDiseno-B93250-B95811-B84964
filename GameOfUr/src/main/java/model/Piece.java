@@ -34,4 +34,10 @@ abstract public class Piece extends GameObject
     public Color getColor() {
         return this.pieceColor;
     }
+    @Override
+    public String toString() {
+        String string =
+            "pieceColor: " + this.pieceColor.getRGB();
+        return string;
+    }
 }

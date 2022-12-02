@@ -48,7 +48,9 @@ public class UrPiece extends Piece {
     }
     @Override
     public String toString() {
-        String string  = this.pieceColor.getRGB() + ", " + this.isInPlay;
+        String string =
+            super.toString() + ", " + 
+            "isInPlay: " + this.isInPlay;
         return string;
     }
 }

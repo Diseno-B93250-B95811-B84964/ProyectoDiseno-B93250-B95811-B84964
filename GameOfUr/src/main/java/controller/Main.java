@@ -26,11 +26,14 @@ public class Main {
             System.out.println("Testing classes");
             
             Tile tile = new UrTile(2,3, false);
-            System.out.println("tile: " + tile.toString());
-            
             Piece piece = new UrPiece(Color.RED);
-            System.out.println("tile: " + piece.toString());
             
+            System.out.println("tile before: " + tile.toString());
+            tile.setPiece(piece);
+            // como le digo al piece que esta en play?
+            
+            System.out.println("tile after: " + tile.toString());
+            System.out.println("piece: " + piece.toString());
             
         });
     }
