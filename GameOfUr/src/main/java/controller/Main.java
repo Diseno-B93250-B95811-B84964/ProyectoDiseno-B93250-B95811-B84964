@@ -36,7 +36,9 @@ public class Main {
             
             System.out.println("board");
             Board board = new Board(UrTile::new, 6);
-            System.out.println(board.toString());
+            // set tile x, y
+            // set tile safe
+            System.out.println(board);
             
             //System.out.println("board tiles: memory adresses");
             //for (int index = 0; index < 6; index++) {

@@ -51,7 +51,7 @@ public final class Board<TileType extends Tile> extends GameObject {
     }
     /**
      * Creates a vertices array with the specific tile received through parameter.
-     * @param supplier Supplier class that contains instance of tile's child
+     * @param supplier Supplier class that contains instance of tile's child.
     */
     private void createVerticesArray(Supplier<TileType> supplier) {
         vertices = new ArrayList<>(verticesAmount);
@@ -65,6 +65,9 @@ public final class Board<TileType extends Tile> extends GameObject {
             // TODO: falta definir las que son seguras
         }
     }
+    /**
+     * Creates the graph's adjacent matrix.
+    */
     private void createAdjacentMatrix() {
         graphAdjacentMatrix = new boolean[verticesAmount][verticesAmount];
         for (int vertexIndex1 = 0; vertexIndex1 < verticesAmount; vertexIndex1++) {
@@ -150,25 +153,25 @@ public final class Board<TileType extends Tile> extends GameObject {
     }
     /**
      *
-     * @param x
-     * @param y
-     * @param tileJumps
+     * @param x Row in which tile is located.
+     * @param y Column in which tile is located.
+     * @param tileJumps Amount of jumps the tile has to make.
      * @return
      */
-    public boolean[] getTilesAdjacents(int x, int y, int tileJumps) {
+    public ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
+        ArrayList<Integer> adjacents = new ArrayList<>();
         if (x >= 0 && x < amountRows && y >= 0 && y < amountColumns) {
             int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
             while(tileJumps > 0) {
                 for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
                     if(graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
                         // TODO REVISAR METODO SI HAY MAS DE UN ADYACENCIA
+                        adjacents.add(columnIndex);
                     }
                 }
             }
-            return graphAdjacentMatrix[currentVertexIndex];
-        } else {
-            return null;
         }
+        return adjacents;
     }
     @Override
     public String toString() {
