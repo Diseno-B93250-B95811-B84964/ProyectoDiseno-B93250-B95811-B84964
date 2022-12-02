@@ -31,6 +31,15 @@ abstract public class Tile extends GameObject
     protected boolean isVacant;
     
     /**
+     * Creates a new Tile located in -1,-1.
+    */
+    public Tile() {
+        this.row = -1;
+        this.column = -1;
+        this.piece = null;
+        this.isVacant = true;
+    }
+    /**
      * Creates a new Tile located in the given row and column.
      * @param tileRow The row in which the tile is located.
      * @param tileColumn The column in which the tile is located.
@@ -54,6 +63,20 @@ abstract public class Tile extends GameObject
     */
     public int getColumn() {
         return this.column;
+    }
+    /**
+     * Sets the row in which the tile is located.
+     * @param givenRow Given row in which tile is placed
+    */
+    public void setRow(int givenRow) {
+        this.row = givenRow;
+    }
+    /**
+     * Sets the column in which the tile is located.
+     * @param givenColumn Given column in which tile is placed
+    */
+    public void setColumn(int givenColumn) {
+        this.column = givenColumn;
     }
     /**
      * Determines if the tile is currently occupied by a piece.

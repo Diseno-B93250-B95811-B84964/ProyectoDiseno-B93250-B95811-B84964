@@ -8,6 +8,7 @@ package controller;
 
 import java.awt.Color;
 import javax.swing.SwingUtilities;
+import model.Board;
 
 import model.Piece;
 import model.Tile;
@@ -25,16 +26,23 @@ public class Main {
             // Doesn't test other methods that can't be accesed through parent
             System.out.println("Testing classes");
             
-            Tile tile = new UrTile(2,3, false);
-            Piece piece = new UrPiece(Color.RED);
-            
-            System.out.println("tile before: " + tile.toString());
-            tile.setPiece(piece);
+            //Tile tile = new UrTile(2,3, false);
+            //Piece piece = new UrPiece(Color.RED);
+            //System.out.println("tile before: " + tile.toString());
+            //tile.setPiece(piece);
             // como le digo al piece que esta en play?
+            //System.out.println("tile after: " + tile.toString());
+            //System.out.println("piece: " + piece.toString());
             
-            System.out.println("tile after: " + tile.toString());
-            System.out.println("piece: " + piece.toString());
+            System.out.println("board");
+            Board board = new Board(UrTile::new, 6);
+            System.out.println(board.toString());
             
+            //System.out.println("board tiles: memory adresses");
+            //for (int index = 0; index < 6; index++) {
+            //    System.out.println("tile " + index + ": " + board.getTile(index).hashCode());
+            //}
+
         });
     }
 }

@@ -19,6 +19,13 @@ public class UrTile extends Tile
     protected boolean isSafe;
     
     /**
+     * Creates a new Tile located in -1, -1.
+    */
+    public UrTile() {
+        super();
+        this.isSafe = false;
+    }
+    /**
      * Creates a new Tile located in the given row and column.
      * @param tileRow The row in which the tile is located.
      * @param tileColumn The column in which the tile is located.
@@ -35,7 +42,12 @@ public class UrTile extends Tile
     public boolean isSafe() {
         return this.isSafe;
     }
-    
+    /**
+     * Sets isSafe value as true.
+    */
+    public void setAsSafe() {
+        this.isSafe = true;
+    }
     @Override
     public String toString() {
         String string  = 
