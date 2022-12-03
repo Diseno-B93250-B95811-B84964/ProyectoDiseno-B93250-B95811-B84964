@@ -35,7 +35,7 @@ public class Main {
             //System.out.println("piece: " + piece.toString());
             
             System.out.println("board");
-            Board board = new Board(UrTile::new, 6);
+            Board board = new Board(UrTile::new, 23, 8, 3);
             // set tile x, y
             // set tile safe
             System.out.println(board);

@@ -44,8 +44,9 @@ public final class Board<TileType extends Tile> extends GameObject {
      * @param supplier Supplier class that contains instance of tile's child
      * @param numberOfVertices The number of vertices to be created.
     */
-    public Board(Supplier<TileType> supplier, int numberOfVertices) {
-        verticesAmount = numberOfVertices;
+    public Board(Supplier<TileType> supplier, int vertices, int rows, int cols) {
+        verticesAmount = vertices;
+        setBoardDimensions(rows, cols);
         createVerticesArray(supplier);
         createAdjacentMatrix();
     }
@@ -62,6 +63,7 @@ public final class Board<TileType extends Tile> extends GameObject {
             vertices.add(vertexIndex, supplier.get());
             vertices.get(vertexIndex).setRow(x);
             vertices.get(vertexIndex).setColumn(y);
+            System.out.println("created vertex: " + vertices.get(vertexIndex));
             // TODO: falta definir las que son seguras
         }
     }
@@ -81,7 +83,7 @@ public final class Board<TileType extends Tile> extends GameObject {
      * @param rows Amount of rows board has.
      * @param columns Amount of columns board has.
      */
-    public void setBoardDimensions(int rows, int columns) {
+    private void setBoardDimensions(int rows, int columns) {
         this.amountRows = rows;
         this.amountColumns = columns;
     }
@@ -165,7 +167,6 @@ public final class Board<TileType extends Tile> extends GameObject {
             while(tileJumps > 0) {
                 for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
                     if(graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
-                        // TODO REVISAR METODO SI HAY MAS DE UN ADYACENCIA
                         adjacents.add(columnIndex);
                     }
                 }
