@@ -93,12 +93,22 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     /**
      * Consults player for a piece.
      * This method is abstract.
-     * @return
+     * @return An available piece 
      */
     public abstract PieceType getAvailablePiece();
+    /**
+     * Converts Player into a string.
+     * @return a string representing a player.
+     */
     @Override
     public String toString() {
-        String string = "";
+        String string =
+            "color: " + color +
+            "name: " + name +
+            "score: " + score +
+            "pieces: " + piecesAmount +
+            "pieces: " + pieces;
+        
         return string;
     }
 }

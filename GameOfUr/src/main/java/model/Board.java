@@ -192,6 +192,10 @@ public final class Board<TileType extends Tile> extends GameObject {
         return adjacents;
     }
     
+    /**
+     * Converts board into a string.
+     * @return a string representing a board
+     */
     @Override
     public String toString() {
         String string  = "graphAdjacentMatrix:\n";

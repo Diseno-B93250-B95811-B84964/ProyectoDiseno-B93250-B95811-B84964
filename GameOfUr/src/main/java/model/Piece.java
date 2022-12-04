@@ -34,6 +34,10 @@ abstract public class Piece extends GameObject
     public Color getColor() {
         return this.color;
     }
+    /**
+     * Converts Piece into a string.
+     * @return a string representing a piece
+     */
     @Override
     public String toString() {
         String string =

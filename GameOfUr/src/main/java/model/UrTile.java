@@ -14,7 +14,7 @@ package model;
 public class UrTile extends Tile
 {
     /**
-    * A boolean value that determines if tile is safe.
+    * Determines if tile is safe.
     */
     protected boolean isSafe;
     
@@ -48,6 +48,11 @@ public class UrTile extends Tile
     public void setAsSafe() {
         this.isSafe = true;
     }
+    /**
+     * Converts Tile into a string.
+     * Made for the Royal Game of Ur.
+     * @return a string representing a tile
+     */
     @Override
     public String toString() {
         String string  = 

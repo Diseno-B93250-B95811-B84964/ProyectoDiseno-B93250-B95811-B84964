@@ -26,7 +26,7 @@ abstract public class Tile extends GameObject
     */
     protected Piece piece;
     /**
-    * A boolean value that determines if tile currently has a piece placed in it.
+    * Determines if tile currently has a piece placed in it.
     */
     protected boolean isVacant;
     
@@ -107,6 +107,10 @@ abstract public class Tile extends GameObject
         this.piece = null;
         this.isVacant = true;
     }
+    /**
+     * Converts Tile into a string.
+     * @return a string representing a tile
+     */
     @Override
     public String toString() {
         String string  = 

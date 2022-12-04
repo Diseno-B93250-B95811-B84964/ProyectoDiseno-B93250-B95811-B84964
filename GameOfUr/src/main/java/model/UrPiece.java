@@ -46,6 +46,11 @@ public class UrPiece extends Piece {
     public void setNotInPlay() {
         this.isInPlay = false;
     }
+    /**
+     * Converts Piece into a string.
+     * Made for the Royal Game of Ur.
+     * @return a string representing a piece
+     */
     @Override
     public String toString() {
         String string =
