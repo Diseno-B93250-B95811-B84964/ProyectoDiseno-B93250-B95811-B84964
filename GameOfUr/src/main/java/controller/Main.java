@@ -12,8 +12,10 @@ import javax.swing.SwingUtilities;
 import model.Board;
 
 import model.Piece;
+import model.Player;
 import model.Tile;
 import model.UrPiece;
+import model.UrPlayer;
 import model.UrTile;
 
 /**
@@ -27,11 +29,14 @@ public class Main {
             // Doesn't test other methods that can't be accesed through parent
             System.out.println("Testing classes");
             
-            System.out.println("\nTesting Tile and Piece classes");
-            testTileAndPieceClasses();
+            //System.out.println("\nTesting Tile and Piece classes");
+            //testTileAndPieceClasses();
             
-            System.out.println("\nTesting Board class");
-            testBoardClasses();
+            //System.out.println("\nTesting Board class");
+            //testBoardClasses();
+            
+            System.out.println("Testing Player classes");
+            testPlayerClasses();
         });
     }
     
@@ -102,5 +107,52 @@ public class Main {
         //board.setPieceInTile(3,0, )
                 
         //ArrayList<Integer> possibleTiles1 = board.getTilesAdjacents(7,1, 3);
+    }
+    
+    public static void testPlayerClasses() {
+        Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        System.out.println(player + "\n");
+        
+        // TODO set is in playe during game making sure piece is not null
+        UrPiece piece1 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 1: " + piece1);
+        piece1.setInPlay();
+        System.out.println("Player after setting 1 piece in play:\n" + player + "\n");
+        
+        UrPiece piece2 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 2: " + piece2);
+        piece2.setInPlay();
+        System.out.println("Player after setting 2 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece3 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 3: " + piece3);
+        piece3.setInPlay();
+        System.out.println("Player after setting 3 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece4 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 4: " + piece4);
+        piece4.setInPlay();
+        System.out.println("Player after setting 4 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece5 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 5: " + piece5);
+        piece5.setInPlay();
+        System.out.println("Player after setting 5 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece6 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 6: " + piece6);
+        piece6.setInPlay();
+        System.out.println("Player after setting 6 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece7 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 7: " + piece7);
+        piece7.setInPlay();
+        System.out.println("Player after setting 7 pieces in play:\n" + player + "\n");
+        
+        UrPiece piece8 = (UrPiece)player.getAvailablePiece();
+        System.out.println("Available piece 8: " + piece8);
+        //piece8.setInPlay();
+        player.modifyScore();
+        System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");
     }
 }

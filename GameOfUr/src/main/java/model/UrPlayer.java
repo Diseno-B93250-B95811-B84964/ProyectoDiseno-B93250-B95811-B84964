@@ -43,11 +43,14 @@ public class UrPlayer extends Player {
     public UrPiece getAvailablePiece() {
         UrPiece availablePiece = null;
         // TODO: research how to fix this issue
-        /*for(UrPiece piece : pieces) {
-            if (!piece.isInPlay()) {
+        for(var piece : pieces) {
+            availablePiece = (UrPiece)piece;
+            if (!availablePiece.isInPlay()) {
                 break;
+            } else {
+                availablePiece = null;
             }
-        }*/
+        }
         return availablePiece;
     }
 }

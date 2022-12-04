@@ -61,7 +61,8 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     private void initializePiecesArray(Supplier<PieceType> supplier){
         this.pieces = new ArrayList<>(this.piecesAmount);
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
-            this.pieces.set(pieceIndex, supplier.get());
+            this.pieces.add(pieceIndex, supplier.get());
+            this.pieces.get(pieceIndex).setColor(this.color);
         }
     }
     /**
@@ -103,11 +104,13 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     @Override
     public String toString() {
         String string =
-            "color: " + color +
-            "name: " + name +
-            "score: " + score +
-            "pieces: " + piecesAmount +
-            "pieces: " + pieces;
+            "color: " + color.getRGB() + "\n" +
+            "name: " + name + "\n" +
+            "score: " + score + "\n" +
+            "pieces:\n";
+        for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
+            string += pieceIndex + ": " + this.pieces.get(pieceIndex) + "\n";
+        }  
         
         return string;
     }

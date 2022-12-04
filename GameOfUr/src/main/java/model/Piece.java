@@ -21,6 +21,12 @@ abstract public class Piece extends GameObject
     protected Color color;
     
     /**
+     * Creates a new Piece.
+    */
+    public Piece() {
+        this.color = Color.WHITE;
+    }
+    /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
@@ -33,6 +39,13 @@ abstract public class Piece extends GameObject
     */
     public Color getColor() {
         return this.color;
+    }
+    /**
+     * Sets piece's color using player's color.
+     * @param playerColor Player's color.
+    */
+    public void setColor(Color playerColor) {
+        this.color = playerColor;
     }
     /**
      * Converts Piece into a string.

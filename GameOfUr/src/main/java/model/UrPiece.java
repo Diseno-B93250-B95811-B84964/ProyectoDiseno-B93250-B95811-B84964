@@ -20,6 +20,13 @@ public class UrPiece extends Piece {
     protected boolean isInPlay;
     
     /**
+     * Creates a new Piece.
+    */
+    public UrPiece() {
+        super();
+        this.isInPlay = false;
+    }
+    /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
