@@ -4,7 +4,11 @@
  */
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.LoadGame;
 import view.MainGame;
@@ -110,19 +115,40 @@ public class ViewManager {
         mainFrame.setVisible(true);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
- 
-        
     }
     
-    public void getUserChoice(){
-    }
     public void showRules(){
+        //UrRulesModel rules = new UrRulesModel();
+        JFrame frame = new JFrame("Rules");        
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);     
+        final JLabel title = new JLabel();
+        title.setFont(new Font("Century Schoolbook", 1, 36));
+        //title.setText(rules.getRules()[0]);
+        title.setText("Some serious rules over here...");
+        panel.add(title);    
+        /*for (int index = 1; index < rules.getLength(); index++) {
+            final JLabel label = new JLabel();
+            label.setFont(new Font("Century Schoolbook", 0, 18));
+            label.setText(rules.getRules()[index]);
+            panel.add(label);
+        }*/
+        frame.getContentPane().add(panel, BorderLayout.CENTER);   
+        frame.setSize(600, 420);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     private  void addComponentToPanel(JPanel basePanel, JPanel newComponent ,String panelsName){
         basePanel.add(newComponent, panelsName);
         basePanel.revalidate();
         basePanel.repaint();
+    }
+    
+    private void swapView(String viewName){
+        this.cardLayout.show(this.mainPanel, viewName);
     }
     
     public JButton getStartNewGameButton(){
@@ -150,7 +176,11 @@ public class ViewManager {
         return urLoadGame.getBackButton();
     }
     
-    private void swapView(String viewName){
-        this.cardLayout.show(this.mainPanel, viewName);
+    public JButton getRulesButtonFromMainMenu(){
+        return urMainMenu.getShowRulesButton();
+    }
+    
+    public JButton getRulesButtonFromGame(){
+        return urMainGame.getShowRulesButton();
     }
 }

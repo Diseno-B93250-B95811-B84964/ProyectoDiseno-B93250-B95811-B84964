@@ -20,10 +20,12 @@ import javax.swing.SwingUtilities;
 public class gameControllerStub {
     private JButton startNewGameButton;
     private JButton startLoadGameButton;
-    private JButton goBackToMainMenuFromNewGame;
-    private JButton goToMainGameFromNewGame;
-    private JButton goBackToMainMenuFromLoadGame;
-    private JButton goToMainGameFromLoadGame;
+    private JButton goBackToMainMenuFromNewGameButton;
+    private JButton goToMainGameFromNewGameButton;
+    private JButton goBackToMainMenuFromLoadGameButton;
+    private JButton goToMainGameFromLoadGameButton;
+    private JButton showRulesFromMainMenuButton;
+    private JButton showRulesFromGameButton;
     
     private ViewManager viewManager;
     
@@ -43,59 +45,89 @@ public class gameControllerStub {
     private void manageButtons(){
         startNewGameButton = viewManager.getStartNewGameButton();
         startLoadGameButton = viewManager.getStartLoadGameButton();
-        goBackToMainMenuFromNewGame = viewManager.getGoBackButtonFromNewGame();
-        goToMainGameFromNewGame = viewManager.getContinueButtonFromNewGame();
-        goBackToMainMenuFromLoadGame = viewManager.getGoBackFromLoadGame();
-        goToMainGameFromLoadGame = viewManager.getContinueButtonFromLoadGame();
+        goBackToMainMenuFromNewGameButton = viewManager.getGoBackButtonFromNewGame();
+        goToMainGameFromNewGameButton = viewManager.getContinueButtonFromNewGame();
+        goBackToMainMenuFromLoadGameButton = viewManager.getGoBackFromLoadGame();
+        goToMainGameFromLoadGameButton = viewManager.getContinueButtonFromLoadGame();
+        showRulesFromMainMenuButton = viewManager.getRulesButtonFromGame();
+        showRulesFromGameButton = viewManager.getRulesButtonFromMainMenu();
         
         startNewGameButton.addActionListener(new buttonAction());
         startLoadGameButton.addActionListener(new buttonAction());
-        goBackToMainMenuFromNewGame.addActionListener(new buttonAction());
-        goToMainGameFromNewGame.addActionListener(new buttonAction());
-        goBackToMainMenuFromLoadGame.addActionListener(new buttonAction());
-        goToMainGameFromLoadGame.addActionListener(new buttonAction());
+        goBackToMainMenuFromNewGameButton.addActionListener(new buttonAction());
+        goToMainGameFromNewGameButton.addActionListener(new buttonAction());
+        goBackToMainMenuFromLoadGameButton.addActionListener(new buttonAction());
+        goToMainGameFromLoadGameButton.addActionListener(new buttonAction());
+        showRulesFromMainMenuButton.addActionListener(new buttonAction());
+        showRulesFromGameButton.addActionListener(new buttonAction());
     }
     
     class buttonAction implements ActionListener{
-        
+        refereeStub refereeStub = new refereeStub();
         boolean firstPlayer;
         
         public buttonAction() {
             firstPlayer  = true;
         }
         
+        private void manageContinueToNewGameButton(){
+            refereeStub.setMessaage("Im working through: startNewGameButton" );
+            System.out.println("Referee stubs says: " + refereeStub.getMessage());
+            viewManager.swapViewToNewGame();
+        }
+        
+        private void manageContinueToLoadGameButton(){
+            refereeStub.setMessaage("Im working through: startLoadGameButton" );
+            System.out.println("Referee stubs says: " + refereeStub.getMessage());
+            viewManager.swapViewToLoadGame();
+        }
+        
+        private void manageStartNewGame(){
+            System.out.println("First player es: " + firstPlayer);
+            if (firstPlayer) {
+                refereeStub.setMessaage("Im working through: goToMainGameFromNewGame" );
+                System.out.println("Referee stubs says: " + refereeStub.getMessage());
+                viewManager.swapViewToNewGame();
+                firstPlayer = false;
+            } else {
+                viewManager.swapViewToMainGame();
+            }
+        }
+        
+        private void manageStartLoadGame(){
+            refereeStub.setMessaage("Im working through: goToMainGameFromLoadGame" );
+            System.out.println("Referee stubs says: " + refereeStub.getMessage());
+            viewManager.getFileName();
+            viewManager.swapViewToNewGame();
+        }
+        
+        private void manageGoBackToMainMenu(){
+            refereeStub.setMessaage("Im working through: goBackToMainMenuFromLoadGame" );
+            System.out.println("Referee stubs says: " + refereeStub.getMessage());
+            viewManager.swapViewToMainMenu();
+        }
+        
+        private void manageShowRules(){
+            viewManager.showRules();
+        }
+        
         @Override
         public void actionPerformed(ActionEvent event) {
             Object source = event.getSource();
-            refereeStub refereeStub = new refereeStub();
+            
             if (source == startNewGameButton) {
-                refereeStub.setMessaage("Im working through: startNewGameButton" );
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                viewManager.swapViewToNewGame();
+                manageContinueToNewGameButton();
             } else if (source == startLoadGameButton) {
-                refereeStub.setMessaage("Im working through: startLoadGameButton" );
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                viewManager.swapViewToLoadGame();
-            } else if (source == goToMainGameFromNewGame) {
-                System.out.println("First player es: " + firstPlayer);
-                if (firstPlayer) {
-                    refereeStub.setMessaage("Im working through: goToMainGameFromNewGame" );
-                    System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                    viewManager.swapViewToNewGame();
-                    firstPlayer = false;
-                } else {
-                    viewManager.swapViewToMainGame();
-                }
-            } else if (source == goToMainGameFromLoadGame){
-               refereeStub.setMessaage("Im working through: goToMainGameFromLoadGame" );
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                viewManager.getFileName();
-                viewManager.swapViewToNewGame();
-            } else if (source == goBackToMainMenuFromLoadGame || source == goBackToMainMenuFromNewGame) {
-                refereeStub.setMessaage("Im working through: goBackToMainMenuFromLoadGame" );
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                viewManager.swapViewToMainMenu();
-            } 
+                manageContinueToLoadGameButton();
+            } else if (source == goToMainGameFromNewGameButton) {
+                manageStartNewGame();
+            } else if (source == goToMainGameFromLoadGameButton){
+                manageStartLoadGame();
+            } else if (source == goBackToMainMenuFromLoadGameButton || source == goBackToMainMenuFromNewGameButton) {
+                manageGoBackToMainMenu();
+            } else if (source == showRulesFromMainMenuButton || source == showRulesFromGameButton) {
+                manageShowRules();
+            }
         }
     }
 }

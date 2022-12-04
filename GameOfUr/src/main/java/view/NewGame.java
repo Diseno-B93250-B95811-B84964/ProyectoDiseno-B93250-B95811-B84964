@@ -246,12 +246,6 @@ public class NewGame extends javax.swing.JPanel {
         playerColor = PurpleButton.getBackground();
     }//GEN-LAST:event_PurpleButtonActionPerformed
 
-    /* Button Action Listeners */
-    
-    public void addContinueButtonClickListener(ActionListener listenForButton){
-        continueButton.addActionListener(listenForButton);
-    }
-    
     /* Text setters */
     
     private void setPlayerTitle(int playerNumber){

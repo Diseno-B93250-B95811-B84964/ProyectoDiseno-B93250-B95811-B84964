@@ -17,6 +17,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -462,39 +463,29 @@ public class MainGame extends javax.swing.JPanel {
 
     
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
-        //UrRulesModel rules = new UrRulesModel();
-        JFrame frame = new JFrame("Rules");        
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);     
-        final JLabel title = new JLabel();
-        title.setFont(new Font("Century Schoolbook", 1, 36));
-        //title.setText(rules.getRules()[0]);
-        panel.add(title);    
-        /*for (int index = 1; index < rules.getLength(); index++) {
-            final JLabel label = new JLabel();
-            label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
-            panel.add(label);
-        }*/
-        frame.getContentPane().add(panel, BorderLayout.CENTER);   
-        frame.setSize(600, 420);      
-        frame.setLocationRelativeTo(null);  
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    }//GEN-LAST:event_rulesButtonActionPerformed
+
+    }//GEN-LAST:event_rulesButtonActionPerformed
 
     private void throwDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwDiceButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
-    /* Main Panel Buttons */
-
-    public void addSaveAndLeaveButtonClickListener(ActionListener listenForButton) {
-        saveAndLeaveButton.addActionListener(listenForButton);
+    /* Button getters */
+    
+    public JButton getShowRulesButton(){
+        return this.rulesButton;
     }
     
-    public void addthrowDiceButtonButtonClickListener(ActionListener listenForButton) {
-        throwDiceButton.addActionListener(listenForButton);
+    public JButton getThrowDiceButton(){
+        return this.throwDiceButton;
+    }
+    
+    public JButton getExitAndSaveButton(){
+        return this.saveAndLeaveButton;
+    }
+    
+    public JLabel[][] getTilesMatrix(){
+        return tilesArray;
     }
     
     /* Button feature */

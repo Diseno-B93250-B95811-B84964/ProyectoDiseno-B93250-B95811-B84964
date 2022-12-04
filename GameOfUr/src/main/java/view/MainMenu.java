@@ -4,7 +4,6 @@
  */
 package view;
 
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
@@ -12,8 +11,6 @@ import javax.swing.JButton;
  * @author Jimena Gdur
  */
 public class MainMenu extends javax.swing.JPanel {
-   
-    private int option = -1;
     
     /**
      * Creates new form MainMenuViewJPanel
@@ -31,10 +28,14 @@ public class MainMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenu1 = new java.awt.PopupMenu();
         gameName = new javax.swing.JLabel();
         loadGameButton = new javax.swing.JButton();
         startNewGameButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        rulesButton = new javax.swing.JButton();
+
+        popupMenu1.setLabel("popupMenu1");
 
         gameName.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         gameName.setText("Royal Game Of Ur");
@@ -52,7 +53,7 @@ public class MainMenu extends javax.swing.JPanel {
         startNewGameButton.setBackground(new java.awt.Color(44, 37, 37));
         startNewGameButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         startNewGameButton.setForeground(new java.awt.Color(255, 255, 255));
-        startNewGameButton.setText("START NEW GAME");
+        startNewGameButton.setText("NEW GAME");
         startNewGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startNewGameButtonActionPerformed(evt);
@@ -69,6 +70,16 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
+        rulesButton.setBackground(new java.awt.Color(44, 37, 37));
+        rulesButton.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
+        rulesButton.setForeground(new java.awt.Color(255, 255, 255));
+        rulesButton.setText("RULES");
+        rulesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +87,7 @@ public class MainMenu extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(317, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startNewGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,33 +99,34 @@ public class MainMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
                 .addComponent(gameName)
-                .addGap(91, 91, 91)
+                .addGap(98, 98, 98)
                 .addComponent(startNewGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(40, 40, 40)
                 .addComponent(loadGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(40, 40, 40)
+                .addComponent(rulesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private int loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
-        return 1;
+    private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
+
     }//GEN-LAST:event_loadGameButtonActionPerformed
 
-    private int startNewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNewGameButtonActionPerformed
-        option = 2;
-        return 2;
+    private void startNewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNewGameButtonActionPerformed
+
     }//GEN-LAST:event_startNewGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    public void addContinueButtonClickListener(ActionListener listenForButton){
-        startNewGameButton.addActionListener(listenForButton);
-    }
-    
+    private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
+
+    }//GEN-LAST:event_rulesButtonActionPerformed
+
     /* Button getters */
     public JButton getStartNewGameButton(){
        return startNewGameButton;
@@ -122,15 +135,17 @@ public class MainMenu extends javax.swing.JPanel {
     public JButton getLoadFormerGameButton(){
        return loadGameButton;
     }
-
-    public int getOption(){
-        return option;
+    
+    public JButton getShowRulesButton(){
+        return rulesButton;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel gameName;
     private javax.swing.JButton loadGameButton;
+    private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JButton rulesButton;
     private javax.swing.JButton startNewGameButton;
     // End of variables declaration//GEN-END:variables
 }

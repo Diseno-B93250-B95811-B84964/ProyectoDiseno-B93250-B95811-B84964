@@ -101,10 +101,6 @@ public class LoadGame extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_continueButtonActionPerformed
 
-    public void addButtonToFileChooser(ActionListener listenForButton){
-        fileChooser.addActionListener(listenForButton);
-    }
-
     /*Button getters */
     public JButton getContinueButton(){
         return continueButton;
