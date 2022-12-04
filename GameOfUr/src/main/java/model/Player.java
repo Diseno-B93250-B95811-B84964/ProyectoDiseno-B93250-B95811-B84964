@@ -19,19 +19,19 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     /**
      * Player's chosen color.
      */
-    protected Color playerColor;
+    protected Color color;
     /**
      * Player's given name.
      */
-    protected String playerName;
+    protected String name;
     /**
      * Player's current score.
      */
-    protected int playerScore;
+    protected int score;
     /**
      * Player's inventory which contains InventoryItems.
      */
-    //protected Inventory playerInventory;
+    //protected Inventory inventory;
     /**
      * Amount of pieces player has.
      */
@@ -39,7 +39,7 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     /**
      * Stores all of the player's pieces.
      */
-    protected ArrayList<PieceType> playerPieces;
+    protected ArrayList<PieceType> pieces;
     
     /**
      * Creates a new Player with an array of pieces.
@@ -50,8 +50,8 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     */
     public Player(Supplier<PieceType> supplier, int amountPieces, Color chosenColor, String name) {
         this.piecesAmount = amountPieces;
-        this.playerColor = chosenColor;
-        this.playerName = name;
+        this.color = chosenColor;
+        this.name = name;
         initializePiecesArray(supplier);
     }
     /**
@@ -59,9 +59,9 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
      * @param supplier Supplier class that contains instance of piece's child.
     */
     private void initializePiecesArray(Supplier<PieceType> supplier){
-        this.playerPieces = new ArrayList<>(this.piecesAmount);
+        this.pieces = new ArrayList<>(this.piecesAmount);
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
-            this.playerPieces.set(pieceIndex, supplier.get());
+            this.pieces.set(pieceIndex, supplier.get());
         }
     }
     /**
@@ -69,27 +69,27 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
      * @return Player's color.
      */
     public Color getColor() {
-        return this.playerColor;
+        return this.color;
     }
     /**
      * Returns player's name.
      * @return Player's name.
      */
-    public String getPlayerName() {
-        return this.playerName;
+    public String getName() {
+        return this.name;
     }
     /**
      * Returns player's score.
      * @return Player's score.
      */
-    public int getPlayerScore() {
-        return this.playerScore;
+    public int getScore() {
+        return this.score;
     }
     /**
      * Modifies player's score.
      * This method is abstract.
      */
-    public abstract void modifyPlayerScore();
+    public abstract void modifyScore();
     /**
      * Consults player for a piece.
      * This method is abstract.

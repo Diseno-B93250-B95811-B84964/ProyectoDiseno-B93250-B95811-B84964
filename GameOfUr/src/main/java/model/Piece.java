@@ -18,26 +18,26 @@ abstract public class Piece extends GameObject
     /**
     * Allows the referee to determine to which player this piece belongs to.
     */
-    protected Color pieceColor;
+    protected Color color;
     
     /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
     public Piece(Color selectedColor) {
-        this.pieceColor = selectedColor;
+        this.color = selectedColor;
     }
     /**
      * Gets piece's color.
      * @return the color of the current piece.
     */
     public Color getColor() {
-        return this.pieceColor;
+        return this.color;
     }
     @Override
     public String toString() {
         String string =
-            "pieceColor: " + this.pieceColor.getRGB();
+            "pieceColor: " + this.color.getRGB();
         return string;
     }
 }
