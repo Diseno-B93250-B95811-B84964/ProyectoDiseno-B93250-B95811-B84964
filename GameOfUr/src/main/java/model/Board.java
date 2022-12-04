@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 /**
@@ -42,7 +43,9 @@ public final class Board<TileType extends Tile> extends GameObject {
     /**
      * Creates a new Board represented as a graph given the amount of vertices given.
      * @param supplier Supplier class that contains instance of tile's child
-     * @param numberOfVertices The number of vertices to be created.
+     * @param vertices The number of vertices to be created.
+     * @param rows Amount of rows board has.
+     * @param cols Amount of columns board has.
     */
     public Board(Supplier<TileType> supplier, int vertices, int rows, int cols) {
         verticesAmount = vertices;
@@ -63,8 +66,6 @@ public final class Board<TileType extends Tile> extends GameObject {
             vertices.add(vertexIndex, supplier.get());
             vertices.get(vertexIndex).setRow(x);
             vertices.get(vertexIndex).setColumn(y);
-            System.out.println("created vertex: " + vertices.get(vertexIndex));
-            // TODO: falta definir las que son seguras
         }
     }
     /**
@@ -162,23 +163,46 @@ public final class Board<TileType extends Tile> extends GameObject {
      */
     public ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
         ArrayList<Integer> adjacents = new ArrayList<>();
+        boolean foundAdjacent = false;
+        
         if (x >= 0 && x < amountRows && y >= 0 && y < amountColumns) {
             int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
-            while(tileJumps > 0) {
+            //System.out.println("x: " + x + ", y: " + y);
+            System.out.println("currentVertexIndex: " + currentVertexIndex);
+            System.out.println("tileJumps: " + tileJumps);
+
+            while(tileJumps > 1 && currentVertexIndex < verticesAmount) {
+                foundAdjacent = false;
                 for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
-                    if(graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
-                        adjacents.add(columnIndex);
+                    if(foundAdjacent != true && graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
+                        currentVertexIndex = columnIndex;
+                        foundAdjacent = true;
+                        System.out.println("currentVertexIndex: " + currentVertexIndex);
                     }
+                }
+                tileJumps--;
+            }
+            System.out.println("Final currentVertexIndex: " + currentVertexIndex);
+            for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
+                if(graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
+                    adjacents.add(columnIndex);
                 }
             }
         }
         return adjacents;
     }
+    
     @Override
     public String toString() {
-        String string  = 
-            "graphAdjacentMatrix: " + this.graphAdjacentMatrix + ", " + 
-            "vertices: " + this.vertices;
+        String string  = "graphAdjacentMatrix:\n";
+        for (boolean[] row : this.graphAdjacentMatrix) {
+            string += Arrays.toString(row) + "\n";
+        }
+        string += "\nvertices:\n";
+        for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {
+            string += "vertex " + vertexIndex + ": " + this.vertices.get(vertexIndex) + "\n";
+        }
+        
         return string;
     }
 }
