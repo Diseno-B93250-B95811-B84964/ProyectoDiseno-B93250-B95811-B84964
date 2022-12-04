@@ -27,6 +27,7 @@ import view.LoadGame;
 import view.MainGame;
 import view.MainMenu;
 import view.NewGame;
+import view.ShowRules;
 
 /**
  *
@@ -37,6 +38,7 @@ public class ViewManager {
     LoadGame urLoadGame;
     NewGame urNewGame;
     MainGame urMainGame;
+    ShowRules urShowRules;
     //ArrayList<Player> playerArray;
     JFrame mainFrame;
     JPanel mainPanel;
@@ -49,11 +51,9 @@ public class ViewManager {
             this.urLoadGame = new LoadGame();
             this.urNewGame = new NewGame(1);
             this.urMainGame = new MainGame();
+            this.urShowRules = new ShowRules();
             //ArrayList<Player> playerArray = new ArrayList<Player>();
-            mainFrame = new JFrame("Royal Game Of Ur");
-            mainPanel = new JPanel();
-            cardLayout = new CardLayout();
-            mainPanel.setLayout(cardLayout);
+            manageCardLayout();
         } catch (IOException ex) {
             Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,49 +65,71 @@ public class ViewManager {
     public void setPlayers(){
         
     }
-    public void getFileName(){
-        JFileChooser chooser = urLoadGame.getFileChooser();
-        try {
-            File file = new File(chooser.getSelectedFile().getAbsolutePath());
-            Scanner lineScanner = new Scanner(file);
-            if (lineScanner != null) {
-                while (lineScanner.hasNextLine()) {
-                System.out.println("Content is: " + lineScanner.nextLine());
+    public File getFileNameToLoadGame(){
+        JFileChooser fileChooser = urLoadGame.getFileChooser();
+        File file = null;
+        if (fileChooser != null) {
+            var selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile != null) {
+                try {
+                    file = new File(selectedFile.getAbsolutePath());
+                    /*Delete this*/
+                    Scanner lineScanner = new Scanner(file);
+                    if (lineScanner != null) {
+                        while (lineScanner.hasNextLine()) {
+                        System.out.println("Content is: " + lineScanner.nextLine());
+                        }
+                        /*
+                        while (lineScanner.hasNextLine()) {
+                            String[] lineAsArray = lineScanner.nextLine().split(",");         
+                            fileAsStringArray.add(removeQuotationMarks(lineAsArray));*/
+                        }
+                    } 
+                    /*Until here*/
+                catch (FileNotFoundException ex) {
+                    Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                /*
-                while (lineScanner.hasNextLine()) {
-                    String[] lineAsArray = lineScanner.nextLine().split(",");         
-                    fileAsStringArray.add(removeQuotationMarks(lineAsArray));*/
-                }
-            } 
-        catch (FileNotFoundException ex) {
-            Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return file;
+    }
+    
+    public void updateMainGameView(){
+    }
+    
+    /*Swap methods */
+    
+    private void swapView(String viewName){
+        this.cardLayout.show(this.mainPanel, viewName);
     }
     
     public void swapViewToLoadGame(){
         this.swapView("loadGame");
     }
+    
     public void swapViewToMainMenu(){
         this.swapView("mainMenu");
     }
+    
     public void swapViewToMainGame(){
         this.swapView("mainGame");
     }
+    
     public void swapViewToNewGame(){
         this.swapView("newGame");
     }
-    public void configViewFlow(){ // Jbutton, Card
-    }
-    public void updateMainGameView(){
-    }
+    
+    /*CardLayout configuration */
+    
     public void manageCardLayout(){
+        mainFrame = new JFrame("Royal Game Of Ur");
+        mainPanel = new JPanel();
+        cardLayout = new CardLayout();
+        mainPanel.setLayout(cardLayout);
         addComponentToPanel(mainPanel, urMainMenu, "mainMenu");
         addComponentToPanel(mainPanel, urNewGame, "newGame");
         addComponentToPanel(mainPanel, urLoadGame, "loadGame");
         addComponentToPanel(mainPanel, urMainGame, "mainGame");
-
-
         cardLayout.show(mainPanel, "mainMenu");
         mainFrame.add(mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -117,38 +139,15 @@ public class ViewManager {
         mainFrame.setResizable(false);
     }
     
-    public void showRules(){
-        //UrRulesModel rules = new UrRulesModel();
-        JFrame frame = new JFrame("Rules");        
-        JPanel panel = new JPanel();
-        LayoutManager layout = new FlowLayout();
-        panel.setLayout(layout);     
-        final JLabel title = new JLabel();
-        title.setFont(new Font("Century Schoolbook", 1, 36));
-        //title.setText(rules.getRules()[0]);
-        title.setText("Some serious rules over here...");
-        panel.add(title);    
-        /*for (int index = 1; index < rules.getLength(); index++) {
-            final JLabel label = new JLabel();
-            label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
-            panel.add(label);
-        }*/
-        frame.getContentPane().add(panel, BorderLayout.CENTER);   
-        frame.setSize(600, 420);      
-        frame.setLocationRelativeTo(null);  
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }
-    
     private  void addComponentToPanel(JPanel basePanel, JPanel newComponent ,String panelsName){
         basePanel.add(newComponent, panelsName);
         basePanel.revalidate();
         basePanel.repaint();
     }
     
-    private void swapView(String viewName){
-        this.cardLayout.show(this.mainPanel, viewName);
+    public void showRules(){
+    //public void showRules(String[] rules){
+        urShowRules.showRules();
     }
     
     public JButton getStartNewGameButton(){

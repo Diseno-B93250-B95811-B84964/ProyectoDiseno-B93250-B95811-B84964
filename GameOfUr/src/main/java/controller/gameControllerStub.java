@@ -6,6 +6,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +34,6 @@ public class gameControllerStub {
         try {
             SwingUtilities.invokeAndWait(() -> {
                 viewManager = new ViewManager();
-                viewManager.manageCardLayout();
                 manageButtons();
                 
             });
@@ -97,8 +97,10 @@ public class gameControllerStub {
         private void manageStartLoadGame(){
             refereeStub.setMessaage("Im working through: goToMainGameFromLoadGame" );
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
-            viewManager.getFileName();
-            viewManager.swapViewToNewGame();
+            File file = viewManager.getFileNameToLoadGame();
+            if (file != null) {
+                viewManager.swapViewToMainGame();
+            }
         }
         
         private void manageGoBackToMainMenu(){
