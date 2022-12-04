@@ -13,6 +13,8 @@ import javax.swing.JButton;
  */
 public class MainMenu extends javax.swing.JPanel {
    
+    private int option = -1;
+    
     /**
      * Creates new form MainMenuViewJPanel
      */
@@ -29,19 +31,10 @@ public class MainMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        colorButton = new javax.swing.JButton();
         gameName = new javax.swing.JLabel();
         loadGameButton = new javax.swing.JButton();
         startNewGameButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-
-        colorButton.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        colorButton.setText("Choose a color");
-        colorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                colorButtonActionPerformed(evt);
-            }
-        });
 
         gameName.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         gameName.setText("Royal Game Of Ur");
@@ -104,28 +97,22 @@ public class MainMenu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void colorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorButtonActionPerformed
-
-    }//GEN-LAST:event_colorButtonActionPerformed
-
-    private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
-        // TODO add your handling code here:
+    private int loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
+        return 1;
     }//GEN-LAST:event_loadGameButtonActionPerformed
 
-    private void startNewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNewGameButtonActionPerformed
-        // TODO add your handling code here:
+    private int startNewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNewGameButtonActionPerformed
+        option = 2;
+        return 2;
     }//GEN-LAST:event_startNewGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    /*Buttons features*/
-
-    public void addExitButtonClickListener(ActionListener listenForButton) {
-        exitButton.addActionListener(listenForButton);
+    public void addContinueButtonClickListener(ActionListener listenForButton){
+        startNewGameButton.addActionListener(listenForButton);
     }
-    
     
     /* Button getters */
     public JButton getStartNewGameButton(){
@@ -136,8 +123,11 @@ public class MainMenu extends javax.swing.JPanel {
        return loadGameButton;
     }
 
+    public int getOption(){
+        return option;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton colorButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel gameName;
     private javax.swing.JButton loadGameButton;

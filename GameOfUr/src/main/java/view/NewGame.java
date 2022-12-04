@@ -14,7 +14,8 @@ import javax.swing.JTextField;
  *
  * @author Ryzen
  */
-public class SelectColor extends javax.swing.JPanel {
+public class NewGame extends javax.swing.JPanel {
+    private int playerNumber;
     private Color playerColor;
     private final static Color BLUE = new Color (0,102,255);
     private final static Color BROWN = new Color (102,51,0);
@@ -26,9 +27,10 @@ public class SelectColor extends javax.swing.JPanel {
     /**
      * Creates new form LoadGamePanel
      */
-    public SelectColor(int playerNumber) {
+    public NewGame(int playerNumber) {
         initComponents();
-        setPlayerTitle(playerNumber);
+        this.playerNumber = playerNumber;
+        setPlayerTitle(this.playerNumber);
         playerColor = Color.WHITE;
     }
 
@@ -213,8 +215,8 @@ public class SelectColor extends javax.swing.JPanel {
 
     }//GEN-LAST:event_GreenButtonActionPerformed
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-
+    private int backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        return 1;
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void BrownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrownButtonActionPerformed
@@ -226,8 +228,8 @@ public class SelectColor extends javax.swing.JPanel {
             // TODO add your handling code here:
     }//GEN-LAST:event_playerNameTextFieldActionPerformed
 
-    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-
+    private int continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
+        return this.playerNumber;
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void RedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedButtonActionPerformed
