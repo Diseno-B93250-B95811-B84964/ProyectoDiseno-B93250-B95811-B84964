@@ -8,10 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import model.Player;
 
 /**
  *
@@ -29,11 +31,13 @@ public class gameControllerStub {
     private JButton showRulesFromGameButton;
     
     private ViewManager viewManager;
+    private ArrayList<Player> playerArray;
     
     public gameControllerStub(){
         try {
             SwingUtilities.invokeAndWait(() -> {
                 viewManager = new ViewManager();
+                playerArray = new ArrayList<>();
                 manageButtons();
                 
             });
@@ -87,8 +91,15 @@ public class gameControllerStub {
             if (firstPlayer) {
                 refereeStub.setMessaage("Im working through: goToMainGameFromNewGame" );
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                viewManager.swapViewToNewGame();
-                firstPlayer = false;
+                //viewManager.setPlayers();
+                Player player = viewManager.getPlayerData();
+                if (player != null) {
+                    playerArray.add(player);
+                    firstPlayer = false;
+                    viewManager.updateNewGameForNextPlayer();
+                    viewManager.hideColors(player.getColor());
+                    viewManager.swapViewToNewGame();
+                }
             } else {
                 viewManager.swapViewToMainGame();
             }

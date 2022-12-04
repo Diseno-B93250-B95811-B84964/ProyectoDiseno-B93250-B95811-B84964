@@ -6,11 +6,14 @@ package controller;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,6 +26,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import model.Player;
 import view.LoadGame;
 import view.MainGame;
 import view.MainMenu;
@@ -34,16 +39,16 @@ import view.ShowRules;
  * @author Mauricio Palma
  */
 public class ViewManager {
-    MainMenu urMainMenu;
-    LoadGame urLoadGame;
-    NewGame urNewGame;
-    MainGame urMainGame;
-    ShowRules urShowRules;
-    //ArrayList<Player> playerArray;
-    JFrame mainFrame;
-    JPanel mainPanel;
-    CardLayout cardLayout;
-    
+    private MainMenu urMainMenu;
+    private LoadGame urLoadGame;
+    private NewGame urNewGame;
+    private MainGame urMainGame;
+    private ShowRules urShowRules;
+    private ArrayList<Player> playerArray; // TODO delete it and make it just Player?
+    private JFrame mainFrame;
+    private JPanel mainPanel;
+    private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
+    private int currentPlayer;
     
     public ViewManager() {
         try {
@@ -52,19 +57,18 @@ public class ViewManager {
             this.urNewGame = new NewGame(1);
             this.urMainGame = new MainGame();
             this.urShowRules = new ShowRules();
-            //ArrayList<Player> playerArray = new ArrayList<Player>();
+            
+            this.urNewGame.addTextFieldFocusistener(new SetColorClickListener());
+            
+            playerArray = new ArrayList<>();
+            currentPlayer = 1;
             manageCardLayout();
         } catch (IOException ex) {
             Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void getPlayers(){
-        
-    }
-    public void setPlayers(){
-        
-    }
+    
     public File getFileNameToLoadGame(){
         JFileChooser fileChooser = urLoadGame.getFileChooser();
         File file = null;
@@ -96,6 +100,42 @@ public class ViewManager {
     
     public void updateMainGameView(){
     }
+    
+    public void showRules(){
+    //public void showRules(String[] rules){
+        urShowRules.showRules();
+    }
+    
+    public Player getPlayerData(){
+        Color playerColor = urNewGame.getPlayerColor();
+        String playerName = urNewGame.getPlayerName();
+        Player player = null;
+        System.out.println("Color: [" + playerColor+"]");
+        System.out.println("Nombre: [" + playerName+"]");
+        if (playerColor != null && !playerName.equals("Enter player name")) { // TODO remove "Enter..." and make it a const variable
+            player = new Player(playerColor, playerName);
+        } else {
+            System.out.println("Color or name is null");
+        }
+        return player;
+    }
+    
+    public void updateNewGameForNextPlayer(){
+        this.currentPlayer++;
+        this.urNewGame.resetPlayerNameTextField();
+        this.urNewGame.setPlayerTitle(currentPlayer);
+    }
+    
+    public void setPlayers(){
+        System.out.println("Players will be set...");   
+    }
+    
+    public void hideColors(Color color){
+        urNewGame.hideColorButton(color);
+        //urNewGame.revalidate();
+        //urNewGame.repaint();
+    }
+    
     
     /*Swap methods */
     
@@ -145,11 +185,7 @@ public class ViewManager {
         basePanel.repaint();
     }
     
-    public void showRules(){
-    //public void showRules(String[] rules){
-        urShowRules.showRules();
-    }
-    
+    /*Getters */
     public JButton getStartNewGameButton(){
         return urMainMenu.getStartNewGameButton();
     }
@@ -159,7 +195,6 @@ public class ViewManager {
     }
     
     public JButton getContinueButtonFromNewGame(){
-        System.out.println("New game button has been passed!");
         return urNewGame.getContinueButton();
     }
     
@@ -181,5 +216,32 @@ public class ViewManager {
     
     public JButton getRulesButtonFromGame(){
         return urMainGame.getShowRulesButton();
+    }
+    
+    class SetColorClickListener implements FocusListener{
+        
+        public SetColorClickListener(){
+            System.out.println("SetColorClickedListener greets you");
+        }
+        
+        @Override
+        public void focusGained(FocusEvent e) {
+            System.out.println("Focused...");
+            JTextField currentInput = urNewGame.getPlayerNameTextField();
+            System.out.println("Name when focus: " + currentInput.getText());
+            if (currentInput.getText().equals("Enter player name")) {
+                currentInput.setText("");
+            }        
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            System.out.println("Focusedn't...");
+            JTextField currentInput = urNewGame.getPlayerNameTextField();
+            System.out.println("Name when not focus: " + currentInput.getText());
+            if (currentInput.getText().equals("")) {
+                urNewGame.resetPlayerNameTextField();
+            }     
+        }
     }
 }

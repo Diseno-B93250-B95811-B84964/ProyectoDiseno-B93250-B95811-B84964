@@ -31,7 +31,7 @@ public class NewGame extends javax.swing.JPanel {
         initComponents();
         this.playerNumber = playerNumber;
         setPlayerTitle(this.playerNumber);
-        playerColor = Color.WHITE;
+        playerColor = null;
     }
 
     /**
@@ -225,7 +225,7 @@ public class NewGame extends javax.swing.JPanel {
     }//GEN-LAST:event_BrownButtonActionPerformed
 
     private void playerNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerNameTextFieldActionPerformed
-            // TODO add your handling code here:
+
     }//GEN-LAST:event_playerNameTextFieldActionPerformed
 
     private int continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
@@ -248,13 +248,14 @@ public class NewGame extends javax.swing.JPanel {
 
     /* Text setters */
     
-    private void setPlayerTitle(int playerNumber){
-        String currentText = Title.getText();
+    public void setPlayerTitle(int playerNumber){
+        String currentText = "SET UP PLAYER";
         Title.setText(currentText + "#" + playerNumber);
     }
     
     /* TextField Listener */
     public void addTextFieldFocusistener(FocusListener listenForButton) {
+        System.out.println("Im trying to gain focus...");
         playerNameTextField.addFocusListener(listenForButton);
     }
     
@@ -266,6 +267,10 @@ public class NewGame extends javax.swing.JPanel {
 
     public Color getPlayerColor(){
         return playerColor;
+    }
+    
+    public String getPlayerName(){
+        return playerNameTextField.getText();
     }
     
     /* Button getters */
@@ -280,6 +285,7 @@ public class NewGame extends javax.swing.JPanel {
     
     /* Miscellaneous */
     public void hideColorButton(Color color){
+        System.out.println("A color is being erased... so long");
         if (color.getRGB() == BLUE.getRGB()) {
             BlueButton.setVisible(false);
             BlueButton.setEnabled(false);
@@ -301,6 +307,9 @@ public class NewGame extends javax.swing.JPanel {
         }
     }
     
+    public void resetPlayerNameTextField(){
+        playerNameTextField.setText("Enter player name");
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BlueButton;
