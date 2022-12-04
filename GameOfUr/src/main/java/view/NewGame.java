@@ -15,7 +15,6 @@ import javax.swing.JTextField;
  * @author Mauricio Palma
  */
 public class NewGame extends javax.swing.JPanel {
-    private int playerNumber;
     private Color playerColor;
     private final static Color BLUE = new Color (0,102,255);
     private final static Color BROWN = new Color (102,51,0);
@@ -27,10 +26,8 @@ public class NewGame extends javax.swing.JPanel {
     /**
      * Creates new form LoadGamePanel
      */
-    public NewGame(int playerNumber) {
+    public NewGame() {
         initComponents();
-        this.playerNumber = playerNumber;
-        setPlayerTitle(this.playerNumber);
         playerColor = null;
     }
 
@@ -215,8 +212,8 @@ public class NewGame extends javax.swing.JPanel {
 
     }//GEN-LAST:event_GreenButtonActionPerformed
 
-    private int backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        return 1;
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void BrownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrownButtonActionPerformed
@@ -228,8 +225,8 @@ public class NewGame extends javax.swing.JPanel {
 
     }//GEN-LAST:event_playerNameTextFieldActionPerformed
 
-    private int continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        return this.playerNumber;
+    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
+
     }//GEN-LAST:event_continueButtonActionPerformed
 
     private void RedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedButtonActionPerformed

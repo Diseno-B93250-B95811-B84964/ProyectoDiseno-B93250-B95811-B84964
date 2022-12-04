@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import model.Dice;
 import model.Player;
 
 /**
@@ -30,15 +31,18 @@ public class gameControllerStub {
     private JButton showRulesFromMainMenuButton;
     private JButton showRulesFromGameButton;
     private JButton exitAndSaveButton;
+    private JButton throwDiceButton;
     
     private ViewManager viewManager;
     private ArrayList<Player> playerArray;
+    private Dice dice;
     
     public gameControllerStub(){
         try {
             SwingUtilities.invokeAndWait(() -> {
                 viewManager = new ViewManager();
                 playerArray = new ArrayList<>();
+                dice = new Dice();
                 manageButtons();
                 
             });
@@ -57,6 +61,7 @@ public class gameControllerStub {
         showRulesFromMainMenuButton = viewManager.getRulesButtonFromGame();
         showRulesFromGameButton = viewManager.getRulesButtonFromMainMenu();
         exitAndSaveButton = viewManager.getExitAndSave();
+        throwDiceButton = viewManager.getThrowDiceButton();
         
         startNewGameButton.addActionListener(new buttonAction());
         startLoadGameButton.addActionListener(new buttonAction());
@@ -67,6 +72,7 @@ public class gameControllerStub {
         showRulesFromMainMenuButton.addActionListener(new buttonAction());
         showRulesFromGameButton.addActionListener(new buttonAction());
         exitAndSaveButton.addActionListener(new buttonAction());
+        throwDiceButton.addActionListener(new buttonAction());
     }
     
     class buttonAction implements ActionListener{
@@ -111,6 +117,8 @@ public class gameControllerStub {
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             File file = viewManager.getFileNameToLoadGame();
             if (file != null) {
+                // playerArray = referee.getPlayers();
+                // viewManager.setPlayers(playerArray);
                 viewManager.swapViewToMainGame();
             }
         }
@@ -128,6 +136,19 @@ public class gameControllerStub {
             // TODO implement this
             // serializer.saveState()
             System.exit(0);
+        }
+        
+        private void managePlay(){
+            int result = throwDice();
+            viewManager.playMove(result);
+        }
+        
+        private int throwDice(){
+            int diceResult = 0;
+            //diceThrown  = true;
+            dice.rollDice();
+            diceResult = dice.getRollResult();
+            return diceResult;
         }
         
         @Override
@@ -148,6 +169,8 @@ public class gameControllerStub {
                 manageShowRules();
             } else if (source == exitAndSaveButton) {
                 manageSaveAndExit();
+            } else if (source == throwDiceButton) {
+                managePlay();
             }
         }
     }

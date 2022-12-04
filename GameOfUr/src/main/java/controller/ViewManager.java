@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Player;
+import model.Tile;
 import view.LoadGame;
 import view.MainGame;
 import view.MainMenu;
@@ -44,21 +47,22 @@ public class ViewManager {
     private NewGame urNewGame;
     private MainGame urMainGame;
     private ShowRules urShowRules;
-    private Player player; // TODO delete it and make it just Player?
     private JFrame mainFrame;
     private JPanel mainPanel;
     private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
+    
+    private Player player;
     private int currentPlayer;
     
     public ViewManager() {
         try {
             this.urMainMenu = new MainMenu();
             this.urLoadGame = new LoadGame();
-            this.urNewGame = new NewGame(1);
+            this.urNewGame = new NewGame();
             this.urMainGame = new MainGame();
             this.urShowRules = new ShowRules();
             
-            this.urNewGame.addTextFieldFocusistener(new SetColorClickListener());
+            initializeListeners();
             
             currentPlayer = 1;
             manageCardLayout();
@@ -67,6 +71,27 @@ public class ViewManager {
         }
     }
     
+    /* Methods to play a match */
+    public void playMove(int diceResult){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
+        this.urMainGame.cleanDice();
+        this.urMainGame.showThrow(diceResult);
+        this.urMainGame.setMoves(diceResult);
+        this.urMainGame.changePlayerTurn(currentPlayer);
+        currentPlayer++;
+        currentPlayer = currentPlayer % 2; // TODO change this 2
+        
+    }
+    
+    public void updateMainGameView(){
+    }
+    
+    public void showRules(){
+    //public void showRules(String[] rules){
+        urShowRules.showRules();
+    }
+    
+    
+    /*Methods to load a former match */
     
     public File getFileNameToLoadGame(){
         JFileChooser fileChooser = urLoadGame.getFileChooser();
@@ -97,14 +122,7 @@ public class ViewManager {
         return file;
     }
     
-    public void updateMainGameView(){
-    }
-    
-    public void showRules(){
-    //public void showRules(String[] rules){
-        urShowRules.showRules();
-    }
-    
+    /* Methods to create a new game */
     public Player getPlayerData(){
         Color playerColor = urNewGame.getPlayerColor();
         String playerName = urNewGame.getPlayerName();
@@ -124,6 +142,8 @@ public class ViewManager {
         this.urNewGame.resetPlayerNameTextField();
         this.urNewGame.setPlayerTitle(currentPlayer);
     }
+    
+    /* Methods to personalize a match */
     
     public void setPlayers(ArrayList<Player> playerArray){ // TODO make a urViewManager?
         this.urMainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName()); // These can be private methods and can be implemented under abstract method "setPlayers()"
@@ -188,7 +208,25 @@ public class ViewManager {
         basePanel.repaint();
     }
     
-    /*Getters */
+    /* GUI Configuration */
+    
+    private void initializeListeners(){
+        this.urNewGame.addTextFieldFocusistener(new SetColorClickListener());
+        initializeLabels();
+    }
+    
+    private void initializeLabels(){
+        JLabel currentLabel;
+        for (int row = 0; row < 8; row++) { // TODO change magic number
+            for (int column = 0; column < 3; column++) { // TODO change magic number
+                currentLabel = this.urMainGame.getLabel(row, column);
+                currentLabel.addMouseListener(new TileMouseListener(currentLabel,row,column));
+            }
+        }
+    }
+    
+    /*Button Getters */
+    
     public JButton getStartNewGameButton(){
         return urMainMenu.getStartNewGameButton();
     }
@@ -225,30 +263,112 @@ public class ViewManager {
         return urMainGame.getExitAndSaveButton();
     }
     
+    public JButton getThrowDiceButton(){
+        return urMainGame.getThrowDiceButton();
+    }
+    
+    /* Auxiliary inner classes */
+    
     class SetColorClickListener implements FocusListener{
-        
-        public SetColorClickListener(){
-            System.out.println("SetColorClickedListener greets you");
-        }
-        
+
         @Override
-        public void focusGained(FocusEvent e) {
-            System.out.println("Focused...");
+        public void focusGained(FocusEvent event) {
             JTextField currentInput = urNewGame.getPlayerNameTextField();
-            System.out.println("Name when focus: " + currentInput.getText());
             if (currentInput.getText().equals("Enter player name")) {
                 currentInput.setText("");
             }        
         }
 
         @Override
-        public void focusLost(FocusEvent e) {
-            System.out.println("Focusedn't...");
+        public void focusLost(FocusEvent event) {
             JTextField currentInput = urNewGame.getPlayerNameTextField();
-            System.out.println("Name when not focus: " + currentInput.getText());
             if (currentInput.getText().equals("")) {
                 urNewGame.resetPlayerNameTextField();
             }     
         }
+    }
+    
+        class TileMouseListener extends MouseAdapter {
+        Tile tile;
+        JLabel label;
+        int row;
+        int column;
+        
+        TileMouseListener(JLabel label, int row, int column){
+            this.label = label;
+            this.row = row;
+            this.column = column;        
+        }
+
+        @Override
+        public void mousePressed(MouseEvent entered){
+            Tile movedTile = null;
+            this.label.setBackground(Color.decode("#DC3333")); /*
+            movedTile = startListening();
+            if (movedTile != null) {
+                int x = movedTile.getRow();
+                int y = movedTile.getColumn();
+                if (currentPlayer == playerArray[0]) {
+                    gameView.setNextPossibleLabel(x,y,gameView.getFirstPlayerIcon());
+                } else {
+                    gameView.setNextPossibleLabel(x,y,gameView.getSecondPlayerIcon());
+                }
+            }
+            if (this.row == 4 && this.column != 1) {
+                this.label.setBackground(Color.decode("#E0E0E0"));
+            } else {
+                this.label.setBackground(Color.decode("#2D3553"));
+            }*/
+        }
+        /*
+        public Tile startListening() {
+            board = getBoard();
+            tile = board.getTile(this.row, this.column); // TODO Delete?
+            UrTileModel movedTile = null; 
+            boolean validMove = false;
+            if (diceThrown) {
+                if(!winner) {
+                    currentPlayer = playerArray[currentPlayerNum];
+                    board.setPlayerTurn(currentPlayer.getColor());
+                    if (diceResult > 0){
+                        possiblePaths.clear();
+                        calculateAllPossiblePathsPerTurn(diceResult);
+                        
+                        // check if it is first move
+                        if (this.row == 4 && this.column != 1) {
+                            validMove = makeInitialMove();               
+                        } else {
+                            validMove = makeNormalMove(tile);
+                        }
+                        /// Removes piece if there was one
+                        if (validMove) {
+                            tile.resetTile();
+                            try { 
+                                if (this.row == 0 && this.column == 0) {
+                                    gameView.removeIconFromRose0_0();
+                                } else if (this.row == 0 && this.column == 2){
+                                    gameView.removeIconFromRose0_2();
+                                } else if (this.row == 3 && this.column == 1){
+                                    gameView.removeIconFromRose3_1();
+                                } else if (this.row == 6 && this.column == 0) {
+                                    gameView.removeIconFromRose6_0();
+                                } else if (this.row == 6 && this.column == 2) {
+                                    gameView.removeIconFromRose6_2();
+                                } else {
+                                    gameView.removeIconFromLabel(this.row,this.column);
+                            }
+                            } catch (IOException e) {
+                                System.out.println("There was a problem going back to blank state. Check images folder");
+                            }
+                        }                                                 
+                    }
+                    winner = checkIfWinner();          
+                }
+                diceThrown = false;
+                currentPlayerNum ++;
+                currentPlayerNum %= playerArray.length;
+            }
+            return movedTile;
+        }*/
     }
 }

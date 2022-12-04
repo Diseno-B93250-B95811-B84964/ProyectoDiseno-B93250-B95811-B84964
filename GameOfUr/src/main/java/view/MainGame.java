@@ -844,10 +844,10 @@ public class MainGame extends javax.swing.JPanel {
     
     public void cleanDice()
     {
-         dice1.setIcon(noScoreDiceState);
-         dice2.setIcon(noScoreDiceState);
-         dice3.setIcon(noScoreDiceState);
-         dice4.setIcon(noScoreDiceState);
+        dice1.setIcon(noScoreDiceState);
+        dice2.setIcon(noScoreDiceState);
+        dice3.setIcon(noScoreDiceState);
+        dice4.setIcon(noScoreDiceState);
     }
     
     public void setMoves(int rollResult)
