@@ -800,17 +800,6 @@ public class MainGame extends javax.swing.JPanel {
       return colorIcon;
     }
     
-    /* Color choose Pieces Feature */
-    public void setFirstPlayerPieceColor(Color color) throws IOException {
-        ImageIcon colorIcon = getPieceImageColor(color);
-        modifiyFirstPlayerPieces(colorIcon);
-    }
-    
-    public void setSecondPlayerPieceColor(Color color) throws IOException{
-        ImageIcon colorIcon = getPieceImageColor(color);
-        modifySecondPlayerPieces(colorIcon);
-    }
-    
     /* Main Frame Dices Feature */
     private void makeDices(){
         try{
@@ -886,6 +875,16 @@ public class MainGame extends javax.swing.JPanel {
         secondPlayerLabelName.setText(name);
     }
 
+    public void setFirstPlayerPieceColor(Color color) {
+        ImageIcon colorIcon = getPieceImageColor(color);
+        modifiyFirstPlayerPieces(colorIcon);
+    }
+    
+    public void setSecondPlayerPieceColor(Color color) {
+        ImageIcon colorIcon = getPieceImageColor(color);
+        modifySecondPlayerPieces(colorIcon);
+    }
+    
     private void modifiyFirstPlayerPieces(ImageIcon icon) {
         pieceLabelFirstPlayer1.setIcon(icon);
         pieceLabelFirstPlayer2.setIcon(icon);

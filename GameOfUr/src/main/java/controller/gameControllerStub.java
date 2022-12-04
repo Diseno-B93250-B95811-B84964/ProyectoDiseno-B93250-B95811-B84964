@@ -29,6 +29,7 @@ public class gameControllerStub {
     private JButton goToMainGameFromLoadGameButton;
     private JButton showRulesFromMainMenuButton;
     private JButton showRulesFromGameButton;
+    private JButton exitAndSaveButton;
     
     private ViewManager viewManager;
     private ArrayList<Player> playerArray;
@@ -55,6 +56,7 @@ public class gameControllerStub {
         goToMainGameFromLoadGameButton = viewManager.getContinueButtonFromLoadGame();
         showRulesFromMainMenuButton = viewManager.getRulesButtonFromGame();
         showRulesFromGameButton = viewManager.getRulesButtonFromMainMenu();
+        exitAndSaveButton = viewManager.getExitAndSave();
         
         startNewGameButton.addActionListener(new buttonAction());
         startLoadGameButton.addActionListener(new buttonAction());
@@ -64,6 +66,7 @@ public class gameControllerStub {
         goToMainGameFromLoadGameButton.addActionListener(new buttonAction());
         showRulesFromMainMenuButton.addActionListener(new buttonAction());
         showRulesFromGameButton.addActionListener(new buttonAction());
+        exitAndSaveButton.addActionListener(new buttonAction());
     }
     
     class buttonAction implements ActionListener{
@@ -75,24 +78,19 @@ public class gameControllerStub {
         }
         
         private void manageContinueToNewGameButton(){
-            refereeStub.setMessaage("Im working through: startNewGameButton" );
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToNewGame();
         }
         
         private void manageContinueToLoadGameButton(){
-            refereeStub.setMessaage("Im working through: startLoadGameButton" );
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToLoadGame();
         }
         
         private void manageStartNewGame(){
-            System.out.println("First player es: " + firstPlayer);
+            Player player = viewManager.getPlayerData();
             if (firstPlayer) {
-                refereeStub.setMessaage("Im working through: goToMainGameFromNewGame" );
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                //viewManager.setPlayers();
-                Player player = viewManager.getPlayerData();
+                System.out.println("Referee stubs says: " + refereeStub.getMessage());                
                 if (player != null) {
                     playerArray.add(player);
                     firstPlayer = false;
@@ -101,12 +99,15 @@ public class gameControllerStub {
                     viewManager.swapViewToNewGame();
                 }
             } else {
-                viewManager.swapViewToMainGame();
+                if (player != null) {
+                    playerArray.add(player);
+                    viewManager.setPlayers(playerArray);
+                    viewManager.swapViewToMainGame();
+                }
             }
         }
         
         private void manageStartLoadGame(){
-            refereeStub.setMessaage("Im working through: goToMainGameFromLoadGame" );
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             File file = viewManager.getFileNameToLoadGame();
             if (file != null) {
@@ -115,13 +116,18 @@ public class gameControllerStub {
         }
         
         private void manageGoBackToMainMenu(){
-            refereeStub.setMessaage("Im working through: goBackToMainMenuFromLoadGame" );
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
         
         private void manageShowRules(){
             viewManager.showRules();
+        }
+        
+        private void manageSaveAndExit(){
+            // TODO implement this
+            // serializer.saveState()
+            System.exit(0);
         }
         
         @Override
@@ -140,6 +146,8 @@ public class gameControllerStub {
                 manageGoBackToMainMenu();
             } else if (source == showRulesFromMainMenuButton || source == showRulesFromGameButton) {
                 manageShowRules();
+            } else if (source == exitAndSaveButton) {
+                manageSaveAndExit();
             }
         }
     }

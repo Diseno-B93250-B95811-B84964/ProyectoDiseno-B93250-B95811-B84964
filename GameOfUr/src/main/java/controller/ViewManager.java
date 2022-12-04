@@ -44,7 +44,7 @@ public class ViewManager {
     private NewGame urNewGame;
     private MainGame urMainGame;
     private ShowRules urShowRules;
-    private ArrayList<Player> playerArray; // TODO delete it and make it just Player?
+    private Player player; // TODO delete it and make it just Player?
     private JFrame mainFrame;
     private JPanel mainPanel;
     private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
@@ -60,7 +60,6 @@ public class ViewManager {
             
             this.urNewGame.addTextFieldFocusistener(new SetColorClickListener());
             
-            playerArray = new ArrayList<>();
             currentPlayer = 1;
             manageCardLayout();
         } catch (IOException ex) {
@@ -109,7 +108,7 @@ public class ViewManager {
     public Player getPlayerData(){
         Color playerColor = urNewGame.getPlayerColor();
         String playerName = urNewGame.getPlayerName();
-        Player player = null;
+        player = null;
         System.out.println("Color: [" + playerColor+"]");
         System.out.println("Nombre: [" + playerName+"]");
         if (playerColor != null && !playerName.equals("Enter player name")) { // TODO remove "Enter..." and make it a const variable
@@ -126,8 +125,12 @@ public class ViewManager {
         this.urNewGame.setPlayerTitle(currentPlayer);
     }
     
-    public void setPlayers(){
-        System.out.println("Players will be set...");   
+    public void setPlayers(ArrayList<Player> playerArray){ // TODO make a urViewManager?
+        this.urMainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName()); // These can be private methods and can be implemented under abstract method "setPlayers()"
+        this.urMainGame.setFirstPlayerPieceColor(playerArray.get(0).getColor());
+        
+        this.urMainGame.setSecondPlayerNameToLabel(playerArray.get(1).getName());
+        this.urMainGame.setSecondPlayerPieceColor(playerArray.get(1).getColor());
     }
     
     public void hideColors(Color color){
@@ -216,6 +219,10 @@ public class ViewManager {
     
     public JButton getRulesButtonFromGame(){
         return urMainGame.getShowRulesButton();
+    }
+    
+    public JButton getExitAndSave(){
+        return urMainGame.getExitAndSaveButton();
     }
     
     class SetColorClickListener implements FocusListener{
