@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Ryzen
+ * @author Mauricio Palma
  */
 public class NewGame extends javax.swing.JPanel {
     private int playerNumber;

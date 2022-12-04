@@ -57,26 +57,22 @@ public class ViewManager {
     public void getFileName(){
     }
     public void swapViewToLoadGame(){
-        this.swapView( "mainGame");
+        this.swapView("loadGame");
     }
     public void swapViewToMainMenu(){
-        this.swapView( "mainMenu");
+        this.swapView("mainMenu");
     }
     public void swapViewToMainGame(){
-        this.swapView( "mainGame");
-
+        this.swapView("mainGame");
     }
     public void swapViewToNewGame(){
+        this.swapView("newGame");
     }
     public void configViewFlow(){ // Jbutton, Card
     }
     public void updateMainGameView(){
     }
     public void manageCardLayout(){
-        
-        //manageButtonsFlow();
-
-        
         addComponentToPanel(mainPanel, urMainMenu, "mainMenu");
         addComponentToPanel(mainPanel, urNewGame, "newGame");
         addComponentToPanel(mainPanel, urLoadGame, "loadGame");
@@ -113,20 +109,21 @@ public class ViewManager {
         return urMainMenu.getLoadFormerGameButton();
     }
     
-    public JButton getGoBackToMainMenuFromNewGameButton(){
-        return urNewGame.getBackButton();
+    public JButton getContinueButtonFromNewGame(){
+        System.out.println("New game button has been passed!");
+        return urNewGame.getContinueButton();
     }
     
-    public JButton getGoBackToMainMenuFromLoadGameButton(){
-        return urLoadGame.getBackButton();
+    public JButton getGoBackButtonFromNewGame(){
+        return urNewGame.getBackButton();
     }
-        
-    public JButton getGoToMainGameFromLoadGameButton(){
+
+    public JButton getContinueButtonFromLoadGame(){
         return urLoadGame.getContinueButton();
     }
-            
-    public JButton getGoToMainGameFromNewGameButton(){
-        return urNewGame.getContinueButton();
+    
+    public JButton getGoBackFromLoadGame(){
+        return urLoadGame.getBackButton();
     }
     
     private void swapView(String viewName){

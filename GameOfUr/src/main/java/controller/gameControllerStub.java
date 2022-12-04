@@ -14,8 +14,9 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
+
 public class gameControllerStub {
     private JButton startNewGameButton;
     private JButton startLoadGameButton;
@@ -24,13 +25,13 @@ public class gameControllerStub {
     private JButton goBackToMainMenuFromLoadGame;
     private JButton goToMainGameFromLoadGame;
     
-    private ViewManager view;
+    private ViewManager viewManager;
     
     public gameControllerStub(){
         try {
             SwingUtilities.invokeAndWait(() -> {
-                view = new ViewManager();
-                view.manageCardLayout();
+                viewManager = new ViewManager();
+                viewManager.manageCardLayout();
                 manageButtons();
                 
             });
@@ -40,12 +41,12 @@ public class gameControllerStub {
     }
     
     private void manageButtons(){
-        startNewGameButton = view.getStartNewGameButton();
-        startLoadGameButton = view.getStartLoadGameButton();
-        goBackToMainMenuFromNewGame = view.getGoBackToMainMenuFromNewGameButton();
-        goToMainGameFromNewGame = view.getGoToMainGameFromLoadGameButton();
-        goBackToMainMenuFromLoadGame = view.getGoBackToMainMenuFromLoadGameButton();
-        goToMainGameFromLoadGame = view.getGoToMainGameFromNewGameButton();
+        startNewGameButton = viewManager.getStartNewGameButton();
+        startLoadGameButton = viewManager.getStartLoadGameButton();
+        goBackToMainMenuFromNewGame = viewManager.getGoBackButtonFromNewGame();
+        goToMainGameFromNewGame = viewManager.getContinueButtonFromNewGame();
+        goBackToMainMenuFromLoadGame = viewManager.getGoBackFromLoadGame();
+        goToMainGameFromLoadGame = viewManager.getContinueButtonFromLoadGame();
         
         startNewGameButton.addActionListener(new buttonAction());
         startLoadGameButton.addActionListener(new buttonAction());
@@ -56,27 +57,40 @@ public class gameControllerStub {
     }
     
     class buttonAction implements ActionListener{
+        
+        boolean firstPlayer;
+        
         public buttonAction() {
-            System.out.println("Im alive!");
+            firstPlayer  = true;
         }
         
         @Override
-        public void actionPerformed(ActionEvent e) {
-            Object source = e.getSource();
+        public void actionPerformed(ActionEvent event) {
+            Object source = event.getSource();
             refereeStub refereeStub = new refereeStub();
             if (source == startNewGameButton) {
                 refereeStub.setMessaage("Im working through: startNewGameButton" );
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                //view.swapViewToMainMenu();
+                viewManager.swapViewToNewGame();
             } else if (source == startLoadGameButton) {
                 refereeStub.setMessaage("Im working through: startLoadGameButton" );
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                //view.swapViewToLoadGame();
-            } else if (source == goBackToMainMenuFromLoadGame) {
+                viewManager.swapViewToLoadGame();
+            } else if (source == goToMainGameFromNewGame) {
+                System.out.println("First player es: " + firstPlayer);
+                if (firstPlayer) {
+                    refereeStub.setMessaage("Im working through: goToMainGameFromNewGame" );
+                    System.out.println("Referee stubs says: " + refereeStub.getMessage());
+                    viewManager.swapViewToNewGame();
+                    firstPlayer = false;
+                } else {
+                    viewManager.swapViewToMainGame();
+                }
+            } else if (source == goBackToMainMenuFromLoadGame || source == goBackToMainMenuFromNewGame) {
                 refereeStub.setMessaage("Im working through: goBackToMainMenuFromLoadGame" );
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
-                //view.swapViewToMainMenu();
-            }
+                viewManager.swapViewToMainMenu();
+            } 
         }
     }
 }

@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Ryzen
+ * @author Mauricio Palma
  */
 public class MainGame extends javax.swing.JPanel {
     private final static int ROWS = 8;
