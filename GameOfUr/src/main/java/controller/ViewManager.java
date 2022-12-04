@@ -7,11 +7,15 @@ package controller;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import view.LoadGame;
@@ -51,11 +55,31 @@ public class ViewManager {
     }
     
     public void getPlayers(){
+        
     }
     public void setPlayers(){
+        
     }
     public void getFileName(){
+        JFileChooser chooser = urLoadGame.getFileChooser();
+        try {
+            File file = new File(chooser.getSelectedFile().getAbsolutePath());
+            Scanner lineScanner = new Scanner(file);
+            if (lineScanner != null) {
+                while (lineScanner.hasNextLine()) {
+                System.out.println("Content is: " + lineScanner.nextLine());
+                }
+                /*
+                while (lineScanner.hasNextLine()) {
+                    String[] lineAsArray = lineScanner.nextLine().split(",");         
+                    fileAsStringArray.add(removeQuotationMarks(lineAsArray));*/
+                }
+            } 
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     public void swapViewToLoadGame(){
         this.swapView("loadGame");
     }

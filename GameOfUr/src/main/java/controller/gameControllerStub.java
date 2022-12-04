@@ -86,6 +86,11 @@ public class gameControllerStub {
                 } else {
                     viewManager.swapViewToMainGame();
                 }
+            } else if (source == goToMainGameFromLoadGame){
+               refereeStub.setMessaage("Im working through: goToMainGameFromLoadGame" );
+                System.out.println("Referee stubs says: " + refereeStub.getMessage());
+                viewManager.getFileName();
+                viewManager.swapViewToNewGame();
             } else if (source == goBackToMainMenuFromLoadGame || source == goBackToMainMenuFromNewGame) {
                 refereeStub.setMessaage("Im working through: goBackToMainMenuFromLoadGame" );
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
