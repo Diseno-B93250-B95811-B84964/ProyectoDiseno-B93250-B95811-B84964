@@ -13,6 +13,7 @@ import model.Board;
 
 import model.Piece;
 import model.Player;
+import model.Rules;
 import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
@@ -35,8 +36,11 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
-            System.out.println("Testing Player classes");
-            testPlayerClasses();
+            //System.out.println("Testing Player classes");
+            //testPlayerClasses();
+            
+            System.out.println("Testing Rules class");
+            testRulesClass();
         });
     }
     
@@ -154,5 +158,10 @@ public class Main {
         //piece8.setInPlay();
         player.modifyScore();
         System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");
+    }
+
+    private static void testRulesClass() {
+        Rules rules = new Rules();
+        System.out.println("rules: " + rules.getRules()); 
     }
 }
