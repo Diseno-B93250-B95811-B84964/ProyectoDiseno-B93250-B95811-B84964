@@ -20,25 +20,25 @@ public final class Board<TileType extends Tile> extends GameObject {
      * The graph's adjacent matrix.
      * It indicates all possible routes.
      */
-    protected boolean[][] graphAdjacentMatrix;
+    private boolean[][] graphAdjacentMatrix;
     
     /**
      * Amount of vertices in graph.
      */
-    protected int verticesAmount;
+    private int verticesAmount;
     /**
      * Stores all of the graph's vertices.
      * It also serves as a list of all game tiles.
      */
-    protected ArrayList<TileType> vertices;
+    private ArrayList<TileType> vertices;
     /**
      * Amount of rows in game board
      */
-    protected int amountRows;
+    private int amountRows;
     /**
      * Amount of columns in game board
      */
-    protected int amountColumns;
+    private int amountColumns;
 
     /**
      * Creates a new Board represented as a graph given the amount of vertices given.
