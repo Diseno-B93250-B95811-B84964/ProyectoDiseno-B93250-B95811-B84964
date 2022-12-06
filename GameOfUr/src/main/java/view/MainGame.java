@@ -35,6 +35,8 @@ public class MainGame extends javax.swing.JPanel {
     private ImageIcon scoreDiceState;
     private int usedPiecesFirstPlayer;
     private int usedPiecesSecondPlayer;
+    private Color firstPlayerColor;
+    private Color secondPlayerColor;
     
     private final static Color BLUE = new Color (0,102,255);
     private final static Color BROWN = new Color (102,51,0);
@@ -489,50 +491,16 @@ public class MainGame extends javax.swing.JPanel {
     }
     
     /* Button feature */
-    public void desactiveAPieceForFirstPlayer(){
-        switch (usedPiecesFirstPlayer) {
-            case 1 -> {
-                pieceLabelFirstPlayer1.setEnabled(false);
-                pieceLabelFirstPlayer1.setVisible(false);
-                break;
-            }
-            case 2 -> {
-                pieceLabelFirstPlayer2.setEnabled(false);
-                pieceLabelFirstPlayer2.setVisible(false);
-                break;
-            }
-            case 3 -> {
-                pieceLabelFirstPlayer3.setEnabled(false);
-                pieceLabelFirstPlayer3.setVisible(false);
-                break;
-            }
-            case 4 -> {
-                pieceLabelFirstPlayer4.setEnabled(false);
-                pieceLabelFirstPlayer4.setVisible(false);
-                break;
-            }
-            case 5 -> {
-                pieceLabelFirstPlayer5.setEnabled(false);
-                pieceLabelFirstPlayer5.setVisible(false);
-                break;
-            }
-            case 6 -> {
-                pieceLabelFirstPlayer6.setEnabled(false);
-                pieceLabelFirstPlayer6.setVisible(false);
-                break;
-            }
-            case 7 -> {
-                pieceLabelFirstPlayer7.setEnabled(false);
-                pieceLabelFirstPlayer7.setVisible(false);
-                break;
-            }
-            default -> {
-            }
+    
+    public void activeAPieceForPlayer(Color color) {
+        if (color == firstPlayerColor) {
+            activeAPieceForFirstPlayer();
+        } else if (color == secondPlayerColor) {
+            activeAPieceForSecondPlayer();
         }
-        usedPiecesFirstPlayer++;
     }
-
-    public void activeAPieceForFirstPlayer(){
+    
+    private void activeAPieceForFirstPlayer(){
         usedPiecesFirstPlayer--;
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
@@ -575,7 +543,100 @@ public class MainGame extends javax.swing.JPanel {
         }
     } 
     
-    public void desactiveAPieceForSecondPlayer(){
+    private void activeAPieceForSecondPlayer(){
+        usedPiecesSecondPlayer--;
+        switch (usedPiecesSecondPlayer) {
+            case 1 -> {
+                pieceLabelSecondPlayer1.setEnabled(true);
+                pieceLabelSecondPlayer1.setVisible(true);
+                break;
+            }
+            case 2 -> {
+                pieceLabelSecondPlayer2.setEnabled(true);
+                pieceLabelSecondPlayer2.setVisible(true);
+                break;
+            }
+            case 3 -> {
+                pieceLabelSecondPlayer3.setEnabled(true);
+                pieceLabelSecondPlayer3.setVisible(true);
+                break;
+            }
+            case 4 -> {
+                pieceLabelSecondPlayer4.setEnabled(true);
+                pieceLabelSecondPlayer4.setVisible(true);
+                break;
+            }
+            case 5 -> {
+                pieceLabelSecondPlayer5.setEnabled(true);
+                pieceLabelSecondPlayer5.setVisible(true);
+                break;
+            }
+            case 6 -> {
+                pieceLabelSecondPlayer6.setEnabled(true);
+                pieceLabelSecondPlayer6.setVisible(true);
+                break;
+            }
+            case 7 -> {
+                pieceLabelSecondPlayer7.setEnabled(true);
+                pieceLabelSecondPlayer7.setVisible(true);
+                break;
+            }
+            default -> {
+            }
+        }      
+    } 
+    
+    public void desactiveAPieceForPlayer(Color color) {
+        if (color == firstPlayerColor) {
+            desactiveAPieceForFirstPlayer();
+        } else if (color == secondPlayerColor) {
+            desactiveAPieceForSecondPlayer();
+        }
+    }
+    private void desactiveAPieceForFirstPlayer(){
+        switch (usedPiecesFirstPlayer) {
+            case 1 -> {
+                pieceLabelFirstPlayer1.setEnabled(false);
+                pieceLabelFirstPlayer1.setVisible(false);
+                break;
+            }
+            case 2 -> {
+                pieceLabelFirstPlayer2.setEnabled(false);
+                pieceLabelFirstPlayer2.setVisible(false);
+                break;
+            }
+            case 3 -> {
+                pieceLabelFirstPlayer3.setEnabled(false);
+                pieceLabelFirstPlayer3.setVisible(false);
+                break;
+            }
+            case 4 -> {
+                pieceLabelFirstPlayer4.setEnabled(false);
+                pieceLabelFirstPlayer4.setVisible(false);
+                break;
+            }
+            case 5 -> {
+                pieceLabelFirstPlayer5.setEnabled(false);
+                pieceLabelFirstPlayer5.setVisible(false);
+                break;
+            }
+            case 6 -> {
+                pieceLabelFirstPlayer6.setEnabled(false);
+                pieceLabelFirstPlayer6.setVisible(false);
+                break;
+            }
+            case 7 -> {
+                pieceLabelFirstPlayer7.setEnabled(false);
+                pieceLabelFirstPlayer7.setVisible(false);
+                break;
+            }
+            default -> {
+            }
+        }
+        usedPiecesFirstPlayer++;
+    }
+        
+    private void desactiveAPieceForSecondPlayer(){
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
                 pieceLabelSecondPlayer1.setEnabled(false);
@@ -618,48 +679,7 @@ public class MainGame extends javax.swing.JPanel {
         usedPiecesSecondPlayer++;
     }
 
-    public void activeAPieceForSecondPlayer(){
-        usedPiecesSecondPlayer--;
-        switch (usedPiecesSecondPlayer) {
-            case 1 -> {
-                pieceLabelSecondPlayer1.setEnabled(true);
-                pieceLabelSecondPlayer1.setVisible(true);
-                break;
-            }
-            case 2 -> {
-                pieceLabelSecondPlayer2.setEnabled(true);
-                pieceLabelSecondPlayer2.setVisible(true);
-                break;
-            }
-            case 3 -> {
-                pieceLabelSecondPlayer3.setEnabled(true);
-                pieceLabelSecondPlayer3.setVisible(true);
-                break;
-            }
-            case 4 -> {
-                pieceLabelSecondPlayer4.setEnabled(true);
-                pieceLabelSecondPlayer4.setVisible(true);
-                break;
-            }
-            case 5 -> {
-                pieceLabelSecondPlayer5.setEnabled(true);
-                pieceLabelSecondPlayer5.setVisible(true);
-                break;
-            }
-            case 6 -> {
-                pieceLabelSecondPlayer6.setEnabled(true);
-                pieceLabelSecondPlayer6.setVisible(true);
-                break;
-            }
-            case 7 -> {
-                pieceLabelSecondPlayer7.setEnabled(true);
-                pieceLabelSecondPlayer7.setVisible(true);
-                break;
-            }
-            default -> {
-            }
-        }      
-    } 
+
     
     /*Load Images Methods*/
     private BufferedImage loadImagesForJarFile(String imageName) throws IOException{
@@ -858,11 +878,21 @@ public class MainGame extends javax.swing.JPanel {
 
     /*Get players pieces icons*/
 
-    public Icon getFirstPlayerIcon(){
+    public Icon getPlayerIcon(Color color){
+        Icon icon = null;
+        if (color == firstPlayerColor) {
+            icon = getFirstPlayerIcon();
+        } else if (color == secondPlayerColor) {
+            icon = getSecondPlayerIcon();
+        }
+        return icon;
+    }
+    
+    private Icon getFirstPlayerIcon(){
         return pieceLabelFirstPlayer1.getIcon();
     }
 
-    public Icon getSecondPlayerIcon(){
+    private Icon getSecondPlayerIcon(){
         return pieceLabelSecondPlayer1.getIcon();
     }
 
@@ -876,11 +906,13 @@ public class MainGame extends javax.swing.JPanel {
     }
 
     public void setFirstPlayerPieceColor(Color color) {
+        this.firstPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
         modifiyFirstPlayerPieces(colorIcon);
     }
     
     public void setSecondPlayerPieceColor(Color color) {
+        this.secondPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
         modifySecondPlayerPieces(colorIcon);
     }

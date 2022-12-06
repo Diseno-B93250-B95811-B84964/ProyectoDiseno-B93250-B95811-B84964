@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -46,8 +47,11 @@ public class ViewManager {
     private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
     
     private Player player;
-    //private int currentPlayer;
+    private Color currentPlayerColor;
     private boolean movedPiece;
+    private boolean canClick;
+    private int clickedRow;
+    private int clickedColumn;
     
     public ViewManager() {
         try {
@@ -59,8 +63,11 @@ public class ViewManager {
             
             initializeListeners();
             
-            //currentPlayer = 1;
-            movedPiece = false;
+            this.movedPiece = false;
+            this.clickedRow = -1;
+            this.clickedColumn = -1;
+            this.canClick = false;
+            this.currentPlayerColor = null;
             manageCardLayout();
         } catch (IOException ex) {
             Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,8 +75,10 @@ public class ViewManager {
     }
     
     /* Methods to play a match */
-    public void playMove(int diceResult, int currentPlayer){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
+    public void playMove(int diceResult, int currentPlayer, Color playerColor){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
         this.setIfPieceMoved(false);
+        this.canClick = true;
+        this.currentPlayerColor = playerColor;
         this.urMainGame.cleanDice();
         this.urMainGame.showThrow(diceResult);
         this.urMainGame.setMoves(diceResult);
@@ -234,6 +243,19 @@ public class ViewManager {
         this.movedPiece = bool;
     }
     
+    private void setClickedTile(int row, int column){
+        this.clickedRow = row;
+        this.clickedColumn = column;
+    }
+    
+    public int getClickedRow(){
+        return this.clickedRow;
+    }
+    
+    public int getClickedColum(){
+        return this.clickedColumn;
+    }
+    
     /*Button Getters */
     
     public JButton getStartNewGameButton(){
@@ -311,9 +333,18 @@ public class ViewManager {
 
         @Override
         public void mousePressed(MouseEvent entered){
-            Tile movedTile = null;
-            this.label.setBackground(Color.decode("#DC3333"));
-            setIfPieceMoved(true);
+            //Tile movedTile = null;
+            if (canClick) {
+                canClick = false;
+                this.label.setBackground(Color.decode("#DC3333"));
+                setIfPieceMoved(true);
+                setClickedTile(this.row, this.column);
+                //ImageIcon icon = urMainGame.getPieceImageColor(currentPlayer.getColor());
+                urMainGame.setNextPossibleLabel(this.row, this.column, urMainGame.getPlayerIcon(currentPlayerColor)); // send color as a parameter so they can all have it
+                urMainGame.desactiveAPieceForPlayer(currentPlayerColor);
+                currentPlayerColor = null;
+            }
+
             /*
             movedTile = startListening();
             if (movedTile != null) {

@@ -150,9 +150,14 @@ public class gameControllerStub {
                 System.out.println("Inside!");
                 int result = throwDice();     
                 currentPlayer++;
-                viewManager.playMove(result, currentPlayer);
+                viewManager.playMove(result, currentPlayer, playerArray.get(currentPlayer-1).getColor());
                 System.out.println("Current player is: " + currentPlayer);
                 currentPlayer = currentPlayer % playerArray.size();
+                System.out.println("Priting selected tile...: ");
+                int row = viewManager.getClickedRow();
+                int column = viewManager.getClickedColum();
+                System.out.println("Row is: " + Integer.toString(row));
+                System.out.println("Column is: " + Integer.toHexString(column));
             }
         }
         
