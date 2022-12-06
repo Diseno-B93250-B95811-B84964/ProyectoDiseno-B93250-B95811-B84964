@@ -294,6 +294,20 @@ public class ViewManager {
         return urMainGame.getThrowDiceButton();
     }
     
+    /* Methods to update GUI */
+    
+    private void cleanTile(int row, int column) {
+        urMainGame.removeIconFromTile(row, column);
+    }
+    
+    public void moveTile(int currentRow, int currentColumn, int nextRow, int nextColumn) {
+        cleanTile(currentRow, currentColumn);
+        urMainGame.setNextPossibleLabel(nextRow, nextColumn, urMainGame.getPlayerIcon(currentPlayerColor));
+    }
+    
+    public void declareWinner(String winnerName){
+    
+    }
     /* Auxiliary inner classes */
     
     class SetColorClickListener implements FocusListener{
