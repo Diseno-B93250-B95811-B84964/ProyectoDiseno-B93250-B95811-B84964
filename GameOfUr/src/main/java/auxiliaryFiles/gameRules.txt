@@ -1,0 +1,6 @@
+Game Rules
+1. Throw the dice to decide who plays first - highest score goes first, if it's a draw, throw again.
+2. Players take turns to throw three binary lots and move one of their pieces.
+3. Only one piece may be moved per throw of the dice and pieces must always move forward around the track.
+4. If a counter lands upon a square occupied by an opposing counter, the counter landed upon is sent off the board and must start again from the beginning.
+5. This wil happen unless a player lands on a flower tile.

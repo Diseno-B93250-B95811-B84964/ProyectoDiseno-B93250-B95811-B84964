@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #26 - Game Logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -32,13 +32,14 @@ public final class FileManager {
         fileContents = new ArrayList<String>();
     }
     /**
-     *
-     * @param fileName Contains the name of the new file .
-     * @param fileExt Contains the extension of the file.
-     * @param dirPath Contains the path in which the file will be stored
-     * @return
+     * Creates file with given name and extension in given directory 
+     * @param name Contains the name of the new file.
+     * @param extension Contains the extension of the file.
+     * @param path Contains the path in which the file will be stored.
+     * @param contents Contains the contents that will be stored in file.
+     * @return whether operation was successful.
      */
-    public boolean saveFile(String fileName, String fileExt, String dirPath) {
+    public boolean saveFile(String name, String extension, String path, ArrayList<String> contents) {
         boolean success = false;
         String completeFileName = dirPath + fileName + fileExt;
         try { 
@@ -57,8 +58,36 @@ public final class FileManager {
     public void setFileContents(ArrayList<String> fileContents){
        this.fileContents = fileContents; 
     }
-    
-    public ArrayList<String> getFileContents(){
-       return fileContents;
+    /**
+     * Loads file with given name, located in given path, into fileContents.
+     * @param fileName Contains the name of the file.
+     * @param dirPath Contains the path in which the file is stored.
+     * @return whether operation was successful.
+     */
+    public boolean loadFile(String fileName, String dirPath) {
+        fileContents = new ArrayList<>();
+        boolean success = false;
+        
+        try {
+            File myObj = new File(dirPath + fileName);
+            Scanner reader = new Scanner(myObj);
+            while (reader.hasNextLine()) {
+              String data = reader.nextLine();
+              fileContents.add(data);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(
+                "An error occurred. File: " + dirPath + fileName + " not found");
+        }
+        
+        return success;
+    }
+    /**
+     * Returns contents read or written to file.
+     * @return fileContents array.
+     */
+    public ArrayList<String> getFileContents() {
+        return this.fileContents;
     }
 }

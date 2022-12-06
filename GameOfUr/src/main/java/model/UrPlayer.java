@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #26 - Game Logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
- * @param <PieceType> Piece's child class
  */
 public class UrPlayer extends Player {
     /**
@@ -44,6 +43,7 @@ public class UrPlayer extends Player {
         UrPiece availablePiece = null;
         // TODO: research how to fix this issue
         for(var piece : pieces) {
+            //if (piece.isInstanceOf(Piece));
             availablePiece = (UrPiece)piece;
             if (!availablePiece.isInPlay()) {
                 break;

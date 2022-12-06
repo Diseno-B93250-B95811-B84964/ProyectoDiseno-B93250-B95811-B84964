@@ -10,9 +10,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import model.Board;
+import model.Dice;
 
 import model.Piece;
 import model.Player;
+import model.Rules;
 import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
@@ -37,6 +39,14 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
+            //System.out.println("Testing Player classes");
+            //testPlayerClasses();
+            
+            //System.out.println("Testing Rules class");
+            //testRulesClass();
+            
+            System.out.println("Testing Dice class");
+            testDiceClass();
             //System.out.println("Testing Player classes");
             //testPlayerClasses();
             
@@ -166,6 +176,22 @@ public class Main {
         //piece8.setInPlay();
         player.modifyScore();
         System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");
+    }
+
+    private static void testRulesClass() {
+        Rules rules = new Rules();
+        System.out.println("rules: " + rules.getRules()); 
+    }
+    
+    private static void testDiceClass() {
+        float[] probabilities = { 10, 10, 50, 10, 20 };
+        Dice dice = new Dice(5, probabilities);
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
     }
     
     public static void testSavingFile() {

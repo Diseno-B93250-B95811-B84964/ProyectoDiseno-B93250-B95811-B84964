@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #25 - Graph logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
