@@ -4,14 +4,8 @@
  */
 package controller;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -52,7 +46,8 @@ public class ViewManager {
     private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
     
     private Player player;
-    private int currentPlayer;
+    //private int currentPlayer;
+    private boolean movedPiece;
     
     public ViewManager() {
         try {
@@ -64,7 +59,8 @@ public class ViewManager {
             
             initializeListeners();
             
-            currentPlayer = 1;
+            //currentPlayer = 1;
+            movedPiece = false;
             manageCardLayout();
         } catch (IOException ex) {
             Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,14 +68,14 @@ public class ViewManager {
     }
     
     /* Methods to play a match */
-    public void playMove(int diceResult){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
+    public void playMove(int diceResult, int currentPlayer){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
+        this.setIfPieceMoved(false);
         this.urMainGame.cleanDice();
         this.urMainGame.showThrow(diceResult);
         this.urMainGame.setMoves(diceResult);
         this.urMainGame.changePlayerTurn(currentPlayer);
-        currentPlayer++;
-        currentPlayer = currentPlayer % 2; // TODO change this 2
-        
+        //currentPlayer++;
+        //currentPlayer = currentPlayer % 2; // TODO change this 2
     }
     
     public void updateMainGameView(){
@@ -137,8 +133,8 @@ public class ViewManager {
         return player;
     }
     
-    public void updateNewGameForNextPlayer(){
-        this.currentPlayer++;
+    public void updateNewGameForNextPlayer(int currentPlayer){
+        //this.currentPlayer++;
         this.urNewGame.resetPlayerNameTextField();
         this.urNewGame.setPlayerTitle(currentPlayer);
     }
@@ -155,10 +151,13 @@ public class ViewManager {
     
     public void hideColors(Color color){
         urNewGame.hideColorButton(color);
-        //urNewGame.revalidate();
-        //urNewGame.repaint();
+        urNewGame.revalidate();
+        urNewGame.repaint();
     }
     
+    public void resetColorChosen () {
+        urNewGame.resetColorChosen();
+    }
     
     /*Swap methods */
     
@@ -225,6 +224,16 @@ public class ViewManager {
         }
     }
     
+    /* Check if piece moved*/
+    
+    public boolean getIfPieceMoved(){
+        return this.movedPiece;
+    }
+    
+    public void setIfPieceMoved(boolean bool){
+        this.movedPiece = bool;
+    }
+    
     /*Button Getters */
     
     public JButton getStartNewGameButton(){
@@ -288,7 +297,7 @@ public class ViewManager {
         }
     }
     
-        class TileMouseListener extends MouseAdapter {
+    class TileMouseListener extends MouseAdapter {
         Tile tile;
         JLabel label;
         int row;
@@ -303,7 +312,9 @@ public class ViewManager {
         @Override
         public void mousePressed(MouseEvent entered){
             Tile movedTile = null;
-            this.label.setBackground(Color.decode("#DC3333")); /*
+            this.label.setBackground(Color.decode("#DC3333"));
+            setIfPieceMoved(true);
+            /*
             movedTile = startListening();
             if (movedTile != null) {
                 int x = movedTile.getRow();

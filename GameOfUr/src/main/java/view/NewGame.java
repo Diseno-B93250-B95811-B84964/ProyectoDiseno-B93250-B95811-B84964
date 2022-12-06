@@ -52,7 +52,7 @@ public class NewGame extends javax.swing.JPanel {
         continueButton = new javax.swing.JButton();
 
         Title.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        Title.setText("SET UP PLAYER");
+        Title.setText("SET UP PLAYER #1");
 
         RedButton.setBackground(new java.awt.Color(255, 0, 0));
         RedButton.setFont(new java.awt.Font("Century Schoolbook", 1, 22)); // NOI18N
@@ -146,10 +146,6 @@ public class NewGame extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Title)
-                .addGap(342, 342, 342))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,13 +169,17 @@ public class NewGame extends javax.swing.JPanel {
                         .addGap(406, 406, 406)
                         .addComponent(playerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(265, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Title)
+                .addGap(318, 318, 318))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(76, 76, 76)
                 .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(playerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,6 +306,10 @@ public class NewGame extends javax.swing.JPanel {
     
     public void resetPlayerNameTextField(){
         playerNameTextField.setText("Enter player name");
+    }
+    
+    public void resetColorChosen() {
+        playerColor = null;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

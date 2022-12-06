@@ -37,13 +37,16 @@ public class gameControllerStub {
     private ArrayList<Player> playerArray;
     private Dice dice;
     
+    private int currentPlayer;
+    
     public gameControllerStub(){
         try {
             SwingUtilities.invokeAndWait(() -> {
-                viewManager = new ViewManager();
-                playerArray = new ArrayList<>();
-                dice = new Dice();
-                manageButtons();
+                this.viewManager = new ViewManager();
+                this.playerArray = new ArrayList<>();
+                this.dice = new Dice();
+                this.manageButtons();
+                this.currentPlayer = 1;
                 
             });
         } catch (InterruptedException | InvocationTargetException ex) {
@@ -78,30 +81,33 @@ public class gameControllerStub {
     class buttonAction implements ActionListener{
         refereeStub refereeStub = new refereeStub();
         boolean firstPlayer;
+        boolean playerPlayed;
         
         public buttonAction() {
             firstPlayer  = true;
+            playerPlayed = true;
+            viewManager.setIfPieceMoved(true);
         }
         
         private void manageContinueToNewGameButton(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToNewGame();
         }
         
         private void manageContinueToLoadGameButton(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToLoadGame();
         }
         
         private void manageStartNewGame(){
             Player player = viewManager.getPlayerData();
+            int nextPlayerNumber = currentPlayer+1;
             if (firstPlayer) {
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());                
                 if (player != null) {
                     playerArray.add(player);
                     firstPlayer = false;
-                    viewManager.updateNewGameForNextPlayer();
+                    viewManager.updateNewGameForNextPlayer(nextPlayerNumber);
                     viewManager.hideColors(player.getColor());
+                    viewManager.resetColorChosen();
                     viewManager.swapViewToNewGame();
                 }
             } else {
@@ -139,13 +145,19 @@ public class gameControllerStub {
         }
         
         private void managePlay(){
-            int result = throwDice();
-            viewManager.playMove(result);
+            playerPlayed = viewManager.getIfPieceMoved();
+            if (playerPlayed) {
+                System.out.println("Inside!");
+                int result = throwDice();     
+                currentPlayer++;
+                viewManager.playMove(result, currentPlayer);
+                System.out.println("Current player is: " + currentPlayer);
+                currentPlayer = currentPlayer % playerArray.size();
+            }
         }
         
         private int throwDice(){
             int diceResult = 0;
-            //diceThrown  = true;
             dice.rollDice();
             diceResult = dice.getRollResult();
             return diceResult;
