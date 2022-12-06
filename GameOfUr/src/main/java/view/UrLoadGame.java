@@ -12,12 +12,12 @@ import javax.swing.JFileChooser;
  *
  * @author Ximena Gdur, Mauricio Palma
  */
-public class LoadGame extends javax.swing.JPanel {
+public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface{
 
     /**
      * Creates new form LoadGamePanel
      */
-    public LoadGame() {
+    public UrLoadGame() {
         initComponents();
     }
 
@@ -102,14 +102,17 @@ public class LoadGame extends javax.swing.JPanel {
     }//GEN-LAST:event_continueButtonActionPerformed
 
     /*Button getters */
+    @Override
     public JButton getContinueButton(){
         return continueButton;
     }
     
+    @Override
     public JButton getBackButton(){
         return goBackButton;
     }
     
+    @Override
     public JFileChooser getFileChooser(){
         return fileChooser;
     }

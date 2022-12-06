@@ -10,12 +10,12 @@ import javax.swing.JButton;
  *
  * @author Jimena Gdur, Mauricio Palma
  */
-public class MainMenu extends javax.swing.JPanel {
+public class UrMainMenu extends javax.swing.JPanel implements MainMenuInterface {
     
     /**
      * Creates new form MainMenuViewJPanel
      */
-    public MainMenu() {
+    public UrMainMenu() {
         initComponents();
     }
 
@@ -128,14 +128,17 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_rulesButtonActionPerformed
 
     /* Button getters */
+    @Override
     public JButton getStartNewGameButton(){
        return startNewGameButton;
     }
     
+    @Override
     public JButton getLoadFormerGameButton(){
        return loadGameButton;
     }
     
+    @Override
     public JButton getShowRulesButton(){
         return rulesButton;
     }

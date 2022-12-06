@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author Mauricio Palma
  */
-public class NewGame extends javax.swing.JPanel {
+public class UrNewGame extends javax.swing.JPanel implements NewGameInterface{
     private Color playerColor;
     private final static Color BLUE = new Color (0,102,255);
     private final static Color BROWN = new Color (102,51,0);
@@ -26,7 +26,7 @@ public class NewGame extends javax.swing.JPanel {
     /**
      * Creates new form LoadGamePanel
      */
-    public NewGame() {
+    public UrNewGame() {
         initComponents();
         playerColor = null;
     }
@@ -245,12 +245,20 @@ public class NewGame extends javax.swing.JPanel {
 
     /* Text setters */
     
+    @Override
     public void setPlayerTitle(int playerNumber){
         String currentText = "SET UP PLAYER";
         Title.setText(currentText + "#" + playerNumber);
     }
     
     /* TextField Listener */
+
+    /**
+     *
+     * @param listenForButton
+     */
+
+    @Override
     public void addTextFieldFocusistener(FocusListener listenForButton) {
         System.out.println("Im trying to gain focus...");
         playerNameTextField.addFocusListener(listenForButton);
@@ -258,29 +266,35 @@ public class NewGame extends javax.swing.JPanel {
     
     /* Getters */
     
+    @Override
     public JTextField getPlayerNameTextField(){
         return playerNameTextField;
     }
 
+    @Override
     public Color getPlayerColor(){
         return playerColor;
     }
     
+    @Override
     public String getPlayerName(){
         return playerNameTextField.getText();
     }
     
     /* Button getters */
     
+    @Override
     public JButton getContinueButton(){
         return continueButton;
     }
     
+    @Override
     public JButton getBackButton(){
         return backButton;
     }
     
     /* Miscellaneous */
+    @Override
     public void hideColorButton(Color color){
         System.out.println("A color is being erased... so long");
         if (color.getRGB() == BLUE.getRGB()) {
@@ -304,10 +318,12 @@ public class NewGame extends javax.swing.JPanel {
         }
     }
     
+    @Override
     public void resetPlayerNameTextField(){
         playerNameTextField.setText("Enter player name");
     }
     
+    @Override
     public void resetColorChosen() {
         playerColor = null;
     }

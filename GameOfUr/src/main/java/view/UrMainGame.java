@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  *
  * @author Mauricio Palma
  */
-public class MainGame extends javax.swing.JPanel {
+public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     private final static int ROWS = 8;
     private final static int COLUMNS = 3;
     private JLabel tilesArray[][] = new JLabel[ROWS][COLUMNS];
@@ -49,7 +49,7 @@ public class MainGame extends javax.swing.JPanel {
      * Creates new form MainGame
      * @throws java.io.IOException
      */
-    public MainGame() throws IOException {
+    public UrMainGame() throws IOException {
         initComponents();
         initializeTilesArray();
         makeUrBoard();
@@ -128,7 +128,7 @@ public class MainGame extends javax.swing.JPanel {
         firstPlayerTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         firstPlayerTitleLabel.setText("Player 1");
 
-        firstPlayerLabelName.setAlignment(java.awt.Label.CENTER);
+        firstPlayerLabelName.setAlignment(1);
         firstPlayerLabelName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         firstPlayerLabelName.setText("label1");
 
@@ -232,7 +232,7 @@ public class MainGame extends javax.swing.JPanel {
         secondPlayerTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         secondPlayerTitleLabel.setText("Player 2");
 
-        secondPlayerLabelName.setAlignment(java.awt.Label.CENTER);
+        secondPlayerLabelName.setAlignment(1);
         secondPlayerLabelName.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         secondPlayerLabelName.setText("label1");
 
@@ -474,24 +474,29 @@ public class MainGame extends javax.swing.JPanel {
 
     /* Button getters */
     
+    @Override
     public JButton getShowRulesButton(){
         return this.rulesButton;
     }
     
+    @Override
     public JButton getThrowDiceButton(){
         return this.throwDiceButton;
     }
     
+    @Override
     public JButton getExitAndSaveButton(){
         return this.saveAndLeaveButton;
     }
     
+    @Override
     public JLabel[][] getTilesMatrix(){
         return tilesArray;
     }
     
     /* Button feature */
     
+    @Override
     public void activeAPieceForPlayer(Color color) {
         if (color == firstPlayerColor) {
             activeAPieceForFirstPlayer();
@@ -586,6 +591,7 @@ public class MainGame extends javax.swing.JPanel {
         }      
     } 
     
+    @Override
     public void desactiveAPieceForPlayer(Color color) {
         if (color == firstPlayerColor) {
             desactiveAPieceForFirstPlayer();
@@ -752,10 +758,12 @@ public class MainGame extends javax.swing.JPanel {
         }
     }
     
+    @Override
     public JLabel getLabel(int row, int column){
         return tilesArray[row][column];
     }
     
+    @Override
     public void setNextPossibleLabel(int row, int column, Icon icon) {
         tilesArray[row][column].setIcon(icon);
     }
@@ -764,6 +772,7 @@ public class MainGame extends javax.swing.JPanel {
         tilesArray[row][column].setIcon(null);
     }
     
+    @Override
     public void removeIconFromTile(int row, int column){
         try { 
             if (row == 0 && column == 0) {
@@ -809,6 +818,7 @@ public class MainGame extends javax.swing.JPanel {
         tilesArray[6][2].setIcon(image);
     }
 
+    @Override
     public ImageIcon getPieceImageColor(Color color) {
         ImageIcon colorIcon = null;
         try {
@@ -875,13 +885,14 @@ public class MainGame extends javax.swing.JPanel {
         return new ImageIcon(resizedImage);
     }
     
-    public void showThrow(int rollResult)
-    {
+    @Override
+    public void showThrownDice(int rollResult) {
         for(int index = 0; index < rollResult; index++){
             diceLabelArray[index].setIcon(scoreDiceState);
         }
     }
     
+    @Override
     public void cleanDice()
     {
         dice1.setIcon(noScoreDiceState);
@@ -890,6 +901,7 @@ public class MainGame extends javax.swing.JPanel {
         dice4.setIcon(noScoreDiceState);
     }
     
+    @Override
     public void setMoves(int rollResult)
     {
         String movesResult = String.valueOf(rollResult);
@@ -898,6 +910,7 @@ public class MainGame extends javax.swing.JPanel {
 
     /*Get players pieces icons*/
 
+    @Override
     public Icon getPlayerIcon(Color color){
         Icon icon = null;
         if (color == firstPlayerColor) {
@@ -983,11 +996,13 @@ public class MainGame extends javax.swing.JPanel {
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
 
+    @Override
     public void changePlayerTurn(int number) {
         String playerTurn = "Player " + number+"'s" + " turn";
         playerTurnLabel.setText(playerTurn);
     }
 
+    @Override
     public void declarePlayerWinner(int number) {
         String playerTurn = "Player " + number+"'s" + " won!";
         playerTurnLabel.setText(playerTurn);

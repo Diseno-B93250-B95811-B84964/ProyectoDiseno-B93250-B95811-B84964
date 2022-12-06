@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -24,22 +25,36 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Player;
-import view.LoadGame;
-import view.MainGame;
-import view.MainMenu;
-import view.NewGame;
+import view.LoadGameInterface;
+import view.UrLoadGame;
+import view.UrMainGame;
+import view.UrMainMenu;
+import view.UrNewGame;
 import view.ShowRules;
 
 /**
  *
  * @author Mauricio Palma
+ * @param <MainGameType>
+ * @param <LoadGameType>
+ * @param <MainMenuType>
+ * @param <NewGameType>
+ * @param <ShowRulesType>
  */
-public class ViewManager {
-    private MainMenu urMainMenu;
-    private LoadGame urLoadGame;
-    private NewGame urNewGame;
-    private MainGame urMainGame;
-    private ShowRules urShowRules;
+public class ViewManager
+        <
+            MainGameType extends UrMainGame, 
+            LoadGameType extends UrLoadGame,
+            MainMenuType extends UrMainMenu,
+            NewGameType extends UrNewGame,
+            ShowRulesType extends ShowRules
+        > {
+    
+    private MainMenuType mainMenu;
+    private LoadGameType loadGame;
+    private NewGameType newGame;
+    private MainGameType mainGame;
+    private ShowRulesType showRules;
     private JFrame mainFrame;
     private JPanel mainPanel;
     private CardLayout cardLayout;
@@ -51,25 +66,25 @@ public class ViewManager {
     private int clickedRow;
     private int clickedColumn;
     
-    public ViewManager() {
-        try {
-            this.urMainMenu = new MainMenu();
-            this.urLoadGame = new LoadGame();
-            this.urNewGame = new NewGame();
-            this.urMainGame = new MainGame();
-            this.urShowRules = new ShowRules();
-            
-            initializeListeners();
-            
-            this.movedPiece = false;
-            this.clickedRow = -1;
-            this.clickedColumn = -1;
-            this.canClick = false;
-            this.currentPlayerColor = null;
-            manageCardLayout();
-        } catch (IOException ex) {
-            Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public ViewManager(
+            Supplier<MainGameType> mainGameSupplier,
+            Supplier<LoadGameType> loadGameSupplier,
+            Supplier<MainMenuType> mainMenuSupplier,
+            Supplier<NewGameType> newGameSupplier,
+            Supplier<ShowRulesType> rulesSupplier
+            ) {
+        this.mainMenu = mainMenuSupplier.get();
+        this.loadGame = loadGameSupplier.get();
+        this.newGame = newGameSupplier.get();
+        this.mainGame = mainGameSupplier.get();
+        this.showRules = rulesSupplier.get();
+        initializeListeners();
+        this.movedPiece = false;
+        this.clickedRow = -1;
+        this.clickedColumn = -1;
+        this.canClick = false;
+        this.currentPlayerColor = null;
+        manageCardLayout();
     }
     
     /* Methods to play a match */
@@ -77,10 +92,10 @@ public class ViewManager {
         this.setIfPieceMoved(false);
         this.canClick = true;
         this.currentPlayerColor = playerColor;
-        this.urMainGame.cleanDice();
-        this.urMainGame.showThrow(diceResult);
-        this.urMainGame.setMoves(diceResult);
-        this.urMainGame.changePlayerTurn(currentPlayer);
+        this.mainGame.cleanDice();
+        this.mainGame.showThrownDice(diceResult);
+        this.mainGame.setMoves(diceResult);
+        this.mainGame.changePlayerTurn(currentPlayer);
     }
     
     public void updateMainGameView(){
@@ -88,14 +103,14 @@ public class ViewManager {
     
     public void showRules(){
     //public void showRules(String[] rules){
-        urShowRules.showRules();
+        showRules.showRules();
     }
     
     
     /*Methods to load a former match */
     
     public File getFileNameToLoadGame(){
-        JFileChooser fileChooser = urLoadGame.getFileChooser();
+        JFileChooser fileChooser = loadGame.getFileChooser();
         File file = null;
         if (fileChooser != null) {
             var selectedFile = fileChooser.getSelectedFile();
@@ -125,8 +140,8 @@ public class ViewManager {
     
     /* Methods to create a new game */
     public Player getPlayerData(){
-        Color playerColor = urNewGame.getPlayerColor();
-        String playerName = urNewGame.getPlayerName();
+        Color playerColor = newGame.getPlayerColor();
+        String playerName = newGame.getPlayerName();
         player = null;
         System.out.println("Color: [" + playerColor+"]");
         System.out.println("Nombre: [" + playerName+"]");
@@ -140,28 +155,28 @@ public class ViewManager {
     
     public void updateNewGameForNextPlayer(int currentPlayer){
         //this.currentPlayer++;
-        this.urNewGame.resetPlayerNameTextField();
-        this.urNewGame.setPlayerTitle(currentPlayer);
+        this.newGame.resetPlayerNameTextField();
+        this.newGame.setPlayerTitle(currentPlayer);
     }
     
     /* Methods to personalize a match */
     
     public void setPlayers(ArrayList<Player> playerArray){ // TODO make a urViewManager?
-        this.urMainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName()); // These can be private methods and can be implemented under abstract method "setPlayers()"
-        this.urMainGame.setFirstPlayerPieceColor(playerArray.get(0).getColor());
+        this.mainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName()); // These can be private methods and can be implemented under abstract method "setPlayers()"
+        this.mainGame.setFirstPlayerPieceColor(playerArray.get(0).getColor());
         
-        this.urMainGame.setSecondPlayerNameToLabel(playerArray.get(1).getName());
-        this.urMainGame.setSecondPlayerPieceColor(playerArray.get(1).getColor());
+        this.mainGame.setSecondPlayerNameToLabel(playerArray.get(1).getName());
+        this.mainGame.setSecondPlayerPieceColor(playerArray.get(1).getColor());
     }
     
     public void hideColors(Color color){
-        urNewGame.hideColorButton(color);
-        urNewGame.revalidate();
-        urNewGame.repaint();
+        newGame.hideColorButton(color);
+        newGame.revalidate();
+        newGame.repaint();
     }
     
     public void resetColorChosen () {
-        urNewGame.resetColorChosen();
+        newGame.resetColorChosen();
     }
     
     /*Swap methods */
@@ -193,10 +208,10 @@ public class ViewManager {
         mainPanel = new JPanel();
         cardLayout = new CardLayout();
         mainPanel.setLayout(cardLayout);
-        addComponentToPanel(mainPanel, urMainMenu, "mainMenu");
-        addComponentToPanel(mainPanel, urNewGame, "newGame");
-        addComponentToPanel(mainPanel, urLoadGame, "loadGame");
-        addComponentToPanel(mainPanel, urMainGame, "mainGame");
+        addComponentToPanel(mainPanel, mainMenu, "mainMenu");
+        addComponentToPanel(mainPanel, newGame, "newGame");
+        addComponentToPanel(mainPanel, loadGame, "loadGame");
+        addComponentToPanel(mainPanel, mainGame, "mainGame");
         cardLayout.show(mainPanel, "mainMenu");
         mainFrame.add(mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -215,7 +230,7 @@ public class ViewManager {
     /* GUI Configuration */
     
     private void initializeListeners(){
-        this.urNewGame.addTextFieldFocusistener(new SetColorClickListener());
+        this.newGame.addTextFieldFocusistener(new SetColorClickListener());
         initializeLabels();
     }
     
@@ -223,7 +238,7 @@ public class ViewManager {
         JLabel currentLabel;
         for (int row = 0; row < 8; row++) { // TODO change magic number
             for (int column = 0; column < 3; column++) { // TODO change magic number
-                currentLabel = this.urMainGame.getLabel(row, column);
+                currentLabel = this.mainGame.getLabel(row, column);
                 currentLabel.addMouseListener(new TileMouseListener(row,column));
             }
         }
@@ -255,54 +270,54 @@ public class ViewManager {
     /*Button Getters */
     
     public JButton getStartNewGameButton(){
-        return urMainMenu.getStartNewGameButton();
+        return mainMenu.getStartNewGameButton();
     }
     
     public JButton getStartLoadGameButton(){
-        return urMainMenu.getLoadFormerGameButton();
+        return mainMenu.getLoadFormerGameButton();
     }
     
     public JButton getContinueButtonFromNewGame(){
-        return urNewGame.getContinueButton();
+        return newGame.getContinueButton();
     }
     
     public JButton getGoBackButtonFromNewGame(){
-        return urNewGame.getBackButton();
+        return newGame.getBackButton();
     }
 
     public JButton getContinueButtonFromLoadGame(){
-        return urLoadGame.getContinueButton();
+        return loadGame.getContinueButton();
     }
     
     public JButton getGoBackFromLoadGame(){
-        return urLoadGame.getBackButton();
+        return loadGame.getBackButton();
     }
     
     public JButton getRulesButtonFromMainMenu(){
-        return urMainMenu.getShowRulesButton();
+        return mainMenu.getShowRulesButton();
     }
     
     public JButton getRulesButtonFromGame(){
-        return urMainGame.getShowRulesButton();
+        return mainGame.getShowRulesButton();
     }
     
     public JButton getExitAndSave(){
-        return urMainGame.getExitAndSaveButton();
+        return mainGame.getExitAndSaveButton();
     }
     
     public JButton getThrowDiceButton(){
-        return urMainGame.getThrowDiceButton();
+        return mainGame.getThrowDiceButton();
     }
     
     /* Methods to update GUI */
     
     private void cleanTile(int row, int column) {
-        urMainGame.removeIconFromTile(row, column);
+        mainGame.removeIconFromTile(row, column);
     }
     
     public void moveTile(int currentRow, int currentColumn, int nextRow, int nextColumn) {
         cleanTile(currentRow, currentColumn);
-        urMainGame.setNextPossibleLabel(nextRow, nextColumn, urMainGame.getPlayerIcon(currentPlayerColor));
+        mainGame.setNextPossibleLabel(nextRow, nextColumn, mainGame.getPlayerIcon(currentPlayerColor));
     }
     
     public void declareWinner(String winnerName){
@@ -314,7 +329,7 @@ public class ViewManager {
 
         @Override
         public void focusGained(FocusEvent event) {
-            JTextField currentInput = urNewGame.getPlayerNameTextField();
+            JTextField currentInput = newGame.getPlayerNameTextField();
             if (currentInput.getText().equals("Enter player name")) {
                 currentInput.setText("");
             }        
@@ -322,9 +337,9 @@ public class ViewManager {
 
         @Override
         public void focusLost(FocusEvent event) {
-            JTextField currentInput = urNewGame.getPlayerNameTextField();
+            JTextField currentInput = newGame.getPlayerNameTextField();
             if (currentInput.getText().equals("")) {
-                urNewGame.resetPlayerNameTextField();
+                newGame.resetPlayerNameTextField();
             }     
         }
     }
@@ -344,8 +359,8 @@ public class ViewManager {
                 canClick = false;
                 setIfPieceMoved(true);
                 setClickedTile(this.row, this.column);
-                urMainGame.setNextPossibleLabel(this.row, this.column, urMainGame.getPlayerIcon(currentPlayerColor));
-                urMainGame.desactiveAPieceForPlayer(currentPlayerColor);
+                mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
+                mainGame.desactiveAPieceForPlayer(currentPlayerColor);
                 currentPlayerColor = null;
             }
         }

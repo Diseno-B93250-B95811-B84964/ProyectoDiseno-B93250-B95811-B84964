@@ -7,6 +7,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,6 +17,11 @@ import javax.swing.SwingUtilities;
 import model.Dice;
 import model.Player;
 
+import view.UrLoadGame;
+import view.UrMainGame;
+import view.UrMainMenu;
+import view.UrNewGame;
+import view.ShowRules;
 /**
  *
  * @author Mauricio Palma
@@ -34,15 +40,19 @@ public class gameControllerStub {
     private JButton throwDiceButton;
     
     private ViewManager viewManager;
+    
     private ArrayList<Player> playerArray;
     private Dice dice;
+    
+    
     
     private int currentPlayer;
     
     public gameControllerStub(){
         try {
             SwingUtilities.invokeAndWait(() -> {
-                this.viewManager = new ViewManager();
+                System.out.println("IO what?");
+                this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
                 this.playerArray = new ArrayList<>();
                 this.dice = new Dice();
                 this.manageButtons();
