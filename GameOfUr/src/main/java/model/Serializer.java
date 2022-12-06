@@ -69,6 +69,7 @@ public class Serializer extends JSONManager{
         //return jsonBoard.toString();
     }
     
+    //TODO clean code
     @Override
     public void managePlayers(){
         JSONObject testPiece;
