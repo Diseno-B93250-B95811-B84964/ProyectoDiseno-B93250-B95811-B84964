@@ -17,6 +17,8 @@ import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
 import model.UrTile;
+import model.FileManager;
+import model.Serializer;
 
 /**
 * Main class that starts program.
@@ -35,8 +37,18 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
-            System.out.println("Testing Player classes");
-            testPlayerClasses();
+            //System.out.println("Testing Player classes");
+            //testPlayerClasses();
+            
+            //System.out.println("Testing file creation");
+            //testSavingFile();
+            
+            //System.out.println("Testing vertices to string");
+            //System.out.println(testGameToJSON());
+            
+            System.out.println("Testing json file creation");
+            testJSONCreation();
+            
         });
     }
     
@@ -154,5 +166,58 @@ public class Main {
         //piece8.setInPlay();
         player.modifyScore();
         System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");
+    }
+    
+    public static void testSavingFile() {
+        String fileSeparator = System.getProperty("file.separator");
+        //"C:" + File.separator + "hello" + File.separator + "hi.txt";
+        FileManager testManager = new FileManager();
+        testManager.fileContents.add("{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}");
+        testManager.saveFile("output", ".json", "C:\\Users\\Usuario1\\Documents\\NetBeansProjects\\ProyectoDiseno-B93250-B95811-B84964\\");
+        System.out.println("Creating file was a success");
+    }
+    
+    public static String testGameToJSON(){
+        int vertexNumberFromFile = 24;
+        int rowNumberFromFile = 8;
+        int colNumberFromFile = 3;
+        String output = "";
+        
+        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player[] players = new Player[2];
+        
+        players[0] = player1;
+        players[1] = player2;
+        
+        Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
+        
+        System.out.println("Vertices Amount");
+        System.out.println(board.getVerticesAmount());
+        Serializer testSerializer = new Serializer(board, players);
+        //output = testSerializer.manageBoard();
+        testSerializer.managePlayers();
+        System.out.println(testSerializer.getJSONPlayer1());
+        System.out.println(testSerializer.getJSONPlayer2());
+        return output;
+    }
+    
+    public static void testJSONCreation(){
+        int vertexNumberFromFile = 24;
+        int rowNumberFromFile = 8;
+        int colNumberFromFile = 3;
+           
+        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player[] players = new Player[2];
+        
+        players[0] = player1;
+        players[1] = player2;
+        
+        Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
+        
+        Serializer testSerializer = new Serializer(board, players);
+        
+        testSerializer.execute();
     }
 }

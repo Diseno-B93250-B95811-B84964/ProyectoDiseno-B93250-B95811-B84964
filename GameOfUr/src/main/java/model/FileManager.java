@@ -6,8 +6,12 @@
  */
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import org.json.simple.JSONObject;
 
 /**
@@ -16,10 +20,16 @@ import org.json.simple.JSONObject;
  */
 public final class FileManager {
     /**
-     * Creates a new Rules class.
+     * Contains file contents.
+     * Can contain either the one who will be saved in a file or read from one.
+    */
+    public ArrayList<String> fileContents;
+    
+    /**
+     * Creates a new FileManager class.
     */
     public FileManager() {
-        
+        fileContents = new ArrayList<String>();
     }
     /**
      *
@@ -30,17 +40,25 @@ public final class FileManager {
      */
     public boolean saveFile(String fileName, String fileExt, String dirPath) {
         boolean success = false;
-        
-        /*try {
-            FileWriter file = new FileWriter("E:/output.json");
-            file.write(jsonObject.toJSONString());
-            file.close();
-        } catch (IOException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-        }*/
-        
+        String completeFileName = dirPath + fileName + fileExt;
+        try { 
+            FileWriter file = new FileWriter(completeFileName);
+            file.write(fileContents.toString()); 
+            file.flush(); 
+            file.close(); 
+ 
+        } catch (IOException e) { 
+            System.out.println(
+                "An error occurred. File: " + dirPath + fileName + fileExt + " not found");
+        } 
         return success;
     }
-        
+    
+    public void setFileContents(ArrayList<String> fileContents){
+       this.fileContents = fileContents; 
+    }
+    
+    public ArrayList<String> getFileContents(){
+       return fileContents;
+    }
 }

@@ -192,6 +192,26 @@ public final class Board<TileType extends Tile> extends GameObject {
         return adjacents;
     }
     
+    public ArrayList<TileType> getVerticesArray(){
+        return this.vertices;
+    }
+    
+    public int getVerticesAmount(){
+        return this.verticesAmount;
+    }
+    
+    public int getAmountRows(){
+        return this.amountRows;
+    }
+    
+    public int getAmountColumns(){
+        return this.amountColumns;
+    }
+    
+    public boolean[][] getAdjacentMatrix(){
+        return this.graphAdjacentMatrix;
+    }
+    
     /**
      * Converts board into a string.
      * @return a string representing a board
