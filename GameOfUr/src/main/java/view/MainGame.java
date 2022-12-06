@@ -760,31 +760,51 @@ public class MainGame extends javax.swing.JPanel {
         tilesArray[row][column].setIcon(icon);
     }
     
-    public void removeIconFromLabel(int row, int column)throws IOException{
+    private void removeIconFromLabel(int row, int column)throws IOException{
         tilesArray[row][column].setIcon(null);
     }
     
-    public void removeIconFromRose0_0() throws IOException{
+    public void removeIconFromTile(int row, int column){
+        try { 
+            if (row == 0 && column == 0) {
+                removeIconFromRose0_0();
+            } else if (row == 0 && column == 2){
+                removeIconFromRose0_2();
+            } else if (row == 3 && column == 1){
+                removeIconFromRose3_1();
+            } else if (row == 6 && column == 0) {
+                removeIconFromRose6_0();
+            } else if (row == 6 && column == 2) {
+                removeIconFromRose6_2();
+            } else {
+                removeIconFromLabel(row,column);
+            }
+        } catch (IOException e) {
+            System.out.println("There was a problem going back to blank state. Check images folder");
+        }
+    }
+    
+    private void removeIconFromRose0_0() throws IOException{
         ImageIcon image = getImageIconRose();
         tilesArray[0][0].setIcon(image);
     }
 
-    public void removeIconFromRose0_2() throws IOException{
+    private void removeIconFromRose0_2() throws IOException{
         ImageIcon image = getImageIconRose();
         tilesArray[0][2].setIcon(image);
     }
 
-    public void removeIconFromRose3_1() throws IOException{
+    private void removeIconFromRose3_1() throws IOException{
         ImageIcon image = getImageIconRose();
         tilesArray[3][1].setIcon(image);
     }
 
-    public void removeIconFromRose6_0() throws IOException{
+    private void removeIconFromRose6_0() throws IOException{
         ImageIcon image = getImageIconRose();
         tilesArray[6][0].setIcon(image);
     }
 
-    public void removeIconFromRose6_2() throws IOException{
+    private void removeIconFromRose6_2() throws IOException{
         ImageIcon image = getImageIconRose();
         tilesArray[6][2].setIcon(image);
     }

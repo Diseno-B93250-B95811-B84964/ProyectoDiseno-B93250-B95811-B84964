@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -25,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Player;
-import model.Tile;
 import view.LoadGame;
 import view.MainGame;
 import view.MainMenu;
@@ -44,7 +42,7 @@ public class ViewManager {
     private ShowRules urShowRules;
     private JFrame mainFrame;
     private JPanel mainPanel;
-    private CardLayout cardLayout; // TODO add an integer saying "current player starting at 1?"
+    private CardLayout cardLayout;
     
     private Player player;
     private Color currentPlayerColor;
@@ -75,7 +73,7 @@ public class ViewManager {
     }
     
     /* Methods to play a match */
-    public void playMove(int diceResult, int currentPlayer, Color playerColor){ // Add boolean to know if goes next player. Booleans checks when user throws dice and choose tile
+    public void playMove(int diceResult, int currentPlayer, Color playerColor){
         this.setIfPieceMoved(false);
         this.canClick = true;
         this.currentPlayerColor = playerColor;
@@ -83,8 +81,6 @@ public class ViewManager {
         this.urMainGame.showThrow(diceResult);
         this.urMainGame.setMoves(diceResult);
         this.urMainGame.changePlayerTurn(currentPlayer);
-        //currentPlayer++;
-        //currentPlayer = currentPlayer % 2; // TODO change this 2
     }
     
     public void updateMainGameView(){
@@ -228,7 +224,7 @@ public class ViewManager {
         for (int row = 0; row < 8; row++) { // TODO change magic number
             for (int column = 0; column < 3; column++) { // TODO change magic number
                 currentLabel = this.urMainGame.getLabel(row, column);
-                currentLabel.addMouseListener(new TileMouseListener(currentLabel,row,column));
+                currentLabel.addMouseListener(new TileMouseListener(row,column));
             }
         }
     }
@@ -320,97 +316,38 @@ public class ViewManager {
     }
     
     class TileMouseListener extends MouseAdapter {
-        Tile tile;
-        JLabel label;
         int row;
         int column;
         
-        TileMouseListener(JLabel label, int row, int column){
-            this.label = label;
+        TileMouseListener(int row, int column){
             this.row = row;
             this.column = column;        
         }
 
         @Override
         public void mousePressed(MouseEvent entered){
-            //Tile movedTile = null;
             if (canClick) {
                 canClick = false;
-                this.label.setBackground(Color.decode("#DC3333"));
                 setIfPieceMoved(true);
                 setClickedTile(this.row, this.column);
-                //ImageIcon icon = urMainGame.getPieceImageColor(currentPlayer.getColor());
-                urMainGame.setNextPossibleLabel(this.row, this.column, urMainGame.getPlayerIcon(currentPlayerColor)); // send color as a parameter so they can all have it
+                urMainGame.setNextPossibleLabel(this.row, this.column, urMainGame.getPlayerIcon(currentPlayerColor));
                 urMainGame.desactiveAPieceForPlayer(currentPlayerColor);
                 currentPlayerColor = null;
             }
-
-            /*
-            movedTile = startListening();
-            if (movedTile != null) {
-                int x = movedTile.getRow();
-                int y = movedTile.getColumn();
-                if (currentPlayer == playerArray[0]) {
-                    gameView.setNextPossibleLabel(x,y,gameView.getFirstPlayerIcon());
-                } else {
-                    gameView.setNextPossibleLabel(x,y,gameView.getSecondPlayerIcon());
-                }
-            }
-            if (this.row == 4 && this.column != 1) {
-                this.label.setBackground(Color.decode("#E0E0E0"));
-            } else {
-                this.label.setBackground(Color.decode("#2D3553"));
-            }*/
         }
         /*
-        public Tile startListening() {
-            board = getBoard();
-            tile = board.getTile(this.row, this.column); // TODO Delete?
-            UrTileModel movedTile = null; 
-            boolean validMove = false;
-            if (diceThrown) {
-                if(!winner) {
-                    currentPlayer = playerArray[currentPlayerNum];
-                    board.setPlayerTurn(currentPlayer.getColor());
-                    if (diceResult > 0){
-                        possiblePaths.clear();
-                        calculateAllPossiblePathsPerTurn(diceResult);
-                        
-                        // check if it is first move
-                        if (this.row == 4 && this.column != 1) {
-                            validMove = makeInitialMove();               
-                        } else {
-                            validMove = makeNormalMove(tile);
-                        }
-                        /// Removes piece if there was one
-                        if (validMove) {
-                            tile.resetTile();
-                            try { 
-                                if (this.row == 0 && this.column == 0) {
-                                    gameView.removeIconFromRose0_0();
-                                } else if (this.row == 0 && this.column == 2){
-                                    gameView.removeIconFromRose0_2();
-                                } else if (this.row == 3 && this.column == 1){
-                                    gameView.removeIconFromRose3_1();
-                                } else if (this.row == 6 && this.column == 0) {
-                                    gameView.removeIconFromRose6_0();
-                                } else if (this.row == 6 && this.column == 2) {
-                                    gameView.removeIconFromRose6_2();
-                                } else {
-                                    gameView.removeIconFromLabel(this.row,this.column);
-                            }
-                            } catch (IOException e) {
-                                System.out.println("There was a problem going back to blank state. Check images folder");
-                            }
-                        }                                                 
-                    }
-                    winner = checkIfWinner();          
-                }
-                diceThrown = false;
-                currentPlayerNum ++;
-                currentPlayerNum %= playerArray.length;
+            // check if it is first move
+            if (this.row == 4 && this.column != 1) {
+                validMove = makeInitialMove();               
+            } else {
+                validMove = makeNormalMove(tile);
             }
-            return movedTile;
+        
+            if (validMove) {
+                tile.resetTile();
+                removeIconFromTile(this.row, this.column);
+            }
+        }     
         }*/
     }
 }

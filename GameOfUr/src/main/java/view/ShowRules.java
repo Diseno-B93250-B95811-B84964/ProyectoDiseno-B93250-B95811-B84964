@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class ShowRules extends javax.swing.JPanel {
 

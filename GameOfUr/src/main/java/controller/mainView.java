@@ -6,7 +6,7 @@ package controller;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class mainView {
 

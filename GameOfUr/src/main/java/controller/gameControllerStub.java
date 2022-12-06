@@ -82,10 +82,12 @@ public class gameControllerStub {
         refereeStub refereeStub = new refereeStub();
         boolean firstPlayer;
         boolean playerPlayed;
+        boolean winnerExists;
         
         public buttonAction() {
             firstPlayer  = true;
             playerPlayed = true;
+            winnerExists = false;
             viewManager.setIfPieceMoved(true);
         }
         
@@ -145,20 +147,31 @@ public class gameControllerStub {
         }
         
         private void managePlay(){
-            playerPlayed = viewManager.getIfPieceMoved();
-            if (playerPlayed) {
-                System.out.println("Inside!");
-                int result = throwDice();     
-                currentPlayer++;
-                viewManager.playMove(result, currentPlayer, playerArray.get(currentPlayer-1).getColor());
-                System.out.println("Current player is: " + currentPlayer);
-                currentPlayer = currentPlayer % playerArray.size();
-                System.out.println("Priting selected tile...: ");
-                int row = viewManager.getClickedRow();
-                int column = viewManager.getClickedColum();
-                System.out.println("Row is: " + Integer.toString(row));
-                System.out.println("Column is: " + Integer.toHexString(column));
+            boolean winner = checkIfWinner();
+            if (!winner) {
+                playerPlayed = viewManager.getIfPieceMoved();
+                if (playerPlayed) {
+                    System.out.println("Inside!");
+                    int result = throwDice();     
+                    currentPlayer++;
+                    viewManager.playMove(result, currentPlayer, playerArray.get(currentPlayer-1).getColor());
+                    System.out.println("Current player is: " + currentPlayer);
+                    currentPlayer = currentPlayer % playerArray.size();
+                    System.out.println("Priting selected tile...: ");
+                    int row = viewManager.getClickedRow();
+                    int column = viewManager.getClickedColum();
+                    System.out.println("Row is: " + Integer.toString(row));
+                    System.out.println("Column is: " + Integer.toHexString(column));
+                }
             }
+
+        }
+        
+        private boolean checkIfWinner(){
+            //if (playerArray.get(currentPlayer).getScore() == 7) {
+               // winnerExists = true;
+            //}
+            return winnerExists;
         }
         
         private int throwDice(){

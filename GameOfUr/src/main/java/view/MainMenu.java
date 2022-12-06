@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Jimena Gdur
+ * @author Jimena Gdur, Mauricio Palma
  */
 public class MainMenu extends javax.swing.JPanel {
     

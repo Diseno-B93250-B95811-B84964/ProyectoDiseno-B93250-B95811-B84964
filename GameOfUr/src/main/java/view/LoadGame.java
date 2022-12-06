@@ -10,7 +10,7 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author Ximena Gdur
+ * @author Ximena Gdur, Mauricio Palma
  */
 public class LoadGame extends javax.swing.JPanel {
 
