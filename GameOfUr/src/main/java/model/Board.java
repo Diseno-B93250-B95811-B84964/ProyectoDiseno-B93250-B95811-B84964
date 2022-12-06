@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #25 - Graph logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
- * @param <TileType> Tile's child class
+ * @param <TileType> Tile's child class.
  */
 public final class Board<TileType extends Tile> extends GameObject {
     /**
@@ -42,7 +42,7 @@ public final class Board<TileType extends Tile> extends GameObject {
 
     /**
      * Creates a new Board represented as a graph given the amount of vertices given.
-     * @param supplier Supplier class that contains instance of tile's child
+     * @param supplier Supplier class that contains instance of tile's child.
      * @param vertices The number of vertices to be created.
      * @param rows Amount of rows board has.
      * @param cols Amount of columns board has.
