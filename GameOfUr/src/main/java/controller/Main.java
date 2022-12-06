@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import model.Board;
+import model.Dice;
 
 import model.Piece;
 import model.Player;
@@ -39,8 +40,11 @@ public class Main {
             //System.out.println("Testing Player classes");
             //testPlayerClasses();
             
-            System.out.println("Testing Rules class");
-            testRulesClass();
+            //System.out.println("Testing Rules class");
+            //testRulesClass();
+            
+            System.out.println("Testing Dice class");
+            testDiceClass();
         });
     }
     
@@ -163,5 +167,16 @@ public class Main {
     private static void testRulesClass() {
         Rules rules = new Rules();
         System.out.println("rules: " + rules.getRules()); 
+    }
+    
+    private static void testDiceClass() {
+        float[] probabilities = { 10, 10, 50, 10, 20 };
+        Dice dice = new Dice(5, probabilities);
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));
     }
 }
