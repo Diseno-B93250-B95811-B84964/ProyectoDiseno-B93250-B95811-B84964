@@ -82,6 +82,28 @@ public abstract class Referee
      */
     protected abstract void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix);    
     /**
+     * Validates player's intended move, and moves piece there if it is valid.
+     * @param playerId Indicates which player to validate.
+     * @param x The row of the tile the player selected.
+     * @param y The column of the tile the player selected.
+     * @param moves Amount of moves the dice selected.
+     * @return whether the move is valid.
+     */
+    protected abstract boolean validateMove(int playerId, int x, int y, int moves); 
+    /**
+     * Validates player's score taking into consideration their last move.
+     * @param playerId Indicates which player to validate.
+     * @param lastMoveRow Row of tile in which player set their piece.
+     * @param lastMoveCol Column of tile in which player set their piece.
+     * @return whether a point was given to the player.
+     */
+    protected abstract boolean validateScore(int playerId, int lastMoveRow, int lastMoveCol);
+    /**
+     * Validates the status of all players and determines if someone has won.
+     * @return the id of the player that has won the game.
+     */
+    protected abstract int validateScore(); // TODO check if it's what was intended
+    /**
      * Gets game rules from class Rules.
      * @return a list of rules.
      */
@@ -95,11 +117,10 @@ public abstract class Referee
      * @param tileJumps Amount of jumps the tile has to make.
      * @return
      */
-    /*private ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
+    private ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
         ArrayList<Integer> adjacents = new ArrayList<>();
-        boolean foundAdjacent = false;
         
-        if (x >= 0 && x < amountRows && y >= 0 && y < amountColumns) {
+        /*if (x >= 0 && x < amountRows && y >= 0 && y < amountCols) {
             int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
             //System.out.println("x: " + x + ", y: " + y);
             System.out.println("currentVertexIndex: " + currentVertexIndex);
@@ -122,7 +143,7 @@ public abstract class Referee
                     adjacents.add(columnIndex);
                 }
             }
-        }
+        }*/
         return adjacents;
-    }*/
+    }
 }

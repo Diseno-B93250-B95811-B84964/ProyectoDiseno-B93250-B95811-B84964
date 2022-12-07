@@ -45,14 +45,6 @@ public abstract class UrReferee extends Referee
     @Override
     protected void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix) {
         gameBoard = new Board(UrTile::new, tileAmount, amountRows, amountCols);
-        
-        // Converts from ArrayList<String> to ArrayList<ArrayList<Boolean>>
-        /*FileManager fileManager = new FileManager();
-        fileManager.loadFile("adjacentMatrix.txt", "src/main/java/auxiliaryFiles/");
-        ArrayList<String> stringArray = fileManager.getFileContents();
-        ArrayList<ArrayList<String>> stringMatrix = fileManager.splitArray(stringArray, ",");
-        ArrayList<ArrayList<Boolean>> boolMatrix = fileManager.convertFromStringToBoolean(stringMatrix);*/
-        
         gameBoard.setAdjacentMatrix(boolMatrix);
     }
     /**
@@ -70,6 +62,21 @@ public abstract class UrReferee extends Referee
             }
         }
         return sucess;
+    }
+    @Override
+    protected boolean validateMove(int playerId, int x, int y, int moves) {
+        boolean canMove = false;
+        
+        
+        return canMove;
+    }
+    @Override
+    protected boolean validateScore(int playerId, int lastMoveRow, int lastMoveCol) {
+        boolean canMove = false;
+        
+        //if 
+        
+        return canMove;
     }
 
 }
