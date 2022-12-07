@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import org.json.simple.JSONObject;
 
@@ -18,19 +20,14 @@ import org.json.simple.JSONObject;
  * Manages file operations.
  * @author Jimena Gdur.
  */
-public final class FileManager {
+public final class FileManager
+{
     /**
      * Contains file contents.
      * Can contain either the one who will be saved in a file or read from one.
     */
-    public ArrayList<String> fileContents;
+    private ArrayList<String> fileContents;
     
-    /**
-     * Creates a new FileManager class.
-    */
-    public FileManager() {
-        
-    }
     /**
      * Creates file with given name and extension in given directory 
      * @param name Contains the name of the new file.
@@ -84,5 +81,41 @@ public final class FileManager {
      */
     public ArrayList<String> getFileContents() {
         return this.fileContents;
+    }
+    /**
+     * Creating a matrix from fileContents by splitting each row using commas as delimiter.
+     * @param contentsArray An array with the file contents.
+     * @param splitBy Character with which to split the array.
+     * @return fileContents matrix.
+     */
+    public ArrayList<ArrayList<String>> splitArray (ArrayList<String> contentsArray, String splitBy) {
+        ArrayList<ArrayList<String>> contentsMatrix = new ArrayList<>(contentsArray.size());
+        
+        for(int rowIndex = 0; rowIndex < contentsArray.size(); rowIndex++) {
+            String[] rowArray = contentsArray.get(rowIndex).split(splitBy);
+            contentsMatrix.add(rowIndex, new ArrayList<>(rowArray.length));
+            for (int colIndex = 0; colIndex < rowArray.length; colIndex++) {
+                contentsMatrix.get(rowIndex).add(colIndex, rowArray[colIndex]);
+            }
+        }
+        return contentsMatrix;
+    }
+    /**
+     * Convert from a string matrix to a true or false matrix.
+     * @param stringMatrix A string matrix with file contents.
+     * @return fileContents matrix as true or false values.
+     */
+    public ArrayList<ArrayList<Boolean>> convertFromStringToBoolean(ArrayList<ArrayList<String>> stringMatrix) {
+        ArrayList<ArrayList<Boolean>> boolMatrix = new ArrayList<>(stringMatrix.get(0).size());
+        
+        for(int rowIndex = 0; rowIndex < stringMatrix.size(); rowIndex++) {
+            ArrayList<String> rowArray = stringMatrix.get(rowIndex);
+            boolMatrix.add(rowIndex, new ArrayList<>(rowArray.size()));
+            for (int colIndex = 0; colIndex < rowArray.size(); colIndex++) {
+                boolean value = Boolean.parseBoolean(stringMatrix.get(rowIndex).get(colIndex));
+                boolMatrix.get(rowIndex).add(colIndex, value);
+            }
+        }
+        return boolMatrix;
     }
 }

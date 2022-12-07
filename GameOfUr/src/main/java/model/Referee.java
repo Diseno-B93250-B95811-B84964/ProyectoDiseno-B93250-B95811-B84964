@@ -9,86 +9,78 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.function.Supplier;
 
 /**
  * Game referee, manages game moves and game score.
  * @author Jimena Gdur.
- * @param <PlayerType> Player's child class.
- * @param <TileType> Tile's child class.
  */
-public abstract class Referee<PlayerType extends Player, TileType extends Tile> {
+public abstract class Referee
+{
     /**
      * Amount of rows in board.
      */
-    private final int amountRows;
+    protected final int amountRows;
     /**
      * Amount of columns in board.
      */
-    private final int amountCols;
+    protected final int amountCols;
+    /**
+     * Amount of tiles in board.
+     */
+    protected final int tileAmount;
     /**
      * Stores game board.
      */
-    private Board gameBoard;
+    protected Board gameBoard;
     /**
      * Amount of players in game.
      */
-    private int playerAmount;
+    protected final int playerAmount;
+    /**
+     * Amount of pieces a player has.
+     */
+    protected final int pieceAmount;
     /**
      * An array with all game players.
      */
-    private ArrayList<PlayerType> playerArray;
+    protected ArrayList<Player> playerArray;
     /**
      * An object that stores game rules.
      */
-    private Rules gameRules;
+    protected final Rules gameRules;
     
     /**
      * Creates referee class.
      * @param rows Amount of rows in game board.
      * @param cols  Amount of columns in game board.
      * @param players Amount of players in game.
-     * @param supplier Supplier class that contains instance of player's child.
+     * @param pieces Amount of pieces for each player.
+     * @param tiles Amount of tiles in game board.
+     * @param boolMatrix A matrix that allows the referee to determine possible routes.
      */
-    public Referee(int rows, int cols, int players, Supplier<PlayerType> playerSupplier, Supplier<TileType> tileSupplier) {
+    public Referee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix)
+    {
         amountRows = rows;
         amountCols = cols;
         playerAmount = players;
+        pieceAmount = pieces;
+        tileAmount = tiles;
         
         gameRules = new Rules();
         
-        //createPlayers(supplier);
-        createBoard();
+        createPlayers();
+        createBoard(boolMatrix);
     }
     /**
      * Creates players and stores them in playerArray.
-     * @param supplier Supplier class that contains instance of player's child.
+     * Abstract class that allows Referee child to manage implementation.
      */
-    private void createPlayers(Supplier<PlayerType> supplier) {
-        playerArray = new ArrayList<>(playerAmount);
-        for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
-            playerArray.add(playerIndex, supplier.get());
-        }
-    }
+    protected abstract void createPlayers();
     /**
      * Creates players and stores them in playerArray.
-     * @param supplier Supplier class that contains instance of player's child.
+     * @param boolMatrix 
      */
-    private void createBoard() {
-        //gameBoard = new Board(TileType::new, );
-        for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
-            //playerArray.add(playerIndex, supplier.get());
-        }
-    }
-    /**
-     *
-     * @param playerNames
-     * @param playerColors
-     */
-    public void settingPlayerInfo(ArrayList<String> playerNames, ArrayList<Color> playerColors) {
-        
-    }
-    
+    protected abstract void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix);    
     /**
      * Gets game rules from class Rules.
      * @return a list of rules.
@@ -96,4 +88,41 @@ public abstract class Referee<PlayerType extends Player, TileType extends Tile> 
     public ArrayList<String> getGameRules() {
         return this.gameRules.getRules();
     }
+    /**
+     *
+     * @param x Row in which tile is located.
+     * @param y Column in which tile is located.
+     * @param tileJumps Amount of jumps the tile has to make.
+     * @return
+     */
+    /*private ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
+        ArrayList<Integer> adjacents = new ArrayList<>();
+        boolean foundAdjacent = false;
+        
+        if (x >= 0 && x < amountRows && y >= 0 && y < amountColumns) {
+            int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
+            //System.out.println("x: " + x + ", y: " + y);
+            System.out.println("currentVertexIndex: " + currentVertexIndex);
+            System.out.println("tileJumps: " + tileJumps);
+
+            while(tileJumps > 1 && currentVertexIndex < verticesAmount) {
+                foundAdjacent = false;
+                for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
+                    if(foundAdjacent != true && graphAdjacentMatrix.get(currentVertexIndex).get(columnIndex) == true) {
+                        currentVertexIndex = columnIndex;
+                        foundAdjacent = true;
+                        System.out.println("currentVertexIndex: " + currentVertexIndex);
+                    }
+                }
+                tileJumps--;
+            }
+            System.out.println("Final currentVertexIndex: " + currentVertexIndex);
+            for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
+                if(graphAdjacentMatrix.get(currentVertexIndex).get(columnIndex) == true) {
+                    adjacents.add(columnIndex);
+                }
+            }
+        }
+        return adjacents;
+    }*/
 }

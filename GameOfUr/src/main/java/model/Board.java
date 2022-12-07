@@ -7,7 +7,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 /**
@@ -15,17 +14,19 @@ import java.util.function.Supplier;
  * @author Jimena Gdur.
  * @param <TileType> Tile's child class.
  */
-public final class Board<TileType extends Tile> extends GameObject {
+public final class Board<TileType
+    extends Tile> extends GameObject
+{
     /**
      * The graph's adjacent matrix.
      * It indicates all possible routes.
      */
-    private boolean[][] graphAdjacentMatrix;
+    private ArrayList<ArrayList<Boolean>> graphAdjacentMatrix;
     
     /**
      * Amount of vertices in graph.
      */
-    private int verticesAmount;
+    private final int verticesAmount;
     /**
      * Stores all of the graph's vertices.
      * It also serves as a list of all game tiles.
@@ -72,10 +73,11 @@ public final class Board<TileType extends Tile> extends GameObject {
      * Creates the graph's adjacent matrix.
     */
     private void createAdjacentMatrix() {
-        graphAdjacentMatrix = new boolean[verticesAmount][verticesAmount];
+        graphAdjacentMatrix = new ArrayList<>(verticesAmount);
         for (int vertexIndex1 = 0; vertexIndex1 < verticesAmount; vertexIndex1++) {
+            graphAdjacentMatrix.add(new ArrayList<>(verticesAmount));
             for (int vertexIndex2 = 0; vertexIndex2 < verticesAmount; vertexIndex2++) {
-                graphAdjacentMatrix[vertexIndex1][vertexIndex2] = false;
+                graphAdjacentMatrix.get(vertexIndex1).add(vertexIndex2, false);
             }
         }
     }
@@ -92,8 +94,8 @@ public final class Board<TileType extends Tile> extends GameObject {
      * Sets the given adjacent matrix to this board's adjacent matrix
      * @param adjacentMatrix
      */
-    public void setAdjacentMatrix(boolean[][] adjacentMatrix) { // TODO: Check if stored correctly
-        this.graphAdjacentMatrix = adjacentMatrix; // no se si caerle encima es lo mejor, pero ocupa menos tiempo
+    public void setAdjacentMatrix(ArrayList<ArrayList<Boolean>> adjacentMatrix) {
+        this.graphAdjacentMatrix = adjacentMatrix;
     }
     /**
      * Converts from array to matrix.
@@ -154,43 +156,6 @@ public final class Board<TileType extends Tile> extends GameObject {
             specifiedTile.setPiece(piece);
         }
     }
-    /**
-     *
-     * @param x Row in which tile is located.
-     * @param y Column in which tile is located.
-     * @param tileJumps Amount of jumps the tile has to make.
-     * @return
-     */
-    public ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
-        ArrayList<Integer> adjacents = new ArrayList<>();
-        boolean foundAdjacent = false;
-        
-        if (x >= 0 && x < amountRows && y >= 0 && y < amountColumns) {
-            int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
-            //System.out.println("x: " + x + ", y: " + y);
-            System.out.println("currentVertexIndex: " + currentVertexIndex);
-            System.out.println("tileJumps: " + tileJumps);
-
-            while(tileJumps > 1 && currentVertexIndex < verticesAmount) {
-                foundAdjacent = false;
-                for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
-                    if(foundAdjacent != true && graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
-                        currentVertexIndex = columnIndex;
-                        foundAdjacent = true;
-                        System.out.println("currentVertexIndex: " + currentVertexIndex);
-                    }
-                }
-                tileJumps--;
-            }
-            System.out.println("Final currentVertexIndex: " + currentVertexIndex);
-            for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
-                if(graphAdjacentMatrix[currentVertexIndex][columnIndex] == true) {
-                    adjacents.add(columnIndex);
-                }
-            }
-        }
-        return adjacents;
-    }
     
     /**
      * Converts board into a string.
@@ -199,8 +164,8 @@ public final class Board<TileType extends Tile> extends GameObject {
     @Override
     public String toString() {
         String string  = "graphAdjacentMatrix:\n";
-        for (boolean[] row : this.graphAdjacentMatrix) {
-            string += Arrays.toString(row) + "\n";
+        for (ArrayList<Boolean> row : this.graphAdjacentMatrix) {
+            string += row + "\n";
         }
         string += "\nvertices:\n";
         for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {

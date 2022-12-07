@@ -12,7 +12,8 @@ import java.util.Random;
  * Simulate the roll of a loaded die.
  * @author Jimena Gdur.
  */
-public final class Dice {
+public final class Dice
+{
     /**
     * A helper list that contains the weighted sum of each side.
     */
