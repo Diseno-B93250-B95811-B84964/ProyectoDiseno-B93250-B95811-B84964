@@ -13,7 +13,10 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -45,11 +48,8 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     private final static Color RED = new Color (255,0,0);
     private final static Color YELLOW = new Color (255,204,0);
 
-    /**
-     * Creates new form MainGame
-     * @throws java.io.IOException
-     */
-    public UrMainGame() throws IOException {
+
+    public UrMainGame() {
         initComponents();
         initializeTilesArray();
         makeUrBoard();
@@ -688,36 +688,44 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
 
     
     /*Load Images Methods*/
-    private BufferedImage loadImagesForJarFile(String imageName) throws IOException{
+    private BufferedImage loadImagesForJarFile(String imageName) {
+        BufferedImage image = null; 
         String generalPath = "/images/";
         String extensionName = ".png";
         String finalPath = generalPath+imageName+extensionName;
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream(finalPath));  
+        try {  
+            image = ImageIO.read(getClass().getResourceAsStream(finalPath));
+        } catch (IOException ex) {
+            Logger.getLogger(UrMainGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return image;
     }
     
-    private BufferedImage loadImagesForIDEFile(String imageName) throws IOException{
+    private BufferedImage loadImagesForIDEFile(String imageName) {
+        BufferedImage image = null; 
         String generalPath = "images/";
         String extensionName = ".png";
         String finalPath = generalPath+imageName+extensionName;
-        BufferedImage image = ImageIO.read(new FileInputStream(finalPath));   
+        try {   
+            image = ImageIO.read(new FileInputStream(finalPath));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UrMainGame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UrMainGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return image;
     }
 
     /* Main Board Methods  */
-    private void makeUrBoard() throws IOException{
-        try {
-            tilesArray[4][0].setBackground(Color.decode("#E0E0E0"));
-            tilesArray[5][0].show(false);
-            tilesArray[4][2].setBackground(Color.decode("#E0E0E0")); 
-            tilesArray[5][2].show(false);
-            setRosesToBoard();
-        } catch (IOException e) {
-            System.out.println("Rose icon not found");
-        }
+    private void makeUrBoard() {
+        tilesArray[4][0].setBackground(Color.decode("#E0E0E0"));
+        tilesArray[5][0].show(false);
+        tilesArray[4][2].setBackground(Color.decode("#E0E0E0"));
+        tilesArray[5][2].show(false);
+        setRosesToBoard();
     }
     
-    private ImageIcon getImageIconRose() throws IOException{
+    private ImageIcon getImageIconRose() {
         /*For JAR FILE*/
         //BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
         
@@ -728,7 +736,7 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         return roseIcon;
     }
     
-    private void setRosesToBoard() throws IOException{
+    private void setRosesToBoard() {
         ImageIcon roseIcon = getImageIconRose();
         tilesArray[0][0].setIcon(roseIcon);
         tilesArray[0][2].setIcon(roseIcon);
@@ -768,52 +776,48 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         tilesArray[row][column].setIcon(icon);
     }
     
-    private void removeIconFromLabel(int row, int column)throws IOException{
+    private void removeIconFromLabel(int row, int column) {
         tilesArray[row][column].setIcon(null);
     }
     
     @Override
     public void removeIconFromTile(int row, int column){
-        try { 
-            if (row == 0 && column == 0) {
-                removeIconFromRose0_0();
-            } else if (row == 0 && column == 2){
-                removeIconFromRose0_2();
-            } else if (row == 3 && column == 1){
-                removeIconFromRose3_1();
-            } else if (row == 6 && column == 0) {
-                removeIconFromRose6_0();
-            } else if (row == 6 && column == 2) {
-                removeIconFromRose6_2();
-            } else {
-                removeIconFromLabel(row,column);
-            }
-        } catch (IOException e) {
-            System.out.println("There was a problem going back to blank state. Check images folder");
+        if (row == 0 && column == 0) {
+            removeIconFromRose0_0();
+        } else if (row == 0 && column == 2){
+            removeIconFromRose0_2();
+        } else if (row == 3 && column == 1){
+            removeIconFromRose3_1();
+        } else if (row == 6 && column == 0) {
+            removeIconFromRose6_0();
+        } else if (row == 6 && column == 2) {
+            removeIconFromRose6_2();
+        } else {
+            removeIconFromLabel(row,column);
         }
     }
     
-    private void removeIconFromRose0_0() throws IOException{
+    private void removeIconFromRose0_0() {
         ImageIcon image = getImageIconRose();
         tilesArray[0][0].setIcon(image);
     }
 
-    private void removeIconFromRose0_2() throws IOException{
+    private void removeIconFromRose0_2() {
         ImageIcon image = getImageIconRose();
         tilesArray[0][2].setIcon(image);
     }
 
-    private void removeIconFromRose3_1() throws IOException{
+    private void removeIconFromRose3_1() {
         ImageIcon image = getImageIconRose();
         tilesArray[3][1].setIcon(image);
     }
 
-    private void removeIconFromRose6_0() throws IOException{
+    private void removeIconFromRose6_0() {
         ImageIcon image = getImageIconRose();
         tilesArray[6][0].setIcon(image);
     }
 
-    private void removeIconFromRose6_2() throws IOException{
+    private void removeIconFromRose6_2() {
         ImageIcon image = getImageIconRose();
         tilesArray[6][2].setIcon(image);
     }
@@ -821,61 +825,49 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     @Override
     public ImageIcon getPieceImageColor(Color color) {
         ImageIcon colorIcon = null;
-        try {
-            BufferedImage image = null;
-            if (color.getRGB() == BLUE.getRGB()) {
-                //image = loadImagesForJarFile("blue_piece_rbg");
-                image = loadImagesForIDEFile("blue_piece_rbg");
-            } else if (color.getRGB() == BROWN.getRGB()) {
-                //image = loadImagesForJarFile("brown_piece_rbg");
-                image = loadImagesForIDEFile("brown_piece_rbg");
-            } else if (color.getRGB() == GREEN.getRGB()) {
-                //image = loadImagesForJarFile("green_piece_rbg");
-                image = loadImagesForIDEFile("green_piece_rbg");
-            } else if (color.getRGB() == PURPLE.getRGB()) {
-                //image = loadImagesForJarFile("purple_piece_rbg");
-                image = loadImagesForIDEFile("purple_piece_rbg");
-            } else if (color.getRGB() == RED.getRGB()) {
-                //image = loadImagesForJarFile("red_piece_rbg");
-                image = loadImagesForIDEFile("red_piece_rbg");
-            } else if (color.getRGB() == YELLOW.getRGB()) {
-                //image = loadImagesForJarFile("yellow_piece_rbg");
-                image = loadImagesForIDEFile("yellow_piece_rbg");
-            }
-            colorIcon = resizeImage(image, 78, 78);
-           
-        } catch (IOException e) {
-            System.out.println("Color piece icon not found");
+        BufferedImage image = null;
+        if (color.getRGB() == BLUE.getRGB()) {
+            //image = loadImagesForJarFile("blue_piece_rbg");
+            image = loadImagesForIDEFile("blue_piece_rbg");
+        } else if (color.getRGB() == BROWN.getRGB()) {
+            //image = loadImagesForJarFile("brown_piece_rbg");
+            image = loadImagesForIDEFile("brown_piece_rbg");
+        } else if (color.getRGB() == GREEN.getRGB()) {
+            //image = loadImagesForJarFile("green_piece_rbg");
+            image = loadImagesForIDEFile("green_piece_rbg");
+        } else if (color.getRGB() == PURPLE.getRGB()) {
+            //image = loadImagesForJarFile("purple_piece_rbg");
+            image = loadImagesForIDEFile("purple_piece_rbg");
+        } else if (color.getRGB() == RED.getRGB()) {
+            //image = loadImagesForJarFile("red_piece_rbg");
+            image = loadImagesForIDEFile("red_piece_rbg");
+        } else if (color.getRGB() == YELLOW.getRGB()) {
+            //image = loadImagesForJarFile("yellow_piece_rbg");
+            image = loadImagesForIDEFile("yellow_piece_rbg");
         }
+        colorIcon = resizeImage(image, 78, 78);
       return colorIcon;
     }
     
     /* Main Frame Dices Feature */
     private void makeDices(){
-        try{
-            diceLabelArray = new JLabel[4];      
-            /*For JAR file*/
-            //BufferedImage diceState1Image = loadImagesForJarFile("result_0_1");
-            //BufferedImage diceState2Image = loadImagesForJarFile("result_1_1");
-            
-            /*For NetBeans*/   
-            BufferedImage diceState1Image = loadImagesForIDEFile("result_0_1");
-            BufferedImage diceState2Image = loadImagesForIDEFile("result_1_1");
-
-            noScoreDiceState = resizeImage(diceState1Image, 77, 77);
-            scoreDiceState = resizeImage(diceState2Image, 77, 77 );
-            diceLabelArray[0] = dice1;
-            diceLabelArray[1] = dice2;
-            diceLabelArray[2] = dice3;
-            diceLabelArray[3] = dice4;
-            dice1.setIcon(noScoreDiceState);
-            dice2.setIcon(noScoreDiceState);
-            dice3.setIcon(noScoreDiceState);
-            dice4.setIcon(noScoreDiceState);
-            
-        } catch(IOException e){
-            System.out.println("Dices images not found!");
-        }
+        diceLabelArray = new JLabel[4];
+        /*For JAR file*/
+        //BufferedImage diceState1Image = loadImagesForJarFile("result_0_1");
+        //BufferedImage diceState2Image = loadImagesForJarFile("result_1_1");
+        /*For NetBeans*/
+        BufferedImage diceState1Image = loadImagesForIDEFile("result_0_1");
+        BufferedImage diceState2Image = loadImagesForIDEFile("result_1_1");
+        noScoreDiceState = resizeImage(diceState1Image, 77, 77);
+        scoreDiceState = resizeImage(diceState2Image, 77, 77 );
+        diceLabelArray[0] = dice1;
+        diceLabelArray[1] = dice2;
+        diceLabelArray[2] = dice3;
+        diceLabelArray[3] = dice4;
+        dice1.setIcon(noScoreDiceState);
+        dice2.setIcon(noScoreDiceState);
+        dice3.setIcon(noScoreDiceState);
+        dice4.setIcon(noScoreDiceState);
     }
     
     private ImageIcon resizeImage(BufferedImage diceState, int width, int height){

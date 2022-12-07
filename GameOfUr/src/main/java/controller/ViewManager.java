@@ -66,7 +66,7 @@ public class ViewManager
     private int clickedRow;
     private int clickedColumn;
     
-    public ViewManager(
+    public ViewManager (
             Supplier<MainGameType> mainGameSupplier,
             Supplier<LoadGameType> loadGameSupplier,
             Supplier<MainMenuType> mainMenuSupplier,
