@@ -9,23 +9,48 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
- * @author Usuario1
+ * Manages the data of the classes to load into a JSON file.
+ * @author Álvaro Miranda.
  */
 public class Serializer extends JSONManager{
+    /**
+    * JSONObject that holds all the information associated to player 1.
+    */
     private JSONObject jsonPlayer1;
+    /**
+    * JSONObject that holds all the information associated to player 1.
+    */
     private JSONObject jsonPlayer2;
-    private JSONArray jsonPlayerPieces;
+    /**
+    * JSONObject that holds all the information associated to the game board.
+    */
     private JSONObject jsonBoard;
+    /**
+    * JSONArray that holds all the information associated to the adjacent matrix.
+    */
     private JSONArray jsonAdyacentMatrix;
+    /**
+    * JSONArray that holds all the information associated to the vertices that conform the board.
+    */
     private JSONArray jsonVertices;
+    /**
+    * JSONObject that holds all the information associated to tiles found in the vertices.
+    */
     private JSONObject jsonTile;
+    /**
+    * JSONObject that holds all the information associated to a piece if one is found in a tile.
+    */
     private JSONObject jsonPiece;
     
+    /**
+     * Creates a new Serializer with the current board and active players.
+     * @param gameBoard Current game board.
+     * @param players Array that holds the active players.
+    */
     public Serializer(Board gameBoard, Player[] players){
         jsonPlayer1 = new JSONObject();
         jsonPlayer2 = new JSONObject();
-        jsonPlayerPieces = new JSONArray();
+        //jsonPlayerPieces = new JSONArray();
         jsonBoard = new JSONObject();
         jsonAdyacentMatrix = new JSONArray();
         jsonVertices = new JSONArray();
@@ -35,12 +60,16 @@ public class Serializer extends JSONManager{
         this.mainManager = new FileManager();
     }
     
+    /**
+     * Calls methods that creates a json file using the file contents that come from the game.
+     * @return success Indicates if the creation of the file was a success.
+    */
     @Override
-    public boolean execute(){ // add players array
+    public boolean execute(){
         boolean success = true;
         try {
             manageFile(mainManager.getFileContents());
-            mainManager.saveFile("output", ".json", "C:\\Users\\Usuario1\\Documents\\NetBeansProjects\\ProyectoDiseno-B93250-B95811-B84964\\");
+            mainManager.saveFile("output", ".json", "src\\main\\java\\auxiliaryFiles\\");
         }
         catch(Exception e) {
             System.out.println(e);
@@ -49,111 +78,114 @@ public class Serializer extends JSONManager{
         return success;
     }
     
+    /**
+     * Calls methods collect the data from the game sections.
+    */
     @Override
     protected void manageFile(ArrayList<String> fileContents){
-        JSONArray jsonGameData = new JSONArray();
         manageBoard();
         managePlayers();
-        fileContents.add(jsonBoard.toString());
+        JSONObject mainBoard = new JSONObject();
+        mainBoard.put("board", jsonBoard);
         fileContents.add(jsonPlayer1.toString());
         fileContents.add(jsonPlayer2.toString());
+        fileContents.add(mainBoard.toString());
     }
     
+    /**
+     * Collects all the information from the game board and saves it in a JSONObject.
+    */
     @Override
     public void manageBoard(){
+        jsonBoard.put("amountOfPlayers", gamePlayers.length);
         jsonBoard.put("verticesAmount", gameBoard.getVerticesAmount());
         jsonBoard.put("amountRows", gameBoard.getAmountRows());
         jsonBoard.put("amountColumns", gameBoard.getAmountColumns());
         manageVertices();
         manageAdjacentMatrix();
-        //return jsonBoard.toString();
     }
     
-    //TODO clean code
+    /**
+     * Collects all the information from the actives players and saves it in a JSONObject.
+    */
     @Override
     public void managePlayers(){
-        JSONObject testPiece;
-        JSONObject testPlayer;
-        JSONArray testPlayerPieces;
+        JSONArray playersPiecesArray = new JSONArray();
+        JSONObject playerToInsert;
+
         int currentPlayer = 1;
         ArrayList<UrPiece> playerPieces = new ArrayList<>(gamePlayers[0].getPiecesAmount());
         playerPieces = gamePlayers[0].getPiecesArray();
+        
         for (Player gamePlayer : gamePlayers) {
-            testPlayer = new JSONObject();
-            testPlayerPieces = new JSONArray();
-            testPlayer.put("playerColor", gamePlayer.getColor());
-            testPlayer.put("name", gamePlayer.getName());
-            testPlayer.put("score", gamePlayer.getScore());
-            testPlayer.put("piecesAmount", gamePlayer.getPiecesAmount());
-            for(int pieces = 0; pieces < playerPieces.size(); pieces++){
-                testPiece = new JSONObject();
-                
-                testPiece.put("pieceColor", playerPieces.get(pieces).getColor());
-                testPiece.put("isInPlay", playerPieces.get(pieces).isInPlay());
-                testPlayerPieces.add(testPiece);
-            }
-            testPlayer.put("pieces",testPlayerPieces);
-
-            //jsonPlayers.add(testPlayer);
+            playerToInsert = new JSONObject();
+            
+            playerToInsert.put("playerColor", gamePlayer.getColor().toString());
+            playerToInsert.put("name", gamePlayer.getName());
+            playerToInsert.put("score", gamePlayer.getScore());
+            playerToInsert.put("piecesAmount", gamePlayer.getPiecesAmount());
+            
+            playersPiecesArray = managePlayerPieces(playerPieces, playerToInsert);
+            
+            playerToInsert.put("pieces",playersPiecesArray);
+            
             if(currentPlayer == 1){
-                jsonPlayer1.put("player1", testPlayer);
+                jsonPlayer1.put("player1", playerToInsert);
             } else {
-                jsonPlayer2.put("player2", testPlayer);
+                jsonPlayer2.put("player2", playerToInsert);
             }
             currentPlayer++;
             playerPieces = gamePlayers[1].getPiecesArray();
         }
     }
-    /*
-    public void manageVertices(){
-        int verticesAmount = gameBoard.getVerticesAmount();
-        ArrayList<UrTile> vertices = new ArrayList<>(verticesAmount);
-        vertices = gameBoard.getVerticesArray();
-        //vertices = new ArrayList<>(verticesAmount);
-        for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {
-            System.out.println("Printing vertices size");
-            System.out.println(gameBoard.getVerticesArray().size());
-            System.out.println("Vertices ROW");
-            //System.out.println(vertices.get(vertexIndex).getRow());
-            jsonTile.put("row", vertices.get(vertexIndex).getRow());
-            jsonTile.put("column", vertices.get(vertexIndex).getColumn());
-            if(vertices.get(vertexIndex).getPiece() != null){
-                jsonTile.put("piece", vertices.get(vertexIndex).getPiece().toString());
-            } else {
-                jsonTile.put("piece", "null");
-            }
-            jsonTile.put("isVacant", vertices.get(vertexIndex).isVacant());
-            jsonTile.put("isSafe", vertices.get(vertexIndex).isSafe());
-            jsonVertices.add(jsonTile);
-        }
-        jsonBoard.put("vertices", jsonVertices);
-    }*/
     
-    //TODO clean method
+    /**
+     * Collects all the information from the current player array of pieces and saves it in a JSONArray.
+     * @return playersPiecesArray Json information from the pieces of the current player.
+    */
+    public JSONArray managePlayerPieces(ArrayList<UrPiece> playerPieces, JSONObject player){
+        JSONArray playersPiecesArray = new JSONArray();
+        JSONObject individualPieceFromArray = new JSONObject();
+        
+        for(int pieces = 0; pieces < playerPieces.size(); pieces++){
+            individualPieceFromArray.put("pieceColor", playerPieces.get(pieces).getColor().toString());
+            individualPieceFromArray.put("isInPlay", playerPieces.get(pieces).isInPlay());
+            playersPiecesArray.add(individualPieceFromArray);
+        }
+        return playersPiecesArray;
+    }
+    
+    /**
+     * Collects all the information from the vertices that conform the board of 
+     * pieces and saves it in a JSONArray, that gets put into the game board JSONObject.
+    */
     public void manageVertices(){
-        JSONObject testTile;
+        JSONObject currentTileToInsert;
         int verticesAmount = gameBoard.getVerticesAmount();
+        
         ArrayList<UrTile> vertices = new ArrayList<>(verticesAmount);
         vertices = gameBoard.getVerticesArray();
-        //vertices = new ArrayList<>(verticesAmount);
+        
         for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {
-            testTile = new JSONObject();
-            //System.out.println(vertices.get(vertexIndex).getRow());
-            testTile.put("row", vertices.get(vertexIndex).getRow());
-            testTile.put("column", vertices.get(vertexIndex).getColumn());
+            currentTileToInsert = new JSONObject();
+            
+            currentTileToInsert.put("row", vertices.get(vertexIndex).getRow());
+            currentTileToInsert.put("column", vertices.get(vertexIndex).getColumn());
             if(vertices.get(vertexIndex).getPiece() != null){
-                testTile.put("piece", vertices.get(vertexIndex).getPiece().toString());
+                currentTileToInsert.put("piece", vertices.get(vertexIndex).getPiece().toString());
             } else {
-                testTile.put("piece", "null");
+                currentTileToInsert.put("piece", "null");
             }
-            testTile.put("isVacant", vertices.get(vertexIndex).isVacant());
-            testTile.put("isSafe", vertices.get(vertexIndex).isSafe());
-            jsonVertices.add(testTile);
+            currentTileToInsert.put("isVacant", vertices.get(vertexIndex).isVacant());
+            currentTileToInsert.put("isSafe", vertices.get(vertexIndex).isSafe());
+            jsonVertices.add(currentTileToInsert);
         }
         jsonBoard.put("vertices", jsonVertices);
     }
     
-    //TODO clean method
+    /**
+     * Collects all the information from adjacentMatrix and saves it in a JSONObject, being the game board.
+    */
     public void manageAdjacentMatrix(){
         String boardState = "";
         int verticesAmount = gameBoard.getVerticesAmount();
@@ -171,14 +203,26 @@ public class Serializer extends JSONManager{
         jsonBoard.put("graphAdjacentMatrix", jsonAdyacentMatrix);
     }
     
+    /**
+     * Returns the player 1 json information.
+     * @return jsonPlayer1.toString() Player 1's information.
+    */
     public String getJSONPlayer1(){
         return jsonPlayer1.toString();
     }
     
+    /**
+     * Returns the player 2 json information.
+     * @return jsonPlayer2.toString() Player 1's information.
+    */
     public String getJSONPlayer2(){
         return jsonPlayer2.toString();
     }
     
+    /**
+     * Returns the main game information.
+     * @return jsonBoard.toString() Player 1's information.
+    */
     public String getJSONBoard(){
         return jsonBoard.toString();
     }

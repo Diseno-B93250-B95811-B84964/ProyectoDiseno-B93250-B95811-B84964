@@ -1,0 +1,16 @@
+model\Board.class
+model\UrTile.class
+model\Piece.class
+model\UrPlayer.class
+model\JSONManager.class
+model\Rules.class
+model\Dice.class
+model\Tile.class
+model\UrPiece.class
+model\Deserializer.class
+controller\Main.class
+model\Player.class
+model\GameObject.class
+model\FileManager.class
+model\Referee.class
+model\Serializer.class

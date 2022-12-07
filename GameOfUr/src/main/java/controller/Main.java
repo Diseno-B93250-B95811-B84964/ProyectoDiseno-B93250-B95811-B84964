@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import model.Board;
+import model.Deserializer;
 import model.Dice;
 
 import model.Piece;
@@ -45,8 +46,9 @@ public class Main {
             //System.out.println("Testing Rules class");
             //testRulesClass();
             
-            System.out.println("Testing Dice class");
-            testDiceClass();
+            //System.out.println("Testing Dice class");
+            //testDiceClass();
+            
             //System.out.println("Testing Player classes");
             //testPlayerClasses();
             
@@ -59,6 +61,8 @@ public class Main {
             System.out.println("Testing json file creation");
             testJSONCreation();
             
+            System.out.println("Testing deserializer");
+            testDeserializer();
         });
     }
     
@@ -245,5 +249,24 @@ public class Main {
         Serializer testSerializer = new Serializer(board, players);
         
         testSerializer.execute();
+    }
+    
+        public static void testDeserializer(){
+        int vertexNumberFromFile = 24;
+        int rowNumberFromFile = 8;
+        int colNumberFromFile = 3;
+           
+        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player[] players = new Player[2];
+        
+        players[0] = player1;
+        players[1] = player2;
+        
+        Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
+        
+        Deserializer testDeserializer = new Deserializer(board, players);
+        
+        testDeserializer.execute();
     }
 }

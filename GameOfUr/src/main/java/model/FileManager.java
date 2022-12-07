@@ -33,13 +33,12 @@ public final class FileManager {
     }
     /**
      * Creates file with given name and extension in given directory 
-     * @param name Contains the name of the new file.
-     * @param extension Contains the extension of the file.
-     * @param path Contains the path in which the file will be stored.
-     * @param contents Contains the contents that will be stored in file.
+     * @param fileName Contains the name of the new file.
+     * @param fileExt Contains the extension of the file.
+     * @param dirPath Contains the path in which the file will be stored.
      * @return whether operation was successful.
      */
-    public boolean saveFile(String name, String extension, String path, ArrayList<String> contents) {
+    public boolean saveFile(String fileName, String fileExt, String dirPath) {
         boolean success = false;
         String completeFileName = dirPath + fileName + fileExt;
         try { 
