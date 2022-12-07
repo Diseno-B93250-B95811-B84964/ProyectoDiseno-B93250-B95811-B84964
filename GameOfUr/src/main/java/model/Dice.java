@@ -4,6 +4,7 @@
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
  */
+
 package model;
 
 import java.util.Random;
@@ -52,7 +53,7 @@ public final class Dice
     public int throwDice() {
         Random randomGenerator = new Random();
         int randomNumber = randomGenerator.nextInt(100);
-        
+
         int side = sideAmount;
         // If X <= a[0] choose 1 as outcome
         if(randomNumber <= weightedSumList[0]) {
@@ -65,7 +66,7 @@ public final class Dice
                     side = sideIndex + 1;
                 }
             }
-        }
+    }
         // If X > a[n-1] choose n as outcome
         return side;
     }

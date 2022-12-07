@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
- * @param <PieceType> Piece's child class
+ * @param <PieceType> Piece's child class.
  */
 public abstract class Player
     <PieceType extends Piece> extends GameObject
@@ -143,7 +143,7 @@ public abstract class Player
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
             string += pieceIndex + ": " + this.pieces.get(pieceIndex) + "\n";
         }  
-        
+    
         return string;
     }
 }
