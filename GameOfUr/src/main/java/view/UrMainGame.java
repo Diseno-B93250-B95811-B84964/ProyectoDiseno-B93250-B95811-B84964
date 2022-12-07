@@ -48,7 +48,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     private final static Color RED = new Color (255,0,0);
     private final static Color YELLOW = new Color (255,204,0);
 
-
+    /**
+     *
+     */
     public UrMainGame() {
         initComponents();
         initializeTilesArray();
@@ -473,28 +475,52 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
     /* Button getters */
+
+    /**
+     *
+     * @return
+     */
+
     
     @Override
     public JButton getShowRulesButton(){
         return this.rulesButton;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public JButton getThrowDiceButton(){
         return this.throwDiceButton;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public JButton getExitAndSaveButton(){
         return this.saveAndLeaveButton;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public JLabel[][] getTilesMatrix(){
         return tilesArray;
     }
     
     /* Button feature */
+
+    /**
+     *
+     * @param color
+     */
+
     
     @Override
     public void activeAPieceForPlayer(Color color) {
@@ -591,6 +617,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }      
     } 
     
+    /**
+     *
+     * @param color
+     */
     @Override
     public void desactiveAPieceForPlayer(Color color) {
         if (color == firstPlayerColor) {
@@ -766,11 +796,23 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
     }
     
+    /**
+     *
+     * @param row
+     * @param column
+     * @return
+     */
     @Override
     public JLabel getLabel(int row, int column){
         return tilesArray[row][column];
     }
     
+    /**
+     *
+     * @param row
+     * @param column
+     * @param icon
+     */
     @Override
     public void setNextPossibleLabel(int row, int column, Icon icon) {
         tilesArray[row][column].setIcon(icon);
@@ -780,6 +822,11 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         tilesArray[row][column].setIcon(null);
     }
     
+    /**
+     *
+     * @param row
+     * @param column
+     */
     @Override
     public void removeIconFromTile(int row, int column){
         if (row == 0 && column == 0) {
@@ -822,6 +869,11 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         tilesArray[6][2].setIcon(image);
     }
 
+    /**
+     *
+     * @param color
+     * @return
+     */
     @Override
     public ImageIcon getPieceImageColor(Color color) {
         ImageIcon colorIcon = null;
@@ -877,6 +929,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         return new ImageIcon(resizedImage);
     }
     
+    /**
+     *
+     * @param rollResult
+     */
     @Override
     public void showThrownDice(int rollResult) {
         for(int index = 0; index < rollResult; index++){
@@ -884,6 +940,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
     }
     
+    /**
+     *
+     */
     @Override
     public void cleanDice()
     {
@@ -893,6 +952,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         dice4.setIcon(noScoreDiceState);
     }
     
+    /**
+     *
+     * @param rollResult
+     */
     @Override
     public void setMoves(int rollResult)
     {
@@ -901,6 +964,13 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     }
 
     /*Get players pieces icons*/
+
+    /**
+     *
+     * @param color
+     * @return
+     */
+
 
     @Override
     public Icon getPlayerIcon(Color color){
@@ -922,20 +992,38 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     }
 
     /*Personalized match */
+
+    /**
+     *
+     * @param name
+     */
+
     public void setFirstPlayerNameToLabel(String name){
         firstPlayerLabelName.setText(name);
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setSecondPlayerNameToLabel(String name){
         secondPlayerLabelName.setText(name);
     }
 
+    /**
+     *
+     * @param color
+     */
     public void setFirstPlayerPieceColor(Color color) {
         this.firstPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
         modifiyFirstPlayerPieces(colorIcon);
     }
     
+    /**
+     *
+     * @param color
+     */
     public void setSecondPlayerPieceColor(Color color) {
         this.secondPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
@@ -963,6 +1051,11 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     }
     
     /* Add score to players */
+
+    /**
+     *
+     */
+
     
     public void addScoreToFirstPlayer() {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
@@ -970,30 +1063,49 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
 
+    /**
+     *
+     */
     public void addScoreToSecondPlayer() {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=1;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
 
+    /**
+     *
+     * @param points
+     */
     public void addScoreToFirstPlayer(int points) {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
         currentScore+=points;
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
 
+    /**
+     *
+     * @param points
+     */
     public void addScoreToSecondPlayer(int points) {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=points;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
 
+    /**
+     *
+     * @param number
+     */
     @Override
     public void changePlayerTurn(int number) {
         String playerTurn = "Player " + number+"'s" + " turn";
         playerTurnLabel.setText(playerTurn);
     }
 
+    /**
+     *
+     * @param number
+     */
     @Override
     public void declarePlayerWinner(int number) {
         String playerTurn = "Player " + number+"'s" + " won!";

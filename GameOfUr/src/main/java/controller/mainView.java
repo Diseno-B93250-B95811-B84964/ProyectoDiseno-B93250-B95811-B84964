@@ -15,7 +15,7 @@ public class mainView {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        gameControllerStub gameController = new gameControllerStub();
+        GameController gameController = new GameController();
     }
     
     

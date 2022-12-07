@@ -11,7 +11,22 @@ import javax.swing.JButton;
  * @author B95811
  */
 public interface MainMenuInterface {
+
+    /**
+     *
+     * @return
+     */
     public JButton getStartNewGameButton();
+
+    /**
+     *
+     * @return
+     */
     public JButton getLoadFormerGameButton();
+
+    /**
+     *
+     * @return
+     */
     public JButton getShowRulesButton();
 }

@@ -12,7 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Supplier;
@@ -24,8 +23,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import model.Player;
-import view.LoadGameInterface;
+
 import view.UrLoadGame;
 import view.UrMainGame;
 import view.UrMainMenu;
@@ -41,6 +41,7 @@ import view.ShowRules;
  * @param <NewGameType>
  * @param <ShowRulesType>
  */
+
 public class ViewManager
         <
             MainGameType extends UrMainGame, 

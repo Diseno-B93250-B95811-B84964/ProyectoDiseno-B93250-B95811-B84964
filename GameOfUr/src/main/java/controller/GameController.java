@@ -7,7 +7,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,31 +26,77 @@ import view.ShowRules;
  * @author Mauricio Palma
  */
 
-public class gameControllerStub {
+/**
+ * Creates a general controller of the game to coordinate
+ * Referee and view manager.
+ */
+
+public class GameController {
+    /**
+    *  A Button that represents the new game button on GUI
+    */
     private JButton startNewGameButton;
+    /**
+    *  A Button that represents the load game button on GUI
+    */
     private JButton startLoadGameButton;
+    /**
+    *  A Button that represents the go back button on GUI, new game view
+    */
     private JButton goBackToMainMenuFromNewGameButton;
+    /**
+    *  A Button that represents the continue button on GUI, new game view
+    */
     private JButton goToMainGameFromNewGameButton;
+    /**
+    *  A Button that represents the go back button on GUI, load game view
+    */
     private JButton goBackToMainMenuFromLoadGameButton;
+    /**
+    *  A Button that represents the continue button on GUI, load game view
+    */
     private JButton goToMainGameFromLoadGameButton;
+    /**
+    *  A Button that represents the rules button on GUI, at main menu view
+    */
     private JButton showRulesFromMainMenuButton;
+    /**
+    *  A Button that represents the rules button on GUI, at main game view
+    */
     private JButton showRulesFromGameButton;
+    /**
+    *  A Button that represents the save and exit button on GUI
+    */
     private JButton exitAndSaveButton;
+    /**
+    *  A Button that represents the throw dice button on GUI
+    */
     private JButton throwDiceButton;
-    
+    /**
+    * Object to call methods of the view manager and coordinate them with
+    * the referee object
+    */
     private ViewManager viewManager;
-    
+    /**
+    * ArrayList used to store the information of every player playing the game
+    */ 
     private ArrayList<Player> playerArray;
+    /**
+    * Object that is used to manipulate the dice accordingly in each game
+    */
     private Dice dice;
     
-    
-    
+    /**
+    * Integer that tracks which player is playing at a given time
+    */
     private int currentPlayer;
     
-    public gameControllerStub(){
+    /**
+     * Constructor method that uses templates to create a perosnalized viewManager.  
+     */
+    public GameController(){
         try {
             SwingUtilities.invokeAndWait(() -> {
-                System.out.println("IO what?");
                 this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
                 this.playerArray = new ArrayList<>();
                 this.dice = new Dice();
@@ -64,6 +109,9 @@ public class gameControllerStub {
         }
     }
     
+    /**
+     * Method that manages each button parameter of GameController to the actual GUI button
+    */
     private void manageButtons(){
         startNewGameButton = viewManager.getStartNewGameButton();
         startLoadGameButton = viewManager.getStartLoadGameButton();
@@ -88,27 +136,56 @@ public class gameControllerStub {
         throwDiceButton.addActionListener(new buttonAction());
     }
     
+    /**
+    * Inner Action Listener class to react accordingly user inputs on GUI
+    */
     class buttonAction implements ActionListener{
-        refereeStub refereeStub = new refereeStub();
+        /**
+        * Referee object used to coordinate them with the view manager object
+        * Referee manipulates the board logic and updates the game status
+        */
+        refereeStub refereeStub;
+        /**
+        * Boolean to know if the current player is the first player
+        */
         boolean firstPlayer;
+        /**
+        * Boolean to know if a player played its move before moving on
+        */
         boolean playerPlayed;
+        /**
+        * Boolean to know if there has been a winner
+        */
         boolean winnerExists;
         
+        /**
+        * Constructor method 
+        */
         public buttonAction() {
+            refereeStub = new refereeStub();
             firstPlayer  = true;
             playerPlayed = true;
             winnerExists = false;
             viewManager.setIfPieceMoved(true);
         }
         
+        /**
+        * Method that coordinates how to react when a new game is chosen
+        */
         private void manageContinueToNewGameButton(){
             viewManager.swapViewToNewGame();
         }
         
+        /**
+        * Method that cooridnates how to react when a game is loading from a previous match
+        */
         private void manageContinueToLoadGameButton(){
             viewManager.swapViewToLoadGame();
         }
         
+        /**
+        * Method that coordinates what to do when a new game starts
+        */
         private void manageStartNewGame(){
             Player player = viewManager.getPlayerData();
             int nextPlayerNumber = currentPlayer+1;
@@ -131,6 +208,9 @@ public class gameControllerStub {
             }
         }
         
+        /**
+        * Method that coordinates how to start a game that has been load from a former match
+        */
         private void manageStartLoadGame(){
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             File file = viewManager.getFileNameToLoadGame();
@@ -141,21 +221,31 @@ public class gameControllerStub {
             }
         }
         
+        /**
+        * Method that coordinates how to go back to the main menu
+        */
         private void manageGoBackToMainMenu(){
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
         
+        /**
+        * Method that coordinates how to show games rules
+        */ 
         private void manageShowRules(){
             viewManager.showRules();
         }
-        
+        /**
+        * Method that coordinates how to save current game state 
+        */ 
         private void manageSaveAndExit(){
             // TODO implement this
             // serializer.saveState()
             System.exit(0);
         }
-        
+        /**
+        * Method that coordinates how each player can interact when they can move a piece
+        */  
         private void managePlay(){
             boolean winner = checkIfWinner();
             if (!winner) {
@@ -174,23 +264,28 @@ public class gameControllerStub {
                     System.out.println("Column is: " + Integer.toHexString(column));
                 }
             }
-
         }
-        
+        /**
+        * Method that checks if a player won the match
+        */  
         private boolean checkIfWinner(){
             //if (playerArray.get(currentPlayer).getScore() == 7) {
                // winnerExists = true;
             //}
             return winnerExists;
         }
-        
+        /**
+        * Method that throws a random dice and shows up its result
+        */    
         private int throwDice(){
             int diceResult = 0;
             dice.rollDice();
             diceResult = dice.getRollResult();
             return diceResult;
         }
-        
+        /**
+        * Method that checks which button was clicked and acts accordingly
+        */   
         @Override
         public void actionPerformed(ActionEvent event) {
             Object source = event.getSource();

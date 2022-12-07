@@ -12,7 +12,22 @@ import javax.swing.JFileChooser;
  * @author Mauricio Palma
  */
 public interface LoadGameInterface {
+
+    /**
+     *
+     * @return
+     */
     public JButton getContinueButton();
+
+    /**
+     *
+     * @return
+     */
     public JButton getBackButton();
+
+    /**
+     *
+     * @return
+     */
     public JFileChooser getFileChooser();
 }

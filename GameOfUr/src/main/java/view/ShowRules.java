@@ -25,6 +25,9 @@ public class ShowRules extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     *
+     */
     public void showRules(){
         //UrRulesModel rules = new UrRulesModel();
         JFrame frame = new JFrame("Rules");        
