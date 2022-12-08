@@ -175,7 +175,7 @@ public class Main {
     }
     
     private static void testDiceClass() {
-        float[] probabilities = { 20, 20, 20, 20, 20 };
+        int[] probabilities = { 20, 20, 20, 20, 20 };
         Dice dice = new Dice(5, probabilities);
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));

@@ -1,6 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package controller;
 
@@ -15,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 import model.Dice;
+import model.FileManager;
 import model.Player;
 import model.UrPiece;
 import model.UrPlayer;
@@ -24,16 +27,12 @@ import view.UrMainGame;
 import view.UrMainMenu;
 import view.UrNewGame;
 import view.ShowRules;
-/**
- *
- * @author Mauricio Palma
- */
 
 /**
  * Creates a general controller of the game to coordinate
  * Referee and view manager.
+ * @author Mauricio Palma
  */
-
 public class UrGameController {
     /**
     *  A Button that represents the new game button on GUI
@@ -88,22 +87,49 @@ public class UrGameController {
     * Object that is used to manipulate the dice accordingly in each game
     */
     private Dice dice;
-    
     /**
     * Integer that tracks which player is playing at a given time
     */
     private int currentPlayer;
+    /**
+    * An array with the probabilities of each dice side.
+    */
+    private int[] diceProbabilities;
+    /**
+    * The amount of players in game.
+    */
+    private int playerAmount;
+    /**
+    * The amount of pieces each player has.
+    */
+    private int pieceAmount;
+    /**
+    * The amount of rows in game board.
+    */
+    private int rowAmount;
+    /**
+    * The amount of columns in game board.
+    */
+    private int colAmount;
+    /**
+    * A matrix that contains the adjacents of each tile.
+    */
+    private ArrayList<ArrayList<Boolean>> adjacentMatrix;
+    /**
+    * A reference to an object that reads and manages files.
+    */
+    private FileManager fileManager;
     
     /**
      * Constructor method that uses templates to create a personalized viewManager.  
      */
     public UrGameController(){
-        float[] probabilities = { 20, 20, 20, 20, 20 };
+        readGameData();
         try {
             SwingUtilities.invokeAndWait(() -> {
                 this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
                 this.playerArray = new ArrayList<>();
-                this.dice = new Dice(5, probabilities);
+                this.dice = new Dice(diceProbabilities.length, diceProbabilities);
                 this.manageButtons();
                 this.currentPlayer = 1;
                 
@@ -112,7 +138,60 @@ public class UrGameController {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Reads game data from file.  
+     */
+    private void readGameData() {
+        // Reads from file
+        fileManager = new FileManager();
+        fileManager.loadFile("gameData.csv", "src/main/java/auxiliaryFiles/");
+        ArrayList<String> stringArray = fileManager.getFileContents();
+        
+        setDiceProbabilities(stringArray.get(0));
+        setPlayerAmount(stringArray.get(1));
+        setBoardDimensions(stringArray.get(2));
+        
+        ArrayList<String> adjacentsArray = new ArrayList(stringArray.subList(3, stringArray.size()));
+        setBoardAdjacentMatrix(adjacentsArray);
+    }
+    /**
+     * Sets dice probabilities extracting them from a string.
+     * @param row A file line.
+     */
+    private void setDiceProbabilities(String row) {
+        String[] diceData = row.split(",");
+        diceProbabilities = new int[diceData.length];
+        for (int diceSide = 0; diceSide < diceData.length; diceSide++) {
+            diceProbabilities[diceSide] = Integer.parseInt(diceData[diceSide]);
+        }
+    }
+    /**
+     * Sets amount of players and the amount of pieces each player has, extracting them from a string.
+     * @param row A file line.
+     */
+    private void setPlayerAmount(String row) {
+        String[] playerData = row.split(",");
+        playerAmount = Integer.parseInt(playerData[0]);
+        pieceAmount = Integer.parseInt(playerData[1]);
+    }
+    /**
+     * Sets board dimensions, extracting them from a string.
+     * @param row A file line.
+     */
+    private void setBoardDimensions(String row) {
+        String[] boardData = row.split(",");
+        rowAmount = Integer.parseInt(boardData[0]);
+        colAmount = Integer.parseInt(boardData[1]);
+    }
+    /**
+     * Sets the graph's adjacent matrix, extracting them from an array of strings.
+     * @param adjacents An array of strings, each with a true or false value specifying if there is an adjacent there.
+     */
+    private void setBoardAdjacentMatrix(ArrayList<String> adjacents) {
+        // Converts from ArrayList<String> to ArrayList<ArrayList<Boolean>>
+        ArrayList<ArrayList<String>> stringMatrix = fileManager.splitArray(adjacents, ",");
+        adjacentMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
+    }
     /**
      * Method that manages each button parameter of UrGameController to the actual GUI button
     */
@@ -163,7 +242,7 @@ public class UrGameController {
         boolean winnerExists;
         
         /**
-        * Constructor method 
+        * Creates new action listener.
         */
         public buttonAction() {
             refereeStub = new refereeStub();
@@ -172,24 +251,18 @@ public class UrGameController {
             winnerExists = false;
             viewManager.setIfPieceMoved(true);
         }
-        
         /**
         * Method that coordinates how to react when a new game is chosen
         */
         private void manageContinueToNewGameButton(){
             viewManager.swapViewToNewGame();
         }
-        
         /**
         * Method that coordinates how to react when a game is loading from a previous match
         */
         private void manageContinueToLoadGameButton(){
             viewManager.swapViewToLoadGame();
         }
-        
-        // TODO: reaed file with game data
-        
-        
         /**
         * Method that coordinates what to do when a new game starts
         */
@@ -220,7 +293,6 @@ public class UrGameController {
                 }
             }
         }
-        
         /**
         * Method that coordinates how to start a game that has been load from a former match
         */
@@ -233,7 +305,6 @@ public class UrGameController {
                 viewManager.swapViewToMainGame();
             }
         }
-        
         /**
         * Method that coordinates how to go back to the main menu
         */
@@ -241,7 +312,6 @@ public class UrGameController {
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
-        
         /**
         * Method that coordinates how to show games rules
         */ 
