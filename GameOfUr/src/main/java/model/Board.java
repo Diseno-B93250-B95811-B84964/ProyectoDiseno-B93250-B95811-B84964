@@ -95,6 +95,15 @@ public final class Board<TileType extends Tile> extends GameObject {
     public void setAdjacentMatrix(boolean[][] adjacentMatrix) { // TODO: Check if stored correctly
         this.graphAdjacentMatrix = adjacentMatrix; // no se si caerle encima es lo mejor, pero ocupa menos tiempo
     }
+    public void setRows(int rows) {
+        this.amountRows = rows;
+    }
+    public void setColumns(int columns) {
+        this.amountColumns = columns;
+    }
+    public void setVerticesAmount(int verticesAmount) {
+        this.verticesAmount = verticesAmount;
+    }
     /**
      * Converts from array to matrix.
      * @param verticesIndex Tile's index in vertices array

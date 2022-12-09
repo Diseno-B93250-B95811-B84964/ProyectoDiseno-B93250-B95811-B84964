@@ -8,6 +8,7 @@ package controller;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.function.Supplier;
 import javax.swing.SwingUtilities;
 import model.Board;
 import model.Deserializer;

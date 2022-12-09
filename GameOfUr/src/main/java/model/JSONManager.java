@@ -16,8 +16,8 @@ abstract public class JSONManager {
     protected Board gameBoard;
     protected Player[] gamePlayers;
     
-    abstract public boolean execute();
-    abstract protected void manageFile(ArrayList<String> fileContents);
+    abstract public void execute();
+    abstract protected void manageFile();
     abstract protected void manageBoard();
     abstract protected void managePlayers();
 }

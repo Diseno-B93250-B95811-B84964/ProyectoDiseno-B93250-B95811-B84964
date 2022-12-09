@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.function.Supplier;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,90 +21,37 @@ import org.json.simple.parser.ParseException;
  * Manages the data of the classes to load into a JSON file.
  * @author Álvaro Miranda.
  */
-public class Deserializer<TileType extends Tile> extends JSONManager{
+public class Deserializer extends JSONManager{
     
-    private Object mainObject;
-    
-    private JSONArray mainJSONArray;
-    
-    private int objectCounter;
-    
+    private JSONObject playerObject;
+    //private JSONObject player2Object;
+    private JSONObject mainBoardObject;
+    //private Supplier<TileType> test;
     /**
      * Creates a new Serializer with the current board and active players.
      * @param gameBoard Current game board.
      * @param players Array that holds the active players.
     */
     public Deserializer(Board gameBoard, Player[] players){
-        objectCounter = 0;
         this.gameBoard = gameBoard;
         this.gamePlayers = players;
-        mainJSONArray = new JSONArray();
+        this.playerObject = new JSONObject();
+        this.mainBoardObject = new JSONObject();
         this.mainManager = new FileManager();
     }
     
-    /**
-     * Calls methods that creates a json file using the file contents that come from the game.
-     * @return success Indicates if the creation of the file was a success.
-    */
-    /*
     @Override
-    public boolean execute(){
-        boolean success = true;
-        JSONParser parser = new JSONParser();
-
-        try (Reader reader = new FileReader("src\\main\\java\\auxiliaryFiles\\output.json")) {
-            JSONObject testJSONArray = new JSONObject();
-            mainObject = parser.parse(reader);
-            mainJSONArray.add(mainObject);
-            System.out.println(mainJSONArray);
-            //mainJSONObject =  (JSONObject) mainObject;
-            //System.out.println(mainJSONObject.toString());
-            for(int remolacha = 0; remolacha <= 0; remolacha++){
-                //testJSONArray = mainJSONArray.get(remolacha);
-            }
-            //ArrayList<TileType> vertices = (ArrayList<TileType>) mainJSONArray.get("vertices");
-            //System.out.println(vertices);
-
-            //UrPlayer player1 = (UrPlayer) mainObject.get("player1");
-            //System.out.println(player1.toString());
-            /*
-            // loop array
-            JSONArray adjacentMatrix = (JSONArray) mainObject.get("graphAdjacentMatrix");
-            Iterator<String> iterator = adjacentMatrix.iterator();
-            while (iterator.hasNext()) {
-                System.out.println(iterator.next());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            success = false;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            success = false;
-        }
-        return success;
-    }*/
+    public void execute(){
+        manageFile();
+    }
     
-    //@SuppressWarnings("unchecked")
-    public boolean execute(){
-        boolean success = true;
+    /**
+     * Calls methods collect the data from the game sections.
+    */
+    @Override
+    protected void manageFile(){
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
-        /*
-        try (FileReader reader = new FileReader("src\\main\\java\\auxiliaryFiles\\output.json"))
-        {
-            //Read JSON file
-            Object allGameObjects = jsonParser.parse(reader);
- 
-            JSONArray gameObjects = (JSONArray) allGameObjects;
-            //System.out.println(employeeList);
-            //Iterate over game object array
-            gameObjects.forEach( gameObject -> parseGameObject( (JSONObject) gameObject, objectCounter ) );
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
         try{
             mainManager.loadFile("output.json", "src\\main\\java\\auxiliaryFiles\\");
             String jsonContents = String.join(", ", mainManager.getFileContents());
@@ -112,94 +60,27 @@ public class Deserializer<TileType extends Tile> extends JSONManager{
             for (int i = 0; i < gameObjects.size(); i++) {
                 JSONObject jsonObject = (JSONObject)gameObjects.get(i);
                 parseGameObject(jsonObject, i);
-                //JSONObject player1Object = (JSONObject) jsonObject.get("player1");
-                //String name = (String) player1Object.get("name");    
-                //System.out.println(name);
             }
         } catch (ParseException e) {
             e.printStackTrace();
+            //success = false;
         }
-
- 
-
-        return success;
     }
- 
-    private void parseGameObject(JSONObject gameObject, int counter) 
-    {
-        //objectCounter++;
+    
+    //Try to generalize
+    private void parseGameObject(JSONObject gameObject, int counter) {
         if(counter == 0) {
-            manageIndividualPlayer(gameObject, "player1");
+            playerObject = (JSONObject) gameObject.get("player1");
+            managePlayers();
         } else{
             if(counter == 1){
-                manageIndividualPlayer(gameObject, "player2");
+                playerObject = (JSONObject) gameObject.get("player2");
+                managePlayers();
             } else {
-                manageBoard(gameObject, "board");
+                mainBoardObject = (JSONObject) gameObject.get("board");
+                manageBoard();
             }
         }
-        
-        
-        System.out.println("I just entered");
-        //Get employee object within list
-        //JSONObject employeeObject = (JSONObject) employee.get("player1");
-         
-        //Get employee first name
-        //JSONArray firstName = (JSONArray) employeeObject.get("pieces");    
-        //System.out.println(firstName);
-    }
-    
-    public void manageIndividualPlayer(JSONObject gameObject, String currentPlayer){
-        //Get player1 object within list
-        JSONObject player1Object = (JSONObject) gameObject.get(currentPlayer);
-         
-        //Get player1's name
-        String name = (String) player1Object.get("name");    
-        System.out.println(name);
-        //Get player1's score
-        Long score = (Long) player1Object.get("score");    
-        System.out.println(score);
-        //Get player1's name
-        Long piecesAmount = (Long) player1Object.get("piecesAmount");    
-        System.out.println(piecesAmount);
-        //Get player1's name
-        String playerColor = (String) player1Object.get("playerColor");    
-        System.out.println(playerColor);
-        //Get player1's name
-        JSONArray pieces = (JSONArray) player1Object.get("pieces");    
-        System.out.println(pieces);
-    }
-    
-    
-    public void manageBoard(JSONObject gameObject, String gameBoard){
-        //Get player1 object within list
-        JSONObject player1Object = (JSONObject) gameObject.get(gameBoard);
-         
-        //Get player1's name
-        Long amountOfPlayers = (Long) player1Object.get("amountOfPlayers");    
-        System.out.println(amountOfPlayers);
-        //Get player1's score
-        Long amountRows = (Long) player1Object.get("amountRows");    
-        System.out.println(amountRows);
-        //Get player1's name
-        Long amountColumns = (Long) player1Object.get("amountColumns");    
-        System.out.println(amountColumns);
-        //Get the amount of vertices
-        Long verticesAmount = (Long) player1Object.get("verticesAmount");    
-        System.out.println(verticesAmount);
-        //Get player1's name
-        JSONArray vertices = (JSONArray) player1Object.get("vertices");    
-        System.out.println(vertices);
-        //Get player1's name
-        JSONArray graphAdjacentMatrix = (JSONArray) player1Object.get("graphAdjacentMatrix");    
-        System.out.println(graphAdjacentMatrix);
-    }
-    
-    /**
-     * Calls methods collect the data from the game sections.
-    */
-    @Override
-    protected void manageFile(ArrayList<String> fileContents){
-        
     }
     
     /**
@@ -207,14 +88,101 @@ public class Deserializer<TileType extends Tile> extends JSONManager{
     */
     @Override
     public void manageBoard(){
-        
+        manageBoardRows();
+        manageBoardColumns();
+        manageBoardVerticesAmount();
+        manageBoardVertices();
+        manageGraphAdjacentMatrix();
+        //System.out.println(gameBoard.toString());
     }
+    
+    public void manageBoardRows(){
+        int valueToInsert = 0;
+        Long amountRows = (Long) mainBoardObject.get("amountRows");
+        valueToInsert = amountRows.intValue();
+        gameBoard.setRows(valueToInsert);
+    }
+    
+    public void manageBoardColumns(){
+        int valueToInsert = 0;
+        Long amountColumns = (Long) mainBoardObject.get("amountColumns");
+        valueToInsert = amountColumns.intValue();
+        gameBoard.setColumns(valueToInsert);
+    }
+    
+    public void manageBoardVerticesAmount(){
+        int valueToInsert = 0;
+        Long verticesAmount = (Long) mainBoardObject.get("verticesAmount");
+        valueToInsert = verticesAmount.intValue();
+        gameBoard.setVerticesAmount(valueToInsert);
+    }
+    
+    public void manageBoardVertices(){
+        UrTile currentTile;
+        Long valueToCast = null;
+        int valueToInsert = 0;
+        JSONArray vertices = new JSONArray();
+        vertices = (JSONArray) mainBoardObject.get("vertices");
+        for (int i = 0; i < vertices.size(); i++) {
+            JSONObject jsonObject = (JSONObject)vertices.get(i);
+            currentTile = (UrTile) gameBoard.getVerticesArray().get(i);
+            manageRowVertices(jsonObject, currentTile, valueToCast, valueToInsert);
+            manageColumnVertices(jsonObject, currentTile, valueToCast, valueToInsert);
+            //currentTile.setPiece((Piece)jsonObject.get("piece")); //Needs changes
+            currentTile.setIsSafe((boolean)jsonObject.get("isSafe"));
+        }
+    }
+        
+    public void manageRowVertices(JSONObject jsonObject, UrTile currentTile, Long valueToCast, int valueToInsert){
+        valueToCast = (Long)jsonObject.get("row");
+        valueToInsert = valueToCast.intValue();
+        currentTile.setRow(valueToInsert);
+    }
+    
+    public void manageColumnVertices(JSONObject jsonObject, UrTile currentTile, Long valueToCast, int valueToInsert){
+        valueToCast = (Long)jsonObject.get("column");
+        valueToInsert = valueToCast.intValue();
+        currentTile.setColumn(valueToInsert);
+    }
+    
+    public void manageGraphAdjacentMatrix(){
+        JSONArray jsonGraphAdjacentMatrix = (JSONArray) mainBoardObject.get("graphAdjacentMatrix");
+        int verticesAmount = gameBoard.getVerticesAmount();
+        //boolean[][] graphAdjacentMatrix = new boolean[verticesAmount][verticesAmount];
+        //graphAdjacentMatrix = (boolean[][])jsonGraphAdjacentMatrix.get("graphAdjacentMatrix");
+        for (int vertexIndex1 = 0; vertexIndex1 < verticesAmount; vertexIndex1++) {
+            for (int vertexIndex2 = 0; vertexIndex2 < verticesAmount; vertexIndex2++) {
+                gameBoard.getAdjacentMatrix()[vertexIndex1][vertexIndex1] = (boolean)jsonGraphAdjacentMatrix.get(vertexIndex2);
+            }
+        }
+    }
+    
+    
     
     /**
      * Collects all the information from the actives players and saves it in a JSONObject.
     */
     @Override
     public void managePlayers(){
-        
+        //Get player1's name
+        String name = (String) playerObject.get("name");
+        System.out.println(name);
+        //Get player1's score
+        Long score = (Long) playerObject.get("score");    
+        System.out.println(score);
+        //Get player1's piecesAmount
+        Long piecesAmount = (Long) playerObject.get("piecesAmount");    
+        System.out.println(piecesAmount);
+        //Get player1's playerColor
+        String playerColor = (String) playerObject.get("playerColor");    
+        System.out.println(playerColor);
+        //Get player1's pieces
+        JSONArray pieces = (JSONArray) playerObject.get("pieces");    
+        System.out.println(pieces);
     }
+    /*
+    public void managePlayersName(int currentPlayer){
+        String name = (String) player1Object.get("name");
+        gamePlayers[currentPlayer];
+    }*/
 }

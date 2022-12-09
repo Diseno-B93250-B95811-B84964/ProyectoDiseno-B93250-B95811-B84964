@@ -65,31 +65,31 @@ public class Serializer extends JSONManager{
      * @return success Indicates if the creation of the file was a success.
     */
     @Override
-    public boolean execute(){
-        boolean success = true;
+    public void execute(){
+        //boolean success = true;
         try {
-            manageFile(mainManager.getFileContents());
+            manageFile();
             mainManager.saveFile("output", ".json", "src\\main\\java\\auxiliaryFiles\\");
         }
         catch(Exception e) {
             System.out.println(e);
-            success = false;
+            //success = false;
         }
-        return success;
+        //return success;
     }
     
     /**
      * Calls methods collect the data from the game sections.
     */
     @Override
-    protected void manageFile(ArrayList<String> fileContents){
+    protected void manageFile(){
         manageBoard();
         managePlayers();
         JSONObject mainBoard = new JSONObject();
         mainBoard.put("board", jsonBoard);
-        fileContents.add(jsonPlayer1.toString());
-        fileContents.add(jsonPlayer2.toString());
-        fileContents.add(mainBoard.toString());
+        mainManager.getFileContents().add(jsonPlayer1.toString());
+        mainManager.getFileContents().add(jsonPlayer2.toString());
+        mainManager.getFileContents().add(mainBoard.toString());
     }
     
     /**
