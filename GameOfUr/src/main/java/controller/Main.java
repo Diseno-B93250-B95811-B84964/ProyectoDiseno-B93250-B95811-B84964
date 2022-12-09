@@ -19,10 +19,12 @@ import model.FileManager;
 
 import model.Piece;
 import model.Player;
+import model.Referee;
 import model.Rules;
 import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
+import model.UrReferee;
 import model.UrTile;
 
 /**
@@ -126,12 +128,24 @@ public class Main {
     }
     
     public static void testPlayerClasses() {
-        UrPiece urPiece = new UrPiece();
-        Player<UrPiece> player = new UrPlayer<>(7,Color.RED,"Miguelito", urPiece);
+        //  public UrPlayer(int amountPieces, Color color, String name)
         
+        Piece urPiece = new UrPiece();
+        // int amountPieces, Color color, String name, PieceType pieceType
+        Player urPlayer = new UrPlayer(7,Color.RED,"San Juan de Diosito");
+        urPlayer.initializePiecesArray(urPiece);
         
-
-        System.out.println("ToString: " + player);
+        //Player<UrPiece> player = new UrPlayer<>(7,Color.RED,"Miguelito", urPiece);
+        
+        //System.out.println("ToString: " + player);
+        //public Referee(int players, int pieces, PlayerType playerType, PieceType pieceType)
+        
+        Referee ref = new UrReferee(1,7, urPlayer, urPiece );
+        
+        System.out.println("After ref...");
+        
+        //System.out.println("Ref is" + ref);
+        
         /*
         Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
         System.out.println(player + "\n");

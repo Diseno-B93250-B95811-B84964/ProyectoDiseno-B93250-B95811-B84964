@@ -36,11 +36,28 @@ public class UrPlayer <PieceType extends Piece> extends Player {
         super(supplier, amountPieces);
     }*/
     
+
+    
+    public UrPlayer(int amountPieces) {
+        super(amountPieces, Color.WHITE, "", null);
+    }
+    
+    public UrPlayer() {
+        super(2, Color.WHITE, "", null);
+        System.out.println("Empty UrPlayer controller greets u");
+    }
+    
+    public UrPlayer(int amountPieces, Color color, String name) {
+        super(amountPieces, color, name);
+    }
     
     public UrPlayer(int amountPieces, Color color, String name, PieceType pieceType) {
         super(amountPieces, color, name, pieceType);
     }
     
+    public UrPlayer(int amountPieces, Color color, String name, UrPiece pieceType) {
+        super(amountPieces, color, name, pieceType);
+    }
     
     /**
      * Modifies player's score.

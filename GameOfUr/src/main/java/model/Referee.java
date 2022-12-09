@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Game referee, manages game moves and game score.
  * @author Jimena Gdur.
  */
-public abstract class Referee <PlayerType extends Player>
+public abstract class Referee <PlayerType extends Player, PieceType extends Piece>
 {
     /**
      * Amount of rows in board.
@@ -55,6 +55,8 @@ public abstract class Referee <PlayerType extends Player>
     
     protected PlayerType playerType;
     
+    protected PieceType pieceType;
+    
     /**
      * Creates referee class.
      * @param rows Amount of rows in game board.
@@ -83,6 +85,26 @@ public abstract class Referee <PlayerType extends Player>
         createBoard(boolMatrix);
     }
     
+    
+    public Referee(int players, int pieces, PlayerType playerType, PieceType pieceType)
+    {
+        this.playerAmount = players;
+        this.pieceAmount = pieces;
+        this.playerType = playerType;
+        this.pieceType = pieceType;
+        
+        try {
+            makeNewPlayers();
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.amountRows = 0;
+        this.amountCols = 0;
+        this.tileAmount = 0;
+        this.gameRules = null;
+    }
+    
+    
     /**
      * Creates players and stores them in playerArray.
      * Abstract class that allows Referee child to manage implementation.
@@ -93,8 +115,8 @@ public abstract class Referee <PlayerType extends Player>
         //Supplier<UrPiece> supplier, int amountPieces;
         for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
            
-            PlayerType newobject = (PlayerType)template.getClass().getConstructor(Supplier.class, Integer.class).newInstance(color);
-            playerArray.add(playerIndex, newobject);
+            //PlayerType newobject = (PlayerType)template.getClass().getConstructor(Supplier.class, Integer.class).newInstance(color);
+            //playerArray.add(playerIndex, newobject);
         }
         
         /*
@@ -106,9 +128,20 @@ public abstract class Referee <PlayerType extends Player>
         */
     }
     
-    protected void makeNewPlayers() throws IllegalAccessException,InstantiationException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
-        PlayerType newPlayer = (PlayerType)playerType.getClass().getConstructor(Color.class).newInstance(color);
+    protected void makeNewPlayers() throws IllegalAccessException,InstantiationException,
+            NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+        playerArray = new ArrayList<>(playerAmount);
+        PieceType newPiece = (PieceType)pieceType.getClass().newInstance();
+        System.out.println("Is this the end...?");
+        System.out.println("PieceType is: " + pieceType.getClass());
+        PieceType newPieceType = this.pieceType;
+        newPieceType.getClass();
+        PlayerType newPlayer = (PlayerType)
+                playerType.getClass().getConstructor(int.class, Color.class, String.class, newPieceType.getClass()).newInstance(
+                        3, Color.WHITE, "Migulito?", this.pieceType);
         playerArray.add(newPlayer);
+        System.out.println("It worked, lol");
+        // public Player(int amountPieces, Color color, String name, PieceType pieceType)
     }
     
     /**

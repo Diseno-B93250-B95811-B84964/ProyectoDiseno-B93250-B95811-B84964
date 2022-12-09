@@ -87,6 +87,29 @@ public abstract class Player
         initializePiecesArray();
     }
     
+    public Player(int amountPieces, Color color, String name) {
+        
+        this.piecesAmount = amountPieces;
+        this.name = name;
+        this.color = color;
+        pieces = new ArrayList<>();
+        //this.pieceType = pieceType;
+        //initializePiecesArray();
+    }
+    
+    
+    public void initializePiecesArray(PieceType piece){
+    //private void initializePiecesArray(Supplier<PieceType> supplier){
+        this.pieces = new ArrayList<>(this.piecesAmount);
+        for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
+            try {
+                makeNewPiece(piece);
+            } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     private void initializePiecesArray(){
     //private void initializePiecesArray(Supplier<PieceType> supplier){
         this.pieces = new ArrayList<>(this.piecesAmount);
@@ -123,6 +146,12 @@ public abstract class Player
      * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
      * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
      */
+    
+    public void makeNewPiece(PieceType piece) throws IllegalAccessException,InstantiationException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+        PieceType newPiece = (PieceType)piece.getClass().getConstructor(Color.class).newInstance(color);
+        pieces.add(newPiece);
+    }
+    
     public void makeNewPiece() throws IllegalAccessException,InstantiationException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
         PieceType newPiece = (PieceType)pieceType.getClass().getConstructor(Color.class).newInstance(color);
         pieces.add(newPiece);
