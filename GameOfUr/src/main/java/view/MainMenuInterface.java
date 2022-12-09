@@ -1,32 +1,32 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
 import javax.swing.JButton;
 
 /**
- *
- * @author B95811
+ * An interface that contains methods necessary to create main menu view.
+ * @author Mauricio Palma
  */
-public interface MainMenuInterface {
-
+public interface MainMenuInterface
+{
     /**
-     *
-     * @return
+     * Returns button that will start a new game.
+     * @return StartNewGame button.
      */
     public JButton getStartNewGameButton();
-
     /**
-     *
-     * @return
+     * Returns button that will load a former game.
+     * @return LoadFormerGame button.
      */
     public JButton getLoadFormerGameButton();
-
     /**
-     *
-     * @return
+     * Returns button that will display game rules.
+     * @return ShowRules button.
      */
     public JButton getShowRulesButton();
 }

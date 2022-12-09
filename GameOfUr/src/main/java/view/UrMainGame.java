@@ -1,16 +1,13 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,23 +18,48 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
- *
- * @author Mauricio Palma
+ * Displays main game components like, the board and player's inventories.
+ * @author Ximena Gdur, Mauricio Palma
  */
 public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
-    private final static int ROWS = 8;
+    /**
+     * Amount of rows in board.
+     */
+    private final static int ROWS = 8; // TODO: READ THIS FROM CONTROLLER
+    /**
+     * Amount of columns in board.
+     */
     private final static int COLUMNS = 3;
-    private JLabel tilesArray[][] = new JLabel[ROWS][COLUMNS];
+    /**
+     * JLabel array representing game tiles.
+     */
+    private final JLabel tilesArray[][] = new JLabel[ROWS][COLUMNS];
+    /**
+     * An array of labels for the dice images.
+     */
     private JLabel diceLabelArray [];
+    /**
+     * Icon representing dice state where player has no score.
+     */
     private ImageIcon noScoreDiceState;
+    /**
+     * Icon representing dice state where player has scored.
+     */
     private ImageIcon scoreDiceState;
+    /**
+     * Amount of used pieces for first player.
+     */
     private int usedPiecesFirstPlayer;
+    /**
+     * Amount of used pieces for second player.
+     */
     private int usedPiecesSecondPlayer;
+    /**
+     * First player's color.
+     */
     private Color firstPlayerColor;
     private Color secondPlayerColor;
     

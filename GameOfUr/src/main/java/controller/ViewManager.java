@@ -12,13 +12,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.function.Supplier;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -44,36 +39,86 @@ import view.ShowRules;
  * @param <ShowRulesType> ShowRules's child class.
  */
 public class ViewManager
-        <
-            MainGameType extends UrMainGame, 
-            LoadGameType extends UrLoadGame,
-            MainMenuType extends UrMainMenu,
-            NewGameType extends UrNewGame,
-            ShowRulesType extends ShowRules
-        > {
-    
-    private MainMenuType mainMenu;
-    private LoadGameType loadGame;
-    private NewGameType newGame;
-    private MainGameType mainGame;
-    private ShowRulesType showRules;
+    <MainGameType extends UrMainGame, 
+    LoadGameType extends UrLoadGame,
+    MainMenuType extends UrMainMenu,
+    NewGameType extends UrNewGame,
+    ShowRulesType extends ShowRules>
+{
+    /**
+     * Stores an instance of a view.
+     * Displays main menu with all different game options.
+     */
+    private final MainMenuType mainMenu;
+    /**
+     * Stores an instance of a view.
+     * Displays a JFileChooser window that allows user to select a saved match.
+     */
+    private final LoadGameType loadGame;
+    /**
+     * Stores an instance of a view.
+     * Displays windows allowing user to select their names and colors.
+     */
+    private final NewGameType newGame;
+    /**
+     * Stores an instance of a view.
+     * Displays main game with board and player inventories.
+     */
+    private final MainGameType mainGame;
+    /**
+     * Stores an instance of a view.
+     * Displays game rules.
+     */
+    private final ShowRulesType showRules;
+    /**
+     * Game's main frame.
+     */
     private JFrame mainFrame;
+    /**
+     * Game's main panel.
+     */
     private JPanel mainPanel;
+    /**
+     * Stores an instance of a card layout class.
+     * Allow transitioning between views.
+     */
     private CardLayout cardLayout;
-    
+    /**
+     * Stores the color of current player.
+     */
     private Color currentPlayerColor;
+    /**
+     * Whether piece was moved.
+     */
     private boolean movedPiece;
+    /**
+     * Whether a tile can be clicked.
+     */
     private boolean canClick;
+    /**
+     * The row clicked on interface.
+     */
     private int clickedRow;
+    /**
+     * The column clicked on interface.
+     */
     private int clickedColumn;
     
+    /**
+     * Creates a view manager.
+     * @param mainGameSupplier Provides an instance of MainGame.
+     * @param loadGameSupplier Provides an instance of LoadGame.
+     * @param mainMenuSupplier Provides an instance of MainMenu.
+     * @param newGameSupplier Provides an instance of NewGame.
+     * @param rulesSupplier Provides an instance of ShowRules.
+     */
     public ViewManager (
-            Supplier<MainGameType> mainGameSupplier,
-            Supplier<LoadGameType> loadGameSupplier,
-            Supplier<MainMenuType> mainMenuSupplier,
-            Supplier<NewGameType> newGameSupplier,
-            Supplier<ShowRulesType> rulesSupplier
-            ) {
+        Supplier<MainGameType> mainGameSupplier,
+        Supplier<LoadGameType> loadGameSupplier,
+        Supplier<MainMenuType> mainMenuSupplier,
+        Supplier<NewGameType> newGameSupplier,
+        Supplier<ShowRulesType> rulesSupplier)
+    {
         this.mainMenu = mainMenuSupplier.get();
         this.loadGame = loadGameSupplier.get();
         this.newGame = newGameSupplier.get();
@@ -87,9 +132,13 @@ public class ViewManager
         this.currentPlayerColor = null;
         manageCardLayout();
     }
-    
-    /* Methods to play a match */
-    public void playMove(int diceResult, int currentPlayer, Color playerColor){
+    /**
+     * Play a match for current player.
+     * @param diceResult The result of throwing the dice.
+     * @param currentPlayer Id of current player.
+     * @param playerColor Color of current player.
+     */
+    public void playMove(int diceResult, int currentPlayer, Color playerColor) {
         this.setIfPieceMoved(false);
         this.canClick = true;
         this.currentPlayerColor = playerColor;
@@ -98,48 +147,38 @@ public class ViewManager
         this.mainGame.setMoves(diceResult);
         this.mainGame.changePlayerTurn(currentPlayer);
     }
-    
-    public void updateMainGameView(){
+    /**
+     * Updates main game view.
+     */
+    public void updateMainGameView() {
+        // TODO: ?
     }
-    
-    public void showRules(){
-    //public void showRules(String[] rules){
+    /**
+     * Show game rules.
+     */
+    public void showRules() {
+        // TODO: receive rules object from referee
         showRules.showRules();
     }
-    
-    
-    /*Methods to load a former match */
-    
-    public File getFileNameToLoadGame(){
+    /**
+     * Gets file name that allows a former match to be loaded.
+     * @return name of chosen file.
+     */
+    public String getFileNameToLoadGame() {
         JFileChooser fileChooser = loadGame.getFileChooser();
-        File file = null;
+        String fileName = null;
         if (fileChooser != null) {
             var selectedFile = fileChooser.getSelectedFile();
             if (selectedFile != null) {
-                try {
-                    file = new File(selectedFile.getAbsolutePath());
-                    /*Delete this*/
-                    Scanner lineScanner = new Scanner(file);
-                    if (lineScanner != null) {
-                        while (lineScanner.hasNextLine()) {
-                        System.out.println("Content is: " + lineScanner.nextLine());
-                        }
-                        /*
-                        while (lineScanner.hasNextLine()) {
-                            String[] lineAsArray = lineScanner.nextLine().split(",");         
-                            fileAsStringArray.add(removeQuotationMarks(lineAsArray));*/
-                        }
-                    } 
-                    /*Until here*/
-                catch (FileNotFoundException ex) {
-                    Logger.getLogger(ViewManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                fileName = selectedFile.getAbsolutePath();    
             }
         }
-        return file;
+        return fileName;
     }
-    
-    /* Methods to create a new game */
+    /**
+     * Gets current player's data.
+     * @return A string with player name and color.
+     */
     public String getPlayerData(){
         Color playerColor = newGame.getPlayerColor();
         String playerName = newGame.getPlayerName();
@@ -153,58 +192,75 @@ public class ViewManager
         }
         return playerData;
     }
-    
+    /**
+     * Updates player name and title to reflect current player information.
+     * @param currentPlayer Id of current player.
+     */
     public void updateNewGameForNextPlayer(int currentPlayer){
-        //this.currentPlayer++;
         this.newGame.resetPlayerNameTextField();
         this.newGame.setPlayerTitle(currentPlayer);
     }
-    
-    /* Methods to personalize a match */
-    
-    public void setPlayers(ArrayList<Player> playerArray){ // TODO make a urViewManager?
-        this.mainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName()); // These can be private methods and can be implemented under abstract method "setPlayers()"
+    /**
+     * Updates labels to reflect the chosen names and colors of each player.
+     * @param playerArray An array with Player objects.
+     */
+    public void setPlayers(ArrayList<Player> playerArray){
+        this.mainGame.setFirstPlayerNameToLabel(playerArray.get(0).getName());
         this.mainGame.setFirstPlayerPieceColor(playerArray.get(0).getColor());
         
         this.mainGame.setSecondPlayerNameToLabel(playerArray.get(1).getName());
         this.mainGame.setSecondPlayerPieceColor(playerArray.get(1).getColor());
     }
-    
+    /**
+     * Hides the colors that have already been chosen.
+     * @param color Color that needs to be hidden.
+     */
     public void hideColors(Color color){
         newGame.hideColorButton(color);
         newGame.revalidate();
         newGame.repaint();
     }
-    
+    /**
+     * Resets the chosen color, allowing the user to select.
+     */
     public void resetColorChosen () {
         newGame.resetColorChosen();
     }
-    
-    /*Swap methods */
-    
+    /**
+     * Swaps to certain view, defined by given string.
+     * @param viewName Name of view to swap to.
+     */
     private void swapView(String viewName){
         this.cardLayout.show(this.mainPanel, viewName);
     }
-    
+    /**
+     * Swaps to load game view.
+     */
     public void swapViewToLoadGame(){
         this.swapView("loadGame");
     }
-    
+    /**
+     * Swaps to main menu view.
+     */
     public void swapViewToMainMenu(){
         this.swapView("mainMenu");
     }
-    
+    /**
+     * Swaps to main game view.
+     */
     public void swapViewToMainGame(){
         this.swapView("mainGame");
     }
-    
+    /**
+     * Swaps to new game view.
+     */
     public void swapViewToNewGame(){
         this.swapView("newGame");
     }
-    
-    /*CardLayout configuration */
-    
-    public void manageCardLayout(){
+    /**
+     * Configures card layout, adds different views and creates main frame.
+     */
+    private void manageCardLayout(){
         mainFrame = new JFrame("Royal Game Of Ur");
         mainPanel = new JPanel();
         cardLayout = new CardLayout();
@@ -221,113 +277,174 @@ public class ViewManager
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
     }
-    
-    private  void addComponentToPanel(JPanel basePanel, JPanel newComponent ,String panelsName){
+    /**
+     * Adds given component to base panel.
+     */
+    private void addComponentToPanel(JPanel basePanel, JPanel newComponent, String panelsName){
         basePanel.add(newComponent, panelsName);
         basePanel.revalidate();
         basePanel.repaint();
     }
-    
-    /* GUI Configuration */
-    
+    /**
+     * Initializes listener for selecting color, initializes labels.
+     */
     private void initializeListeners(){
         this.newGame.addTextFieldFocusistener(new SetColorClickListener());
         initializeLabels();
     }
-    
+    /**
+     * Initializes labels that represent each game tile.
+     */
     private void initializeLabels(){
         JLabel currentLabel;
         for (int row = 0; row < 8; row++) { // TODO change magic number
             for (int column = 0; column < 3; column++) { // TODO change magic number
                 currentLabel = this.mainGame.getLabel(row, column);
-                currentLabel.addMouseListener(new TileMouseListener(row,column));
+                currentLabel.addMouseListener(new TileMouseListener(row, column));
             }
         }
     }
-    
-    /* Check if piece moved*/
-    
+    /**
+     * Checks if piece has been moved.
+     * @return whether the piece has been moved.
+     */
     public boolean getIfPieceMoved(){
         return this.movedPiece;
     }
-    
-    public void setIfPieceMoved(boolean bool){
-        this.movedPiece = bool;
+    /**
+     * Indicates if piece has been moved or not.
+     * @param beenMoved True or false value indicating if tile has been moved.
+     */
+    public void setIfPieceMoved(boolean beenMoved){
+        this.movedPiece = beenMoved;
     }
-    
+    /**
+     * Indicates which tile has been clicked.
+     * @param row The row of the tile that was clicked.
+     * @param column The column of the tile that was clicked.
+     */
     private void setClickedTile(int row, int column){
         this.clickedRow = row;
         this.clickedColumn = column;
     }
-    
+    /**
+     * Gets the last row that was clicked.
+     * @return last row clicked.
+     */
     public int getClickedRow(){
         return this.clickedRow;
     }
-    
+    /**
+     * Gets the last column that was clicked.
+     * @return last column clicked.
+     */
     public int getClickedColum(){
         return this.clickedColumn;
     }
-    
-    /*Button Getters */
-    
+    /**
+     * Gets the button that starts a new game.
+     * @return startNewGame button.
+     */
     public JButton getStartNewGameButton(){
         return mainMenu.getStartNewGameButton();
     }
-    
+    /**
+     * Gets the button that loads a game.
+     * @return StartLoadGame button.
+     */
     public JButton getStartLoadGameButton(){
         return mainMenu.getLoadFormerGameButton();
     }
-    
+    /**
+     * Gets the button that continues from new game window.
+     * @return Continue button.
+     */
     public JButton getContinueButtonFromNewGame(){
         return newGame.getContinueButton();
     }
-    
+    /**
+     * Gets the button that goes back from new game window.
+     * @return GoBack button.
+     */
     public JButton getGoBackButtonFromNewGame(){
         return newGame.getBackButton();
     }
-
+    /**
+     * Gets the button that continues from load game window.
+     * @return Continue button.
+     */
     public JButton getContinueButtonFromLoadGame(){
         return loadGame.getContinueButton();
     }
-    
+    /**
+     * Gets the button that goes back from load game window.
+     * @return GoBack button.
+     */
     public JButton getGoBackFromLoadGame(){
         return loadGame.getBackButton();
     }
-    
+    /**
+     * Gets the button that displays rules from main menu window.
+     * @return Rules button.
+     */
     public JButton getRulesButtonFromMainMenu(){
         return mainMenu.getShowRulesButton();
     }
-    
+    /**
+     * Gets the button that displays rules from game window.
+     * @return Rules button.
+     */
     public JButton getRulesButtonFromGame(){
         return mainGame.getShowRulesButton();
     }
-    
+    /**
+     * Gets the button that exits and saves.
+     * @return ExitAndSave button.
+     */
     public JButton getExitAndSave(){
         return mainGame.getExitAndSaveButton();
     }
-    
+    /**
+     * Gets the button that throws the dice.
+     * @return ThrowDice button.
+     */
     public JButton getThrowDiceButton(){
         return mainGame.getThrowDiceButton();
     }
-    
-    /* Methods to update GUI */
-    
+    /**
+     * Updates interface by removing icon from tile.
+     * @param row The row of the label that needs to be cleaned.
+     * @param column The column of the label that needs to be cleaned.
+     */
     private void cleanTile(int row, int column) {
         mainGame.removeIconFromTile(row, column);
     }
-    
-    public void moveTile(int currentRow, int currentColumn, int nextRow, int nextColumn) {
+    /**
+     * Updates interface by moving piece from old tile to new one.
+     * @param currentRow The row of the piece that will be moved to a new tile.
+     * @param currentColumn The column of the piece that will be moved to a new tile.
+     * @param nextRow The row of the new tile, where the piece is now located.
+     * @param nextColumn The column of the new tile, where the piece is now located.
+     */
+    public void movePiece(int currentRow, int currentColumn, int nextRow, int nextColumn) {
         cleanTile(currentRow, currentColumn);
         mainGame.setNextPossibleLabel(nextRow, nextColumn, mainGame.getPlayerIcon(currentPlayerColor));
     }
-    
+    /**
+     * Updates label to indicate a player has won the game.
+     * @param winnerName Name of the player that has won.
+     */
     public void declareWinner(String winnerName){
-    
+        // TODO: update label to show there is a winner.
     }
-    /* Auxiliary inner classes */
     
+    /**
+     * A listener that detects when a user has chosen a color.
+     */
     class SetColorClickListener implements FocusListener{
-
+        /**
+         * An event that detects that someone has clicked on a specific color.
+         */
         @Override
         public void focusGained(FocusEvent event) {
             JTextField currentInput = newGame.getPlayerNameTextField();
@@ -335,7 +452,9 @@ public class ViewManager
                 currentInput.setText("");
             }        
         }
-
+        /**
+         * An event that detects that someone has clicked elsewhere.
+         */
         @Override
         public void focusLost(FocusEvent event) {
             JTextField currentInput = newGame.getPlayerNameTextField();
@@ -345,15 +464,32 @@ public class ViewManager
         }
     }
     
+    /**
+     * A listener that detects when a user has clicked a tile.
+     */
     class TileMouseListener extends MouseAdapter {
+        /**
+         * The row of specific label in visual matrix.
+         */
         int row;
+        /**
+         * The column of specific label in visual matrix.
+         */
         int column;
         
+        /**
+         * Initializes listener with fiven data.
+         * @param row Tile's row.
+         * @param column Tile's column.
+         */
         TileMouseListener(int row, int column){
             this.row = row;
             this.column = column;        
         }
-
+        /**
+         * Detects when user has clicked label.
+         * @param entered Provides further information regarding event.
+         */
         @Override
         public void mousePressed(MouseEvent entered){
             if (canClick) {
