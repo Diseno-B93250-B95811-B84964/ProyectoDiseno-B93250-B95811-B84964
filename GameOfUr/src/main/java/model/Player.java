@@ -13,9 +13,11 @@ import java.util.function.Supplier;
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
- * @param <PieceType> Piece's child class
+ * @param <PieceType> Piece's child class.
  */
-public abstract class Player<PieceType extends Piece> extends GameObject {
+public abstract class Player
+    <PieceType extends Piece> extends GameObject
+{
     /**
      * Player's chosen color.
      */
@@ -42,7 +44,7 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
     protected ArrayList<PieceType> pieces;
     
     /**
-     * Creates a new Player with an array of pieces.
+     * Creates a new Player with their color and name.
      * @param supplier Supplier class that contains instance of piece's child.
      * @param amountPieces Amount of pieces the player has.
      * @param chosenColor Color player chose on respective screen.
@@ -52,6 +54,15 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
         this.piecesAmount = amountPieces;
         this.color = chosenColor;
         this.name = name;
+        initializePiecesArray(supplier);
+    }
+    /**
+     * Creates a new Player with an array of pieces.
+     * @param supplier Supplier class that contains instance of piece's child.
+     * @param amountPieces Amount of pieces the player has.
+     */
+    public Player(Supplier<PieceType> supplier, int amountPieces) {
+        this.piecesAmount = amountPieces;
         initializePiecesArray(supplier);
     }
     /**
@@ -73,6 +84,13 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
         return this.color;
     }
     /**
+     * Sets player's color with given Color.
+     * @param chosenColor Player's color.
+     */
+    public void setColor(Color chosenColor) {
+        this.color = chosenColor;
+    }
+    /**
      * Returns player's name.
      * @return Player's name.
      */
@@ -80,11 +98,25 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
         return this.name;
     }
     /**
+     * Sets player's color with given Color.
+     * @param chosenName Player's name.
+     */
+    public void setName(String chosenName) {
+        this.name = chosenName;
+    }
+    /**
      * Returns player's score.
      * @return Player's score.
      */
     public int getScore() {
         return this.score;
+    }
+    /**
+     * Sets player's score.
+     * @param currentScore Player's score.
+     */
+    public void setScore(int currentScore) {
+        this.score = currentScore;
     }
     /**
      * Returns player's amount of pieces.
@@ -125,7 +157,7 @@ public abstract class Player<PieceType extends Piece> extends GameObject {
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
             string += pieceIndex + ": " + this.pieces.get(pieceIndex) + "\n";
         }  
-        
+    
         return string;
     }
 }

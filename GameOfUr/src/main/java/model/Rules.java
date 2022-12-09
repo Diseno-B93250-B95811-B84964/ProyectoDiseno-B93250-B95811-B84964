@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * Stores game rules.
  * @author Jimena Gdur.
  */
-public final class Rules {
+public final class Rules
+{
     /**
      * Stores all game rules
      */

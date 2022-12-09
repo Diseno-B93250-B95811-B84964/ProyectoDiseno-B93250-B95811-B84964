@@ -4,6 +4,7 @@
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
  */
+
 package model;
 
 import java.util.Random;
@@ -12,11 +13,12 @@ import java.util.Random;
  * Simulate the roll of a loaded die.
  * @author Jimena Gdur.
  */
-public final class Dice {
+public final class Dice
+{
     /**
     * A helper list that contains the weighted sum of each side.
     */
-    private float[] weightedSumList;
+    private int[] weightedSumList;
     /**
     * The amount of sides in current dice.
     */
@@ -27,7 +29,7 @@ public final class Dice {
      * @param sides Amount of sides in dice.
      * @param probabilities An array with the probability of each side.
      */
-    public Dice(int sides, float[] probabilities) {
+    public Dice(int sides, int[] probabilities) {
         sideAmount = sides;
         createHelperList(probabilities);
     }
@@ -35,8 +37,8 @@ public final class Dice {
      * Creates a helper list with the weighted sum of each side.
      * @param probabilities An array with the probability of each side.
      */
-    private void createHelperList(float[] probabilities) {
-        weightedSumList = new float[sideAmount];
+    private void createHelperList(int[] probabilities) {
+        weightedSumList = new int[sideAmount];
         weightedSumList[0] = probabilities[0];
         for (int sideIndex = 1; sideIndex < sideAmount; sideIndex++) {
             weightedSumList[sideIndex] =
@@ -45,13 +47,13 @@ public final class Dice {
     }
     /**
      * Throws the dice with given probabilities.
-     * Based on http://censore.blogspot.com/2014/08/simulate-roll-of-bias-or-weighted-dice.HTML
+     * Adapted from http://censore.blogspot.com/2014/08/simulate-roll-of-bias-or-weighted-dice.HTML
      * @return random number.
      */
     public int throwDice() {
         Random randomGenerator = new Random();
         int randomNumber = randomGenerator.nextInt(100);
-        
+
         int side = sideAmount;
         // If X <= a[0] choose 1 as outcome
         if(randomNumber <= weightedSumList[0]) {
@@ -64,7 +66,7 @@ public final class Dice {
                     side = sideIndex + 1;
                 }
             }
-        }
+    }
         // If X > a[n-1] choose n as outcome
         return side;
     }

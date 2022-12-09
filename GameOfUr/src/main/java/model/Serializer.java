@@ -102,7 +102,7 @@ public class Serializer extends JSONManager{
         jsonBoard.put("amountRows", gameBoard.getAmountRows());
         jsonBoard.put("amountColumns", gameBoard.getAmountColumns());
         manageVertices();
-        manageAdjacentMatrix();
+        //manageAdjacentMatrix();
     }
     
     /**
@@ -182,10 +182,7 @@ public class Serializer extends JSONManager{
         }
         jsonBoard.put("vertices", jsonVertices);
     }
-    
-    /**
-     * Collects all the information from adjacentMatrix and saves it in a JSONObject, being the game board.
-    */
+    /*
     public void manageAdjacentMatrix(){
         String boardState = "";
         int verticesAmount = gameBoard.getVerticesAmount();
@@ -201,7 +198,7 @@ public class Serializer extends JSONManager{
             }
         }
         jsonBoard.put("graphAdjacentMatrix", jsonAdyacentMatrix);
-    }
+    }*/
     
     /**
      * Returns the player 1 json information.

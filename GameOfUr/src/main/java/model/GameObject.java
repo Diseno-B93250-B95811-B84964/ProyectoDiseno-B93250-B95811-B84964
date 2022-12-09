@@ -12,7 +12,8 @@ package model;
  * All game objects will inherit from this class.
  * @author Jimena Gdur
  */
-abstract public class GameObject {
+abstract public class GameObject
+{
     /**
      * Converts specific class into a string.
      * @return a string representing the class

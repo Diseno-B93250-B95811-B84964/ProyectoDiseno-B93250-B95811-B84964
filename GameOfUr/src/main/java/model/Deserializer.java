@@ -90,9 +90,9 @@ public class Deserializer extends JSONManager{
     public void manageBoard(){
         manageBoardRows();
         manageBoardColumns();
-        manageBoardVerticesAmount();
+        //manageBoardVerticesAmount();
         manageBoardVertices();
-        manageGraphAdjacentMatrix();
+        //manageGraphAdjacentMatrix();
         //System.out.println(gameBoard.toString());
     }
     
@@ -108,13 +108,6 @@ public class Deserializer extends JSONManager{
         Long amountColumns = (Long) mainBoardObject.get("amountColumns");
         valueToInsert = amountColumns.intValue();
         gameBoard.setColumns(valueToInsert);
-    }
-    
-    public void manageBoardVerticesAmount(){
-        int valueToInsert = 0;
-        Long verticesAmount = (Long) mainBoardObject.get("verticesAmount");
-        valueToInsert = verticesAmount.intValue();
-        gameBoard.setVerticesAmount(valueToInsert);
     }
     
     public void manageBoardVertices(){
@@ -144,7 +137,7 @@ public class Deserializer extends JSONManager{
         valueToInsert = valueToCast.intValue();
         currentTile.setColumn(valueToInsert);
     }
-    
+    /*
     public void manageGraphAdjacentMatrix(){
         JSONArray jsonGraphAdjacentMatrix = (JSONArray) mainBoardObject.get("graphAdjacentMatrix");
         int verticesAmount = gameBoard.getVerticesAmount();
@@ -155,7 +148,7 @@ public class Deserializer extends JSONManager{
                 gameBoard.getAdjacentMatrix()[vertexIndex1][vertexIndex1] = (boolean)jsonGraphAdjacentMatrix.get(vertexIndex2);
             }
         }
-    }
+    }*/
     
     
     

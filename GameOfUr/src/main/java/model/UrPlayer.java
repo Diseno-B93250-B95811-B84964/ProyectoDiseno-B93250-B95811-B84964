@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  */
 public class UrPlayer extends Player {
     /**
-     * Creates a new Player with an array of pieces.
+     * Creates a new Player with their color and name.
      * @param supplier Supplier class that contains instance of piece's child.
      * @param amountPieces Amount of pieces the player has.
      * @param chosenColor Color player chose on respective screen.
@@ -24,7 +24,14 @@ public class UrPlayer extends Player {
     public UrPlayer(Supplier<UrPiece> supplier, int amountPieces, Color chosenColor, String name) {
         super(supplier, amountPieces, chosenColor, name);
     }
-
+    /**
+     * Creates a new Player with an array of pieces.
+     * @param supplier Supplier class that contains instance of piece's child.
+     * @param amountPieces Amount of pieces the player has.
+     */
+    public UrPlayer(Supplier<UrPiece> supplier, int amountPieces) {
+        super(supplier, amountPieces);
+    }
     /**
      * Modifies player's score.
      * Made for the Royal Game of Ur.

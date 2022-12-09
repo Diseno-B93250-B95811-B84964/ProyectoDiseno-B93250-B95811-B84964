@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import model.Board;
 import model.Deserializer;
 import model.Dice;
+import model.FileManager;
 
 import model.Piece;
 import model.Player;
@@ -50,8 +51,9 @@ public class Main {
             //System.out.println("Testing Dice class");
             //testDiceClass();
             
-            //System.out.println("Testing Player classes");
-            //testPlayerClasses();
+            //System.out.println("Testing Referee classes");
+            //System.out.println("Testing Dice class");
+            //testDiceClass();
             
             //System.out.println("Testing file creation");
             //testSavingFile();
@@ -97,43 +99,45 @@ public class Main {
         //safeTile3.setAsSafe();
         Tile safeTile4 = board.getTile(6, 2);
         //safeTile4.setAsSafe();
-        
-        boolean[][] adjacentMatrixFromFile =
-        {
-            {false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 0
-            {false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 1
-            {false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 2
-            {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 3
-            {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 4
-            {false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 5
-            {false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 6
-            {false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 7
-            {false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 8
-            {false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 9
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false}, // 10
-            {false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 11
-            {false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 12
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false}, // 13
-            {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false}, // 14
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 15
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false}, // 16
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, // 17
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false}, // 18
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false}, // 19
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false}, // 20
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false}, // 21
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, true},  // 22
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false}, // 23
-        };
-        board.setAdjacentMatrix(adjacentMatrixFromFile);
-        //System.out.println("Board after setting adjacentMatrix: " + board);
+
+        System.out.println("Board before setting adjacentMatrix: " + board);
+        ArrayList<ArrayList<Boolean>> boolMatrix = readAdjacentMatrixFromFile();
+        board.setAdjacentMatrix(boolMatrix);
+        System.out.println("Board after setting adjacentMatrix: " + board);
         
         System.out.println("Getting tile adjacents:");
-        ArrayList<Integer> possibleTiles = board.getTilesAdjacents(5,1, 3);
-        System.out.println("possibleTiles: " + possibleTiles);
-        //board.setPieceInTile(3,0, )
+        //ArrayList<Integer> possibleTiles = board.getTilesAdjacents(5,1, 3);
+        //System.out.println("possibleTiles: " + possibleTiles);
+        //board.setPieceInTile(3,0, )*/
                 
         //ArrayList<Integer> possibleTiles1 = board.getTilesAdjacents(7,1, 3);
+    }
+    
+    private static ArrayList<ArrayList<Boolean>> readAdjacentMatrixFromFile(){
+        // Reads from file
+        FileManager fileManager = new FileManager();
+        fileManager.loadFile("adjacentMatrix.csv", "src/main/java/auxiliaryFiles/");
+        ArrayList<String> stringArray = fileManager.getFileContents();
+        
+        // Gets amount of rows and columns
+        String boardDimensions = stringArray.get(0);
+        
+        // Gets amount of vertices
+        String amountVertices = stringArray.get(1);
+        
+        // Creates new array without first 2 rows
+        int length = stringArray.size() - 2;
+        int currentRow = 2;
+        ArrayList<String> adjacentArray = new ArrayList<>(length);
+        for (int rowIndex = 0; rowIndex < length; rowIndex++) {
+            adjacentArray.add(stringArray.get(currentRow++));
+        }
+        
+        // Converts from ArrayList<String> to ArrayList<ArrayList<Boolean>>
+        ArrayList<ArrayList<String>> stringMatrix = fileManager.splitArray(adjacentArray, ",");
+        ArrayList<ArrayList<Boolean>> boolMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
+        
+        return boolMatrix;
     }
     
     public static void testPlayerClasses() {
@@ -189,7 +193,7 @@ public class Main {
     }
     
     private static void testDiceClass() {
-        float[] probabilities = { 10, 10, 50, 10, 20 };
+        int[] probabilities = { 20, 20, 20, 20, 20 };
         Dice dice = new Dice(5, probabilities);
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
@@ -197,15 +201,6 @@ public class Main {
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
-    }
-    
-    public static void testSavingFile() {
-        String fileSeparator = System.getProperty("file.separator");
-        //"C:" + File.separator + "hello" + File.separator + "hi.txt";
-        FileManager testManager = new FileManager();
-        testManager.fileContents.add("{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}");
-        testManager.saveFile("output", ".json", "C:\\Users\\Usuario1\\Documents\\NetBeansProjects\\ProyectoDiseno-B93250-B95811-B84964\\");
-        System.out.println("Creating file was a success");
     }
     
     public static String testGameToJSON(){
