@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 
 import model.Dice;
 import model.FileManager;
+import model.Piece;
 import model.Player;
 import model.UrPiece;
 import model.UrPlayer;
@@ -269,12 +270,14 @@ public class UrGameController
         */
         private void manageStartNewGame(){
             String playerData = viewManager.getPlayerData();
+            Piece urPiece = new UrPiece();
             if (playerData != null) {
                 // Creates new player from data received
                 String[] playerDataArray = playerData.split(",");
                 Color playerColor = new Color(Integer.parseInt(playerDataArray[0]));
                 String playerName = playerDataArray[1];
-                Player newPlayer = new UrPlayer(UrPiece::new, pieceAmount, playerColor, playerName);
+                //public UrPlayer(int amountPieces, Color color, String name, UrPiece pieceType);
+                Player newPlayer = new UrPlayer(pieceAmount, playerColor, playerName, (UrPiece) urPiece); // TODO make a General Game Controller with templates
            
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
                 int nextPlayerNumber = currentPlayer+1;

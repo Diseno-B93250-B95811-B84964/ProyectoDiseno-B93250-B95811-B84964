@@ -25,11 +25,12 @@ public class UrReferee extends Referee
      * @param pieces Amount of pieces for each player.
      * @param tiles Amount of tiles in game board.
      * @param boolMatrix A matrix with all adjacents.
-     *//*
-    public UrReferee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix)
+     */
+    public UrReferee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix, Player playerType, Piece pieceType)
     {
-        super(rows, cols, players, pieces, tiles, boolMatrix);
-    }*/
+        super(rows, cols, players, pieces, tiles, boolMatrix, playerType, pieceType);
+    }
+    
     public UrReferee(int players, int pieces, Player playerType, Piece pieceType) {
         super(players, pieces, playerType, pieceType);
     }

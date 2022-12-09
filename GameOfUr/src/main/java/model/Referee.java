@@ -67,8 +67,9 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
      * @param tiles Amount of tiles in game board.
      * @param boolMatrix A matrix that allows the referee to determine possible routes.
      * @param playerType The specific type of player that will be playing
+     * @param pieceType
      */
-    public Referee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType)
+    public Referee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType, PieceType pieceType)
     {
         this.amountRows = rows;
         this.amountCols = cols;
@@ -76,6 +77,7 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         this.pieceAmount = pieces;
         this.tileAmount = tiles;
         this.playerType = playerType;
+        this.pieceType = pieceType;
         
         gameRules = new Rules();
         

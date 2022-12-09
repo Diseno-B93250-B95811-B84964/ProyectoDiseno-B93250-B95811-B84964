@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import model.Board;
+import model.CommandInterface;
+import model.CommandValidateWinner;
 import model.Dice;
 import model.FileManager;
 
@@ -28,6 +30,9 @@ import model.UrTile;
 * @author Mauricio Palma, Alvaro Miranda, Jimena Gdur
 */
 public class Main {
+    
+    public static CommandInterface winnerCommand;
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             // Doesn't test other methods that can't be accesed through parent
@@ -36,8 +41,8 @@ public class Main {
             //System.out.println("\nTesting Tile and Piece classes");
             //testTileAndPieceClasses();
             
-            System.out.println("\nTesting Board class");
-            testBoardClasses();
+            //System.out.println("\nTesting Board class");
+            //testBoardClasses();
             
             //System.out.println("Testing Player classes");
             //testPlayerClasses();
@@ -49,7 +54,37 @@ public class Main {
             //testDiceClass();
             
             //System.out.println("Testing Referee classes");
+            testCommandValidateWinner();
         });
+    }
+    
+    public static void testCommandValidateWinner(){
+        Piece urPiece = new UrPiece();
+        Player urPlayer1 = new UrPlayer(7,Color.RED,"San Juan", (UrPiece) urPiece);
+        Player urPlayer2 = new UrPlayer(7,Color.BLUE,"Martin", (UrPiece) urPiece);
+        Player urPlayer3 = new UrPlayer(7,Color.WHITE,"Maria", (UrPiece) urPiece);
+
+        ArrayList<Player> playerArray = new ArrayList<>();
+        playerArray.add(urPlayer1);
+        playerArray.add(urPlayer2);
+
+        int currentPlayer = 0;
+        winnerCommand = new CommandValidateWinner(playerArray, currentPlayer);
+        boolean result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
+
+        playerArray.add(urPlayer3);
+        result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
+        
+        playerArray.get(0).setScore(2);
+        for (int i = 0; i < 10; i++) {
+            result = winnerCommand.execute();
+            System.out.println("Winner command result is: " + result);
+        }
+        playerArray.get(0).setScore(7);
+        result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
     }
     
     public static void testTileAndPieceClasses() {
