@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 
 /**
  * Displays main game components like, the board and player's inventories.
+ * Made for the Royal Game of Ur.
  * @author Ximena Gdur, Mauricio Palma
  */
 public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
@@ -42,11 +43,11 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
      */
     private JLabel diceLabelArray [];
     /**
-     * Icon representing dice state where player has no score.
+     * Image Icon representing dice state where player has no score.
      */
     private ImageIcon noScoreDiceState;
     /**
-     * Icon representing dice state where player has scored.
+     * Image Icon representing dice state where player has scored.
      */
     private ImageIcon scoreDiceState;
     /**
@@ -61,17 +62,37 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
      * First player's color.
      */
     private Color firstPlayerColor;
+    /**
+     * Second player's color.
+     */
     private Color secondPlayerColor;
-    
+    /**
+     * Game's version of color blue.
+     */
     private final static Color BLUE = new Color (0,102,255);
+    /**
+     * Game's version of color brown.
+     */
     private final static Color BROWN = new Color (102,51,0);
+    /**
+     * Game's version of color green.
+     */
     private final static Color GREEN = new Color (102,204,0);
+    /**
+     * Game's version of color purple.
+     */
     private final static Color PURPLE = new Color (102,0,102);
+    /**
+     * Game's version of color red.
+     */
     private final static Color RED = new Color (255,0,0);
+    /**
+     * Game's version of color yellow.
+     */
     private final static Color YELLOW = new Color (255,204,0);
 
     /**
-     *
+     * Constructs a new main game for the Royal Game of Ur.
      */
     public UrMainGame() {
         initComponents();
@@ -487,7 +508,6 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         // TODO add your handling code here:
     }//GEN-LAST:event_saveAndLeaveButtonActionPerformed
 
-    
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
 
     }//GEN-LAST:event_rulesButtonActionPerformed
@@ -496,54 +516,47 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         // TODO add your handling code here:
     }//GEN-LAST:event_throwDiceButtonActionPerformed
 
-    /* Button getters */
-
     /**
-     *
-     * @return
+     * Returns button that will display game rules.
+     * Made for Royal Game of Ur.
+     * @return ShowRules button.
      */
-
-    
     @Override
     public JButton getShowRulesButton(){
         return this.rulesButton;
     }
-    
     /**
-     *
-     * @return
+     * Returns button that updates dice with new random value.
+     * Made for Royal Game of Ur.
+     * @return ThrowDice button.
      */
     @Override
     public JButton getThrowDiceButton(){
         return this.throwDiceButton;
     }
-    
     /**
-     *
-     * @return
+     * Returns button that will save game and exit.
+     * Made for Royal Game of Ur.
+     * @return ExitAndSave button.
      */
     @Override
     public JButton getExitAndSaveButton(){
         return this.saveAndLeaveButton;
-    }
-    
+    } 
     /**
-     *
-     * @return
+     * Returns matrix that stores all labels, representing game tiles.
+     * Made for Royal Game of Ur.
+     * @return JLabel matrix.
      */
     @Override
     public JLabel[][] getTilesMatrix(){
         return tilesArray;
     }
-    
-    /* Button feature */
-
     /**
-     *
-     * @param color
+     * Displays piece for player with given color.
+     * Made for Royal Game of Ur.
+     * @param color Player's color.
      */
-
-    
     @Override
     public void activeAPieceForPlayer(Color color) {
         if (color == firstPlayerColor) {
@@ -552,7 +565,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             activeAPieceForSecondPlayer();
         }
     }
-    
+    /**
+     * Displays piece for first player.
+     */
     private void activeAPieceForFirstPlayer(){
         usedPiecesFirstPlayer--;
         switch (usedPiecesFirstPlayer) {
@@ -595,7 +610,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             }
         }
     } 
-    
+    /**
+     * Displays piece for second player.
+     */
     private void activeAPieceForSecondPlayer(){
         usedPiecesSecondPlayer--;
         switch (usedPiecesSecondPlayer) {
@@ -637,11 +654,11 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             default -> {
             }
         }      
-    } 
-    
+    }
     /**
-     *
-     * @param color
+     * Makes player's piece invisible.
+     * Made for Royal Game of Ur.
+     * @param color Player's color.
      */
     @Override
     public void desactiveAPieceForPlayer(Color color) {
@@ -651,6 +668,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             desactiveAPieceForSecondPlayer();
         }
     }
+    /**
+     * Makes first player's piece invisible.
+     */
     private void desactiveAPieceForFirstPlayer(){
         switch (usedPiecesFirstPlayer) {
             case 1 -> {
@@ -693,7 +713,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
         usedPiecesFirstPlayer++;
     }
-        
+    /**
+     * Makes second player's piece invisible.
+     */
     private void desactiveAPieceForSecondPlayer(){
         switch (usedPiecesSecondPlayer) {
             case 1 -> {
@@ -736,10 +758,12 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
         usedPiecesSecondPlayer++;
     }
-
-
-    
-    /*Load Images Methods*/
+    /**
+     * Gets a buffered image using image's name.
+     * Made for JAR file use.
+     * @param imageName Name of the specific image to load.
+     * @return BufferedImage loaded from name.
+     */
     private BufferedImage loadImagesForJarFile(String imageName) {
         BufferedImage image = null; 
         String generalPath = "/images/";
@@ -752,7 +776,12 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
         return image;
     }
-    
+    /**
+     * Gets a buffered image using image's name.
+     * Made for IDE use.
+     * @param imageName Name of the specific image to load.
+     * @return BufferedImage loaded from name.
+     */
     private BufferedImage loadImagesForIDEFile(String imageName) {
         BufferedImage image = null; 
         String generalPath = "images/";
@@ -767,8 +796,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
         return image;
     }
-
-    /* Main Board Methods  */
+    /**
+     * Creates board for the Royal Game of Ur.
+     */
     private void makeUrBoard() {
         tilesArray[4][0].setBackground(Color.decode("#E0E0E0"));
         tilesArray[5][0].show(false);
@@ -776,7 +806,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         tilesArray[5][2].show(false);
         setRosesToBoard();
     }
-    
+    /**
+     * Gets the ImageIcon of Rose tile icon.
+     * @return the ImageIcon.
+     */
     private ImageIcon getImageIconRose() {
         /*For JAR FILE*/
         //BufferedImage image = loadImagesForJarFile("icon2_rounded"); 
@@ -787,7 +820,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         ImageIcon roseIcon = resizeImage(image, 80,80);
         return roseIcon;
     }
-    
+    /**
+     * Sets tiles that have roses in them.
+     */
     private void setRosesToBoard() {
         ImageIcon roseIcon = getImageIconRose();
         tilesArray[0][0].setIcon(roseIcon);
@@ -796,7 +831,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         tilesArray[6][0].setIcon(roseIcon);
         tilesArray[6][2].setIcon(roseIcon);
     }
-    
+    /**
+     * Creates labels for board representation and sets them on screen.
+     */
     private void initializeTilesArray(){
         int intialXGap = 39;
         int intialYGap = 18;
@@ -817,37 +854,42 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             intialYGap += verticaOffset;
         }
     }
-    
     /**
-     *
-     * @param row
-     * @param column
-     * @return
+     * Returns specific label located in given row and column.
+     * Made for the Royal Game of Ur.
+     * @param row Row in which tile is located.
+     * @param column Column in which tile is located.
+     * @return specific JLabel object.
      */
     @Override
     public JLabel getLabel(int row, int column){
         return tilesArray[row][column];
     }
-    
     /**
-     *
-     * @param row
-     * @param column
-     * @param icon
+     * Sets icon in label located in given row and column.
+     * Made for the Royal Game of Ur.
+     * @param row  Row in which tile is located.
+     * @param column Column in which tile is located.
+     * @param icon Icon that will be assigned.
      */
     @Override
     public void setNextPossibleLabel(int row, int column, Icon icon) {
         tilesArray[row][column].setIcon(icon);
     }
-    
+    /**
+     * Removes icon from label located in given row and column.
+     * Made for the Royal Game of Ur.
+     * @param row  Row in which tile is located.
+     * @param column Column in which tile is located.
+     */
     private void removeIconFromLabel(int row, int column) {
         tilesArray[row][column].setIcon(null);
     }
-    
     /**
-     *
-     * @param row
-     * @param column
+     * Removes temporary icon from tile located in given row and column.
+     * Made for the Royal Game of Ur.
+     * @param row  Row in which tile is located.
+     * @param column Column in which tile is located.
      */
     @Override
     public void removeIconFromTile(int row, int column){
@@ -865,36 +907,46 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             removeIconFromLabel(row,column);
         }
     }
-    
+    /**
+     * Removes temporary icon from rose tile.
+     */
     private void removeIconFromRose0_0() {
         ImageIcon image = getImageIconRose();
         tilesArray[0][0].setIcon(image);
     }
-
+    /**
+     * Removes temporary icon from rose tile.
+     */
     private void removeIconFromRose0_2() {
         ImageIcon image = getImageIconRose();
         tilesArray[0][2].setIcon(image);
     }
-
+    /**
+     * Removes temporary icon from rose tile.
+     */
     private void removeIconFromRose3_1() {
         ImageIcon image = getImageIconRose();
         tilesArray[3][1].setIcon(image);
     }
-
+    /**
+     * Removes temporary icon from rose tile.
+     */
     private void removeIconFromRose6_0() {
         ImageIcon image = getImageIconRose();
         tilesArray[6][0].setIcon(image);
     }
-
+    /**
+     * Removes temporary icon from rose tile.
+     */
     private void removeIconFromRose6_2() {
         ImageIcon image = getImageIconRose();
         tilesArray[6][2].setIcon(image);
     }
-
     /**
-     *
-     * @param color
-     * @return
+     * Returns an image of a piece associated with given color.
+     * Made for the Royal Game of Ur.
+     * @param color The color that needs to be retrieved.
+     * @return the icon representing colored piece.
      */
     @Override
     public ImageIcon getPieceImageColor(Color color) {
@@ -922,8 +974,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         colorIcon = resizeImage(image, 78, 78);
       return colorIcon;
     }
-    
-    /* Main Frame Dices Feature */
+    /**
+     * Creates dice labels and initializes them.
+     */
     private void makeDices(){
         diceLabelArray = new JLabel[4];
         /*For JAR file*/
@@ -943,17 +996,23 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         dice3.setIcon(noScoreDiceState);
         dice4.setIcon(noScoreDiceState);
     }
-    
-    private ImageIcon resizeImage(BufferedImage diceState, int width, int height){
-        ImageIcon diceStateIcon = new ImageIcon(diceState);
+    /**
+     * Resizes image to given width and height.
+     * @param diceState Image to resize
+     * @param width Image's new width.
+     * @param height Image's new height.
+     * @return new image in new size.
+     */
+    private ImageIcon resizeImage(BufferedImage image, int width, int height){
+        ImageIcon diceStateIcon = new ImageIcon(image);
         Image temporalImage = diceStateIcon.getImage();
         Image resizedImage = temporalImage.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
-    
     /**
-     *
-     * @param rollResult
+     * Displays the result of thrown dice.
+     * Made for the Royal Game of Ur.
+     * @param rollResult The result of the throw.
      */
     @Override
     public void showThrownDice(int rollResult) {
@@ -961,9 +1020,9 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
             diceLabelArray[index].setIcon(scoreDiceState);
         }
     }
-    
     /**
-     *
+     * Resets dice labels to prepare for next throw.
+     * Made for the Royal Game of Ur.
      */
     @Override
     public void cleanDice()
@@ -973,10 +1032,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         dice3.setIcon(noScoreDiceState);
         dice4.setIcon(noScoreDiceState);
     }
-    
     /**
-     *
-     * @param rollResult
+     * Sets label with amount of moves.
+     * Made for the Royal Game of Ur.
+     * @param rollResult Result of dice.
      */
     @Override
     public void setMoves(int rollResult)
@@ -984,16 +1043,12 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         String movesResult = String.valueOf(rollResult);
         moves.setText(movesResult);
     }
-
-    /*Get players pieces icons*/
-
     /**
-     *
-     * @param color
-     * @return
+     * Returns an icon representing player's chosen color.
+     * Made for the Royal Game of Ur.
+     * @param color The color that needs to be retrieved.
+     * @return the icon representing colored piece.
      */
-
-
     @Override
     public Icon getPlayerIcon(Color color){
         Icon icon = null;
@@ -1004,54 +1059,54 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         }
         return icon;
     }
-    
+    /**
+     * Returns icon associated with first player.
+     */
     private Icon getFirstPlayerIcon(){
         return pieceLabelFirstPlayer1.getIcon();
     }
-
+    /**
+     * Returns icon associated with second player.
+     */
     private Icon getSecondPlayerIcon(){
         return pieceLabelSecondPlayer1.getIcon();
     }
-
-    /*Personalized match */
-
     /**
-     *
-     * @param name
+     * Sets label of first player's name with given name.
+     * @param name Player's name.
      */
-
     public void setFirstPlayerNameToLabel(String name){
         firstPlayerLabelName.setText(name);
     }
-
-    /**
-     *
-     * @param name
+/**
+     * Sets label of second player's name with given name.
+     * @param name Player's name.
      */
     public void setSecondPlayerNameToLabel(String name){
         secondPlayerLabelName.setText(name);
     }
-
     /**
-     *
-     * @param color
+     * Sets first player's pieces with given color.
+     * @param color Player's color.
      */
     public void setFirstPlayerPieceColor(Color color) {
         this.firstPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
         modifiyFirstPlayerPieces(colorIcon);
     }
-    
     /**
-     *
-     * @param color
+     * Sets second player's pieces with given color.
+     * @param color Player's color.
      */
     public void setSecondPlayerPieceColor(Color color) {
         this.secondPlayerColor = color;
         ImageIcon colorIcon = getPieceImageColor(color);
         modifySecondPlayerPieces(colorIcon);
     }
-    
+    /**
+     * Sets first player's pieces with given icon.
+     * @param icon New icon for piece.
+     */
     private void modifiyFirstPlayerPieces(ImageIcon icon) {
         pieceLabelFirstPlayer1.setIcon(icon);
         pieceLabelFirstPlayer2.setIcon(icon);
@@ -1061,7 +1116,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         pieceLabelFirstPlayer6.setIcon(icon);
         pieceLabelFirstPlayer7.setIcon(icon);
     }
-    
+    /**
+     * Sets second player's pieces with given icon.
+     * @param icon New icon for piece.
+     */
     private void modifySecondPlayerPieces(ImageIcon icon)  {
         pieceLabelSecondPlayer1.setIcon(icon);
         pieceLabelSecondPlayer2.setIcon(icon);
@@ -1071,66 +1129,58 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         pieceLabelSecondPlayer6.setIcon(icon);
         pieceLabelSecondPlayer7.setIcon(icon);
     }
-    
-    /* Add score to players */
-
     /**
-     *
+     * Updates first player's score label by adding one point to it.
      */
-
-    
     public void addScoreToFirstPlayer() {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
         currentScore+=1;
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
-
     /**
-     *
+     * Updates second player's score label by adding one point to it.
      */
     public void addScoreToSecondPlayer() {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=1;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
-
     /**
-     *
-     * @param points
+     * Updates first player's score label to given amount
+     * @param points Amount of points.
      */
     public void addScoreToFirstPlayer(int points) {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
         currentScore+=points;
         firstPlayerScore.setText(Integer.toString(currentScore));
     }
-
     /**
-     *
-     * @param points
+     * Updates second player's score label to given amount
+     * @param points Amount of points.
      */
     public void addScoreToSecondPlayer(int points) {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=points;
         secondPlayerScore.setText(Integer.toString(currentScore));
     }
-
     /**
-     *
-     * @param number
+     * Changes player turn to certain player.
+     * Made for Royal Game of Ur.
+     * @param number Id of new current player.
      */
     @Override
     public void changePlayerTurn(int number) {
         String playerTurn = "Player " + number+"'s" + " turn";
         playerTurnLabel.setText(playerTurn);
     }
-
     /**
-     *
+     * Declares a player has won and updates labels.
+     * Made for Royal Game of Ur.
      * @param number
      */
     @Override
     public void declarePlayerWinner(int number) {
-        String playerTurn = "Player " + number+"'s" + " won!";
+        String playerTurn = "Player " + number + "'s" + " won!";
         playerTurnLabel.setText(playerTurn);
     }
 
