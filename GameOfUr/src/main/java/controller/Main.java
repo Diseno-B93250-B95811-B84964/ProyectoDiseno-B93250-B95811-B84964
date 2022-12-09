@@ -7,11 +7,7 @@
 package controller;
 
 import java.awt.Color;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.function.Supplier;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import model.Board;
 import model.Dice;
@@ -40,11 +36,11 @@ public class Main {
             //System.out.println("\nTesting Tile and Piece classes");
             //testTileAndPieceClasses();
             
-            //System.out.println("\nTesting Board class");
-            //testBoardClasses();
+            System.out.println("\nTesting Board class");
+            testBoardClasses();
             
-            System.out.println("Testing Player classes");
-            testPlayerClasses();
+            //System.out.println("Testing Player classes");
+            //testPlayerClasses();
             
             //System.out.println("Testing Rules class");
             //testRulesClass();
@@ -73,8 +69,9 @@ public class Main {
         int vertexNumberFromFile = 24;
         int rowNumberFromFile = 8;
         int colNumberFromFile = 3;
+        Tile urTile = new UrTile();
         
-        Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
+        Board board = new Board(vertexNumberFromFile, rowNumberFromFile, colNumberFromFile, urTile);
         //System.out.println("Board after constructor: " + board);
         
         // TODO: set safe tiles

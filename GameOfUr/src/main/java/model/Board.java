@@ -6,16 +6,18 @@
  */
 package model;
 
+import java.awt.Color;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
  * @param <TileType> Tile's child class.
  */
-public final class Board<TileType
-    extends Tile> extends GameObject
+public final class Board<TileType extends Tile> extends GameObject
 {
     /**
      * The graph's adjacent matrix.
@@ -40,35 +42,65 @@ public final class Board<TileType
      * Amount of columns in game board
      */
     private int amountColumns;
+    /**
+     * Generic data type that extends Tile model
+     */
+    protected TileType tileType;
 
     /**
      * Creates a new Board represented as a graph given the amount of vertices given.
-     * @param supplier Supplier class that contains instance of tile's child.
      * @param vertices The number of vertices to be created.
      * @param rows Amount of rows board has.
      * @param cols Amount of columns board has.
+     * @param tileType
     */
-    public Board(Supplier<TileType> supplier, int vertices, int rows, int cols) {
-        verticesAmount = vertices;
+    public Board(int vertices, int rows, int cols, TileType tileType) {
+        this.verticesAmount = vertices;
+        this.tileType = tileType;
         setBoardDimensions(rows, cols);
-        createVerticesArray(supplier);
+        createVerticesArray();
         createAdjacentMatrix();
     }
+    
     /**
      * Creates a vertices array with the specific tile received through parameter.
      * @param supplier Supplier class that contains instance of tile's child.
     */
-    private void createVerticesArray(Supplier<TileType> supplier) {
+    private void createVerticesArray() {
         vertices = new ArrayList<>(verticesAmount);
         for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {
             int x = getRowThroughVertexIndex(vertexIndex);
-            int y = getColumnThroughVertexIndex(vertexIndex);
-            
-            vertices.add(vertexIndex, supplier.get());
-            vertices.get(vertexIndex).setRow(x);
-            vertices.get(vertexIndex).setColumn(y);
+            int y = getColumnThroughVertexIndex(vertexIndex); 
+            try {
+                vertices.add(makeNewPiece(x,y,false)); // TODO change magic boolean
+            } catch (IllegalAccessException | InstantiationException | 
+                    NoSuchMethodException | IllegalArgumentException | 
+                    InvocationTargetException ex) {
+                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
+    
+    /**
+    * Creates a new object of generic type TileType and stores it into vertices arraylist.
+     * @param x
+     * @param y
+     * @param safeTile
+    * @throws IllegalAccessException Exception that is thrown if object tries to access an invalidad memory reference
+    * @throws InstantiationException Exception that is thrown if object cannot be instantiated
+    * @throws NoSuchMethodException Exception that is thrown if method called does not exist
+    * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
+    * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
+    */
+    public TileType makeNewPiece(int x, int y, boolean safeTile) throws IllegalAccessException,InstantiationException, 
+            NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
+        //UrTile(int tileRow, int tileColumn, boolean isTileSafe) 
+        TileType newTile = (TileType)tileType.getClass()
+                .getConstructor(int.class, int.class, boolean.class)
+                .newInstance(x,y,safeTile);
+        return newTile;
+    }
+    
     /**
      * Creates the graph's adjacent matrix.
     */
