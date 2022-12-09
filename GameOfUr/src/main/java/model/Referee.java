@@ -10,13 +10,14 @@ package model;
 import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Game referee, manages game moves and game score.
  * @author Jimena Gdur.
+ * @param <PlayerType>
+ * @param <PieceType>
  */
 public abstract class Referee <PlayerType extends Player, PieceType extends Piece>
 {
@@ -65,6 +66,7 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
      * @param pieces Amount of pieces for each player.
      * @param tiles Amount of tiles in game board.
      * @param boolMatrix A matrix that allows the referee to determine possible routes.
+     * @param playerType The specific type of player that will be playing
      */
     public Referee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType)
     {
@@ -79,13 +81,13 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         
         try {
             createPlayers();
-        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (IllegalArgumentException ex) {
             Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
         }
         createBoard(boolMatrix);
     }
     
-    
+    /*TODO delete this constructor*/
     public Referee(int players, int pieces, PlayerType playerType, PieceType pieceType)
     {
         this.playerAmount = players;
@@ -94,8 +96,8 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         this.pieceType = pieceType;
         
         try {
-            makeNewPlayers();
-        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+            createPlayers();
+        } catch (IllegalArgumentException ex) {
             Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.amountRows = 0;
@@ -105,43 +107,41 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
     }
     
     
-    /**
-     * Creates players and stores them in playerArray.
-     * Abstract class that allows Referee child to manage implementation.
-     */
-    protected void createPlayers() throws IllegalAccessException,InstantiationException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
-        playerArray = new ArrayList<>(playerAmount);
-        Color color = Color.WHITE;
-        //Supplier<UrPiece> supplier, int amountPieces;
-        for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
-           
-            //PlayerType newobject = (PlayerType)template.getClass().getConstructor(Supplier.class, Integer.class).newInstance(color);
-            //playerArray.add(playerIndex, newobject);
-        }
-        
-        /*
-        
+
+    protected void createPlayers() {
         playerArray = new ArrayList<>(playerAmount);
         for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
-            playerArray.add(playerIndex, new UrPlayer(UrPiece::new, pieceAmount));
+            try {
+                playerArray.add(makeNewPlayers());
+            } catch (IllegalAccessException | InstantiationException | 
+                    NoSuchMethodException | IllegalArgumentException | 
+                    InvocationTargetException ex) {
+                Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        */
     }
     
-    protected void makeNewPlayers() throws IllegalAccessException,InstantiationException,
+    /*TODO Delete this method*/
+    public String getPlayerString(){
+        return this.playerArray.get(0).toString();
+    }
+    
+    /**
+    * Creates players and stores them in playerArray.Abstract class that allows Referee child to manage implementation.
+    * @return Returns a object of the specific player given through templates
+    * @throws IllegalAccessException Exception that is thrown if object tries to access an invalidad memory reference
+    * @throws InstantiationException Exception that is thrown if object cannot be instantiated
+    * @throws NoSuchMethodException Exception that is thrown if method called does not exist
+    * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
+    * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
+    */
+    protected PlayerType makeNewPlayers() throws IllegalAccessException,InstantiationException,
             NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
-        playerArray = new ArrayList<>(playerAmount);
-        PieceType newPiece = (PieceType)pieceType.getClass().newInstance();
-        System.out.println("Is this the end...?");
-        System.out.println("PieceType is: " + pieceType.getClass());
-        PieceType newPieceType = this.pieceType;
-        newPieceType.getClass();
         PlayerType newPlayer = (PlayerType)
-                playerType.getClass().getConstructor(int.class, Color.class, String.class, newPieceType.getClass()).newInstance(
-                        3, Color.WHITE, "Migulito?", this.pieceType);
-        playerArray.add(newPlayer);
-        System.out.println("It worked, lol");
-        // public Player(int amountPieces, Color color, String name, PieceType pieceType)
+                playerType.getClass()
+                        .getConstructor(int.class, Color.class, String.class, this.pieceType.getClass())
+                        .newInstance(7, Color.WHITE, "Migulito", this.pieceType); // TODO change magic values
+        return newPlayer;
     }
     
     /**

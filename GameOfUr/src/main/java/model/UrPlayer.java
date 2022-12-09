@@ -7,54 +7,20 @@
 package model;
 
 import java.awt.Color;
-import java.util.function.Supplier;
 
 /**
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
+ * @param <PieceType> Piece's child class.
  */
 public class UrPlayer <PieceType extends Piece> extends Player {
-    /*
     /**
      * Creates a new Player with their color and name.
-     * @param supplier Supplier class that contains instance of piece's child.
      * @param amountPieces Amount of pieces the player has.
-     * @param chosenColor Color player chose on respective screen.
+     * @param color Player's color.
      * @param name Player's name.
-    *//*
-    public UrPlayer(Supplier<UrPiece> supplier, int amountPieces, Color chosenColor, String name) {
-        super(supplier, amountPieces, chosenColor, name);
-    }*/
-    
-    /*
-    /**
-     * Creates a new Player with an array of pieces.
-     * @param supplier Supplier class that contains instance of piece's child.
-     * @param amountPieces Amount of pieces the player has.
-     *//*
-    public UrPlayer(Supplier<UrPiece> supplier, int amountPieces) {
-        super(supplier, amountPieces);
-    }*/
-    
-
-    
-    public UrPlayer(int amountPieces) {
-        super(amountPieces, Color.WHITE, "", null);
-    }
-    
-    public UrPlayer() {
-        super(2, Color.WHITE, "", null);
-        System.out.println("Empty UrPlayer controller greets u");
-    }
-    
-    public UrPlayer(int amountPieces, Color color, String name) {
-        super(amountPieces, color, name);
-    }
-    
-    public UrPlayer(int amountPieces, Color color, String name, PieceType pieceType) {
-        super(amountPieces, color, name, pieceType);
-    }
-    
+     * @param pieceType The specific type of piece that will use player.
+    */
     public UrPlayer(int amountPieces, Color color, String name, UrPiece pieceType) {
         super(amountPieces, color, name, pieceType);
     }

@@ -132,8 +132,8 @@ public class Main {
         
         Piece urPiece = new UrPiece();
         // int amountPieces, Color color, String name, PieceType pieceType
-        Player urPlayer = new UrPlayer(7,Color.RED,"San Juan de Diosito");
-        urPlayer.initializePiecesArray(urPiece);
+        Player urPlayer = new UrPlayer(7,Color.RED,"San Juan de Diosito", (UrPiece) urPiece);
+        //urPlayer.initializePiecesArray(urPiece);
         
         //Player<UrPiece> player = new UrPlayer<>(7,Color.RED,"Miguelito", urPiece);
         
@@ -144,7 +144,7 @@ public class Main {
         
         System.out.println("After ref...");
         
-        //System.out.println("Ref is" + ref);
+        System.out.println("Ref is" + ref.getPlayerString());
         
         /*
         Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
