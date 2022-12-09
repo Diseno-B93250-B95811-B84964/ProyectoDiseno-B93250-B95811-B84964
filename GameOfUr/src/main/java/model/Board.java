@@ -64,7 +64,6 @@ public final class Board<TileType extends Tile> extends GameObject
     
     /**
      * Creates a vertices array with the specific tile received through parameter.
-     * @param supplier Supplier class that contains instance of tile's child.
     */
     private void createVerticesArray() {
         vertices = new ArrayList<>(verticesAmount);
@@ -72,7 +71,7 @@ public final class Board<TileType extends Tile> extends GameObject
             int x = getRowThroughVertexIndex(vertexIndex);
             int y = getColumnThroughVertexIndex(vertexIndex); 
             try {
-                vertices.add(makeNewPiece(x,y,false)); // TODO change magic boolean
+                vertices.add(makeNewTile(x,y,false)); // TODO change magic boolean
             } catch (IllegalAccessException | InstantiationException | 
                     NoSuchMethodException | IllegalArgumentException | 
                     InvocationTargetException ex) {
@@ -92,7 +91,7 @@ public final class Board<TileType extends Tile> extends GameObject
     * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
     * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
     */
-    public TileType makeNewPiece(int x, int y, boolean safeTile) throws IllegalAccessException,InstantiationException, 
+    public TileType makeNewTile(int x, int y, boolean safeTile) throws IllegalAccessException,InstantiationException, 
             NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
         //UrTile(int tileRow, int tileColumn, boolean isTileSafe) 
         TileType newTile = (TileType)tileType.getClass()

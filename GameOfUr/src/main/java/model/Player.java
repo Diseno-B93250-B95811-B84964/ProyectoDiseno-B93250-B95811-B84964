@@ -65,7 +65,7 @@ public abstract class Player
         this.piecesAmount = amountPieces;
         this.name = name;
         this.color = color;
-        pieces = new ArrayList<>();
+        this.pieces = new ArrayList<>(this.piecesAmount);        
         this.pieceType = pieceType;
         initializePiecesArray();
     }
@@ -74,7 +74,6 @@ public abstract class Player
     * Initializes player array that contains all their pieces.
     */
     private void initializePiecesArray(){
-        this.pieces = new ArrayList<>(this.piecesAmount);
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
             try {
                 makeNewPiece();
@@ -98,7 +97,7 @@ public abstract class Player
             NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
         PieceType newPiece = (PieceType)pieceType.getClass()
                 .getConstructor(Color.class)
-                .newInstance(color);
+                .newInstance(this.color);
         pieces.add(newPiece);
     }
     

@@ -22,7 +22,6 @@ import model.Rules;
 import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
-import model.UrReferee;
 import model.UrTile;
 
 /**
@@ -44,8 +43,8 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
-            //System.out.println("Testing Player classes");
-            //testPlayerClasses();
+            System.out.println("Testing Player classes");
+            testPlayerClasses();
             
             //System.out.println("Testing Rules class");
             //testRulesClass();
@@ -69,7 +68,8 @@ public class Main {
         playerArray.add(urPlayer2);
 
         int currentPlayer = 0;
-        winnerCommand = new CommandValidateWinner(playerArray, currentPlayer);
+        winnerCommand = new CommandValidateWinner(playerArray, currentPlayer, 7);
+        
         boolean result = winnerCommand.execute();
         System.out.println("Winner command result is: " + result);
 
@@ -135,18 +135,18 @@ public class Main {
     private static ArrayList<ArrayList<Boolean>> readAdjacentMatrixFromFile(){
         // Reads from file
         FileManager fileManager = new FileManager();
-        fileManager.loadFile("adjacentMatrix.csv", "src/main/java/auxiliaryFiles/");
+        fileManager.loadFile("gameData.csv", "src/main/java/auxiliaryFiles/");
         ArrayList<String> stringArray = fileManager.getFileContents();
         
         // Gets amount of rows and columns
-        String boardDimensions = stringArray.get(0);
+        //String boardDimensions = stringArray.get(0);
         
         // Gets amount of vertices
-        String amountVertices = stringArray.get(1);
+        //String amountVertices = stringArray.get(1);
         
         // Creates new array without first 2 rows
-        int length = stringArray.size() - 2;
-        int currentRow = 2;
+        int length = stringArray.size() - 3;
+        int currentRow = 3;
         ArrayList<String> adjacentArray = new ArrayList<>(length);
         for (int rowIndex = 0; rowIndex < length; rowIndex++) {
             adjacentArray.add(stringArray.get(currentRow++));
@@ -164,7 +164,9 @@ public class Main {
         
         Piece urPiece = new UrPiece();
         // int amountPieces, Color color, String name, PieceType pieceType
-        Player urPlayer = new UrPlayer(7,Color.RED,"San Juan de Diosito", (UrPiece) urPiece);
+        Player urPlayer = new UrPlayer(7,Color.BLACK,"San Juan de Diosito", (UrPiece) urPiece);
+        
+        Tile urTile = new UrTile();
         //urPlayer.initializePiecesArray(urPiece);
         
         //Player<UrPiece> player = new UrPlayer<>(7,Color.RED,"Miguelito", urPiece);
@@ -172,11 +174,14 @@ public class Main {
         //System.out.println("ToString: " + player);
         //public Referee(int players, int pieces, PlayerType playerType, PieceType pieceType)
         
-        Referee ref = new UrReferee(1,7, urPlayer, urPiece );
         
+        ArrayList<ArrayList<Boolean>> boolMatrix = readAdjacentMatrixFromFile();
+        Referee<UrPlayer, UrPiece, UrTile> ref = new Referee(8,3,2,7,24, boolMatrix, urPlayer, urPiece, urTile);
+
+
         System.out.println("After ref...");
         
-        System.out.println("Ref is" + ref.getPlayerString());
+        System.out.println("Ref is " + ref.getPlayerString()); // TODO check is color
         
         /*
         Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");

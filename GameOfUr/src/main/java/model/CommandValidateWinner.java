@@ -8,16 +8,22 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mauup
+ * @author Mauricio Palma
  */
 public class CommandValidateWinner implements CommandInterface {
 
     private ArrayList<Player> playerArray;
     private int currentPlayer;
+    private int maxScore;
 
-    public CommandValidateWinner(ArrayList<Player> playerArray, int currentPlayer) {
+    /**
+    * Validates the status of all players and determines if someone has won.
+    * @return the id of the player that has won the game.
+    */
+    public CommandValidateWinner(ArrayList<Player> playerArray, int currentPlayer, int maxScore) {
         this.playerArray = playerArray;
         this.currentPlayer = currentPlayer;
+        this.maxScore = maxScore;
     }
     
     /*TODO delete this method*/
@@ -38,7 +44,7 @@ public class CommandValidateWinner implements CommandInterface {
         System.out.println("Name of the current player: " + playerArray.get(currentPlayer).getName());
         System.out.println("Current player score: " + playerArray.get(currentPlayer).getScore());
         System.out.println("/***********************************/");
-        boolean checkIfWinner=playerArray.get(currentPlayer).score >= 7;
+        boolean checkIfWinner = this.playerArray.get(currentPlayer).score >= this.maxScore ;
         updateCurrentPlayer();
         return checkIfWinner;
     }

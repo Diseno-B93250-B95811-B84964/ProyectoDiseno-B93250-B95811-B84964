@@ -11,7 +11,8 @@ package model;
  * Represents a game tile that belongs to a game board.
  * @author Jimena Gdur.
  */
-abstract public class Tile extends GameObject
+
+public class Tile extends GameObject
 {
     /**
     * A tile's row position.

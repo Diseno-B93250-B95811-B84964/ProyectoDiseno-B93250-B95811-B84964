@@ -18,8 +18,12 @@ import java.util.logging.Logger;
  * @author Jimena Gdur.
  * @param <PlayerType>
  * @param <PieceType>
+ * @param <TileType>
  */
-public abstract class Referee <PlayerType extends Player, PieceType extends Piece>
+public class Referee <
+    PlayerType extends Player
+    , PieceType extends Piece
+    , TileType extends Tile>
 {
     /**
      * Amount of rows in board.
@@ -58,6 +62,16 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
     
     protected PieceType pieceType;
     
+    protected TileType tileType;
+    
+    protected Tile lastMovedTile;
+    
+    protected Tile nextMoveTile;
+    
+    CommandInterface commandAddScore;
+    CommandInterface commandValidateWinner;
+    CommandInterface commandMovePiece;
+    
     /**
      * Creates referee class.
      * @param rows Amount of rows in game board.
@@ -68,8 +82,11 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
      * @param boolMatrix A matrix that allows the referee to determine possible routes.
      * @param playerType The specific type of player that will be playing
      * @param pieceType
+     * @param tileType
      */
-    public Referee(int rows, int cols, int players, int pieces, int tiles, ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType, PieceType pieceType)
+    public Referee(int rows, int cols, int players, int pieces, int tiles, 
+            ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType,
+            PieceType pieceType, TileType tileType)
     {
         this.amountRows = rows;
         this.amountCols = cols;
@@ -78,6 +95,8 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         this.tileAmount = tiles;
         this.playerType = playerType;
         this.pieceType = pieceType;
+        this.tileType = tileType;
+        this.lastMovedTile = new Tile();
         
         gameRules = new Rules();
         
@@ -89,27 +108,10 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         createBoard(boolMatrix);
     }
     
-    /*TODO delete this constructor*/
-    public Referee(int players, int pieces, PlayerType playerType, PieceType pieceType)
-    {
-        this.playerAmount = players;
-        this.pieceAmount = pieces;
-        this.playerType = playerType;
-        this.pieceType = pieceType;
-        
-        try {
-            createPlayers();
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.amountRows = 0;
-        this.amountCols = 0;
-        this.tileAmount = 0;
-        this.gameRules = null;
-    }
-    
-    
-
+    /*
+    /**
+    * Creates players and stores them in playerArray.
+    */
     protected void createPlayers() {
         playerArray = new ArrayList<>(playerAmount);
         for (int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
@@ -125,7 +127,9 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
     
     /*TODO Delete this method*/
     public String getPlayerString(){
-        return this.playerArray.get(0).toString();
+        String string = this.gameBoard.toString();
+        string += this.playerArray.get(0).toString();
+        return string;
     }
     
     /**
@@ -142,15 +146,37 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
         PlayerType newPlayer = (PlayerType)
                 playerType.getClass()
                         .getConstructor(int.class, Color.class, String.class, this.pieceType.getClass())
-                        .newInstance(7, Color.WHITE, "Migulito", this.pieceType); // TODO change magic values
+                        .newInstance(7, Color.BLACK, "Migulito", this.pieceType); // TODO change magic values
         return newPlayer;
     }
     
     /**
      * Creates players and stores them in playerArray.
-     * @param boolMatrix 
+     * @param boolMatrix Matrix of booleans to reflect adjacent vertices
      */
-    protected abstract void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix);    
+    protected void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix) {
+        gameBoard = new Board(tileAmount, amountRows, amountCols, this.tileType);
+        gameBoard.setAdjacentMatrix(boolMatrix);
+    }    
+    
+    /**
+     * Sets player information with given arrays.
+     * @param playerNames All player names.
+     * @param playerColors All player colors.
+     * @return whether the operation was successful.
+     */ 
+    public boolean setPlayerInfo(ArrayList<String> playerNames, ArrayList<Color> playerColors) {
+        boolean success = false;
+        if (playerAmount == playerNames.size() && playerNames.size() == playerColors.size()) {
+            for(int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
+                playerArray.get(playerIndex).setColor(playerColors.get(playerIndex));
+                playerArray.get(playerIndex).setName(playerNames.get(playerIndex));
+            }
+        }
+        return success;
+    }
+    
+    /*
     /**
      * Validates player's intended move, and moves piece there if it is valid.
      * @param playerId Indicates which player to validate.
@@ -159,27 +185,20 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
      * @param moves Amount of moves the dice selected.
      * @return whether the move is valid.
      */
-    protected abstract boolean validateMove(int playerId, int x, int y, int moves); 
-    /**
-     * Validates player's score taking into consideration their last move.
-     * @param playerId Indicates which player to validate.
-     * @param lastMoveRow Row of tile in which player set their piece.
-     * @param lastMoveCol Column of tile in which player set their piece.
-     * @return whether a point was given to the player.
-     */
-    protected abstract boolean validateScore(int playerId, int lastMoveRow, int lastMoveCol);
-    /**
-     * Validates the status of all players and determines if someone has won.
-     * @return the id of the player that has won the game.
-     */
-    protected abstract int validateScore(); // TODO check if it's what was intended
+    protected boolean validateMove(int playerId, int x, int y, int moves){
+        return false;
+    }
+
+    
     /**
      * Gets game rules from class Rules.
      * @return a list of rules.
      */
+    
     public ArrayList<String> getGameRules() {
         return this.gameRules.getRules();
     }
+
     /**
      *
      * @param x Row in which tile is located.
@@ -187,33 +206,5 @@ public abstract class Referee <PlayerType extends Player, PieceType extends Piec
      * @param tileJumps Amount of jumps the tile has to make.
      * @return
      */
-    private ArrayList<Integer> getTilesAdjacents(int x, int y, int tileJumps) {
-        ArrayList<Integer> adjacents = new ArrayList<>();
-        
-        /*if (x >= 0 && x < amountRows && y >= 0 && y < amountCols) {
-            int currentVertexIndex = getVertexIndexThroughXYCoordinates(x, y);
-            //System.out.println("x: " + x + ", y: " + y);
-            System.out.println("currentVertexIndex: " + currentVertexIndex);
-            System.out.println("tileJumps: " + tileJumps);
 
-            while(tileJumps > 1 && currentVertexIndex < verticesAmount) {
-                foundAdjacent = false;
-                for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
-                    if(foundAdjacent != true && graphAdjacentMatrix.get(currentVertexIndex).get(columnIndex) == true) {
-                        currentVertexIndex = columnIndex;
-                        foundAdjacent = true;
-                        System.out.println("currentVertexIndex: " + currentVertexIndex);
-                    }
-                }
-                tileJumps--;
-            }
-            System.out.println("Final currentVertexIndex: " + currentVertexIndex);
-            for(int columnIndex = 0; columnIndex < vertices.size(); columnIndex++) {
-                if(graphAdjacentMatrix.get(currentVertexIndex).get(columnIndex) == true) {
-                    adjacents.add(columnIndex);
-                }
-            }
-        }*/
-        return adjacents;
-    }
 }
