@@ -7,7 +7,11 @@
 package controller;
 
 import java.awt.Color;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import model.Board;
 import model.Dice;
@@ -26,7 +30,6 @@ import model.UrTile;
 * @author Mauricio Palma, Alvaro Miranda, Jimena Gdur
 */
 public class Main {
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             // Doesn't test other methods that can't be accesed through parent
@@ -35,11 +38,11 @@ public class Main {
             //System.out.println("\nTesting Tile and Piece classes");
             //testTileAndPieceClasses();
             
-            System.out.println("\nTesting Board class");
-            testBoardClasses();
+            //System.out.println("\nTesting Board class");
+            //testBoardClasses();
             
-            //System.out.println("Testing Player classes");
-            //testPlayerClasses();
+            System.out.println("Testing Player classes");
+            testPlayerClasses();
             
             //System.out.println("Testing Rules class");
             //testRulesClass();
@@ -123,6 +126,13 @@ public class Main {
     }
     
     public static void testPlayerClasses() {
+        UrPiece urPiece = new UrPiece();
+        Player<UrPiece> player = new UrPlayer<>(7,Color.RED,"Miguelito", urPiece);
+        
+        
+
+        System.out.println("ToString: " + player);
+        /*
         Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
         System.out.println(player + "\n");
         
@@ -166,7 +176,7 @@ public class Main {
         System.out.println("Available piece 8: " + piece8);
         //piece8.setInPlay();
         player.modifyScore();
-        System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");
+        System.out.println("Player after setting 8 pieces in play:\n" + player + "\n");*/
     }
 
     private static void testRulesClass() {
