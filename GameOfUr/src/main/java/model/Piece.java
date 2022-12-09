@@ -32,6 +32,7 @@ abstract public class Piece extends GameObject
     */
     public Piece(Color selectedColor) {
         this.color = selectedColor;
+
     }
     /**
      * Gets piece's color.

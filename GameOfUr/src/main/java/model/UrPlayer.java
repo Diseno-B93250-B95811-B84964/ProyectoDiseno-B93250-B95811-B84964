@@ -13,25 +13,35 @@ import java.util.function.Supplier;
  * Creates a game board using a graph to store the information.
  * @author Jimena Gdur.
  */
-public class UrPlayer extends Player {
+public class UrPlayer <PieceType extends Piece> extends Player {
+    /*
     /**
      * Creates a new Player with their color and name.
      * @param supplier Supplier class that contains instance of piece's child.
      * @param amountPieces Amount of pieces the player has.
      * @param chosenColor Color player chose on respective screen.
      * @param name Player's name.
-    */
+    *//*
     public UrPlayer(Supplier<UrPiece> supplier, int amountPieces, Color chosenColor, String name) {
         super(supplier, amountPieces, chosenColor, name);
-    }
+    }*/
+    
+    /*
     /**
      * Creates a new Player with an array of pieces.
      * @param supplier Supplier class that contains instance of piece's child.
      * @param amountPieces Amount of pieces the player has.
-     */
+     *//*
     public UrPlayer(Supplier<UrPiece> supplier, int amountPieces) {
         super(supplier, amountPieces);
+    }*/
+    
+    
+    public UrPlayer(int amountPieces, Color color, String name, PieceType pieceType) {
+        super(amountPieces, color, name, pieceType);
     }
+    
+    
     /**
      * Modifies player's score.
      * Made for the Royal Game of Ur.
