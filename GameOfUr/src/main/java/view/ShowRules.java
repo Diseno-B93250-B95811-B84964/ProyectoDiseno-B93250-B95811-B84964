@@ -1,6 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
@@ -13,23 +15,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
+ * Displays game rules.
  * @author Mauricio Palma
  */
-public class ShowRules extends javax.swing.JPanel {
-
+public class ShowRules extends javax.swing.JPanel
+{
     /**
      * Creates new form ShowRules
      */
     public ShowRules() {
         initComponents();
     }
-
     /**
-     *
+     * Creates new frame with game rules.
      */
     public void showRules(){
-        //UrRulesModel rules = new UrRulesModel();
+        //UrRulesModel rules = new UrRulesModel(); // TODO: is this okay?
         JFrame frame = new JFrame("Rules");        
         JPanel panel = new JPanel();
         LayoutManager layout = new FlowLayout();

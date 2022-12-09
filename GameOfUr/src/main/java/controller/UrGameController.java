@@ -9,13 +9,13 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+
 import model.Dice;
 import model.FileManager;
 import model.Player;
@@ -31,9 +31,10 @@ import view.ShowRules;
 /**
  * Creates a general controller of the game to coordinate
  * Referee and view manager.
- * @author Mauricio Palma
+ * @author Mauricio Palma.
  */
-public class UrGameController {
+public class UrGameController
+{
     /**
     *  A Button that represents the new game button on GUI
     */
@@ -98,7 +99,7 @@ public class UrGameController {
     /**
     * The amount of players in game.
     */
-    private int playerAmount;
+    private int playerAmount;  // TODO: USAR ESTOS AL CREAR REFEREE
     /**
     * The amount of pieces each player has.
     */
@@ -193,7 +194,7 @@ public class UrGameController {
         adjacentMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
     }
     /**
-     * Method that manages each button parameter of UrGameController to the actual GUI button
+     * Manages each button parameter of UrGameController to the actual GUI button
     */
     private void manageButtons(){
         startNewGameButton = viewManager.getStartNewGameButton();
@@ -229,15 +230,15 @@ public class UrGameController {
         */
         refereeStub refereeStub;
         /**
-        * Boolean to know if the current player is the first player
+        * Determines if the current player is the first player.
         */
         boolean firstPlayer;
         /**
-        * Boolean to know if a player played its move before moving on
+        * Determines if a player has played its move, before moving on.
         */
         boolean playerPlayed;
         /**
-        * Boolean to know if there has been a winner
+        * Boolean to know if there has been a winner.
         */
         boolean winnerExists;
         
@@ -252,19 +253,19 @@ public class UrGameController {
             viewManager.setIfPieceMoved(true);
         }
         /**
-        * Method that coordinates how to react when a new game is chosen
+        * Coordinates how to react when a new game is chosen.
         */
         private void manageContinueToNewGameButton(){
             viewManager.swapViewToNewGame();
         }
         /**
-        * Method that coordinates how to react when a game is loading from a previous match
+        * Coordinates how to react when a game is loading from a previous match.
         */
         private void manageContinueToLoadGameButton(){
             viewManager.swapViewToLoadGame();
         }
         /**
-        * Method that coordinates what to do when a new game starts
+        * Coordinates what to do when a new game starts.
         */
         private void manageStartNewGame(){
             String playerData = viewManager.getPlayerData();
@@ -273,8 +274,7 @@ public class UrGameController {
                 String[] playerDataArray = playerData.split(",");
                 Color playerColor = new Color(Integer.parseInt(playerDataArray[0]));
                 String playerName = playerDataArray[1];
-                // 7 NEEDS TO BE CHANGED TO # OF PIECES FROM FILE.
-                Player newPlayer = new UrPlayer(UrPiece::new, 7, playerColor, playerName);
+                Player newPlayer = new UrPlayer(UrPiece::new, pieceAmount, playerColor, playerName);
            
                 System.out.println("Referee stubs says: " + refereeStub.getMessage());
                 int nextPlayerNumber = currentPlayer+1;
@@ -294,11 +294,11 @@ public class UrGameController {
             }
         }
         /**
-        * Method that coordinates how to start a game that has been load from a former match
+        * Coordinates how to start a game that has been load from a former match.
         */
         private void manageStartLoadGame(){
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
-            File file = viewManager.getFileNameToLoadGame();
+            String file = viewManager.getFileNameToLoadGame();
             if (file != null) {
                 // playerArray = referee.getPlayers();
                 // viewManager.setPlayers(playerArray);
@@ -306,20 +306,20 @@ public class UrGameController {
             }
         }
         /**
-        * Method that coordinates how to go back to the main menu
+        * Coordinates how to go back to the main menu.
         */
         private void manageGoBackToMainMenu(){
             System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
         /**
-        * Method that coordinates how to show games rules
+        * Coordinates how to show games rules.
         */ 
         private void manageShowRules(){
             viewManager.showRules();
         }
         /**
-        * Method that coordinates how to save current game state 
+        * Coordinates how to save current game state.
         */ 
         private void manageSaveAndExit(){
             // TODO implement this
@@ -327,7 +327,7 @@ public class UrGameController {
             System.exit(0);
         }
         /**
-        * Method that coordinates how each player can interact when they can move a piece
+        * Coordinates how each player can interact when they can move a piece.
         */  
         private void managePlay(){
             boolean winner = checkIfWinner();
@@ -349,7 +349,7 @@ public class UrGameController {
             }
         }
         /**
-        * Method that checks if a player won the match
+        * Checks if a player won the match.
         * @return whether there is a winner.
         */  
         private boolean checkIfWinner(){
@@ -359,7 +359,8 @@ public class UrGameController {
             return winnerExists;
         }
         /**
-        * Method that throws a random dice and shows up its result
+        * Method that throws a random dice and shows up its result.
+        * @return dice result.
         */    
         private int throwDice(){
             int diceResult = 0;

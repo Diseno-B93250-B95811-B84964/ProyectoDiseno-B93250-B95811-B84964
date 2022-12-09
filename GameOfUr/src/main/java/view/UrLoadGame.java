@@ -1,26 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 /**
- *
+ * Displays a JFileChooser component that allows user to choose a file.
  * @author Ximena Gdur, Mauricio Palma
  */
-public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface{
-
+public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface
+{
     /**
-     * Creates new form LoadGamePanel
+     * Creates new form to select a file from which to load game.
      */
     public UrLoadGame() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,21 +101,31 @@ public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface{
         // TODO add your handling code here:
     }//GEN-LAST:event_continueButtonActionPerformed
 
-    /*Button getters */
+    /**
+     * Returns button that will continue to next panel.
+     * @return Continue button.
+     */
     @Override
     public JButton getContinueButton(){
         return continueButton;
     }
-    
+    /**
+     * Returns button that will go back to previous panel.
+     * @return Back button.
+     */
     @Override
     public JButton getBackButton(){
         return goBackButton;
     }
-    
+    /**
+     * Returns JFileChooser object that allows user to select which file to load.
+     * @return FileChooser object.
+     */
     @Override
     public JFileChooser getFileChooser(){
         return fileChooser;
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton continueButton;
     private javax.swing.JFileChooser fileChooser;
