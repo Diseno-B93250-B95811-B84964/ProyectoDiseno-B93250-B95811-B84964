@@ -1,26 +1,49 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
 import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
- *
- * @author Mauricio Palma
+ * Displays player options for their color and name.
+ * Made for the Royal Game of Ur.
+ * @author Ximena Gdur, Mauricio Palma
  */
-public class UrNewGame extends javax.swing.JPanel implements NewGameInterface{
+public class UrNewGame extends javax.swing.JPanel implements NewGameInterface {
+    /**
+     * Stores selected player color.
+     */
     private Color playerColor;
+    /**
+     * Game's version of color blue.
+     */
     private final static Color BLUE = new Color (0,102,255);
+    /**
+     * Game's version of color brown.
+     */
     private final static Color BROWN = new Color (102,51,0);
+    /**
+     * Game's version of color green.
+     */
     private final static Color GREEN = new Color (102,204,0);
+    /**
+     * Game's version of color purple.
+     */
     private final static Color PURPLE = new Color (102,0,102);
+    /**
+     * Game's version of color red.
+     */
     private final static Color RED = new Color (255,0,0);
+    /**
+     * Game's version of color yellow.
+     */
     private final static Color YELLOW = new Color (255,204,0);
     
     /**
@@ -243,57 +266,76 @@ public class UrNewGame extends javax.swing.JPanel implements NewGameInterface{
         playerColor = PurpleButton.getBackground();
     }//GEN-LAST:event_PurpleButtonActionPerformed
 
-    /* Text setters */
-    
+    /**
+     * Sets player number in view title.
+     * Made for the Royal Game of Ur.
+     * @param playerNumber Player's identification.
+     */
     @Override
     public void setPlayerTitle(int playerNumber){
         String currentText = "SET UP PLAYER";
         Title.setText(currentText + "#" + playerNumber);
     }
-    
-    /* TextField Listener */
-
     /**
-     *
-     * @param listenForButton
+     * Adds listener that detects player has clicked a color.
+     * Made for the Royal Game of Ur.
+     * @param listenForButton Button listener.
      */
-
     @Override
     public void addTextFieldFocusistener(FocusListener listenForButton) {
         System.out.println("Im trying to gain focus...");
         playerNameTextField.addFocusListener(listenForButton);
     }
-    
-    /* Getters */
-    
+    /**
+     * Returns JTextField where player's name is stored.
+     * Made for the Royal Game of Ur.
+     * @return JTextField object.
+     */
     @Override
     public JTextField getPlayerNameTextField(){
         return playerNameTextField;
     }
-
+    /**
+     * Returns chosen color for current player.
+     * Made for the Royal Game of Ur.
+     * @return player color.
+     */
     @Override
     public Color getPlayerColor(){
         return playerColor;
     }
-    
+    /**
+     * Returns given name for current player.
+     * Made for the Royal Game of Ur.
+     * @return player name.
+     */
     @Override
     public String getPlayerName(){
         return playerNameTextField.getText();
     }
-    
-    /* Button getters */
-    
+    /**
+     * Returns button that will continue to next panel.
+     * Made for the Royal Game of Ur.
+     * @return Continue button.
+     */
     @Override
     public JButton getContinueButton(){
         return continueButton;
     }
-    
+    /**
+     * Returns button that will go back to previous panel.
+     * Made for the Royal Game of Ur.
+     * @return Back button.
+     */
     @Override
     public JButton getBackButton(){
         return backButton;
     }
-    
-    /* Miscellaneous */
+    /**
+     * Hides button associated with given color.
+     * Made for the Royal Game of Ur.
+     * @param color Button to be hid.
+     */
     @Override
     public void hideColorButton(Color color){
         System.out.println("A color is being erased... so long");
@@ -317,12 +359,18 @@ public class UrNewGame extends javax.swing.JPanel implements NewGameInterface{
             YellowButton.setEnabled(false);
         }
     }
-    
+    /**
+     * Resets text field and variables for further use.
+     * Made for the Royal Game of Ur.
+     */
     @Override
     public void resetPlayerNameTextField(){
         playerNameTextField.setText("Enter player name");
     }
-    
+    /**
+     * Resets variables storing chosen color.
+     * Made for the Royal Game of Ur.
+     */
     @Override
     public void resetColorChosen() {
         playerColor = null;

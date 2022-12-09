@@ -63,7 +63,7 @@ public interface MainGameInterface
      */
     public void setNextPossibleLabel(int row, int column, Icon icon);
     /**
-     * Removes icon from label located in given row and column.
+     * Removes temporary icon from tile located in given row and column.
      * @param row  Row in which tile is located.
      * @param column Column in which tile is located.
      */
@@ -84,10 +84,10 @@ public interface MainGameInterface
      */
     public void cleanDice();
     /**
-     *
-     * @param rollResult
+     * Sets label with amount of moves.
+     * @param rollResult Result of dice.
      */
-    public void setMoves(int rollResult); // TODO: fix documentation
+    public void setMoves(int rollResult);
     /**
      * Returns an icon representing player's chosen color.
      * @param color The color that needs to be retrieved.

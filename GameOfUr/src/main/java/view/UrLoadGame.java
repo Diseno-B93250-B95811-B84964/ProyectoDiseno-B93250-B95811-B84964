@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 
 /**
  * Displays a JFileChooser component that allows user to choose a file.
+ * Made for the Royal Game of Ur.
  * @author Ximena Gdur, Mauricio Palma
  */
 public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface
@@ -103,6 +104,7 @@ public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface
 
     /**
      * Returns button that will continue to next panel.
+     * Made for Royal Game of Ur.
      * @return Continue button.
      */
     @Override
@@ -111,6 +113,7 @@ public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface
     }
     /**
      * Returns button that will go back to previous panel.
+     * Made for Royal Game of Ur.
      * @return Back button.
      */
     @Override
@@ -119,6 +122,7 @@ public class UrLoadGame extends javax.swing.JPanel implements LoadGameInterface
     }
     /**
      * Returns JFileChooser object that allows user to select which file to load.
+     * Made for Royal Game of Ur.
      * @return FileChooser object.
      */
     @Override

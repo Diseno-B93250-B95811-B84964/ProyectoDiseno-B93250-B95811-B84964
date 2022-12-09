@@ -1,14 +1,16 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package view;
 
 import javax.swing.JButton;
 
 /**
- *
- * @author Jimena Gdur, Mauricio Palma
+ * Displays game's main menu.
+ * @author Ximena Gdur, Mauricio Palma
  */
 public class UrMainMenu extends javax.swing.JPanel implements MainMenuInterface {
     
@@ -126,18 +128,30 @@ public class UrMainMenu extends javax.swing.JPanel implements MainMenuInterface 
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
 
     }//GEN-LAST:event_rulesButtonActionPerformed
-
-    /* Button getters */
+    
+    /**
+     * Returns button that will start a new game.
+     * Made for Royal Game of Ur.
+     * @return StartNewGame button.
+     */
     @Override
     public JButton getStartNewGameButton(){
        return startNewGameButton;
     }
-    
+    /**
+     * Returns button that will load a former game.
+     * Made for Royal Game of Ur.
+     * @return LoadFormerGame button.
+     */
     @Override
     public JButton getLoadFormerGameButton(){
        return loadGameButton;
     }
-    
+    /**
+     * Returns button that will display game rules.
+     * Made for Royal Game of Ur.
+     * @return ShowRules button.
+     */
     @Override
     public JButton getShowRulesButton(){
         return rulesButton;
