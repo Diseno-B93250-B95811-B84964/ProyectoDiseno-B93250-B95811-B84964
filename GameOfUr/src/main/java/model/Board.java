@@ -6,7 +6,6 @@
  */
 package model;
 
-import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -45,14 +44,14 @@ public final class Board<TileType extends Tile> extends GameObject
     /**
      * Generic data type that extends Tile model
      */
-    protected TileType tileType;
+    private final TileType tileType;
 
     /**
      * Creates a new Board represented as a graph given the amount of vertices given.
      * @param vertices The number of vertices to be created.
      * @param rows Amount of rows board has.
      * @param cols Amount of columns board has.
-     * @param tileType
+     * @param tileType Type of tile board has
     */
     public Board(int vertices, int rows, int cols, TileType tileType) {
         this.verticesAmount = vertices;
@@ -71,7 +70,7 @@ public final class Board<TileType extends Tile> extends GameObject
             int x = getRowThroughVertexIndex(vertexIndex);
             int y = getColumnThroughVertexIndex(vertexIndex); 
             try {
-                vertices.add(makeNewTile(x,y,false)); // TODO change magic boolean
+                vertices.add(makeNewTile(x,y));
             } catch (IllegalAccessException | InstantiationException | 
                     NoSuchMethodException | IllegalArgumentException | 
                     InvocationTargetException ex) {
@@ -82,7 +81,7 @@ public final class Board<TileType extends Tile> extends GameObject
     
     /**
     * Creates a new object of generic type TileType and stores it into vertices arraylist.
-     * @param x
+     * @param x 
      * @param y
      * @param safeTile
     * @throws IllegalAccessException Exception that is thrown if object tries to access an invalidad memory reference
@@ -91,12 +90,12 @@ public final class Board<TileType extends Tile> extends GameObject
     * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
     * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
     */
-    public TileType makeNewTile(int x, int y, boolean safeTile) throws IllegalAccessException,InstantiationException, 
-            NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
-        //UrTile(int tileRow, int tileColumn, boolean isTileSafe) 
+    public TileType makeNewTile(int x, int y) throws IllegalAccessException,InstantiationException, 
+            NoSuchMethodException, IllegalArgumentException, InvocationTargetException 
+    {
         TileType newTile = (TileType)tileType.getClass()
-                .getConstructor(int.class, int.class, boolean.class)
-                .newInstance(x,y,safeTile);
+                .getConstructor(int.class, int.class)
+                .newInstance(x,y);
         return newTile;
     }
     
@@ -130,7 +129,7 @@ public final class Board<TileType extends Tile> extends GameObject
     }
     /**
      * Converts from array to matrix.
-     * @param verticesIndex Tile's index in vertices array
+     * @param vertexIndex Tile's index in vertices array
      * @return calculated row
      */
     private int getRowThroughVertexIndex(int vertexIndex) {
@@ -142,7 +141,7 @@ public final class Board<TileType extends Tile> extends GameObject
     }
     /**
      * Converts from array to matrix.
-     * @param verticesIndex Tile's index in vertices array
+     * @param vertexIndex Tile's index in vertices array
      * @return calculated column
      */
     private int getColumnThroughVertexIndex(int vertexIndex) {
@@ -176,7 +175,26 @@ public final class Board<TileType extends Tile> extends GameObject
         return specifiedTile;
     }
     /**
-     *
+     * Gets a specific tile using the given coordinates.
+     * @param x Row in which tile is located.
+     * @param y Column in which tile is located.
+     * @return A generic type whose parent class is Tile.
+     */
+    public ArrayList<TileType> getVertices(int x, int y) {
+        ArrayList<TileType> tileVertices = new ArrayList<>();
+        int rowIndex = getVertexIndexThroughXYCoordinates(x, y);
+        
+        for(int columnIndex = 0; columnIndex < verticesAmount; columnIndex++) {
+            if (columnIndex != rowIndex) {
+                if(graphAdjacentMatrix.get(rowIndex).get(columnIndex) == true) {
+                    tileVertices.add(vertices.get(columnIndex));
+                }
+            }
+        }
+        return tileVertices;
+    }
+    /**
+     * Sets given piece in given coordinates.
      * @param x Row in which tile is located.
      * @param y Column in which tile is located.
      * @param piece Piece to be set in specified tile.
@@ -186,6 +204,20 @@ public final class Board<TileType extends Tile> extends GameObject
         if (specifiedTile != null) {
             specifiedTile.setPiece(piece);
         }
+    }
+    /**
+     * Gets amount of rows in game board.
+     * @return amountRows value.
+     */
+    public int getAmountRows() {
+        return this.amountRows;
+    }
+    /**
+     * Gets amount of columns in game board.
+     * @return amountColumns value.
+     */
+    public int getAmountColumns() {
+        return this.amountColumns;
     }
     
     /**

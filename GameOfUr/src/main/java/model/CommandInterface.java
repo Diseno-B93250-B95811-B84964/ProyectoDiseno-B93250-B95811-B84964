@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Graph logic.
+ * Issue #26 - Game logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -8,7 +8,7 @@ package model;
 
 /**
  * Object whose role is to store and execute an action.
- * @author Jimena Gdur.
+ * @author Jimena Gdur, Mauricio Palma.
  */
 public interface CommandInterface
 {

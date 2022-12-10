@@ -16,7 +16,7 @@ public class UrTile extends Tile
     /**
     * Determines if tile is safe.
     */
-    protected boolean isSafe;
+    private boolean isSafe;
     
     /**
      * Creates a new Tile located in -1, -1.
@@ -31,9 +31,9 @@ public class UrTile extends Tile
      * @param tileColumn The column in which the tile is located.
      * @param isTileSafe If current tile is safe.
     */
-    public UrTile(int tileRow, int tileColumn, boolean isTileSafe) {
+    public UrTile(int tileRow, int tileColumn) {
         super(tileRow, tileColumn);
-        this.isSafe = isTileSafe;
+        this.isSafe = false;
     }
     /**
      * Determines if current tile is safe.

@@ -17,7 +17,7 @@ public class UrPiece extends Piece {
     /**
     * Determines whether piece is currently in play.
     */
-    protected boolean isInPlay;
+    private boolean isInPlay;
     
     /**
      * Creates a new Piece.

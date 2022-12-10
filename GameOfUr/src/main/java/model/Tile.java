@@ -17,19 +17,19 @@ public class Tile extends GameObject
     /**
     * A tile's row position.
     */
-    protected int row;
+    private int row;
     /**
     * A tile's column position.
     */
-    protected int column;
+    private int column;
     /**
     * A possible tile that can be placed on the tile.
     */
-    protected Piece piece;
+    private Piece piece;
     /**
     * Determines if tile currently has a piece placed in it.
     */
-    protected boolean isVacant;
+    private boolean isVacant;
     
     /**
      * Creates a new Tile located in -1,-1.

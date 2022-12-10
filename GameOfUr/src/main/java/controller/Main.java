@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import model.Board;
 import model.CommandInterface;
+import model.CommandMovePiece;
 import model.CommandValidateWinner;
 import model.Dice;
 import model.FileManager;
@@ -31,6 +32,7 @@ import model.UrTile;
 public class Main {
     
     public static CommandInterface winnerCommand;
+    public static CommandInterface moveCommand;
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -43,8 +45,8 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
-            System.out.println("Testing Player classes");
-            testPlayerClasses();
+            //System.out.println("Testing Player classes");
+            //testPlayerClasses();
             
             //System.out.println("Testing Rules class");
             //testRulesClass();
@@ -52,43 +54,16 @@ public class Main {
             //System.out.println("Testing Dice class");
             //testDiceClass();
             
-            //System.out.println("Testing Referee classes");
-            testCommandValidateWinner();
+            System.out.println("Testing Referee classes");
+            //testCommandValidateWinner();
+            testCommandMovePiece();
         });
     }
     
-    public static void testCommandValidateWinner(){
-        Piece urPiece = new UrPiece();
-        Player urPlayer1 = new UrPlayer(7,Color.RED,"San Juan", (UrPiece) urPiece);
-        Player urPlayer2 = new UrPlayer(7,Color.BLUE,"Martin", (UrPiece) urPiece);
-        Player urPlayer3 = new UrPlayer(7,Color.WHITE,"Maria", (UrPiece) urPiece);
-
-        ArrayList<Player> playerArray = new ArrayList<>();
-        playerArray.add(urPlayer1);
-        playerArray.add(urPlayer2);
-
-        int currentPlayer = 0;
-        winnerCommand = new CommandValidateWinner(playerArray, currentPlayer, 7);
-        
-        boolean result = winnerCommand.execute();
-        System.out.println("Winner command result is: " + result);
-
-        playerArray.add(urPlayer3);
-        result = winnerCommand.execute();
-        System.out.println("Winner command result is: " + result);
-        
-        playerArray.get(0).setScore(2);
-        for (int i = 0; i < 10; i++) {
-            result = winnerCommand.execute();
-            System.out.println("Winner command result is: " + result);
-        }
-        playerArray.get(0).setScore(7);
-        result = winnerCommand.execute();
-        System.out.println("Winner command result is: " + result);
-    }
+    
     
     public static void testTileAndPieceClasses() {
-        Tile tile = new UrTile(2,3, false);
+        Tile tile = new UrTile(2,3);
         System.out.println("Tile after constructor: " + tile);
         Piece piece = new UrPiece(Color.RED);
         System.out.println("Piece after constructor: " + piece);
@@ -100,7 +75,7 @@ public class Main {
         // TODO: piece isInPlay is not changed
     }
     
-    public static void testBoardClasses() {
+    public static Board testBoardClasses() {
         int vertexNumberFromFile = 24;
         int rowNumberFromFile = 8;
         int colNumberFromFile = 3;
@@ -119,17 +94,19 @@ public class Main {
         Tile safeTile4 = board.getTile(6, 2);
         //safeTile4.setAsSafe();
 
-        System.out.println("Board before setting adjacentMatrix: " + board);
+        //System.out.println("Board before setting adjacentMatrix: " + board);
         ArrayList<ArrayList<Boolean>> boolMatrix = readAdjacentMatrixFromFile();
         board.setAdjacentMatrix(boolMatrix);
-        System.out.println("Board after setting adjacentMatrix: " + board);
+        //System.out.println("Board after setting adjacentMatrix: " + board);
         
-        System.out.println("Getting tile adjacents:");
+        //System.out.println("Getting tile adjacents:");
         //ArrayList<Integer> possibleTiles = board.getTilesAdjacents(5,1, 3);
         //System.out.println("possibleTiles: " + possibleTiles);
         //board.setPieceInTile(3,0, )*/
                 
         //ArrayList<Integer> possibleTiles1 = board.getTilesAdjacents(7,1, 3);
+        
+        return board;
     }
     
     private static ArrayList<ArrayList<Boolean>> readAdjacentMatrixFromFile(){
@@ -235,14 +212,80 @@ public class Main {
         System.out.println("rules: " + rules.getRules()); 
     }
     
-    private static void testDiceClass() {
+    private static Dice testDiceClass() {
         int[] probabilities = { 20, 20, 20, 20, 20 };
         Dice dice = new Dice(5, probabilities);
+        /*System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
         System.out.println("dice: " + (dice.throwDice() - 1));
+        System.out.println("dice: " + (dice.throwDice() - 1));*/
         System.out.println("dice: " + (dice.throwDice() - 1));
-        System.out.println("dice: " + (dice.throwDice() - 1));
-        System.out.println("dice: " + (dice.throwDice() - 1));
+        return dice;
+    }
+    
+    public static void testCommandValidateWinner(){
+        Piece urPiece = new UrPiece();
+        Player urPlayer1 = new UrPlayer(7,Color.RED,"San Juan", (UrPiece) urPiece);
+        Player urPlayer2 = new UrPlayer(7,Color.BLUE,"Martin", (UrPiece) urPiece);
+        Player urPlayer3 = new UrPlayer(7,Color.WHITE,"Maria", (UrPiece) urPiece);
+
+        ArrayList<Player> playerArray = new ArrayList<>();
+        playerArray.add(urPlayer1);
+        playerArray.add(urPlayer2);
+
+        int currentPlayer = 0;
+        winnerCommand = new CommandValidateWinner(playerArray, currentPlayer, 7);
+        
+        boolean result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
+
+        playerArray.add(urPlayer3);
+        result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
+        
+        playerArray.get(0).setScore(2);
+        for (int i = 0; i < 10; i++) {
+            result = winnerCommand.execute();
+            System.out.println("Winner command result is: " + result);
+        }
+        playerArray.get(0).setScore(7);
+        result = winnerCommand.execute();
+        System.out.println("Winner command result is: " + result);
+    }
+    
+    public static void testCommandMovePiece() {
+        Board board = testBoardClasses();
+        UrTile safeTile1 = (UrTile) board.getTile(0, 0);
+        safeTile1.setAsSafe();
+        UrTile safeTile2 = (UrTile) board.getTile(0, 2);
+        safeTile2.setAsSafe();
+        UrTile safeTile3 = (UrTile) board.getTile(6, 0);
+        safeTile3.setAsSafe();
+        UrTile safeTile4 = (UrTile) board.getTile(6, 2);
+        safeTile4.setAsSafe();
+        
+        Dice dice = testDiceClass();
+        
+        Tile clickedTile = board.getTile(0, 0);
+        Tile nextTile = new Tile();
+        Boolean pieceEaten = new Boolean(false);
+        
+        Piece urPiece = new UrPiece();
+        ArrayList<Player> urPlayers = new ArrayList<>(2);
+        urPlayers.add(0, new UrPlayer(7,Color.BLACK,"San Juan de Diosito", (UrPiece) urPiece));
+        urPlayers.add(1, new UrPlayer(7,Color.RED,"Lucia", (UrPiece) urPiece));
+        int[] playerColumns = {0,2};
+        
+        UrPiece player2piece = (UrPiece) urPlayers.get(1).getAvailablePiece();
+        board.getTile(2, 1).setPiece(player2piece);
+        System.out.println("board.getTile(2, 1): " + board.getTile(2, 1));
+        player2piece.setInPlay();
+        
+        System.out.println("Sending nextTile: " + nextTile);
+        moveCommand = new CommandMovePiece(board, urPlayers, 0, dice, clickedTile, nextTile, playerColumns, 1, pieceEaten);
+        moveCommand.execute();
+        System.out.println("After setting nextTile: " + nextTile);
+        System.out.println("After setting pieceEaten: " + pieceEaten);
     }
 }
