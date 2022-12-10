@@ -40,60 +40,62 @@ import view.ShowRules;
 public class UrGameController
 {
     /**
-    *  A Button that represents the new game button on GUI
+    *  A Button that represents the new game button on GUI.
     */
     private JButton startNewGameButton;
     /**
-    *  A Button that represents the load game button on GUI
+    *  A Button that represents the load game button on GUI.
     */
     private JButton startLoadGameButton;
     /**
-    *  A Button that represents the go back button on GUI, new game view
+    *  A Button that represents the go back button on GUI, new game view.
     */
     private JButton goBackToMainMenuFromNewGameButton;
     /**
-    *  A Button that represents the continue button on GUI, new game view
+    *  A Button that represents the continue button on GUI, new game view.
     */
     private JButton goToMainGameFromNewGameButton;
     /**
-    *  A Button that represents the go back button on GUI, load game view
+    *  A Button that represents the go back button on GUI, load game view.
     */
     private JButton goBackToMainMenuFromLoadGameButton;
     /**
-    *  A Button that represents the continue button on GUI, load game view
+    *  A Button that represents the continue button on GUI, load game view.
     */
     private JButton goToMainGameFromLoadGameButton;
     /**
-    *  A Button that represents the rules button on GUI, at main menu view
+    *  A Button that represents the rules button on GUI, at main menu view.
     */
     private JButton showRulesFromMainMenuButton;
     /**
-    *  A Button that represents the rules button on GUI, at main game view
+    *  A Button that represents the rules button on GUI, at main game view.
     */
     private JButton showRulesFromGameButton;
     /**
-    *  A Button that represents the save and exit button on GUI
+    *  A Button that represents the save and exit button on GUI.
     */
     private JButton exitAndSaveButton;
     /**
-    *  A Button that represents the throw dice button on GUI
+    *  A Button that represents the throw dice button on GUI.
     */
     private JButton throwDiceButton;
     /**
-    * Object to call methods of the view manager and coordinate them with
+    * Object to call methods of the view manager and coordinate them with.
     * the referee object
     */
     private ViewManager viewManager;
     /**
-    * ArrayList used to store the information of every player playing the game
+    * ArrayList used to store the information of every player playing the game.
     */ 
     private ArrayList<Player> playerArray;
 
     /**
-    * Integer that tracks which player is playing at a given time
+    * Integer that tracks which player is playing at a given time.
     */
     private int currentPlayer;
-
+    /**
+    * Referee to manage the game.
+    */
     private Referee<UrPlayer, UrPiece, UrTile> referee;
     
     /**
@@ -107,7 +109,9 @@ public class UrGameController
         makeSafeTiles();
         this.manageButtons();
     }
-    
+    /**
+     * Constructor for the referee using the references from the game elements.  
+     */    
     private void makeReferee(){
         Player urPlayer = new UrPlayer();
         Piece urPiece = new UrPiece();
@@ -115,7 +119,9 @@ public class UrGameController
         this.referee = new Referee(urPlayer, urPiece, urTile);
 
     }
-
+    /**
+     * Initialize safe tiles.  
+     */
     private void makeSafeTiles(){
         UrTile safeTile1 = (UrTile) referee.getTile(0, 0);
         safeTile1.setAsSafe();
@@ -275,7 +281,9 @@ public class UrGameController
                 }
             }
         }
-        
+        /**
+        * Manages the throw of the dice in the game flow.
+        */  
         public void manageThrowDice(){
             int result = referee.throwDice();
             viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
@@ -286,7 +294,9 @@ public class UrGameController
                 updateCurrentPlayer();
             }
         }
-        
+        /**
+        * Manages the changes made when a tile is selected to make a move.
+        */  
         public void manageSelectedTile(){
             selectedPiece = false;
             playerPlayed = viewManager.getIfPieceMoved();
@@ -318,12 +328,16 @@ public class UrGameController
                 viewManager.changeThrowDiceButtonText("THROW DICE");
             }
         }
-        
+        /**
+        * Changes turns between players.
+        */  
         private void updateCurrentPlayer(){
             currentPlayer++;
             currentPlayer = currentPlayer%playerArray.size();
         }
-        
+        /**
+        * Updates the users view.
+        */  
         private void updateGUI(int formerX, int formerY){
             int nextRow = viewManager.getNextRowPosition();
             int nextColumn = viewManager.getNextColumnPosition();
@@ -342,7 +356,7 @@ public class UrGameController
         }
 
         /**
-        * Method that checks which button was clicked and acts accordingly
+        * Method that checks which button was clicked and acts accordingly.
         */   
         @Override
         public void actionPerformed(ActionEvent event) {
