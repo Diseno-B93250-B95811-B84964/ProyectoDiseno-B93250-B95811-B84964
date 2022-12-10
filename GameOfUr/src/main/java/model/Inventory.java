@@ -5,34 +5,35 @@
 package model;
 
 import java.util.ArrayList;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 /**
  *
- * @author Mauricio Palma
+ * @author Mauricio Palma, Ximena Gdur
  */
 public class Inventory extends GameObject{
 
     protected CommandAddToInventory addInventoryCommand;
     protected CommandRemoveFromInventory removeInventoryCommand;
-    protected CommandSearchInventory searchInventoryCommand;
     protected CommandGetObjectFromInventory getObjectFromInventoryCommand;
     
     private ArrayList<InventoryItem> inventoryArray;
+    private InventoryItem receivedItem;
+    private MutableInt itemIndex;
 
     public Inventory() {
-        this.addInventoryCommand = addInventoryCommand;
-        this.removeInventoryCommand = removeInventoryCommand;
-        this.searchInventoryCommand = searchInventoryCommand;
-        this.getObjectFromInventoryCommand = getObjectFromInventoryCommand;
-        this.inventoryArray = inventoryArray;
+        this.addInventoryCommand = new CommandAddToInventory(inventoryArray, receivedItem);
+        this.removeInventoryCommand = new CommandRemoveFromInventory(inventoryArray, itemIndex);
+        this.getObjectFromInventoryCommand = new CommandGetObjectFromInventory(inventoryArray, receivedItem, itemIndex);
     }
      
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "inventoryArray: " + inventoryArray;
     }
     
-    public void addToInventory(){
+    public void addToInventory(InventoryItem item){
+        receivedItem.copyFromItem(item);
         addInventoryCommand.execute();
     }
     
@@ -40,12 +41,9 @@ public class Inventory extends GameObject{
         removeInventoryCommand.execute();
     }
     
-    public void searchInventoryCommand(){
-        searchInventoryCommand.execute();
-    }
-    
-    public void getObjectFromInventory(){
+    public InventoryItem getObjectFromInventory(){
         getObjectFromInventoryCommand.execute();
+        return receivedItem;
     }
     
 }
