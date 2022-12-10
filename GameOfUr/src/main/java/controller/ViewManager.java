@@ -104,6 +104,10 @@ public class ViewManager
      */
     private int clickedColumn;
     
+    private int nextRow;
+    
+    private int nextColumn;
+    
     /**
      * Creates a view manager.
      * @param mainGameSupplier Provides an instance of MainGame.
@@ -140,13 +144,18 @@ public class ViewManager
      */
     public void playMove(int diceResult, int currentPlayer, Color playerColor) {
         this.setIfPieceMoved(false);
-        this.canClick = true;
+        if (diceResult>0) {
+            this.canClick = true;
+        }
         this.currentPlayerColor = playerColor;
         this.mainGame.cleanDice();
         this.mainGame.showThrownDice(diceResult);
         this.mainGame.setMoves(diceResult);
         this.mainGame.changePlayerTurn(currentPlayer);
     }
+   
+    
+    
     /**
      * Updates main game view.
      */
@@ -417,6 +426,15 @@ public class ViewManager
     private void cleanTile(int row, int column) {
         mainGame.removeIconFromTile(row, column);
     }
+    
+    public void resetBackground(int formerRow, int formerColumn){
+        if (formerRow == 4 && formerColumn != 1){
+            mainGame.getLabel(formerRow, formerColumn).setBackground(Color.decode("#E0E0E0"));
+        } else {
+            mainGame.getLabel(formerRow, formerColumn).setBackground(Color.decode("#2D3553"));
+        }
+    }
+    
     /**
      * Updates interface by moving piece from old tile to new one.
      * @param currentRow The row of the piece that will be moved to a new tile.
@@ -424,16 +442,38 @@ public class ViewManager
      * @param nextRow The row of the new tile, where the piece is now located.
      * @param nextColumn The column of the new tile, where the piece is now located.
      */
-    public void movePiece(int currentRow, int currentColumn, int nextRow, int nextColumn) {
-        cleanTile(currentRow, currentColumn);
+    public void movePiece(int formerRow, int formerColumn, int nextRow, int nextColumn) {
+        resetBackground(formerRow, formerColumn);
+        cleanTile(formerRow, formerColumn);
         mainGame.setNextPossibleLabel(nextRow, nextColumn, mainGame.getPlayerIcon(currentPlayerColor));
+        if (formerRow == 4 && formerColumn != 1) {
+            mainGame.desactiveAPieceForPlayer(currentPlayerColor);
+        }
     }
+    
     /**
      * Updates label to indicate a player has won the game.
      * @param winnerName Name of the player that has won.
      */
     public void declareWinner(String winnerName){
         // TODO: update label to show there is a winner.
+    }
+    
+    public void changeThrowDiceButtonText(String text){
+        this.mainGame.changeButtonText(text);
+    }
+    
+    public void setNextTilePosition(int row, int column){
+        this.nextRow = row;
+        this.nextColumn = column;
+    }
+    
+    public int getNextRowPosition(){
+        return this.nextRow;
+    }
+    
+    public int getNextColumnPosition(){
+        return this.nextColumn;
     }
     
     /**
@@ -494,9 +534,14 @@ public class ViewManager
                 canClick = false;
                 setClickedTile(this.row, this.column);
                 setIfPieceMoved(true);
-                mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
-                mainGame.desactiveAPieceForPlayer(currentPlayerColor);
-                currentPlayerColor = null;
+                mainGame.getLabel(this.row, this.column).setBackground(Color.decode("#A12525"));   
+                 /*int row = getNextRowPosition();
+                int column = getNextColumnPosition();
+                mainGame.setNextPossibleLabel(row, column, mainGame.getPlayerIcon(currentPlayerColor));*/
+
+                //mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
+                // mainGame.desactiveAPieceForPlayer(currentPlayerColor);
+                //currentPlayerColor = null;
             }
         }
         /*

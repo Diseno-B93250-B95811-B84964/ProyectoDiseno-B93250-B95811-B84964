@@ -256,8 +256,6 @@ public class Referee <
     }
     
     private void copyClickedTile(int x, int y) {
-        System.out.println("X is: " + x);
-        System.out.println("Y is: " + y);
         
         Tile boardTile = this.gameBoard.getTile(x, y);
         
@@ -275,29 +273,30 @@ public class Referee <
     /**
     * 
     */
-    public boolean checkPlay(int x, int y) {
+    public boolean checkPlay(int clickedX, int clickedY) {
         boolean success = false;
         this.playerScored = false;
         this.isWinner = false;
-                
+        System.out.println("Before copyClickedTile x," + clickedX + " y,"+ clickedY);
         // Moves piece to tile if possible
-        copyClickedTile(x, y);
-        this.clickedTile = this.gameBoard.getTile(x, y);
-        System.out.println("Referee_clickedTile row: " + clickedTile.getRow() + ", column: " + clickedTile.getColumn());
+        copyClickedTile(clickedX, clickedY);
+        System.out.println("After copyClickedTile x," + clickedX + " y,"+ clickedY);
+
         success = this.commandMovePiece.execute();
         
-        System.out.println("Referee_After moving piece row: " + this.nextTile.getRow() + ", column: " + this.nextTile.getColumn());
         
         // possible tile vacio -1, -1
         // movePiece = possible tile lleno
         
         
-        if (success == true) {
+        if (success) {
             // Validates if point can be given to player
             this.playerScored = this.commandAddScore.execute();
 
             // Checks for winner
             this.isWinner = this.commandValidateWinner.execute();
+        } else {
+            System.out.println("NOT POSSIBLE MOVE BRO");
         }
         
         return success;
@@ -333,4 +332,9 @@ public class Referee <
     public ArrayList<Player> getPlayerArray(){
         return this.playerArray;
     }
+    
+    public Tile getTile(int row, int column){
+        return this.gameBoard.getTile(row, column);
+    }
+    
 }

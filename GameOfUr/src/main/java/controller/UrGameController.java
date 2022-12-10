@@ -104,6 +104,7 @@ public class UrGameController
         this.playerArray = new ArrayList<>(); // Recibe, NO crea
         this.currentPlayer = 0;
         makeReferee();
+        makeSafeTiles();
         this.manageButtons();
     }
     
@@ -115,6 +116,17 @@ public class UrGameController
 
     }
 
+    private void makeSafeTiles(){
+        UrTile safeTile1 = (UrTile) referee.getTile(0, 0);
+        safeTile1.setAsSafe();
+        UrTile safeTile2 = (UrTile) referee.getTile(0, 2);
+        safeTile2.setAsSafe();
+        UrTile safeTile3 = (UrTile) referee.getTile(6, 0);
+        safeTile3.setAsSafe();
+        UrTile safeTile4 = (UrTile) referee.getTile(6, 2);
+        safeTile4.setAsSafe();
+    }
+    
     /**
      * Manages each button parameter of UrGameController to the actual GUI button
     */
@@ -164,7 +176,7 @@ public class UrGameController
         */
         boolean winnerExists;
         
-        boolean firstPlayerThrow;
+        boolean selectedPiece;
         /**
         * Creates new action listener.
         */
@@ -173,8 +185,7 @@ public class UrGameController
             firstPlayer  = true;
             playerPlayed = false;
             winnerExists = false;
-            firstPlayerThrow = true;
-            viewManager.setIfPieceMoved(true);
+            selectedPiece = false;
         }
         /**
         * Coordinates how to react when a new game is chosen.
@@ -257,57 +268,68 @@ public class UrGameController
         private void managePlay(){
             boolean winner = checkIfWinner();
             if (!winner) {
-                if (firstPlayerThrow) {
-                    manageFirstPlayerPlay();
-                }
-                playerPlayed = viewManager.getIfPieceMoved();
-                System.out.println("PlayerPlayed value within urGameController: " + playerPlayed);
-                if (playerPlayed) {
-                    int result = referee.throwDice()-1;
-                    
-                    viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
-                    currentPlayer = currentPlayer % playerArray.size();
-                    int row = viewManager.getClickedRow();
-                    int column = viewManager.getClickedColum();
-
-                    
-                    System.out.println("ClickedRow is: " + Integer.toString(row));
-                    System.out.println("ClickedColumn is: " + Integer.toString(column));
-                    
-                    referee.checkPlay(row, column);
-                    Tile nextTile = referee.getNextTile();
-                    System.out.println("NextTileRow: " + nextTile.getRow());
-                    System.out.println("NextTileColumn: " + nextTile.getColumn());
-                    
-                    currentPlayer++;
-                    currentPlayer = currentPlayer%playerArray.size();
+                if (!selectedPiece) {
+                    manageThrowDice();
+                } else{
+                    manageSelectedTile();
                 }
             }
         }
         
-        public void manageFirstPlayerPlay(){
-            firstPlayerThrow = false;
-            int result = referee.throwDice()-1;                    
+        public void manageThrowDice(){
+            int result = referee.throwDice();
             viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
-            currentPlayer = currentPlayer % playerArray.size();
-            int row = viewManager.getClickedRow();
-            int column = viewManager.getClickedColum();
+            if (result > 0) {
+                selectedPiece = true;
+                viewManager.changeThrowDiceButtonText("CONTINUE");
+            } else {
+                updateCurrentPlayer();
+            }
+        }
+        
+        public void manageSelectedTile(){
+            selectedPiece = false;
+            playerPlayed = viewManager.getIfPieceMoved();
+            if (playerPlayed) {
+                int formerRow = viewManager.getClickedRow();
+                int formerColumn = viewManager.getClickedColum();
 
-            System.out.println("/************/");
-            System.out.println("ClickedRow is: " + 4);
-            System.out.println("ClickedColumn is: " + 0);
-            System.out.println("/************/");
-            
-            referee.checkPlay(4, 0);
-            Tile nextTile = referee.getNextTile();
-            System.out.println("/************/");
-            System.out.println("NextTileRow: " + nextTile.getRow());
-            System.out.println("NextTileColumn: " + nextTile.getColumn());
-            System.out.println("/************/");
-            
+                System.out.println("/************/");
+                System.out.println("ClickedRow is: " + Integer.toString(formerRow));
+                System.out.println("ClickedColumn is: " + Integer.toString(formerColumn));
+                System.out.println("/************/");
+                
+                boolean canMove = referee.checkPlay(formerRow, formerColumn);
+                if (canMove) {
+                    Tile nextTile = referee.getNextTile();
+                    viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
+
+                    System.out.println("/************/");
+                    System.out.println("NextTileRow: " + nextTile.getRow());
+                    System.out.println("NextTileColumn: " + nextTile.getColumn());
+                    System.out.println("/************/");
+
+                    updateGUI(formerRow, formerColumn);                
+                } else {
+                    viewManager.resetBackground(formerRow, formerColumn);
+                }
+
+                updateCurrentPlayer();
+                viewManager.changeThrowDiceButtonText("THROW DICE");
+            }
+        }
+        
+        private void updateCurrentPlayer(){
             currentPlayer++;
             currentPlayer = currentPlayer%playerArray.size();
         }
+        
+        private void updateGUI(int formerX, int formerY){
+            int nextRow = viewManager.getNextRowPosition();
+            int nextColumn = viewManager.getNextColumnPosition();
+            viewManager.movePiece(formerX, formerY, nextRow, nextColumn);
+        }
+        
         /**
         * Checks if a player won the match.
         * @return whether there is a winner.

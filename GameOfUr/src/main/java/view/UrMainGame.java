@@ -1183,6 +1183,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         String playerTurn = "Player " + number + "'s" + " won!";
         playerTurnLabel.setText(playerTurn);
     }
+    
+    public void changeButtonText(String textName){
+        throwDiceButton.setText(textName);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Player1Panel;
