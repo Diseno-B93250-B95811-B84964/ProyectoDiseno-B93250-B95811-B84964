@@ -69,6 +69,15 @@ public abstract class Player
         initializePiecesArray();
     }
 
+    public Player() {
+        this.piecesAmount = 0;
+        this.name = "";
+        this.color = Color.WHITE;
+        this.pieces = new ArrayList<>(this.piecesAmount);        
+        this.pieceType = null;
+        //initializePiecesArray();
+    }
+
     /**
     * Initializes player array that contains all their pieces.
     */

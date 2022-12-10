@@ -25,6 +25,11 @@ public class UrPlayer <PieceType extends Piece> extends Player {
         super(amountPieces, color, name, pieceType);
     }
     
+    public UrPlayer() {
+        super();
+    }
+    
+    
     /**
      * Modifies player's score.
      * Made for the Royal Game of Ur.

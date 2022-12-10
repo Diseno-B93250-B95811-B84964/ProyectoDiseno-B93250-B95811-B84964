@@ -183,8 +183,6 @@ public class ViewManager
         Color playerColor = newGame.getPlayerColor();
         String playerName = newGame.getPlayerName();
         String playerData = null;
-        System.out.println("Color: [" + playerColor+"]");
-        System.out.println("Nombre: [" + playerName+"]");
         if (playerColor != null && !playerName.equals("Enter player name")) { // TODO remove "Enter..." and make it a const variable
             playerData = playerColor.getRGB() + "," + playerName;
         } else {
@@ -494,8 +492,8 @@ public class ViewManager
         public void mousePressed(MouseEvent entered){
             if (canClick) {
                 canClick = false;
-                setIfPieceMoved(true);
                 setClickedTile(this.row, this.column);
+                setIfPieceMoved(true);
                 mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
                 mainGame.desactiveAPieceForPlayer(currentPlayerColor);
                 currentPlayerColor = null;

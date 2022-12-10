@@ -82,21 +82,15 @@ public class CommandMovePiece implements CommandInterface {
         boolean success = false;
         resetEatenValue();
         
-        dice.throwDice();
-        System.out.println("dice: " + dice.getDiceResult());
+        System.out.println("dice: " + (dice.getDiceResult() - 1));
         
         UrTile nextTile = null;
-        System.out.println("clickedTile.getColumn(): " + clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
-            System.out.println("My column");
             Piece currentPiece = getCurrentPiece();
-            System.out.println("currentPiece: " + currentPiece);
             if (currentPiece != null) {
-                System.out.println("Got piece: " + currentPiece);
                 nextTile = (UrTile) getPossibleTile();
                 if (nextTile != null) {
                     // Copies value from next tile to possibleTile
-                    System.out.println("Got possible tile: " + nextTile);
                     possibleTile.setRow(nextTile.getRow());
                     possibleTile.setColumn(nextTile.getColumn());
                     setPieceInTile(nextTile, currentPiece);
@@ -121,10 +115,8 @@ public class CommandMovePiece implements CommandInterface {
         Piece currentPiece = null;
         
         if (this.clickedTile.isVacant()){
-            System.out.println("Is vacant");
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
         } else {
-            System.out.println(" this.clickedTile.getPiece(): " +  this.clickedTile.getPiece());
             currentPiece = this.clickedTile.getPiece();
         }
         
@@ -147,7 +139,7 @@ public class CommandMovePiece implements CommandInterface {
         int currentRow = this.clickedTile.getRow();
         int currentCol = this.clickedTile.getColumn();
         
-        int diceResult = dice.getDiceResult();
+        int diceResult = dice.getDiceResult() - 1;
         
         Tile newTile = null;
         

@@ -94,10 +94,6 @@ public class UrGameController
     */
     private int currentPlayer;
 
-    private ArrayList<String> playersNameArray;
-    
-    private ArrayList<Color> playersColorArray;
-
     private Referee<UrPlayer, UrPiece, UrTile> referee;
     
     /**
@@ -106,18 +102,18 @@ public class UrGameController
     public UrGameController(){     
         this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
         this.playerArray = new ArrayList<>(); // Recibe, NO crea
-        this.playersNameArray = new ArrayList<>();
-        this.playersColorArray = new ArrayList<>();
         this.currentPlayer = 0;
-                 //ref = new Referee(8,3,2,7,24, boolMatrix, urPlayer, urPiece, urTile, diceProbabilities);
-                //PlayerType playerType, PieceType pieceType, TileType tileType)
-        Player urPlayer = new UrPlayer(0,Color.BLACK,"", (UrPiece) urPiece);
-        Piece urPiece = new UrPiece();
-        Tile urTile = new UrTile();
-        this.referee = new Referee(UrPlayer::new, UrPiece::new, UrTile::new);
+        makeReferee();
         this.manageButtons();
     }
     
+    private void makeReferee(){
+        Player urPlayer = new UrPlayer();
+        Piece urPiece = new UrPiece();
+        Tile urTile = new UrTile();
+        this.referee = new Referee(urPlayer, urPiece, urTile);
+
+    }
 
     /**
      * Manages each button parameter of UrGameController to the actual GUI button
@@ -168,14 +164,16 @@ public class UrGameController
         */
         boolean winnerExists;
         
+        boolean firstPlayerThrow;
         /**
         * Creates new action listener.
         */
         public buttonAction() {
             refereeStub = new refereeStub();
             firstPlayer  = true;
-            playerPlayed = true;
+            playerPlayed = false;
             winnerExists = false;
+            firstPlayerThrow = true;
             viewManager.setIfPieceMoved(true);
         }
         /**
@@ -193,34 +191,31 @@ public class UrGameController
         /**
         * Coordinates what to do when a new game starts.
         */
-        private void manageStartNewGame(){
+        private void manageStartNewGame() {
             String playerData = viewManager.getPlayerData();
-            Piece urPiece = new UrPiece();
             if (playerData != null) {
                 // Creates new player from data received
                 String[] playerDataArray = playerData.split(",");
                 Color playerColor = new Color(Integer.parseInt(playerDataArray[0]));
                 String playerName = playerDataArray[1];
-                playersNameArray.add(playerName);
-                playersColorArray.add(playerColor);
-                //public UrPlayer(int amountPieces, Color color, String name, UrPiece pieceType);
-                //Player newPlayer = new UrPlayer(pieceAmount, playerColor, playerName, (UrPiece) urPiece); // TODO make a General Game Controller with templates
-           
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
+                referee.setPlayerInfo(playerName, playerColor, currentPlayer);
+                currentPlayer += 1;
                 int nextPlayerNumber = currentPlayer+1;
                 
                 if (firstPlayer) {
-                    //playerArray.add(newPlayer);
+                    
                     firstPlayer = false;
                     viewManager.updateNewGameForNextPlayer(nextPlayerNumber);
                     viewManager.hideColors(playerColor);
                     viewManager.resetColorChosen();
                     viewManager.swapViewToNewGame();
                 } else {
-                    //playerArray.add(newPlayer);
+                    playerArray = referee.getPlayerArray();
                     viewManager.setPlayers(playerArray);
                     viewManager.swapViewToMainGame();
+                    currentPlayer = currentPlayer % playerArray.size();
                 }
+                
             }
         }
         /**
@@ -262,26 +257,56 @@ public class UrGameController
         private void managePlay(){
             boolean winner = checkIfWinner();
             if (!winner) {
+                if (firstPlayerThrow) {
+                    manageFirstPlayerPlay();
+                }
                 playerPlayed = viewManager.getIfPieceMoved();
+                System.out.println("PlayerPlayed value within urGameController: " + playerPlayed);
                 if (playerPlayed) {
-                    System.out.println("Inside!");
+                    int result = referee.throwDice()-1;
                     
-                    /********************************/
-                    //int result = throwDice();     
-                    /********************************/
-                    
-                    currentPlayer++;
-                    // DESCOMENTAR SIGUIENTE LINEA
-                    //viewManager.playMove(result, currentPlayer, playerArray.get(currentPlayer-1).getColor());
-                    System.out.println("Current player is: " + currentPlayer);
+                    viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
                     currentPlayer = currentPlayer % playerArray.size();
-                    System.out.println("Priting selected tile...: ");
                     int row = viewManager.getClickedRow();
                     int column = viewManager.getClickedColum();
-                    System.out.println("Row is: " + Integer.toString(row));
-                    System.out.println("Column is: " + Integer.toHexString(column));
+
+                    
+                    System.out.println("ClickedRow is: " + Integer.toString(row));
+                    System.out.println("ClickedColumn is: " + Integer.toString(column));
+                    
+                    referee.checkPlay(row, column);
+                    Tile nextTile = referee.getNextTile();
+                    System.out.println("NextTileRow: " + nextTile.getRow());
+                    System.out.println("NextTileColumn: " + nextTile.getColumn());
+                    
+                    currentPlayer++;
+                    currentPlayer = currentPlayer%playerArray.size();
                 }
             }
+        }
+        
+        public void manageFirstPlayerPlay(){
+            firstPlayerThrow = false;
+            int result = referee.throwDice()-1;                    
+            viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
+            currentPlayer = currentPlayer % playerArray.size();
+            int row = viewManager.getClickedRow();
+            int column = viewManager.getClickedColum();
+
+            System.out.println("/************/");
+            System.out.println("ClickedRow is: " + 4);
+            System.out.println("ClickedColumn is: " + 0);
+            System.out.println("/************/");
+            
+            referee.checkPlay(4, 0);
+            Tile nextTile = referee.getNextTile();
+            System.out.println("/************/");
+            System.out.println("NextTileRow: " + nextTile.getRow());
+            System.out.println("NextTileColumn: " + nextTile.getColumn());
+            System.out.println("/************/");
+            
+            currentPlayer++;
+            currentPlayer = currentPlayer%playerArray.size();
         }
         /**
         * Checks if a player won the match.

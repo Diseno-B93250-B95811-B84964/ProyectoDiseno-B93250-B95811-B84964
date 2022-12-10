@@ -94,11 +94,12 @@ public class Referee <
      */
     public Referee(PlayerType playerType, PieceType pieceType, TileType tileType)
     {
-        readGameData();
+        
         this.playerType = playerType;
         this.pieceType = pieceType;
         this.tileType = tileType;
-        
+        readGameData();
+
         this.pieceEaten = new MutableBoolean(false);
         this.clickedTile = new Tile();
         this.nextTile = new Tile();
@@ -226,18 +227,38 @@ public class Referee <
      * @param playerColors All player colors.
      * @return whether the operation was successful.
      */ 
-    public boolean setPlayerInfo(ArrayList<String> playerNames, ArrayList<Color> playerColors) {
+    public boolean setPlayersInfo(ArrayList<String> playerNames, ArrayList<Color> playerColors) {
         boolean success = false;
         if (playerAmount == playerNames.size() && playerNames.size() == playerColors.size()) {
             for(int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
                 playerArray.get(playerIndex).setColor(playerColors.get(playerIndex));
                 playerArray.get(playerIndex).setName(playerNames.get(playerIndex));
+                System.out.println("/************************/");
+                System.out.println("Printing color...: " +playerColors.get(playerIndex));
+                System.out.println("Printing player..."+ playerNames.get(playerIndex));
+                System.out.println("Printing playerColor" + playerArray.get(playerIndex).getColor());
+                System.out.println("Printing playerName"+ playerArray.get(playerIndex).getName());
+                System.out.println("/*********************/");
             }
         }
         return success;
     }
     
+    public boolean setPlayerInfo(String playerName, Color playerColor, int currentPlayer) {
+        boolean success = false;
+        if (playerName != null && playerColor != null) {
+            playerArray.get(currentPlayer).setColor(playerColor);
+            playerArray.get(currentPlayer).setName(playerName);
+
+            
+        }
+        return success;
+    }
+    
     private void copyClickedTile(int x, int y) {
+        System.out.println("X is: " + x);
+        System.out.println("Y is: " + y);
+        
         Tile boardTile = this.gameBoard.getTile(x, y);
         
         this.clickedTile.setColumn(y);
@@ -247,23 +268,25 @@ public class Referee <
         }
     }
     
+    public int throwDice(){
+        return this.gameDice.throwDice();
+    }
+    
     /**
-     * 
-     */
+    * 
+    */
     public boolean checkPlay(int x, int y) {
         boolean success = false;
         this.playerScored = false;
         this.isWinner = false;
-        
-        System.out.println("In check play");
-        
+                
         // Moves piece to tile if possible
         copyClickedTile(x, y);
         this.clickedTile = this.gameBoard.getTile(x, y);
-        System.out.println("clickedTile: " + clickedTile.getRow() + ", " + clickedTile.getColumn());
+        System.out.println("Referee_clickedTile row: " + clickedTile.getRow() + ", column: " + clickedTile.getColumn());
         success = this.commandMovePiece.execute();
         
-        System.out.println("After moving piece: " + this.nextTile);
+        System.out.println("Referee_After moving piece row: " + this.nextTile.getRow() + ", column: " + this.nextTile.getColumn());
         
         // possible tile vacio -1, -1
         // movePiece = possible tile lleno
@@ -280,6 +303,8 @@ public class Referee <
         return success;
     }
 
+
+    
     /**
      * Gets game rules from class Rules.
      * @return a list of rules.
@@ -303,5 +328,9 @@ public class Referee <
     
     public Tile getNextTile() {
         return this.nextTile;
+    }
+    
+    public ArrayList<Player> getPlayerArray(){
+        return this.playerArray;
     }
 }
