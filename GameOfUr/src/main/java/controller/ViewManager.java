@@ -103,9 +103,13 @@ public class ViewManager
      * The column clicked on interface.
      */
     private int clickedColumn;
-    
+    /**
+     * The next row.
+     */
     private int nextRow;
-    
+    /**
+     * The next column.
+     */
     private int nextColumn;
     
     /**
@@ -449,6 +453,10 @@ public class ViewManager
         if (formerRow == 4 && formerColumn != 1) {
             mainGame.desactiveAPieceForPlayer(currentPlayerColor);
         }
+    }
+    
+    public void desactivatePiece(Color otherPlayer) {
+        mainGame.activeAPieceForPlayer(otherPlayer);
     }
     
     /**
