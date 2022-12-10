@@ -8,10 +8,9 @@ package controller;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.function.Supplier;
 import javax.swing.SwingUtilities;
 import model.Board;
-import model.Deserializer;
+import model.JSONDeserializer;
 import model.CommandInterface;
 import model.CommandMovePiece;
 import model.CommandValidateWinner;
@@ -27,7 +26,8 @@ import model.UrPiece;
 import model.UrPlayer;
 import model.UrTile;
 import model.FileManager;
-import model.Serializer;
+import model.JSONSerializer;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
 * Main class that starts program.
@@ -100,13 +100,15 @@ public class Main {
         int colNumberFromFile = 3;
         Tile urTile = new UrTile();
         
+        /*
         Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
         Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
-        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");*/
+        
         Player[] players = new Player[2];
         
-        players[0] = player1;
-        players[1] = player2;
+        /*players[0] = player1;
+        players[1] = player2;*/
         Board board = new Board(vertexNumberFromFile, rowNumberFromFile, colNumberFromFile, urTile);
         //System.out.println("Board after constructor: " + board);
         
@@ -129,10 +131,11 @@ public class Main {
         //System.out.println("Getting tile adjacents:");
         //ArrayList<Integer> possibleTiles = board.getTilesAdjacents(5,1, 3);
         //System.out.println("possibleTiles: " + possibleTiles);
+        /*
         board.setPieceInTile(3,0, player1.getAvailablePiece());
         System.out.println("Board before setting adjacentMatrix: " + board);
         Serializer serializer = new Serializer(board, players);
-        serializer.execute();
+        serializer.execute();*/
         //Deserializer deserializer = new Deserializer(board, players);
         
         //ArrayList<Integer> possibleTiles1 = board.getTilesAdjacents(7,1, 3);
@@ -156,8 +159,7 @@ public class Main {
         System.out.println(stringArray.size());
         int length = stringArray.size() - 3;
         int currentRow = 3;
-        int length = stringArray.size() - 3;
-        int currentRow = 3;
+    
         ArrayList<String> adjacentArray = new ArrayList<>(length);
         for (int rowIndex = 0; rowIndex < length; rowIndex++) {
             adjacentArray.add(stringArray.get(currentRow++));
@@ -268,6 +270,8 @@ public class Main {
         playerArray.add(urPlayer1);
         playerArray.add(urPlayer2);
 
+        MutableBoolean pieceEaten = new MutableBoolean(false);
+        
         int currentPlayer = 0;
         winnerCommand = new CommandValidateWinner(playerArray, currentPlayer, 7);
         
@@ -329,7 +333,7 @@ public class Main {
         int colNumberFromFile = 3;
         String output = "";
         
-        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        /*Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
         Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
         Player[] players = new Player[2];
         
@@ -344,7 +348,7 @@ public class Main {
         //output = testSerializer.manageBoard();
         testSerializer.managePlayers();
         System.out.println(testSerializer.getJSONPlayer1());
-        System.out.println(testSerializer.getJSONPlayer2());
+        System.out.println(testSerializer.getJSONPlayer2());*/
         return output;
     }
     
@@ -353,7 +357,7 @@ public class Main {
         int rowNumberFromFile = 8;
         int colNumberFromFile = 3;
            
-        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        /*Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
         Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
         Player[] players = new Player[2];
         
@@ -364,7 +368,7 @@ public class Main {
         
         Serializer testSerializer = new Serializer(board, players);
         
-        testSerializer.execute();
+        testSerializer.execute();*/
     }
     
         public static void testDeserializer(){
@@ -372,7 +376,7 @@ public class Main {
         int rowNumberFromFile = 8;
         int colNumberFromFile = 3;
            
-        Player player1 = new UrPlayer(UrPiece::new, 7, Color.YELLOW, "Julio");
+        /*Player player1 = new UrPlayer(UrPiece::new, 7, Color.YELLOW, "Julio");
         Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLACK, "Juana");
         Player[] players = new Player[2];
         
@@ -386,7 +390,7 @@ public class Main {
         testDeserializer.execute();
         System.out.println(board);
         System.out.println(player1);
-        System.out.println(player2);
+        System.out.println(player2);*/
         
     }
 }

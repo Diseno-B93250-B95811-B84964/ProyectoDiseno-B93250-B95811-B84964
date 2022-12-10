@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
  * Manages the data of the classes to load into a JSON file.
  * @author Álvaro Miranda.
  */
-public class Serializer extends JSONManager{
+public class JSONSerializer extends DataManager{
     /**
     * JSONObject that holds all the information associated to player 1.
     */
@@ -47,7 +47,7 @@ public class Serializer extends JSONManager{
      * @param gameBoard Current game board.
      * @param players Array that holds the active players.
     */
-    public Serializer(Board gameBoard, Player[] players){
+    public JSONSerializer(Board gameBoard, Player[] players){
         jsonPlayer1 = new JSONObject();
         jsonPlayer2 = new JSONObject();
         //jsonPlayerPieces = new JSONArray();

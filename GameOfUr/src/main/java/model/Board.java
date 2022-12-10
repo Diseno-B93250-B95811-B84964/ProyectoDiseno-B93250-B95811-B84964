@@ -234,14 +234,6 @@ public final class Board<TileType extends Tile> extends GameObject
         return this.verticesAmount;
     }
     
-    public int getAmountRows(){
-        return this.amountRows;
-    }
-    
-    public int getAmountColumns(){
-        return this.amountColumns;
-    }
-    
     /**
      * Converts board into a string.
      * @return a string representing a board

@@ -10,9 +10,8 @@ import java.util.ArrayList;
  *
  * @author Usuario1
  */
-abstract public class JSONManager {
+abstract public class DataManager {
     protected FileManager mainManager;
-    //protected ArrayList<String[]> fileContents;
     protected Board gameBoard;
     protected Player[] gamePlayers;
     

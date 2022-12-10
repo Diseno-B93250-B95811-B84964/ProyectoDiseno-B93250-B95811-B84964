@@ -5,12 +5,7 @@
 package model;
 
 import java.awt.Color;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.function.Supplier;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +16,7 @@ import org.json.simple.parser.ParseException;
  * Manages the data of the classes to load into a JSON file.
  * @author Álvaro Miranda.
  */
-public class Deserializer extends JSONManager{
+public class JSONDeserializer extends DataManager{
     
     //private JSONObject playerObject;
     
@@ -35,7 +30,7 @@ public class Deserializer extends JSONManager{
      * @param gameBoard Current game board.
      * @param players Array that holds the active players.
     */
-    public Deserializer(Board gameBoard, Player[] players){
+    public JSONDeserializer(Board gameBoard, Player[] players){
         this.gameBoard = gameBoard;
         this.gamePlayers = players;
         this.mainBoardObject = new JSONObject();
