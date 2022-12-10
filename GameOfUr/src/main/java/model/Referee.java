@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
  * Game referee, manages game moves and game score.
@@ -64,9 +65,16 @@ public class Referee <
     
     protected TileType tileType;
     
-    protected Tile lastMovedTile;
+    protected Tile clickedTile;
     
-    protected Tile nextMoveTile;
+    protected Tile nextTile;
+    
+    protected Dice gameDice;
+    
+    protected MutableBoolean pieceEaten;
+    
+    protected boolean playerScored;
+    protected boolean isWinner;
     
     CommandInterface commandAddScore;
     CommandInterface commandValidateWinner;
@@ -84,9 +92,9 @@ public class Referee <
      * @param pieceType
      * @param tileType
      */
-    public Referee(int rows, int cols, int players, int pieces, int tiles, 
-            ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType,
-            PieceType pieceType, TileType tileType)
+    public Referee(int rows, int cols, int players, int pieces, int tiles,
+        ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType,
+        PieceType pieceType, TileType tileType, int[] diceProbabilities)
     {
         this.amountRows = rows;
         this.amountCols = cols;
@@ -96,16 +104,34 @@ public class Referee <
         this.playerType = playerType;
         this.pieceType = pieceType;
         this.tileType = tileType;
-        this.lastMovedTile = new Tile();
         
-        gameRules = new Rules();
+        this.pieceEaten = new MutableBoolean(false);
+        this.clickedTile = new Tile();
+        this.nextTile = new Tile();
+        this.gameRules = new Rules();
+        this.gameDice = new Dice(diceProbabilities.length, diceProbabilities);
         
         try {
             createPlayers();
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         createBoard(boolMatrix);
+        
+        initializeCommands();
+    }
+    
+    private void initializeCommands() {
+        // commandAddScore
+        commandAddScore = new CommandAddScore(this.playerArray, 0, this.nextTile);
+        
+        // commandValidateWinner
+        commandValidateWinner = new CommandValidateWinner(this.playerArray, 0, this.pieceAmount);
+        
+        // commandMovePiece        
+        commandMovePiece = new CommandMovePiece(this.gameBoard, this.playerArray, 0,
+            this.gameDice, this.clickedTile, this.nextTile, this.pieceEaten);
     }
     
     /*
@@ -135,7 +161,7 @@ public class Referee <
     /**
     * Creates players and stores them in playerArray.Abstract class that allows Referee child to manage implementation.
     * @return Returns a object of the specific player given through templates
-    * @throws IllegalAccessException Exception that is thrown if object tries to access an invalidad memory reference
+    * @throws IllegalAccessException Exception that is thrown if object tries to access an invalid memory reference
     * @throws InstantiationException Exception that is thrown if object cannot be instantiated
     * @throws NoSuchMethodException Exception that is thrown if method called does not exist
     * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
@@ -176,20 +202,49 @@ public class Referee <
         return success;
     }
     
-    /*
+    private void copyClickedTile(int x, int y) {
+        Tile boardTile = this.gameBoard.getTile(x, y);
+        
+        this.clickedTile.setColumn(y);
+        this.clickedTile.setRow(x);
+        if (boardTile.getPiece() != null) {
+            this.clickedTile.setPiece(boardTile.getPiece());
+        }
+    }
+    
     /**
-     * Validates player's intended move, and moves piece there if it is valid.
-     * @param playerId Indicates which player to validate.
-     * @param x The row of the tile the player selected.
-     * @param y The column of the tile the player selected.
-     * @param moves Amount of moves the dice selected.
-     * @return whether the move is valid.
+     * 
      */
-    protected boolean validateMove(int playerId, int x, int y, int moves){
-        return false;
+    public boolean checkPlay(int x, int y) {
+        boolean success = false;
+        this.playerScored = false;
+        this.isWinner = false;
+        
+        System.out.println("In check play");
+        
+        // Moves piece to tile if possible
+        copyClickedTile(x, y);
+        this.clickedTile = this.gameBoard.getTile(x, y);
+        System.out.println("clickedTile: " + clickedTile.getRow() + ", " + clickedTile.getColumn());
+        success = this.commandMovePiece.execute();
+        
+        System.out.println("After moving piece: " + this.nextTile);
+        
+        // possible tile vacio -1, -1
+        // movePiece = possible tile lleno
+        
+        
+        if (success == true) {
+            // Validates if point can be given to player
+            this.playerScored = this.commandAddScore.execute();
+
+            // Checks for winner
+            this.isWinner = this.commandValidateWinner.execute();
+        }
+        
+        return success;
     }
 
-    
     /**
      * Gets game rules from class Rules.
      * @return a list of rules.
@@ -198,13 +253,20 @@ public class Referee <
     public ArrayList<String> getGameRules() {
         return this.gameRules.getRules();
     }
-
-    /**
-     *
-     * @param x Row in which tile is located.
-     * @param y Column in which tile is located.
-     * @param tileJumps Amount of jumps the tile has to make.
-     * @return
-     */
-
+    
+    public boolean getPieceEaten() {
+        return this.pieceEaten.booleanValue();
+    }
+    
+    public boolean getIfScored() {
+        return this.playerScored;
+    }
+    
+    public boolean getIsWinner() {
+        return this.isWinner;
+    }
+    
+    public Tile getNextTile() {
+        return this.nextTile;
+    }
 }

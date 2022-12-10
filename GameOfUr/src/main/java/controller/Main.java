@@ -24,6 +24,7 @@ import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
 import model.UrTile;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
 * Main class that starts program.
@@ -45,8 +46,8 @@ public class Main {
             //System.out.println("\nTesting Board class");
             //testBoardClasses();
             
-            //System.out.println("Testing Player classes");
-            //testPlayerClasses();
+            System.out.println("Testing Player classes");
+            testPlayerClasses();
             
             //System.out.println("Testing Rules class");
             //testRulesClass();
@@ -54,9 +55,9 @@ public class Main {
             //System.out.println("Testing Dice class");
             //testDiceClass();
             
-            System.out.println("Testing Referee classes");
+            //System.out.println("Testing Referee classes");
             //testCommandValidateWinner();
-            testCommandMovePiece();
+            //testCommandMovePiece();
         });
     }
     
@@ -153,12 +154,17 @@ public class Main {
         
         
         ArrayList<ArrayList<Boolean>> boolMatrix = readAdjacentMatrixFromFile();
-        Referee<UrPlayer, UrPiece, UrTile> ref = new Referee(8,3,2,7,24, boolMatrix, urPlayer, urPiece, urTile);
-
+        
+        
+        
+        int[] diceProbabilities = {20, 20, 20, 20, 20};
+        
+        Referee<UrPlayer, UrPiece, UrTile> ref = new Referee(8,3,2,7,24, boolMatrix, urPlayer, urPiece, urTile, diceProbabilities);
+        ref.checkPlay(0, 0);
 
         System.out.println("After ref...");
         
-        System.out.println("Ref is " + ref.getPlayerString()); // TODO check is color
+        //System.out.println("Ref is " + ref.getPlayerString()); // TODO check is color
         
         /*
         Player player = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
@@ -269,7 +275,7 @@ public class Main {
         
         Tile clickedTile = board.getTile(0, 0);
         Tile nextTile = new Tile();
-        Boolean pieceEaten = new Boolean(false);
+        MutableBoolean pieceEaten = new MutableBoolean(false);
         
         Piece urPiece = new UrPiece();
         ArrayList<Player> urPlayers = new ArrayList<>(2);
@@ -282,10 +288,17 @@ public class Main {
         System.out.println("board.getTile(2, 1): " + board.getTile(2, 1));
         player2piece.setInPlay();
         
+        System.out.println("\nboard:\n" + board);
+        
         System.out.println("Sending nextTile: " + nextTile);
-        moveCommand = new CommandMovePiece(board, urPlayers, 0, dice, clickedTile, nextTile, playerColumns, 1, pieceEaten);
+        moveCommand = new CommandMovePiece(board, urPlayers, 0, dice, clickedTile, nextTile, pieceEaten);
         moveCommand.execute();
+        
+        // pasar de nextTile a board
+        
         System.out.println("After setting nextTile: " + nextTile);
         System.out.println("After setting pieceEaten: " + pieceEaten);
+        
+        System.out.println("\nboard:\n" + board);
     }
 }

@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
  * Sets piece in calculated if clicked tile is a valid move.
@@ -44,7 +45,7 @@ public class CommandMovePiece implements CommandInterface {
     
     private final int sharedColumn;
     
-    private boolean pieceEaten;
+    private MutableBoolean pieceEaten;
 
     /**
      * Creates a command with given references.
@@ -56,10 +57,10 @@ public class CommandMovePiece implements CommandInterface {
      * @param possibleTile Tile that will be assigned in class.
      * @param playerColumns
      * @param sharedColumn
+     * @param pieceEaten
      */
     public CommandMovePiece(Board board, ArrayList<Player> playerArray,
-        int currentPlayer, Dice dice, Tile clickedTile, Tile possibleTile,
-        int[] playerColumns, int sharedColumn, boolean pieceEaten)
+        int currentPlayer, Dice dice, Tile clickedTile, Tile possibleTile, MutableBoolean pieceEaten)
     {
         this.board = board;
         this.playerArray = playerArray;
@@ -67,24 +68,39 @@ public class CommandMovePiece implements CommandInterface {
         this.dice = dice;
         this.clickedTile = clickedTile;
         this.possibleTile = possibleTile;
-        this.playerColumns = playerColumns;
-        this.sharedColumn = sharedColumn;
+        this.playerColumns = new int[2];
+        playerColumns[0] = 0;
+        playerColumns[1] = 2;
+        this.sharedColumn = 1;
         this.pieceEaten = pieceEaten;
     }
      
     @Override
     public boolean execute() {
-        boolean success = false;
+         System.out.println(clickedTile.getRow() + ", " + clickedTile.getColumn());
         
+        boolean success = false;
+        resetEatenValue();
+        
+        dice.throwDice();
+        System.out.println("dice: " + dice.getDiceResult());
+        
+        UrTile nextTile = null;
+        System.out.println("clickedTile.getColumn(): " + clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
-            System.out.println("Is player column");
+            System.out.println("My column");
             Piece currentPiece = getCurrentPiece();
+            System.out.println("currentPiece: " + currentPiece);
             if (currentPiece != null) {
-                System.out.println("Current piece: " + currentPiece);
-                possibleTile = getPossibleTile();
-                if (possibleTile != null) {
-                    System.out.println("Possible tile is: " + possibleTile);
-                    setPieceInTile(currentPiece);
+                System.out.println("Got piece: " + currentPiece);
+                nextTile = (UrTile) getPossibleTile();
+                if (nextTile != null) {
+                    // Copies value from next tile to possibleTile
+                    System.out.println("Got possible tile: " + nextTile);
+                    possibleTile.setRow(nextTile.getRow());
+                    possibleTile.setColumn(nextTile.getColumn());
+                    setPieceInTile(nextTile, currentPiece);
+                    success = true;
                 }
             }
         }
@@ -105,8 +121,10 @@ public class CommandMovePiece implements CommandInterface {
         Piece currentPiece = null;
         
         if (this.clickedTile.isVacant()){
+            System.out.println("Is vacant");
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
         } else {
+            System.out.println(" this.clickedTile.getPiece(): " +  this.clickedTile.getPiece());
             currentPiece = this.clickedTile.getPiece();
         }
         
@@ -129,22 +147,16 @@ public class CommandMovePiece implements CommandInterface {
         int currentRow = this.clickedTile.getRow();
         int currentCol = this.clickedTile.getColumn();
         
-        int diceResult = 3;
-        
-        int index = 1; // TODO : DELETE, USED FOR PRINT
+        int diceResult = dice.getDiceResult();
         
         Tile newTile = null;
         
         if (isInRange(currentRow, currentCol)
             && isPlayerColumn(currentCol) && diceResult != 0)
         {
-            System.out.println("Is in range");
             ArrayList<Tile> tileVertices = board.getVertices(currentRow, currentCol);
-            System.out.println("tileVertices: " + tileVertices + "\n");
-            
 
             while(diceResult > 0 && !tileVertices.isEmpty()) {
-                System.out.println("tileVertices" + index++ + ": " + tileVertices);
                 for (Tile tile : tileVertices) {
                     currentCol = tile.getColumn();
                     currentRow = tile.getRow();
@@ -160,24 +172,23 @@ public class CommandMovePiece implements CommandInterface {
         return newTile;
     }
 
-    private void setPieceInTile(Piece movedPiece) {
-        UrTile urTile = (UrTile) possibleTile;
+    private void setPieceInTile(Tile realTile, Piece movedPiece) {
+        UrTile urTile = (UrTile) realTile;
         UrPiece myUrPiece = (UrPiece) movedPiece;
         UrPiece yourUrPiece;
-        if (possibleTile.isVacant()) {
-            possibleTile.setPiece(movedPiece);
-        } else if (possibleTile.getPiece().getColor() != movedPiece.getColor()
+        if (realTile.isVacant()) {
+            myUrPiece.setInPlay();
+            realTile.setPiece(movedPiece);
+        } else if (realTile.getPiece().getColor() != movedPiece.getColor()
             && !urTile.isSafe())
         {
-            pieceEaten = true;
-            System.out.println("pieceEaten: " + pieceEaten);
-            possibleTile.setPiece(movedPiece);
+            this.pieceEaten.setTrue();
+            realTile.setPiece(movedPiece);
             myUrPiece.setInPlay();
-            yourUrPiece = (UrPiece) possibleTile.getPiece();
+            yourUrPiece = (UrPiece) realTile.getPiece();
             yourUrPiece.setNotInPlay();
-        } else {
-            System.out.println("ES MIA");
-        }  
+            this.clickedTile.removePiece();
+        } 
     }
     
     /**
@@ -193,4 +204,7 @@ public class CommandMovePiece implements CommandInterface {
         return false;    
     }
     
+    private void resetEatenValue() {
+        pieceEaten.setFalse();
+    }
 }

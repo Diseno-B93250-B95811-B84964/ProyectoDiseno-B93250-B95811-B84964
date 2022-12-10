@@ -43,12 +43,12 @@ public class CommandAddScore implements CommandInterface {
      * @param outOfBoundRow Specific row that is out of bounds for Ur.
      * @param outOfBoundColumn Specific column that is out of bounds for Ur.
      */
-    public CommandAddScore(ArrayList<Player> playerArray, int currentPlayer, Tile lastMovedTile, int outOfBoundRow, int outOfBoundColumn) {
+    public CommandAddScore(ArrayList<Player> playerArray, int currentPlayer, Tile lastMovedTile) {
         this.playerArray = playerArray;
         this.currentPlayer = currentPlayer;
         this.lastMovedTile = lastMovedTile;
-        this.outOfBoundRow = outOfBoundRow;
-        this.outOfBoundColumn = outOfBoundColumn;
+        this.outOfBoundRow = 5;
+        this.outOfBoundColumn = 1;
     }
     /**
      * Updates current player index.
