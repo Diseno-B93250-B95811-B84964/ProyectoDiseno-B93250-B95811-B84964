@@ -29,15 +29,15 @@ public class Referee <
     /**
      * Amount of rows in board.
      */
-    protected final int amountRows;
+    protected int amountRows;
     /**
      * Amount of columns in board.
      */
-    protected final int amountCols;
+    protected int amountCols;
     /**
      * Amount of tiles in board.
      */
-    protected final int tileAmount;
+    protected int tileAmount;
     /**
      * Stores game board.
      */
@@ -45,11 +45,11 @@ public class Referee <
     /**
      * Amount of players in game.
      */
-    protected final int playerAmount;
+    protected int playerAmount;
     /**
      * Amount of pieces a player has.
      */
-    protected final int pieceAmount;
+    protected int pieceAmount;
     /**
      * An array with all game players.
      */
@@ -57,7 +57,7 @@ public class Referee <
     /**
      * An object that stores game rules.
      */
-    protected final Rules gameRules;
+    protected Rules gameRules;
     
     protected PlayerType playerType;
     
@@ -79,28 +79,22 @@ public class Referee <
     CommandInterface commandAddScore;
     CommandInterface commandValidateWinner;
     CommandInterface commandMovePiece;
+
+    /**
+    * A reference to an object that reads and manages files.
+    */
+    private FileManager fileManager;
+    
     
     /**
      * Creates referee class.
-     * @param rows Amount of rows in game board.
-     * @param cols  Amount of columns in game board.
-     * @param players Amount of players in game.
-     * @param pieces Amount of pieces for each player.
-     * @param tiles Amount of tiles in game board.
-     * @param boolMatrix A matrix that allows the referee to determine possible routes.
      * @param playerType The specific type of player that will be playing
      * @param pieceType
      * @param tileType
      */
-    public Referee(int rows, int cols, int players, int pieces, int tiles,
-        ArrayList<ArrayList<Boolean>> boolMatrix, PlayerType playerType,
-        PieceType pieceType, TileType tileType, int[] diceProbabilities)
+    public Referee(PlayerType playerType, PieceType pieceType, TileType tileType)
     {
-        this.amountRows = rows;
-        this.amountCols = cols;
-        this.playerAmount = players;
-        this.pieceAmount = pieces;
-        this.tileAmount = tiles;
+        readGameData();
         this.playerType = playerType;
         this.pieceType = pieceType;
         this.tileType = tileType;
@@ -109,7 +103,6 @@ public class Referee <
         this.clickedTile = new Tile();
         this.nextTile = new Tile();
         this.gameRules = new Rules();
-        this.gameDice = new Dice(diceProbabilities.length, diceProbabilities);
         
         try {
             createPlayers();
@@ -117,9 +110,67 @@ public class Referee <
             Logger.getLogger(Referee.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        createBoard(boolMatrix);
-        
         initializeCommands();
+    }
+    
+    /**
+    * Reads game data from file.  
+    */
+    private void readGameData() {
+        // Reads from file
+        this.fileManager = new FileManager();
+        this.fileManager.loadFile("gameData.csv", "src/main/java/auxiliaryFiles/");
+        ArrayList<String> stringArray = fileManager.getFileContents();
+        
+        makeDice(stringArray.get(0));
+        setPlayerAmount(stringArray.get(1));
+        setBoardDimensions(stringArray.get(2));
+        
+        ArrayList<String> adjacentsArray = new ArrayList(stringArray.subList(3, stringArray.size()));
+        makeBoard(adjacentsArray);
+    }
+    
+    /**
+     * Sets dice probabilities extracting them from a string.
+     * @param row A file line.
+     */
+    private void makeDice(String row) {
+        String[] diceData = row.split(",");
+        int [] diceProbabilities = new int[diceData.length];
+        for (int diceSide = 0; diceSide < diceData.length; diceSide++) {
+            diceProbabilities[diceSide] = Integer.parseInt(diceData[diceSide]);
+        }
+        gameDice = new Dice(diceProbabilities.length, diceProbabilities);
+    }
+    /**
+     * Sets amount of players and the amount of pieces each player has, extracting them from a string.
+     * @param row A file line.
+     */
+    private void setPlayerAmount(String row) {
+        String[] playerData = row.split(",");
+        this.playerAmount = Integer.parseInt(playerData[0]);
+        this.pieceAmount = Integer.parseInt(playerData[1]);
+    }
+    /**
+     * Sets board dimensions, extracting them from a string.
+     * @param row A file line.
+     */
+    private void setBoardDimensions(String row) {
+        String[] boardData = row.split(",");
+        this.amountRows = Integer.parseInt(boardData[0]);
+        this.amountCols = Integer.parseInt(boardData[1]);
+        this.tileAmount = this.amountCols * this.amountRows;
+    }
+    /**
+     * Sets the graph's adjacent matrix, extracting them from an array of strings.
+     * @param adjacents An array of strings, each with a true or false value specifying if there is an adjacent there.
+     */
+    private void makeBoard(ArrayList<String> adjacents) {
+        // Converts from ArrayList<String> to ArrayList<ArrayList<Boolean>>
+        ArrayList<ArrayList<String>> stringMatrix = fileManager.splitArray(adjacents, ",");
+        ArrayList<ArrayList<Boolean>> adjacentMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
+        gameBoard = new Board(tileAmount, amountRows, amountCols, this.tileType);
+        gameBoard.setAdjacentMatrix(adjacentMatrix);
     }
     
     private void initializeCommands() {
@@ -151,13 +202,6 @@ public class Referee <
         }
     }
     
-    /*TODO Delete this method*/
-    public String getPlayerString(){
-        String string = this.gameBoard.toString();
-        string += this.playerArray.get(0).toString();
-        return string;
-    }
-    
     /**
     * Creates players and stores them in playerArray.Abstract class that allows Referee child to manage implementation.
     * @return Returns a object of the specific player given through templates
@@ -175,15 +219,6 @@ public class Referee <
                         .newInstance(7, Color.BLACK, "Migulito", this.pieceType); // TODO change magic values
         return newPlayer;
     }
-    
-    /**
-     * Creates players and stores them in playerArray.
-     * @param boolMatrix Matrix of booleans to reflect adjacent vertices
-     */
-    protected void createBoard(ArrayList<ArrayList<Boolean>> boolMatrix) {
-        gameBoard = new Board(tileAmount, amountRows, amountCols, this.tileType);
-        gameBoard.setAdjacentMatrix(boolMatrix);
-    }    
     
     /**
      * Sets player information with given arrays.

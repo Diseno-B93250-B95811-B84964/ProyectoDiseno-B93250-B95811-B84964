@@ -36,9 +36,8 @@ public abstract class Player
      * Player's inventory which contains InventoryItems.
      */
     
-    /*******************************/
-    //protected Inventory inventory;
-    /******************************/
+   
+
     
     /**
      * Amount of pieces player has.

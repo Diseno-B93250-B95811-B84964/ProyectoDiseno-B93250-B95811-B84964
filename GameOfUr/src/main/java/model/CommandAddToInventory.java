@@ -8,6 +8,16 @@ package model;
  *
  * @author Mauricio Palma
  */
-public class CommandAddToInventory {
-    
+public class CommandAddToInventory implements CommandInterface  {
+
+    @Override
+    public boolean execute() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean unExecute() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
