@@ -49,6 +49,13 @@ public class UrTile extends Tile
         this.isSafe = true;
     }
     /**
+     * Sets tile isSafe value depending on the parameter.
+     * @param isSafe indicates if the tile is safe.
+    */
+    public void setIsSafe(boolean isSafe) {
+        this.isSafe = isSafe;
+    }
+    /**
      * Converts Tile into a string.
      * Made for the Royal Game of Ur.
      * @return a string representing a tile

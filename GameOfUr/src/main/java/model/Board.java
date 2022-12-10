@@ -127,6 +127,12 @@ public final class Board<TileType extends Tile> extends GameObject
     public void setAdjacentMatrix(ArrayList<ArrayList<Boolean>> adjacentMatrix) {
         this.graphAdjacentMatrix = adjacentMatrix;
     }
+    public void setRows(int rows) {
+        this.amountRows = rows;
+    }
+    public void setColumns(int columns) {
+        this.amountColumns = columns;
+    }
     /**
      * Converts from array to matrix.
      * @param vertexIndex Tile's index in vertices array
@@ -218,6 +224,14 @@ public final class Board<TileType extends Tile> extends GameObject
      */
     public int getAmountColumns() {
         return this.amountColumns;
+    }
+    
+    public ArrayList<TileType> getVerticesArray(){
+        return this.vertices;
+    }
+    
+    public int getVerticesAmount(){
+        return this.verticesAmount;
     }
     
     /**
