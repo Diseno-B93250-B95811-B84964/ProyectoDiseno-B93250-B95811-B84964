@@ -6,11 +6,15 @@ package model;
 
 /**
  *
- * @author Mauricio Palma
+ * @author Mauricio Palma, Ximena Gdur
  */
 public abstract class InventoryItem {
 
     public InventoryItem() {
+        
     }
     
+    public abstract InventoryItem makeCopy();
+    
+    public abstract void copyFromItem(InventoryItem original);
 }

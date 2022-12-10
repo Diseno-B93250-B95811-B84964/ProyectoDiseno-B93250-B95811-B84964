@@ -4,20 +4,36 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author Mauricio Palma
+ * @author Mauricio Palma, Ximena Gdur
  */
-public class CommandAddToInventory implements CommandInterface  {
+public class CommandAddToInventory<InventoryItemType extends InventoryItem> implements CommandInterface
+{
+    private ArrayList<InventoryItem> inventoryArray;
+    private InventoryItemType item;
 
+    public CommandAddToInventory(ArrayList<InventoryItem> array, InventoryItemType item) {
+        this.inventoryArray = array;
+        this.item = item;
+    }
+    
     @Override
     public boolean execute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean success = false;
+        
+        InventoryItem itemCopy = this.item.makeCopy();
+        this.inventoryArray.add(itemCopy);
+        
+        return success;
     }
 
     @Override
     public boolean unExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    
 }

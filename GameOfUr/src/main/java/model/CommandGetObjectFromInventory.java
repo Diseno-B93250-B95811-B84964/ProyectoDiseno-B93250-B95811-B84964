@@ -4,20 +4,38 @@
  */
 package model;
 
+import java.util.ArrayList;
+import org.apache.commons.lang3.mutable.MutableInt;
+
 /**
  *
- * @author Mauricio Palma
+ * @author Mauricio Palma, Ximena Gdur
  */
-public class CommandGetObjectFromInventory implements CommandInterface {
-
+public class CommandGetObjectFromInventory<InventoryItemType extends InventoryItem> implements CommandInterface
+{
+    private ArrayList<InventoryItem> inventoryArray;
+    private InventoryItemType receivedItem;
+    private MutableInt itemIndex;
+    
+    public CommandGetObjectFromInventory(ArrayList<InventoryItem> array, InventoryItemType item, MutableInt itemIndex) {
+        this.inventoryArray = array;
+        this.receivedItem = item;
+        this.itemIndex = itemIndex;
+    }
+    
     @Override
     public boolean execute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean success = false;
+        
+        InventoryItem item = this.inventoryArray.get(this.itemIndex.intValue());
+        this.receivedItem.copyFromItem(item);
+        
+        return success;
     }
 
     @Override
     public boolean unExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
