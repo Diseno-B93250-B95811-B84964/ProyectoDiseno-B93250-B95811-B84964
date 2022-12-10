@@ -144,6 +144,20 @@ public abstract class Player
         this.score = currentScore;
     }
     /**
+     * Returns player's amount of pieces.
+     * @return Player's amount of pieces.
+     */
+    public int getPiecesAmount() {
+        return this.piecesAmount;
+    }
+    /**
+     * Returns player's amount of pieces.
+     * @return Player's amount of pieces.
+     */
+    public ArrayList<PieceType> getPiecesArray() {
+        return this.pieces;
+    }
+    /**
      * Modifies player's score.
      * This method is abstract.
      */

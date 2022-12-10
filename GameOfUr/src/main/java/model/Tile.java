@@ -86,6 +86,9 @@ public class Tile extends GameObject
     public boolean isVacant() {
         return this.isVacant;
     }
+    public void setIsVacant(boolean isVacant) {
+        this.isVacant = isVacant;
+    }
     /**
      * Sets given piece in current tile.
      * @param givenPiece The piece that is located in current tile.

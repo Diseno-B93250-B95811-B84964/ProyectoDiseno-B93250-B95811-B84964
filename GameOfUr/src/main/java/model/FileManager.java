@@ -29,26 +29,36 @@ public final class FileManager
     private ArrayList<String> fileContents;
     
     /**
+     * Creates a new FileManager class.
+    */
+    public FileManager() {
+        fileContents = new ArrayList<String>();
+    }
+    /**
      * Creates file with given name and extension in given directory 
-     * @param name Contains the name of the new file.
-     * @param extension Contains the extension of the file.
-     * @param path Contains the path in which the file will be stored.
-     * @param contents Contains the contents that will be stored in file.
+     * @param fileName Contains the name of the new file.
+     * @param fileExt Contains the extension of the file.
+     * @param dirPath Contains the path in which the file will be stored.
      * @return whether operation was successful.
      */
-    public boolean saveFile(String name, String extension, String path, ArrayList<String> contents) {
+    public boolean saveFile(String fileName, String fileExt, String dirPath) {
         boolean success = false;
-        
-        /*try {
-            FileWriter file = new FileWriter("E:/output.json");
-            file.write(jsonObject.toJSONString());
-            file.close();
-        } catch (IOException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-        }*/
-        
+        String completeFileName = dirPath + fileName + fileExt;
+        try { 
+            FileWriter file = new FileWriter(completeFileName);
+            file.write(fileContents.toString()); 
+            file.flush(); 
+            file.close(); 
+ 
+        } catch (IOException e) { 
+            System.out.println(
+                "An error occurred. File: " + dirPath + fileName + fileExt + " not found");
+        } 
         return success;
+    }
+    
+    public void setFileContents(ArrayList<String> fileContents){
+       this.fileContents = fileContents; 
     }
     /**
      * Loads file with given name, located in given path, into fileContents.
