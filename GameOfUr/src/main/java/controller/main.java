@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Mauricio Palma
  */
-public class main {
+public class Main {
 
     
     /**
@@ -25,7 +25,7 @@ public class main {
                 UrGameController gameController = new UrGameController();
             });
         } catch (InterruptedException | InvocationTargetException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

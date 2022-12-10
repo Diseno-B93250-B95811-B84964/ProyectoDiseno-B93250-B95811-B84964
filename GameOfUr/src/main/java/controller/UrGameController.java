@@ -310,7 +310,7 @@ public class UrGameController
                 System.out.println("/************/");
                 
                 boolean canMove = referee.checkPlay(formerRow, formerColumn);
-                if (canMove) {
+                if (canMove) {                    
                     Tile nextTile = referee.getNextTile();
                     viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
 
@@ -319,7 +319,19 @@ public class UrGameController
                     System.out.println("NextTileColumn: " + nextTile.getColumn());
                     System.out.println("/************/");
 
-                    updateGUI(formerRow, formerColumn);                
+                    updateGUI(formerRow, formerColumn);  
+                    
+                    if(referee.getPieceEaten()) {
+                        viewManager.desactivatePiece(nextTile.getPiece().getColor());
+                    }
+                    
+                    if (referee.getIfScored()) {
+                        
+                    }
+                    
+                    if (referee.getIsWinner()) {
+                        
+                    }
                 } else {
                     viewManager.resetBackground(formerRow, formerColumn);
                 }

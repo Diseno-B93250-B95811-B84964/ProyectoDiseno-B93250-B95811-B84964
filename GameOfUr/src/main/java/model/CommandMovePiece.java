@@ -89,6 +89,7 @@ public class CommandMovePiece implements CommandInterface {
         System.out.println("MyColumn is: "+ clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
             Piece currentPiece = getCurrentPiece();
+            System.out.println("piece: " + currentPiece);
             if (currentPiece != null) {
                 nextTile = (UrTile) getPossibleTile();
                 if (nextTile != null) {
@@ -114,9 +115,9 @@ public class CommandMovePiece implements CommandInterface {
     
     private Piece getCurrentPiece() {
         Piece currentPiece = null;
-        if (this.clickedTile.isVacant()){
+        if (this.clickedTile.isVacant() && this.clickedTile.getRow() == 4 && this.clickedTile.getColumn() != 1){
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
-        } else {
+        } else if (!this.clickedTile.isVacant()) {
             currentPiece = this.clickedTile.getPiece();
         }
         
@@ -167,20 +168,21 @@ public class CommandMovePiece implements CommandInterface {
     private boolean setPieceInTile(Tile realTile, Piece movedPiece) {
         boolean success = false;
         UrTile urTile = (UrTile) realTile;
+        System.out.println("realTile: " + realTile);
         
         UrTile urClickedTile = (UrTile) board.getTile(clickedTile.getRow(), clickedTile.getColumn());
         
         UrPiece myUrPiece = (UrPiece) movedPiece;
         UrPiece yourUrPiece;
         System.out.println("Vamo a ver si es Vacant");
-        System.out.println("!urClickedTile.isSafe()" + !urTile.isSafe());
+        System.out.println("!urTile.isSafe()" + !urTile.isSafe());
         
         if (realTile.isVacant()) {
             System.out.println("Si es Vacant");
             myUrPiece.setInPlay();
             realTile.setPiece(movedPiece);
             success = true;
-        } else if (realTile.getPiece().getColor() != movedPiece.getColor()
+        } else if (realTile.getPiece().getColor().getRGB() != movedPiece.getColor().getRGB()
             && !urTile.isSafe())
         {
             System.out.println("NO vacant");
