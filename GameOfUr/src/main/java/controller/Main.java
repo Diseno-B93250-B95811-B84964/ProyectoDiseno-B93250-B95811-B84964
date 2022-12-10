@@ -61,8 +61,8 @@ public class Main {
             //System.out.println("Testing vertices to string");
             //System.out.println(testGameToJSON());
             
-            System.out.println("Testing json file creation");
-            testJSONCreation();
+            //System.out.println("Testing json file creation");
+            //testJSONCreation();
             
             System.out.println("Testing deserializer");
             testDeserializer();
@@ -88,6 +88,12 @@ public class Main {
         int colNumberFromFile = 3;
         
         Board board = new Board(UrTile::new, vertexNumberFromFile, rowNumberFromFile, colNumberFromFile);
+        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player[] players = new Player[2];
+        
+        players[0] = player1;
+        players[1] = player2;
         //System.out.println("Board after constructor: " + board);
         
         // TODO: set safe tiles
@@ -100,34 +106,39 @@ public class Main {
         Tile safeTile4 = board.getTile(6, 2);
         //safeTile4.setAsSafe();
 
-        System.out.println("Board before setting adjacentMatrix: " + board);
+
         ArrayList<ArrayList<Boolean>> boolMatrix = readAdjacentMatrixFromFile();
         board.setAdjacentMatrix(boolMatrix);
-        System.out.println("Board after setting adjacentMatrix: " + board);
+        //System.out.println("Board after setting adjacentMatrix: " + board);
         
-        System.out.println("Getting tile adjacents:");
+        //System.out.println("Getting tile adjacents:");
         //ArrayList<Integer> possibleTiles = board.getTilesAdjacents(5,1, 3);
         //System.out.println("possibleTiles: " + possibleTiles);
-        //board.setPieceInTile(3,0, )*/
-                
+        board.setPieceInTile(3,0, player1.getAvailablePiece());
+        System.out.println("Board before setting adjacentMatrix: " + board);
+        Serializer serializer = new Serializer(board, players);
+        serializer.execute();
+        //Deserializer deserializer = new Deserializer(board, players);
+        
         //ArrayList<Integer> possibleTiles1 = board.getTilesAdjacents(7,1, 3);
     }
     
     private static ArrayList<ArrayList<Boolean>> readAdjacentMatrixFromFile(){
         // Reads from file
         FileManager fileManager = new FileManager();
-        fileManager.loadFile("adjacentMatrix.csv", "src/main/java/auxiliaryFiles/");
+        fileManager.loadFile("gameData.csv", "src/main/java/auxiliaryFiles/");
         ArrayList<String> stringArray = fileManager.getFileContents();
         
         // Gets amount of rows and columns
-        String boardDimensions = stringArray.get(0);
+        //String boardDimensions = stringArray.get(0);
         
         // Gets amount of vertices
-        String amountVertices = stringArray.get(1);
+        //String amountVertices = stringArray.get(1);
         
         // Creates new array without first 2 rows
-        int length = stringArray.size() - 2;
-        int currentRow = 2;
+        System.out.println(stringArray.size());
+        int length = stringArray.size() - 3;
+        int currentRow = 3;
         ArrayList<String> adjacentArray = new ArrayList<>(length);
         for (int rowIndex = 0; rowIndex < length; rowIndex++) {
             adjacentArray.add(stringArray.get(currentRow++));
@@ -252,8 +263,8 @@ public class Main {
         int rowNumberFromFile = 8;
         int colNumberFromFile = 3;
            
-        Player player1 = new UrPlayer(UrPiece::new, 7, Color.RED, "Maria");
-        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLUE, "Edgardo");
+        Player player1 = new UrPlayer(UrPiece::new, 7, Color.YELLOW, "Julio");
+        Player player2 = new UrPlayer(UrPiece::new, 7, Color.BLACK, "Juana");
         Player[] players = new Player[2];
         
         players[0] = player1;
@@ -264,5 +275,9 @@ public class Main {
         Deserializer testDeserializer = new Deserializer(board, players);
         
         testDeserializer.execute();
+        System.out.println(board);
+        System.out.println(player1);
+        System.out.println(player2);
+        
     }
 }

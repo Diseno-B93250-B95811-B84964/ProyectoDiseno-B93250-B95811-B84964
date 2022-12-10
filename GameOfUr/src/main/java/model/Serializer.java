@@ -52,7 +52,7 @@ public class Serializer extends JSONManager{
         jsonPlayer2 = new JSONObject();
         //jsonPlayerPieces = new JSONArray();
         jsonBoard = new JSONObject();
-        jsonAdyacentMatrix = new JSONArray();
+        //jsonAdyacentMatrix = new JSONArray();
         jsonVertices = new JSONArray();
         jsonPiece = new JSONObject();
         this.gameBoard = gameBoard;
@@ -97,10 +97,10 @@ public class Serializer extends JSONManager{
     */
     @Override
     public void manageBoard(){
-        jsonBoard.put("amountOfPlayers", gamePlayers.length);
-        jsonBoard.put("verticesAmount", gameBoard.getVerticesAmount());
-        jsonBoard.put("amountRows", gameBoard.getAmountRows());
-        jsonBoard.put("amountColumns", gameBoard.getAmountColumns());
+        //jsonBoard.put("amountOfPlayers", gamePlayers.length);
+        //jsonBoard.put("verticesAmount", gameBoard.getVerticesAmount());
+        //jsonBoard.put("amountRows", gameBoard.getAmountRows());
+        //jsonBoard.put("amountColumns", gameBoard.getAmountColumns());
         manageVertices();
         //manageAdjacentMatrix();
     }
@@ -120,10 +120,10 @@ public class Serializer extends JSONManager{
         for (Player gamePlayer : gamePlayers) {
             playerToInsert = new JSONObject();
             
-            playerToInsert.put("playerColor", gamePlayer.getColor().toString());
+            playerToInsert.put("playerColor", (int)gamePlayer.getColor().getRGB());
             playerToInsert.put("name", gamePlayer.getName());
             playerToInsert.put("score", gamePlayer.getScore());
-            playerToInsert.put("piecesAmount", gamePlayer.getPiecesAmount());
+            //playerToInsert.put("piecesAmount", gamePlayer.getPiecesAmount());
             
             playersPiecesArray = managePlayerPieces(playerPieces, playerToInsert);
             
@@ -148,8 +148,8 @@ public class Serializer extends JSONManager{
         JSONObject individualPieceFromArray = new JSONObject();
         
         for(int pieces = 0; pieces < playerPieces.size(); pieces++){
-            individualPieceFromArray.put("pieceColor", playerPieces.get(pieces).getColor().toString());
-            individualPieceFromArray.put("isInPlay", playerPieces.get(pieces).isInPlay());
+            individualPieceFromArray.put("pieceColor", playerPieces.get(pieces).getColor().getRGB());
+            //individualPieceFromArray.put("isInPlay", playerPieces.get(pieces).isInPlay());
             playersPiecesArray.add(individualPieceFromArray);
         }
         return playersPiecesArray;
@@ -160,7 +160,9 @@ public class Serializer extends JSONManager{
      * pieces and saves it in a JSONArray, that gets put into the game board JSONObject.
     */
     public void manageVertices(){
+        JSONObject pieceData;
         JSONObject currentTileToInsert;
+        UrPiece auxPiece;
         int verticesAmount = gameBoard.getVerticesAmount();
         
         ArrayList<UrTile> vertices = new ArrayList<>(verticesAmount);
@@ -168,11 +170,14 @@ public class Serializer extends JSONManager{
         
         for (int vertexIndex = 0; vertexIndex < verticesAmount; vertexIndex++) {
             currentTileToInsert = new JSONObject();
-            
             currentTileToInsert.put("row", vertices.get(vertexIndex).getRow());
             currentTileToInsert.put("column", vertices.get(vertexIndex).getColumn());
             if(vertices.get(vertexIndex).getPiece() != null){
-                currentTileToInsert.put("piece", vertices.get(vertexIndex).getPiece().toString());
+                pieceData = new JSONObject();
+                pieceData.put("pieceColor", vertices.get(vertexIndex).getPiece().getColor().getRGB());
+                auxPiece = (UrPiece)vertices.get(vertexIndex).getPiece();
+                //pieceData.put("isInPlay", auxPiece.isInPlay());
+                currentTileToInsert.put("piece", pieceData);
             } else {
                 currentTileToInsert.put("piece", "null");
             }
@@ -182,23 +187,6 @@ public class Serializer extends JSONManager{
         }
         jsonBoard.put("vertices", jsonVertices);
     }
-    /*
-    public void manageAdjacentMatrix(){
-        String boardState = "";
-        int verticesAmount = gameBoard.getVerticesAmount();
-        boolean[][] adjacentMatrix = new boolean[verticesAmount][verticesAmount];
-        adjacentMatrix = gameBoard.getAdjacentMatrix();
-        for (int vertexIndex1 = 0; vertexIndex1 < verticesAmount; vertexIndex1++) {
-            for (int vertexIndex2 = 0; vertexIndex2 < verticesAmount; vertexIndex2++) {
-                if(adjacentMatrix[vertexIndex1][vertexIndex2] == true){
-                    jsonAdyacentMatrix.add(true);
-                } else {
-                    jsonAdyacentMatrix.add(false);
-                }
-            }
-        }
-        jsonBoard.put("graphAdjacentMatrix", jsonAdyacentMatrix);
-    }*/
     
     /**
      * Returns the player 1 json information.

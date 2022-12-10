@@ -53,6 +53,10 @@ public class UrPiece extends Piece {
     public void setNotInPlay() {
         this.isInPlay = false;
     }
+    
+    public void setIsInPlay(boolean isInPlay){
+        this.isInPlay = isInPlay;
+    }
     /**
      * Converts Piece into a string.
      * Made for the Royal Game of Ur.

@@ -23,10 +23,13 @@ import org.json.simple.parser.ParseException;
  */
 public class Deserializer extends JSONManager{
     
-    private JSONObject playerObject;
-    //private JSONObject player2Object;
+    //private JSONObject playerObject;
+    
     private JSONObject mainBoardObject;
-    //private Supplier<TileType> test;
+    
+    ArrayList<JSONObject> jsonPlayers;
+    
+    int currentPlayer;
     /**
      * Creates a new Serializer with the current board and active players.
      * @param gameBoard Current game board.
@@ -35,9 +38,10 @@ public class Deserializer extends JSONManager{
     public Deserializer(Board gameBoard, Player[] players){
         this.gameBoard = gameBoard;
         this.gamePlayers = players;
-        this.playerObject = new JSONObject();
         this.mainBoardObject = new JSONObject();
         this.mainManager = new FileManager();
+        this.jsonPlayers = new ArrayList<JSONObject>(players.length);
+        this.currentPlayer = 0;
     }
     
     @Override
@@ -57,29 +61,15 @@ public class Deserializer extends JSONManager{
             String jsonContents = String.join(", ", mainManager.getFileContents());
             Object allGameObjects = jsonParser.parse(jsonContents);
             JSONArray gameObjects = (JSONArray) allGameObjects;
-            for (int i = 0; i < gameObjects.size(); i++) {
-                JSONObject jsonObject = (JSONObject)gameObjects.get(i);
-                parseGameObject(jsonObject, i);
+            for (int i = 0; i < gamePlayers.length; i++) {
+                jsonPlayers.add(i, (JSONObject)gameObjects.get(i));
+                managePlayers();
+                currentPlayer++;
             }
+            mainBoardObject = (JSONObject)gameObjects.get(gameObjects.size() - 1);
+            manageBoard();
         } catch (ParseException e) {
             e.printStackTrace();
-            //success = false;
-        }
-    }
-    
-    //Try to generalize
-    private void parseGameObject(JSONObject gameObject, int counter) {
-        if(counter == 0) {
-            playerObject = (JSONObject) gameObject.get("player1");
-            managePlayers();
-        } else{
-            if(counter == 1){
-                playerObject = (JSONObject) gameObject.get("player2");
-                managePlayers();
-            } else {
-                mainBoardObject = (JSONObject) gameObject.get("board");
-                manageBoard();
-            }
         }
     }
     
@@ -88,94 +78,133 @@ public class Deserializer extends JSONManager{
     */
     @Override
     public void manageBoard(){
-        manageBoardRows();
-        manageBoardColumns();
-        //manageBoardVerticesAmount();
-        manageBoardVertices();
-        //manageGraphAdjacentMatrix();
-        //System.out.println(gameBoard.toString());
+        JSONObject boardAtributes = new JSONObject();
+        boardAtributes = (JSONObject)mainBoardObject.get("board");
+        manageBoardVertices(boardAtributes);
     }
     
     public void manageBoardRows(){
-        int valueToInsert = 0;
-        Long amountRows = (Long) mainBoardObject.get("amountRows");
-        valueToInsert = amountRows.intValue();
-        gameBoard.setRows(valueToInsert);
+        gameBoard.setRows(castLongToInt((Long) mainBoardObject.get("amountRows")));
     }
     
     public void manageBoardColumns(){
-        int valueToInsert = 0;
-        Long amountColumns = (Long) mainBoardObject.get("amountColumns");
-        valueToInsert = amountColumns.intValue();
-        gameBoard.setColumns(valueToInsert);
+        gameBoard.setColumns(castLongToInt((Long) mainBoardObject.get("amountColumns")));
     }
     
-    public void manageBoardVertices(){
+    public void manageBoardVertices(JSONObject boardAtributes){
         UrTile currentTile;
-        Long valueToCast = null;
-        int valueToInsert = 0;
         JSONArray vertices = new JSONArray();
-        vertices = (JSONArray) mainBoardObject.get("vertices");
+        vertices = (JSONArray) boardAtributes.get("vertices");
         for (int i = 0; i < vertices.size(); i++) {
-            JSONObject jsonObject = (JSONObject)vertices.get(i);
-            currentTile = (UrTile) gameBoard.getVerticesArray().get(i);
-            manageRowVertices(jsonObject, currentTile, valueToCast, valueToInsert);
-            manageColumnVertices(jsonObject, currentTile, valueToCast, valueToInsert);
-            //currentTile.setPiece((Piece)jsonObject.get("piece")); //Needs changes
-            currentTile.setIsSafe((boolean)jsonObject.get("isSafe"));
+            JSONObject tileJSONObject = (JSONObject)vertices.get(i);
+            currentTile = (UrTile)gameBoard.getVerticesArray().get(i);
+            manageRowVertices(tileJSONObject, currentTile);
+            manageColumnVertices(tileJSONObject, currentTile);
+            manageTilePieces(tileJSONObject, currentTile);
+            currentTile.setIsSafe((boolean)tileJSONObject.get("isSafe"));
+            manageIsVacant(tileJSONObject, currentTile);
         }
+    }
+    
+    public void manageIsVacant(JSONObject tileJSONObject, UrTile currentTile){
+        currentTile.setIsVacant((boolean)tileJSONObject.get("isVacant"));
     }
         
-    public void manageRowVertices(JSONObject jsonObject, UrTile currentTile, Long valueToCast, int valueToInsert){
-        valueToCast = (Long)jsonObject.get("row");
-        valueToInsert = valueToCast.intValue();
-        currentTile.setRow(valueToInsert);
+    public void manageRowVertices(JSONObject tileJSONObject, UrTile currentTile){
+        currentTile.setRow(castLongToInt((Long)tileJSONObject.get("row")));
     }
     
-    public void manageColumnVertices(JSONObject jsonObject, UrTile currentTile, Long valueToCast, int valueToInsert){
-        valueToCast = (Long)jsonObject.get("column");
-        valueToInsert = valueToCast.intValue();
-        currentTile.setColumn(valueToInsert);
+    public void manageColumnVertices(JSONObject tileJSONObject, UrTile currentTile){
+        currentTile.setColumn(castLongToInt((Long)tileJSONObject.get("column")));
     }
-    /*
-    public void manageGraphAdjacentMatrix(){
-        JSONArray jsonGraphAdjacentMatrix = (JSONArray) mainBoardObject.get("graphAdjacentMatrix");
-        int verticesAmount = gameBoard.getVerticesAmount();
-        //boolean[][] graphAdjacentMatrix = new boolean[verticesAmount][verticesAmount];
-        //graphAdjacentMatrix = (boolean[][])jsonGraphAdjacentMatrix.get("graphAdjacentMatrix");
-        for (int vertexIndex1 = 0; vertexIndex1 < verticesAmount; vertexIndex1++) {
-            for (int vertexIndex2 = 0; vertexIndex2 < verticesAmount; vertexIndex2++) {
-                gameBoard.getAdjacentMatrix()[vertexIndex1][vertexIndex1] = (boolean)jsonGraphAdjacentMatrix.get(vertexIndex2);
-            }
+    
+    public void manageTilePieces(JSONObject tileJSONObject, UrTile currentTile){
+        int currentPlayer;
+        var jsonTile = tileJSONObject.get("piece");
+        Color pieceColor;
+        if(jsonTile instanceof String){
+            currentTile.setPiece(null);
+        } else {
+            JSONObject pieceAtributes = new JSONObject((JSONObject)jsonTile);
+            pieceColor = new Color(castLongToInt((Long)pieceAtributes.get("pieceColor")));
+            currentPlayer = getPlayerColorMatch(pieceColor);
+            UrPiece pieceInTile = (UrPiece)gamePlayers[currentPlayer].getAvailablePiece();
+            pieceInTile.setColor(pieceColor);
+            pieceInTile.setIsInPlay(true);
+            currentTile.setPiece(pieceInTile);
         }
-    }*/
-    
-    
+    }
     
     /**
      * Collects all the information from the actives players and saves it in a JSONObject.
     */
     @Override
     public void managePlayers(){
-        //Get player1's name
-        String name = (String) playerObject.get("name");
-        System.out.println(name);
-        //Get player1's score
-        Long score = (Long) playerObject.get("score");    
-        System.out.println(score);
-        //Get player1's piecesAmount
-        Long piecesAmount = (Long) playerObject.get("piecesAmount");    
-        System.out.println(piecesAmount);
-        //Get player1's playerColor
-        String playerColor = (String) playerObject.get("playerColor");    
-        System.out.println(playerColor);
-        //Get player1's pieces
-        JSONArray pieces = (JSONArray) playerObject.get("pieces");    
-        System.out.println(pieces);
+        String playerKey = "player" + (currentPlayer + 1);
+        JSONObject auxPlayer = new JSONObject();
+        JSONObject playerAtributes = new JSONObject();
+        auxPlayer = jsonPlayers.get(currentPlayer);
+        playerAtributes = (JSONObject)auxPlayer.get(playerKey);
+        manageCurrentPlayer(playerAtributes, currentPlayer);
     }
-    /*
-    public void managePlayersName(int currentPlayer){
-        String name = (String) player1Object.get("name");
-        gamePlayers[currentPlayer];
-    }*/
+    
+    public void manageCurrentPlayer(JSONObject jsonPlayer, int currentPlayer){
+        managePlayerName(jsonPlayer, currentPlayer);
+        managePlayerColor(jsonPlayer, currentPlayer);
+        managePlayerScore(jsonPlayer, currentPlayer);
+        managePlayerPieces(jsonPlayer, currentPlayer);
+    }
+    
+    public void managePlayerName(JSONObject jsonPlayer, int currentPlayer){
+        gamePlayers[currentPlayer].setName((String)jsonPlayer.get("name"));
+    }
+    
+    public void managePlayerColor(JSONObject jsonPlayer, int currentPlayer){
+        Color currentPlayerColor = new Color(castLongToInt((Long)jsonPlayer.get("playerColor")));
+        gamePlayers[currentPlayer].setColor(currentPlayerColor);
+    }
+    
+    public void managePlayerScore(JSONObject jsonPlayer, int currentPlayer){
+        //System.out.println(mainBoardObject.get("score"));
+        gamePlayers[currentPlayer].setScore(castLongToInt((Long) jsonPlayer.get("score")));
+    }
+    
+    public void managePlayerPieces(JSONObject jsonPlayer, int currentPlayer){
+        JSONArray piecesJSONArray = (JSONArray) jsonPlayer.get("pieces");
+        int piecesArraySize = gamePlayers[currentPlayer].getPiecesArray().size();
+        UrPiece tempPiece;
+        Color pieceColor;
+        for(int currentPiece = 0; currentPiece < piecesArraySize; currentPiece++){
+            JSONObject jsonPiece = new JSONObject();
+            jsonPiece = (JSONObject)piecesJSONArray.get(currentPiece);
+            tempPiece = (UrPiece)gamePlayers[currentPlayer].getPiecesArray().get(currentPiece);
+            pieceColor = new Color(castLongToInt((Long)jsonPiece.get("pieceColor")));
+            tempPiece.setColor(pieceColor);
+        }
+    }
+    
+    public String getPlayerKey(int currentPlayer){
+        String playerKey = "";
+        if(currentPlayer == 0){
+            playerKey = "player1";
+        } else {
+            playerKey = "player2";
+        }
+        return playerKey;
+    }
+    
+    public int castLongToInt(Long value){
+        return value.intValue();
+    }
+    
+    public int getPlayerColorMatch(Color pieceColor){
+        int player = 0;
+        for(int currentPlayer = 0; currentPlayer < gamePlayers.length; currentPlayer++){
+            if(pieceColor.getRGB() == gamePlayers[currentPlayer].getColor().getRGB()){
+                player = currentPlayer;
+                break;
+            }
+        }
+        return player;
+    }
 }
