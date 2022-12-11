@@ -79,6 +79,10 @@ public class Referee <
     CommandInterface commandAddScore;
     CommandInterface commandValidateWinner;
     CommandInterface commandMovePiece;
+    
+    DataManager JSONdeserializer;
+    DataManager JSONserializer;
+    
 
     /**
     * A reference to an object that reads and manages files.
@@ -112,6 +116,11 @@ public class Referee <
         }
         
         initializeCommands();
+    }
+    
+    public void setSerializers(DataManager serializer, DataManager deserializer){
+        JSONdeserializer = serializer;
+        JSONserializer = deserializer;
     }
     
     /**
@@ -233,12 +242,6 @@ public class Referee <
             for(int playerIndex = 0; playerIndex < playerAmount; playerIndex++) {
                 playerArray.get(playerIndex).setColor(playerColors.get(playerIndex));
                 playerArray.get(playerIndex).setName(playerNames.get(playerIndex));
-                System.out.println("/************************/");
-                System.out.println("Printing color...: " +playerColors.get(playerIndex));
-                System.out.println("Printing player..."+ playerNames.get(playerIndex));
-                System.out.println("Printing playerColor" + playerArray.get(playerIndex).getColor());
-                System.out.println("Printing playerName"+ playerArray.get(playerIndex).getName());
-                System.out.println("/*********************/");
             }
         }
         return success;
@@ -328,6 +331,10 @@ public class Referee <
     
     public Tile getTile(int row, int column){
         return this.gameBoard.getTile(row, column);
+    }
+    
+    public Board getBoard(){
+        return this.gameBoard;
     }
     
 }

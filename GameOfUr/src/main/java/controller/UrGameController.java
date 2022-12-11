@@ -15,9 +15,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import model.Board;
+import model.DataManager;
 
 import model.Dice;
 import model.FileManager;
+import model.JSONDeserializer;
+import model.JSONSerializer;
 import model.Piece;
 import model.Player;
 import model.Referee;
@@ -97,6 +101,14 @@ public class UrGameController
     * Referee to manage the game.
     */
     private Referee<UrPlayer, UrPiece, UrTile> referee;
+    /**
+    * Serializer attribute
+    */
+    private DataManager JSONdeserializer;
+    /**
+    * Deserializer attribute
+    */
+    private DataManager JSONserializer;
     
     /**
      * Constructor method that uses templates to create a personalized viewManager.  
@@ -107,8 +119,21 @@ public class UrGameController
         this.currentPlayer = 0;
         makeReferee();
         makeSafeTiles();
+        makeSerializers();
         this.manageButtons();
     }
+    
+    /**
+    * Makes seriales
+    */
+    public void makeSerializers(){
+        ArrayList<Player> myPlayerArray = referee.getPlayerArray();
+        Board myBoard = referee.getBoard();
+        Player[] myPlayerAsArray = myPlayerArray.toArray(new Player[2]);
+        JSONserializer = new JSONSerializer(myBoard,myPlayerAsArray);
+        JSONdeserializer = new JSONDeserializer(myBoard,myPlayerAsArray);
+    }
+    
     /**
      * Constructor for the referee using the references from the game elements.  
      */    
@@ -164,11 +189,7 @@ public class UrGameController
     * Inner Action Listener class to react accordingly user inputs on GUI
     */
     class buttonAction implements ActionListener{
-        /**
-        * Referee object used to coordinate them with the view manager object
-        * Referee manipulates the board logic and updates the game status
-        */
-        refereeStub refereeStub;
+   
         /**
         * Determines if the current player is the first player.
         */
@@ -187,7 +208,6 @@ public class UrGameController
         * Creates new action listener.
         */
         public buttonAction() {
-            refereeStub = new refereeStub();
             firstPlayer  = true;
             playerPlayed = false;
             winnerExists = false;
@@ -239,19 +259,20 @@ public class UrGameController
         * Coordinates how to start a game that has been load from a former match.
         */
         private void manageStartLoadGame(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             String file = viewManager.getFileNameToLoadGame();
             if (file != null) {
-                // playerArray = referee.getPlayers();
-                // viewManager.setPlayers(playerArray);
+                JSONdeserializer.execute();
+                playerArray = referee.getPlayerArray();
+                viewManager.setPlayers(playerArray);
                 viewManager.swapViewToMainGame();
+                currentPlayer = currentPlayer % playerArray.size();
+                
             }
         }
         /**
         * Coordinates how to go back to the main menu.
         */
         private void manageGoBackToMainMenu(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
         /**
@@ -265,8 +286,8 @@ public class UrGameController
         * Coordinates how to save current game state.
         */ 
         private void manageSaveAndExit(){
-            // TODO implement this
-            // serializer.saveState()
+            JSONserializer.execute();
+            System.out.println("Creado");
             System.exit(0);
         }
         /**
