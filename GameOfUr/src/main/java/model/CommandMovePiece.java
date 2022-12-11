@@ -42,9 +42,13 @@ public class CommandMovePiece implements CommandInterface {
      * Stores the column numbers associated with each player.
      */
     private final int[] playerColumns;
-    
+    /**
+     * Stores the players shared column.
+     */
     private final int sharedColumn;
-    
+    /**
+     * Stores if a piece has been eaten during the game.
+     */
     private MutableBoolean pieceEaten;
 
     /**
@@ -55,9 +59,7 @@ public class CommandMovePiece implements CommandInterface {
      * @param dice Game dice with last stored value.
      * @param clickedTile Tile that user has clicked.
      * @param possibleTile Tile that will be assigned in class.
-     * @param playerColumns
-     * @param sharedColumn
-     * @param pieceEaten
+     * @param pieceEaten Value that stores if a piece has been eaten during the game.
      */
     public CommandMovePiece(Board board, ArrayList<Player> playerArray,
         int currentPlayer, Dice dice, Tile clickedTile, Tile possibleTile, MutableBoolean pieceEaten)
@@ -74,7 +76,11 @@ public class CommandMovePiece implements CommandInterface {
         this.sharedColumn = 1;
         this.pieceEaten = pieceEaten;
     }
-     
+    
+    /**
+     * Executes the action of eating a piece.
+     * @return Indicates if the action of eating a piece has been successful.
+     */
     @Override
     public boolean execute() {
          System.out.println(clickedTile.getRow() + ", " + clickedTile.getColumn());
@@ -108,7 +114,11 @@ public class CommandMovePiece implements CommandInterface {
         updateCurrentPlayer();
         return success;
     }
-    
+    /**
+     * Indicates if a current column is of a certain player.
+     * @param col The selected column.
+     * @return Indicates if the column is of the player or not.
+     */
     private boolean isPlayerColumn(int col) {
         boolean isMine = false;
         if ( (col == playerColumns[currentPlayer]) || col == sharedColumn ) {
@@ -116,7 +126,11 @@ public class CommandMovePiece implements CommandInterface {
         }
         return isMine;
     }
-    
+    /**
+     * Gets a piece to be moved, if the piece is already on the board, or has to
+     * be taken from the players array of pieces.
+     * @return The current piece.
+     */
     private Piece getCurrentPiece() {
         Piece currentPiece = null;
         
@@ -131,7 +145,12 @@ public class CommandMovePiece implements CommandInterface {
         return currentPiece;
     }
     
-    
+    /**
+     * Indicates if a pair of coordinates are contained within the board.
+     * @param row The selected row.
+     * @param col The selected column.
+     * @return If the coordinates are on the board or not.
+     */
     private boolean isInRange(int row, int col) {
         boolean inRange = false;
         
@@ -142,7 +161,10 @@ public class CommandMovePiece implements CommandInterface {
         
         return inRange;
     }
-            
+    /**
+     * Get the possible tile for a move.
+     * @return The selected tile.
+     */ 
     private Tile getPossibleTile() {
         int currentRow = this.clickedTile.getRow();
         int currentCol = this.clickedTile.getColumn();
@@ -171,7 +193,12 @@ public class CommandMovePiece implements CommandInterface {
         
         return newTile;
     }
-
+    /**
+     * Indicates if a pair of coordinates are contained within the board.
+     * @param realTile Selected tile from the board.
+     * @param movedPiece Piece that's being moved.
+     * @return If the coordinates are on the board or not.
+     */
     private void setPieceInTile(Tile realTile, Piece movedPiece) {
         UrTile urTile = (UrTile) realTile;
         UrPiece myUrPiece = (UrPiece) movedPiece;
@@ -198,12 +225,17 @@ public class CommandMovePiece implements CommandInterface {
         currentPlayer++;
         currentPlayer = currentPlayer % playerArray.size();
     }
-    
+    /**
+     * Reverts an action.
+     * @return whether the operation was successful.
+     */
     @Override
     public boolean unExecute() {
         return false;    
     }
-    
+    /**
+     * Resets the eaten value.
+     */
     private void resetEatenValue() {
         pieceEaten.setFalse();
     }

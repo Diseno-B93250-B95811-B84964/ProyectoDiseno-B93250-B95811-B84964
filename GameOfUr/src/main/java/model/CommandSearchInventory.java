@@ -5,16 +5,24 @@
 package model;
 
 /**
- *
- * @author Mauricio Palma
+ * Search an inventory object from the inventory.
+ * @author Mauricio Palma.
  */
 public class CommandSearchInventory implements CommandInterface {
 
+    /**
+     * Executes an action, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean execute() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    /**
+     * Reverts an execution, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean unExecute() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

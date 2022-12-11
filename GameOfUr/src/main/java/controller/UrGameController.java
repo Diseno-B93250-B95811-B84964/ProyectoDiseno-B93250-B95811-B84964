@@ -37,60 +37,60 @@ import view.ShowRules;
 public class UrGameController
 {
     /**
-    *  A Button that represents the new game button on GUI
+    *  A Button that represents the new game button on GUI.
     */
     private JButton startNewGameButton;
     /**
-    *  A Button that represents the load game button on GUI
+    *  A Button that represents the load game button on GUI.
     */
     private JButton startLoadGameButton;
     /**
-    *  A Button that represents the go back button on GUI, new game view
+    *  A Button that represents the go back button on GUI, new game view.
     */
     private JButton goBackToMainMenuFromNewGameButton;
     /**
-    *  A Button that represents the continue button on GUI, new game view
+    *  A Button that represents the continue button on GUI, new game view.
     */
     private JButton goToMainGameFromNewGameButton;
     /**
-    *  A Button that represents the go back button on GUI, load game view
+    *  A Button that represents the go back button on GUI, load game view.
     */
     private JButton goBackToMainMenuFromLoadGameButton;
     /**
-    *  A Button that represents the continue button on GUI, load game view
+    *  A Button that represents the continue button on GUI, load game view.
     */
     private JButton goToMainGameFromLoadGameButton;
     /**
-    *  A Button that represents the rules button on GUI, at main menu view
+    *  A Button that represents the rules button on GUI, at main menu view.
     */
     private JButton showRulesFromMainMenuButton;
     /**
-    *  A Button that represents the rules button on GUI, at main game view
+    *  A Button that represents the rules button on GUI, at main game view.
     */
     private JButton showRulesFromGameButton;
     /**
-    *  A Button that represents the save and exit button on GUI
+    *  A Button that represents the save and exit button on GUI.
     */
     private JButton exitAndSaveButton;
     /**
-    *  A Button that represents the throw dice button on GUI
+    *  A Button that represents the throw dice button on GUI.
     */
     private JButton throwDiceButton;
     /**
-    * Object to call methods of the view manager and coordinate them with
+    * Object to call methods of the view manager and coordinate them with.
     * the referee object
     */
     private ViewManager viewManager;
     /**
-    * ArrayList used to store the information of every player playing the game
+    * ArrayList used to store the information of every player playing the game.
     */ 
     private ArrayList<Player> playerArray;
     /**
-    * Object that is used to manipulate the dice accordingly in each game
+    * Object that is used to manipulate the dice accordingly in each game.
     */
     private Dice dice;
     /**
-    * Integer that tracks which player is playing at a given time
+    * Integer that tracks which player is playing at a given time.
     */
     private int currentPlayer;
     /**
@@ -195,7 +195,7 @@ public class UrGameController
         adjacentMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
     }
     /**
-     * Manages each button parameter of UrGameController to the actual GUI button
+     * Manages each button parameter of UrGameController to the actual GUI button.
     */
     private void manageButtons(){
         startNewGameButton = viewManager.getStartNewGameButton();
@@ -222,12 +222,12 @@ public class UrGameController
     }
     
     /**
-    * Inner Action Listener class to react accordingly user inputs on GUI
+    * Inner Action Listener class to react accordingly user inputs on GUI.
     */
     class buttonAction implements ActionListener{
         /**
-        * Referee object used to coordinate them with the view manager object
-        * Referee manipulates the board logic and updates the game status
+        * Referee object used to coordinate them with the view manager object.
+        * Referee manipulates the board logic and updates the game status.
         */
         refereeStub refereeStub;
         /**

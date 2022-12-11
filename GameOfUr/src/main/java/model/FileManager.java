@@ -39,7 +39,7 @@ public final class FileManager
      * @param fileName Contains the name of the new file.
      * @param fileExt Contains the extension of the file.
      * @param dirPath Contains the path in which the file will be stored.
-     * @return whether operation was successful.
+     * @return Whether operation was successful.
      */
     public boolean saveFile(String fileName, String fileExt, String dirPath) {
         boolean success = false;
@@ -56,15 +56,11 @@ public final class FileManager
         } 
         return success;
     }
-    
-    public void setFileContents(ArrayList<String> fileContents){
-       this.fileContents = fileContents; 
-    }
     /**
      * Loads file with given name, located in given path, into fileContents.
      * @param fileName Contains the name of the file.
      * @param dirPath Contains the path in which the file is stored.
-     * @return whether operation was successful.
+     * @return Whether operation was successful.
      */
     public boolean loadFile(String fileName, String dirPath) {
         fileContents = new ArrayList<>();
@@ -86,8 +82,15 @@ public final class FileManager
         return success;
     }
     /**
+     * Sets the file contents of the file manager.
+     * @param fileContents The contents from the file.
+     */
+    public void setFileContents(ArrayList<String> fileContents){
+       this.fileContents = fileContents; 
+    }
+    /**
      * Returns contents read or written to file.
-     * @return fileContents array.
+     * @return FileContents array.
      */
     public ArrayList<String> getFileContents() {
         return this.fileContents;
@@ -96,7 +99,7 @@ public final class FileManager
      * Creating a matrix from fileContents by splitting each row using commas as delimiter.
      * @param contentsArray An array with the file contents.
      * @param splitBy Character with which to split the array.
-     * @return fileContents matrix.
+     * @return FileContents matrix.
      */
     public ArrayList<ArrayList<String>> splitArray (ArrayList<String> contentsArray, String splitBy) {
         ArrayList<ArrayList<String>> contentsMatrix = new ArrayList<>(contentsArray.size());
@@ -113,7 +116,7 @@ public final class FileManager
     /**
      * Convert from a string matrix to a true or false matrix.
      * @param stringMatrix A string matrix with file contents.
-     * @return fileContents matrix as true or false values.
+     * @return FileContents matrix as true or false values.
      */
     public ArrayList<ArrayList<Boolean>> convertFromStringToBoolean(ArrayList<ArrayList<String>> stringMatrix) {
         ArrayList<ArrayList<Boolean>> boolMatrix = new ArrayList<>(stringMatrix.get(0).size());

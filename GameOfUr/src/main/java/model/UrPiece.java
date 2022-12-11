@@ -35,13 +35,6 @@ public class UrPiece extends Piece {
         this.isInPlay = false;
     }
     /**
-     * Determines if the piece is currently in play.
-     * @return value of isInPlay.
-    */
-    public boolean isInPlay() {
-        return this.isInPlay;
-    }
-    /**
      * Indicates piece is currently in play.
     */
     public void setInPlay() {
@@ -53,14 +46,24 @@ public class UrPiece extends Piece {
     public void setNotInPlay() {
         this.isInPlay = false;
     }
-    
+    /**
+     * Sets given piece in current tile.
+     * @param givenPiece The piece that is located in current tile.
+    */
     public void setIsInPlay(boolean isInPlay){
         this.isInPlay = isInPlay;
     }
     /**
+     * Determines if the piece is currently in play.
+     * @return Value of isInPlay.
+    */
+    public boolean isInPlay() {
+        return this.isInPlay;
+    }
+    /**
      * Converts Piece into a string.
      * Made for the Royal Game of Ur.
-     * @return a string representing a piece
+     * @return A string representing a piece
      */
     @Override
     public String toString() {

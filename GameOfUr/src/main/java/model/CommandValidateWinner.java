@@ -7,8 +7,8 @@ package model;
 import java.util.ArrayList;
 
 /**
- *
- * @author Mauricio Palma
+ * Validates the winner.
+ * @author Mauricio Palma.
  */
 public class CommandValidateWinner implements CommandInterface {
 
@@ -35,7 +35,10 @@ public class CommandValidateWinner implements CommandInterface {
         currentPlayer++;
         currentPlayer = currentPlayer % playerArray.size();
     }
-    
+    /**
+     * Executes an action, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean execute() {
         System.out.println("Current length: " + getPlayerArrayLength());
@@ -48,7 +51,11 @@ public class CommandValidateWinner implements CommandInterface {
         updateCurrentPlayer();
         return checkIfWinner;
     }
-
+    
+    /**
+     * Reverts an execution, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean unExecute() {
         return false;

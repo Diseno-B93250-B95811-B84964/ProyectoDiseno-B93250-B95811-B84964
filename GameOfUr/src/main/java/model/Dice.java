@@ -23,7 +23,9 @@ public final class Dice
     * The amount of sides in current dice.
     */
     private final int sideAmount;
-    
+    /**
+    * The value of the side of the dice.
+    */
     private int side;
     
     /**
@@ -50,7 +52,7 @@ public final class Dice
     /**
      * Throws the dice with given probabilities.
      * Adapted from http://censore.blogspot.com/2014/08/simulate-roll-of-bias-or-weighted-dice.HTML
-     * @return random number.
+     * @return Random number.
      */
     public int throwDice() {
         Random randomGenerator = new Random();
@@ -72,9 +74,11 @@ public final class Dice
         // If X > a[n-1] choose n as outcome
         return this.side;
     }
-    
+    /**
+     * Gets the result returned from the dice.
+     * @return Result of the dice.
+     */
     public int getDiceResult(){
         return this.side;
     }
-    
 }

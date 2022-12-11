@@ -13,9 +13,13 @@ package model;
 public interface CommandInterface
 {
     /**
-     * Executes an action.
-     * @return whether the operation was successful.
+     * Executes an action, to follow the command pattern.
+     * @return Whether the operation was successful.
      */
     public abstract boolean execute();
+    /**
+     * Reverts an execution, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     public abstract boolean unExecute();
 }

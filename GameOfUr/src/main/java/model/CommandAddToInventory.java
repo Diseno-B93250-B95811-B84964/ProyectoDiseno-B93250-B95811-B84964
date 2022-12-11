@@ -5,8 +5,8 @@
 package model;
 
 /**
- *
- * @author Mauricio Palma
+ * Validates the ability to add a new object to the inventory.
+ * @author Jimena Gdur, Mauricio Palma.
  */
 public class CommandAddToInventory {
     

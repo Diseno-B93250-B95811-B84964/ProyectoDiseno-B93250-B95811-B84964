@@ -306,7 +306,7 @@ public class ViewManager
     }
     /**
      * Checks if piece has been moved.
-     * @return whether the piece has been moved.
+     * @return Whether the piece has been moved.
      */
     public boolean getIfPieceMoved(){
         return this.movedPiece;
@@ -329,21 +329,21 @@ public class ViewManager
     }
     /**
      * Gets the last row that was clicked.
-     * @return last row clicked.
+     * @return Last row clicked.
      */
     public int getClickedRow(){
         return this.clickedRow;
     }
     /**
      * Gets the last column that was clicked.
-     * @return last column clicked.
+     * @return Last column clicked.
      */
     public int getClickedColum(){
         return this.clickedColumn;
     }
     /**
      * Gets the button that starts a new game.
-     * @return startNewGame button.
+     * @return StartNewGame button.
      */
     public JButton getStartNewGameButton(){
         return mainMenu.getStartNewGameButton();

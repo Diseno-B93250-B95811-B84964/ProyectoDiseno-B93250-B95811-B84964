@@ -17,14 +17,18 @@ import org.json.simple.parser.ParseException;
  * @author Álvaro Miranda.
  */
 public class JSONDeserializer extends DataManager{
-    
-    //private JSONObject playerObject;
-    
+    /**
+    * JSONObject that holds all the information associated to the board.
+    */
     private JSONObject mainBoardObject;
-    
-    ArrayList<JSONObject> jsonPlayers;
-    
-    int currentPlayer;
+    /**
+    * ArraList of JSONObjects that holds all the information associated to the players.
+    */
+    private ArrayList<JSONObject> jsonPlayers;
+    /**
+    * Reference to the players in the array.
+    */
+    private int currentPlayer;
     /**
      * Creates a new Serializer with the current board and active players.
      * @param gameBoard Current game board.
@@ -38,7 +42,9 @@ public class JSONDeserializer extends DataManager{
         this.jsonPlayers = new ArrayList<JSONObject>(players.length);
         this.currentPlayer = 0;
     }
-    
+    /**
+     * Calls the methods that manage the deserialization of the file.
+    */    
     @Override
     public void execute(){
         manageFile();
@@ -72,21 +78,28 @@ public class JSONDeserializer extends DataManager{
      * Collects all the information from the game board and saves it in a JSONObject.
     */
     @Override
-    public void manageBoard(){
+    protected void manageBoard(){
         JSONObject boardAtributes = new JSONObject();
         boardAtributes = (JSONObject)mainBoardObject.get("board");
         manageBoardVertices(boardAtributes);
     }
-    
-    public void manageBoardRows(){
+    /**
+     * Deserializes the games amount of rows.
+     */
+    private void manageBoardRows(){
         gameBoard.setRows(castLongToInt((Long) mainBoardObject.get("amountRows")));
     }
-    
-    public void manageBoardColumns(){
+    /**
+     * Deserializes the games amount of columns.
+     */
+    private void manageBoardColumns(){
         gameBoard.setColumns(castLongToInt((Long) mainBoardObject.get("amountColumns")));
     }
-    
-    public void manageBoardVertices(JSONObject boardAtributes){
+    /**
+     * Deserializes the boards vertices.
+     * @param boardAtributes All the attributes associated with the board.
+    */
+    private void manageBoardVertices(JSONObject boardAtributes){
         UrTile currentTile;
         JSONArray vertices = new JSONArray();
         vertices = (JSONArray) boardAtributes.get("vertices");
@@ -100,20 +113,36 @@ public class JSONDeserializer extends DataManager{
             manageIsVacant(tileJSONObject, currentTile);
         }
     }
-    
-    public void manageIsVacant(JSONObject tileJSONObject, UrTile currentTile){
+    /**
+     * Deserializes if a tile from the vertice is vacant.
+     * @param tileJSONObject All the attributes associated with a tile on the board.
+     * @param currentTile Reference to a tile int the board.
+    */
+    private void manageIsVacant(JSONObject tileJSONObject, UrTile currentTile){
         currentTile.setIsVacant((boolean)tileJSONObject.get("isVacant"));
     }
-        
-    public void manageRowVertices(JSONObject tileJSONObject, UrTile currentTile){
+    /**
+     * Deserializes the tiles row.
+     * @param tileJSONObject All the attributes associated with a tile on the board.
+     * @param currentTile Reference to a tile int the board.
+    */
+    private void manageRowVertices(JSONObject tileJSONObject, UrTile currentTile){
         currentTile.setRow(castLongToInt((Long)tileJSONObject.get("row")));
     }
-    
-    public void manageColumnVertices(JSONObject tileJSONObject, UrTile currentTile){
+    /**
+     * Deserializes the tiles column.
+     * @param tileJSONObject All the attributes associated with a tile on the board.
+     * @param currentTile Reference to a tile int the board.
+    */
+    private void manageColumnVertices(JSONObject tileJSONObject, UrTile currentTile){
         currentTile.setColumn(castLongToInt((Long)tileJSONObject.get("column")));
     }
-    
-    public void manageTilePieces(JSONObject tileJSONObject, UrTile currentTile){
+    /**
+     * Deserializes depending on if a tile has a piece or not.
+     * @param tileJSONObject All the attributes associated with a tile on the board.
+     * @param currentTile Reference to a tile int the board.
+    */
+    private void manageTilePieces(JSONObject tileJSONObject, UrTile currentTile){
         int currentPlayer;
         var jsonTile = tileJSONObject.get("piece");
         Color pieceColor;
@@ -134,7 +163,7 @@ public class JSONDeserializer extends DataManager{
      * Collects all the information from the actives players and saves it in a JSONObject.
     */
     @Override
-    public void managePlayers(){
+    protected void managePlayers(){
         String playerKey = "player" + (currentPlayer + 1);
         JSONObject auxPlayer = new JSONObject();
         JSONObject playerAtributes = new JSONObject();
@@ -142,29 +171,47 @@ public class JSONDeserializer extends DataManager{
         playerAtributes = (JSONObject)auxPlayer.get(playerKey);
         manageCurrentPlayer(playerAtributes, currentPlayer);
     }
-    
-    public void manageCurrentPlayer(JSONObject jsonPlayer, int currentPlayer){
+    /**
+     * Manages the deserialization of an individual player.
+     * @param jsonPlayer The object that contains all the information from a player.
+     * @param currentPlayer The position of the current player within the array of players.
+    */
+    private void manageCurrentPlayer(JSONObject jsonPlayer, int currentPlayer){
         managePlayerName(jsonPlayer, currentPlayer);
         managePlayerColor(jsonPlayer, currentPlayer);
         managePlayerScore(jsonPlayer, currentPlayer);
         managePlayerPieces(jsonPlayer, currentPlayer);
     }
-    
-    public void managePlayerName(JSONObject jsonPlayer, int currentPlayer){
+    /**
+     * Deserializes the players name.
+     * @param jsonPlayer The object that contains all the information from a player.
+     * @param currentPlayer The position of the current player within the array of players.
+    */
+    private void managePlayerName(JSONObject jsonPlayer, int currentPlayer){
         gamePlayers[currentPlayer].setName((String)jsonPlayer.get("name"));
     }
-    
-    public void managePlayerColor(JSONObject jsonPlayer, int currentPlayer){
+    /**
+     * Deserializes the players color.
+     * @param jsonPlayer The object that contains all the information from a player.
+     * @param currentPlayer The position of the current player within the array of players.
+    */
+    private void managePlayerColor(JSONObject jsonPlayer, int currentPlayer){
         Color currentPlayerColor = new Color(castLongToInt((Long)jsonPlayer.get("playerColor")));
         gamePlayers[currentPlayer].setColor(currentPlayerColor);
     }
-    
-    public void managePlayerScore(JSONObject jsonPlayer, int currentPlayer){
+    /**
+     * Deserializes the players score.
+    */
+    private void managePlayerScore(JSONObject jsonPlayer, int currentPlayer){
         //System.out.println(mainBoardObject.get("score"));
         gamePlayers[currentPlayer].setScore(castLongToInt((Long) jsonPlayer.get("score")));
     }
-    
-    public void managePlayerPieces(JSONObject jsonPlayer, int currentPlayer){
+    /**
+     * Deserializes the players array of pieces.
+     * @param jsonPlayer The object that contains all the information from a player.
+     * @param currentPlayer The position of the current player within the array of players.
+    */
+    private void managePlayerPieces(JSONObject jsonPlayer, int currentPlayer){
         JSONArray piecesJSONArray = (JSONArray) jsonPlayer.get("pieces");
         int piecesArraySize = gamePlayers[currentPlayer].getPiecesArray().size();
         UrPiece tempPiece;
@@ -177,8 +224,12 @@ public class JSONDeserializer extends DataManager{
             tempPiece.setColor(pieceColor);
         }
     }
-    
-    public String getPlayerKey(int currentPlayer){
+    /**
+     * Gets the player key to obtain the JSONObject.
+     * @param currentPlayer The position of the current player within the array of players.
+     * @return The players key.
+    */
+    private String getPlayerKey(int currentPlayer){
         String playerKey = "";
         if(currentPlayer == 0){
             playerKey = "player1";
@@ -187,12 +238,20 @@ public class JSONDeserializer extends DataManager{
         }
         return playerKey;
     }
-    
-    public int castLongToInt(Long value){
+    /**
+     * Casts a long to an int.
+     * @param value Long to be cast to int
+     * @return The value in int.
+    */
+    private int castLongToInt(Long value){
         return value.intValue();
     }
-    
-    public int getPlayerColorMatch(Color pieceColor){
+    /**
+     * Find the match in color between a piece and a certain player.
+     * @param pieceColor Color from the piece to find the match.
+     * @return The player that got the match.
+    */
+    private int getPlayerColorMatch(Color pieceColor){
         int player = 0;
         for(int currentPlayer = 0; currentPlayer < gamePlayers.length; currentPlayer++){
             if(pieceColor.getRGB() == gamePlayers[currentPlayer].getColor().getRGB()){

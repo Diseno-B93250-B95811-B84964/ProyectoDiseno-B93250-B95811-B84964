@@ -60,7 +60,7 @@ public class CommandAddScore implements CommandInterface {
     /**
      * Executes an action.
      * Validates player's score taking into consideration their last move.
-     * @return whether the operation was successful.
+     * @return Whether the operation was successful.
      */
     @Override
     public boolean execute() {
@@ -73,6 +73,10 @@ public class CommandAddScore implements CommandInterface {
         updateCurrentPlayer();
         return success;
     }
+    /**
+     * Notifies the revert of an execution.
+     * @return Method that doesn't return anything in particular.
+    */
     @Override
     public boolean unExecute() {
         System.out.println("Unexecuting...");

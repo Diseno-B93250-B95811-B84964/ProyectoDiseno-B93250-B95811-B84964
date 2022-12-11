@@ -5,16 +5,22 @@
 package model;
 
 /**
- *
- * @author Mauricio Palma
+ * Validates the ability to get an object from the player's inventory.
+ * @author Jimena Gdur, Mauricio Palma.
  */
 public class CommandGetObjectFromInventory implements CommandInterface {
-
+    /**
+     * Executes an action, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean execute() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    /**
+     * Reverts an execution, to follow the command pattern.
+     * @return Whether the operation was successful.
+     */
     @Override
     public boolean unExecute() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

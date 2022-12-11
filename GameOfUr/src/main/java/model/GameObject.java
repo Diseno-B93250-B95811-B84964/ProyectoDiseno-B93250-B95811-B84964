@@ -16,7 +16,7 @@ abstract public class GameObject
 {
     /**
      * Converts specific class into a string.
-     * @return a string representing the class
+     * @return A string representing the class
      */
     @Override
     abstract public String toString();
