@@ -50,7 +50,7 @@ public class UrGameController extends GameController
     }
     
     /**
-    * Makes seriales
+    * Makes a new serializer object with references to the board and active players.
     */
     public void makeSerializers(){
         ArrayList<Player> myPlayerArray = referee.getPlayerArray();
@@ -128,7 +128,9 @@ public class UrGameController extends GameController
         * Boolean to know if there has been a winner.
         */
         boolean winnerExists;
-        
+        /*
+         * Boolean to know if a piece has been selected.
+        */
         boolean selectedPiece;
         /**
         * Creates new action listener.
@@ -308,7 +310,10 @@ public class UrGameController extends GameController
             }
             return winnerExists;
         }
-
+        /*
+         * Asign pieces to a player from the board after deserializing.
+         * @param myPlayerAsArray The array of players.
+        */
         private void searchForPieces(Player[] myPlayerAsArray){
             Board board = referee.getBoard();
             UrTile tile = null;
