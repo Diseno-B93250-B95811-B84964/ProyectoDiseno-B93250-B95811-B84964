@@ -22,7 +22,7 @@ public class main {
     public static void main(String[] args) {
         try {
             SwingUtilities.invokeAndWait(() -> {
-                UrGameController gameController = new UrGameController();
+                GameController gameController = new UrGameController();
             });
         } catch (InterruptedException | InvocationTargetException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
