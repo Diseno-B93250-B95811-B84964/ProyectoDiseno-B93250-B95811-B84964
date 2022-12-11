@@ -346,7 +346,7 @@ public class UrGameController
                     }
                     
                     if (referee.getIsWinner()) {
-                        viewManager.declareWinner(currentPlayer);
+                        viewManager.declareWinner(currentPlayer+1);
                     }
                 } else {
                     viewManager.resetBackground(formerRow, formerColumn);
