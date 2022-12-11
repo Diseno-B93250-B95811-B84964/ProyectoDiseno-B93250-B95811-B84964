@@ -34,15 +34,15 @@ public final class Board<TileType extends Tile> extends GameObject
      */
     private ArrayList<TileType> vertices;
     /**
-     * Amount of rows in game board
+     * Amount of rows in game board.
      */
     private int amountRows;
     /**
-     * Amount of columns in game board
+     * Amount of columns in game board.
      */
     private int amountColumns;
     /**
-     * Generic data type that extends Tile model
+     * Generic data type that extends Tile model.
      */
     private final TileType tileType;
 
@@ -51,7 +51,7 @@ public final class Board<TileType extends Tile> extends GameObject
      * @param vertices The number of vertices to be created.
      * @param rows Amount of rows board has.
      * @param cols Amount of columns board has.
-     * @param tileType Type of tile board has
+     * @param tileType Type of tile board has.
     */
     public Board(int vertices, int rows, int cols, TileType tileType) {
         this.verticesAmount = vertices;
@@ -81,9 +81,9 @@ public final class Board<TileType extends Tile> extends GameObject
     
     /**
     * Creates a new object of generic type TileType and stores it into vertices arraylist.
-     * @param x 
-     * @param y
-     * @param safeTile
+     * @param x Coordinate to locate the tile in the x axis.
+     * @param y Coordinate to locate the tile int the y axis.
+     * @return The tile generated.
     * @throws IllegalAccessException Exception that is thrown if object tries to access an invalidad memory reference
     * @throws InstantiationException Exception that is thrown if object cannot be instantiated
     * @throws NoSuchMethodException Exception that is thrown if method called does not exist
@@ -115,7 +115,7 @@ public final class Board<TileType extends Tile> extends GameObject
      * Sets board dimensions with given parameters.
      * @param rows Amount of rows board has.
      * @param columns Amount of columns board has.
-     */
+    */
     private void setBoardDimensions(int rows, int columns) {
         this.amountRows = rows;
         this.amountColumns = columns;
@@ -123,20 +123,40 @@ public final class Board<TileType extends Tile> extends GameObject
     /**
      * Sets the given adjacent matrix to this board's adjacent matrix
      * @param adjacentMatrix
-     */
+    */
     public void setAdjacentMatrix(ArrayList<ArrayList<Boolean>> adjacentMatrix) {
         this.graphAdjacentMatrix = adjacentMatrix;
     }
+    /**
+     * Sets the current row according to the parameter received.
+     * @param rows Current row to be set.
+    */
     public void setRows(int rows) {
         this.amountRows = rows;
     }
+    /**
+     * Sets the current row according to the parameter received.
+     * @param rows Current row to be set.
+    */
     public void setColumns(int columns) {
         this.amountColumns = columns;
     }
     /**
+     * Sets given piece in given coordinates.
+     * @param x Row in which tile is located.
+     * @param y Column in which tile is located.
+     * @param piece Piece to be set in specified tile.
+     */
+    public void setPieceInTile(int x, int y, Piece piece) {
+        TileType specifiedTile = getTile(x, y);
+        if (specifiedTile != null) {
+            specifiedTile.setPiece(piece);
+        }
+    }
+    /**
      * Converts from array to matrix.
-     * @param vertexIndex Tile's index in vertices array
-     * @return calculated row
+     * @param vertexIndex Tile's index in vertices array.
+     * @return Calculated row.
      */
     private int getRowThroughVertexIndex(int vertexIndex) {
         if (amountColumns != 0) {
@@ -147,8 +167,8 @@ public final class Board<TileType extends Tile> extends GameObject
     }
     /**
      * Converts from array to matrix.
-     * @param vertexIndex Tile's index in vertices array
-     * @return calculated column
+     * @param vertexIndex Tile's index in vertices array.
+     * @return Calculated column.
      */
     private int getColumnThroughVertexIndex(int vertexIndex) {
         if (amountColumns != 0) {
@@ -161,7 +181,7 @@ public final class Board<TileType extends Tile> extends GameObject
      * Converts from array to matrix.
      * @param x Row position in matrix
      * @param y Column position in matrix
-     * @return calculated index in vertices array
+     * @return Calculated index in vertices array.
      */
     public int getVertexIndexThroughXYCoordinates(int x, int y) {
         return (x * amountColumns) + y;
@@ -200,18 +220,6 @@ public final class Board<TileType extends Tile> extends GameObject
         return tileVertices;
     }
     /**
-     * Sets given piece in given coordinates.
-     * @param x Row in which tile is located.
-     * @param y Column in which tile is located.
-     * @param piece Piece to be set in specified tile.
-     */
-    public void setPieceInTile(int x, int y, Piece piece) {
-        TileType specifiedTile = getTile(x, y);
-        if (specifiedTile != null) {
-            specifiedTile.setPiece(piece);
-        }
-    }
-    /**
      * Gets amount of rows in game board.
      * @return amountRows value.
      */
@@ -225,11 +233,17 @@ public final class Board<TileType extends Tile> extends GameObject
     public int getAmountColumns() {
         return this.amountColumns;
     }
-    
+    /**
+     * Returns the array of tiles of the current board.
+     * @return Array of vertices that make the board.
+    */
     public ArrayList<TileType> getVerticesArray(){
         return this.vertices;
     }
-    
+    /**
+     * Returns the amount of vertices.
+     * @return Total amount of vertices.
+    */
     public int getVerticesAmount(){
         return this.verticesAmount;
     }
@@ -240,7 +254,7 @@ public final class Board<TileType extends Tile> extends GameObject
     
     /**
      * Converts board into a string.
-     * @return a string representing a board
+     * @return A string representing a board.
      */
     @Override
     public String toString() {

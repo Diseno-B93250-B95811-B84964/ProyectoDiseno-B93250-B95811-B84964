@@ -26,21 +26,9 @@ public class JSONSerializer extends DataManager{
     */
     private JSONObject jsonBoard;
     /**
-    * JSONArray that holds all the information associated to the adjacent matrix.
-    */
-    private JSONArray jsonAdyacentMatrix;
-    /**
     * JSONArray that holds all the information associated to the vertices that conform the board.
     */
     private JSONArray jsonVertices;
-    /**
-    * JSONObject that holds all the information associated to tiles found in the vertices.
-    */
-    private JSONObject jsonTile;
-    /**
-    * JSONObject that holds all the information associated to a piece if one is found in a tile.
-    */
-    private JSONObject jsonPiece;
     
     /**
      * Creates a new Serializer with the current board and active players.
@@ -50,11 +38,8 @@ public class JSONSerializer extends DataManager{
     public JSONSerializer(Board gameBoard, Player[] players){
         jsonPlayer1 = new JSONObject();
         jsonPlayer2 = new JSONObject();
-        //jsonPlayerPieces = new JSONArray();
         jsonBoard = new JSONObject();
-        //jsonAdyacentMatrix = new JSONArray();
         jsonVertices = new JSONArray();
-        jsonPiece = new JSONObject();
         this.gameBoard = gameBoard;
         this.gamePlayers = players;
         this.mainManager = new FileManager();
@@ -66,16 +51,13 @@ public class JSONSerializer extends DataManager{
     */
     @Override
     public void execute(){
-        //boolean success = true;
         try {
             manageFile();
             mainManager.saveFile("output", ".json", "src\\main\\java\\auxiliaryFiles\\");
         }
         catch(Exception e) {
             System.out.println(e);
-            //success = false;
         }
-        //return success;
     }
     
     /**
@@ -96,20 +78,15 @@ public class JSONSerializer extends DataManager{
      * Collects all the information from the game board and saves it in a JSONObject.
     */
     @Override
-    public void manageBoard(){
-        //jsonBoard.put("amountOfPlayers", gamePlayers.length);
-        //jsonBoard.put("verticesAmount", gameBoard.getVerticesAmount());
-        //jsonBoard.put("amountRows", gameBoard.getAmountRows());
-        //jsonBoard.put("amountColumns", gameBoard.getAmountColumns());
+    protected void manageBoard(){
         manageVertices();
-        //manageAdjacentMatrix();
     }
     
     /**
      * Collects all the information from the actives players and saves it in a JSONObject.
     */
     @Override
-    public void managePlayers(){
+    protected void managePlayers(){
         JSONArray playersPiecesArray = new JSONArray();
         JSONObject playerToInsert;
 
@@ -123,9 +100,8 @@ public class JSONSerializer extends DataManager{
             playerToInsert.put("playerColor", (int)gamePlayer.getColor().getRGB());
             playerToInsert.put("name", gamePlayer.getName());
             playerToInsert.put("score", gamePlayer.getScore());
-            //playerToInsert.put("piecesAmount", gamePlayer.getPiecesAmount());
             
-            playersPiecesArray = managePlayerPieces(playerPieces, playerToInsert);
+            playersPiecesArray = managePlayerPieces(playerPieces);
             
             playerToInsert.put("pieces",playersPiecesArray);
             
@@ -141,15 +117,15 @@ public class JSONSerializer extends DataManager{
     
     /**
      * Collects all the information from the current player array of pieces and saves it in a JSONArray.
+     * @param playerPieces Contains the players array of pieces.
      * @return playersPiecesArray Json information from the pieces of the current player.
     */
-    public JSONArray managePlayerPieces(ArrayList<UrPiece> playerPieces, JSONObject player){
+    private JSONArray managePlayerPieces(ArrayList<UrPiece> playerPieces){
         JSONArray playersPiecesArray = new JSONArray();
         JSONObject individualPieceFromArray = new JSONObject();
         
         for(int pieces = 0; pieces < playerPieces.size(); pieces++){
             individualPieceFromArray.put("pieceColor", playerPieces.get(pieces).getColor().getRGB());
-            //individualPieceFromArray.put("isInPlay", playerPieces.get(pieces).isInPlay());
             playersPiecesArray.add(individualPieceFromArray);
         }
         return playersPiecesArray;
@@ -159,7 +135,7 @@ public class JSONSerializer extends DataManager{
      * Collects all the information from the vertices that conform the board of 
      * pieces and saves it in a JSONArray, that gets put into the game board JSONObject.
     */
-    public void manageVertices(){
+    private void manageVertices(){
         JSONObject pieceData;
         JSONObject currentTileToInsert;
         UrPiece auxPiece;
@@ -176,7 +152,6 @@ public class JSONSerializer extends DataManager{
                 pieceData = new JSONObject();
                 pieceData.put("pieceColor", vertices.get(vertexIndex).getPiece().getColor().getRGB());
                 auxPiece = (UrPiece)vertices.get(vertexIndex).getPiece();
-                //pieceData.put("isInPlay", auxPiece.isInPlay());
                 currentTileToInsert.put("piece", pieceData);
             } else {
                 currentTileToInsert.put("piece", "null");

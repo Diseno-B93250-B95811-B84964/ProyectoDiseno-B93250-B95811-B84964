@@ -108,27 +108,12 @@ public abstract class Player
                 .newInstance(this.color,index);
         pieces.add(newPiece);
     }
-    
-    /**
-     * Returns player's color.
-     * @return Player's color.
-     */
-    public Color getColor() {
-        return this.color;
-    }
     /**
      * Sets player's color with given Color.
      * @param chosenColor Player's color.
      */
     public void setColor(Color chosenColor) {
         this.color = chosenColor;
-    }
-    /**
-     * Returns player's name.
-     * @return Player's name.
-     */
-    public String getName() {
-        return this.name;
     }
     /**
      * Sets player's color with given Color.
@@ -138,18 +123,32 @@ public abstract class Player
         this.name = chosenName;
     }
     /**
-     * Returns player's score.
-     * @return Player's score.
-     */
-    public int getScore() {
-        return this.score;
-    }
-    /**
      * Sets player's score.
      * @param currentScore Player's score.
      */
     public void setScore(int currentScore) {
         this.score = currentScore;
+    }
+    /**
+     * Returns player's color.
+     * @return Player's color.
+     */
+    public Color getColor() {
+        return this.color;
+    }
+    /**
+     * Returns player's name.
+     * @return Player's name.
+     */
+    public String getName() {
+        return this.name;
+    }
+    /**
+     * Returns player's score.
+     * @return Player's score.
+     */
+    public int getScore() {
+        return this.score;
     }
     /**
      * Returns player's amount of pieces.
@@ -178,7 +177,8 @@ public abstract class Player
     public abstract PieceType getAvailablePiece();
     /**
      * Converts Player into a string.
-     * @return a string representing a player.
+     * This method is abstract.
+     * @return A string representing a player.
      */
     @Override
     public String toString() {

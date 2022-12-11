@@ -39,13 +39,6 @@ abstract public class Piece extends GameObject
 
     }
     /**
-     * Gets piece's color.
-     * @return the color of the current piece.
-    */
-    public Color getColor() {
-        return this.color;
-    }
-    /**
      * Sets piece's color using player's color.
      * @param playerColor Player's color.
     */
@@ -53,8 +46,15 @@ abstract public class Piece extends GameObject
         this.color = playerColor;
     }
     /**
+     * Gets piece's color.
+     * @return The color of the current piece.
+    */
+    public Color getColor() {
+        return this.color;
+    }
+    /**
      * Converts Piece into a string.
-     * @return a string representing a piece
+     * @return A string representing a piece
      */
     @Override
     public String toString() {

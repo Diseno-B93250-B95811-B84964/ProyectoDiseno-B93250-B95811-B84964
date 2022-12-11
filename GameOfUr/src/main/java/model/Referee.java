@@ -58,26 +58,53 @@ public class Referee <
      * An object that stores game rules.
      */
     protected Rules gameRules;
-    
+    /**
+     * Template for the players.
+     */
     protected PlayerType playerType;
-    
+    /**
+     * Template for the pieces.
+     */
     protected PieceType pieceType;
-    
+    /**
+     * Template for the tiles.
+     */
     protected TileType tileType;
-    
+    /**
+     * Tile that has been interacted with.
+     */
     protected Tile clickedTile;
-    
+    /**
+     * The next tile for the move.
+     */
     protected Tile nextTile;
-    
+    /**
+     * The games dice.
+     */
     protected Dice gameDice;
-    
+    /**
+     * Indicates if a piece has been eaten.
+     */
     protected MutableBoolean pieceEaten;
-    
+    /**
+     * Indicates if a player has scored a point.
+     */
     protected boolean playerScored;
+    /**
+     * Indicates if there's a winner to the current game.
+     */
     protected boolean isWinner;
-    
+    /**
+     * Command to manage the adding of points.
+     */
     CommandInterface commandAddScore;
+    /**
+     * Command that validates if there's a winner.
+     */
     CommandInterface commandValidateWinner;
+    /**
+     * Command used to move pieces.
+     */
     CommandInterface commandMovePiece;
     
     DataManager JSONdeserializer;
@@ -182,7 +209,9 @@ public class Referee <
         gameBoard = new Board(tileAmount, amountRows, amountCols, this.tileType);
         gameBoard.setAdjacentMatrix(adjacentMatrix);
     }
-    
+    /**
+    * Initialize the referee's commands.
+    */
     private void initializeCommands() {
         // commandAddScore
         commandAddScore = new CommandAddScore(this.playerArray, 0, this.nextTile);
@@ -194,8 +223,6 @@ public class Referee <
         commandMovePiece = new CommandMovePiece(this.gameBoard, this.playerArray, 0,
             this.gameDice, this.clickedTile, this.nextTile, this.pieceEaten);
     }
-    
-    /*
     /**
     * Creates players and stores them in playerArray.
     */
@@ -256,7 +283,11 @@ public class Referee <
         }
         return success;
     }
-    
+    /**
+     * Copy a tile where the x and y coordinates indicate.
+     * @param x Coordinate in the x axis.
+     * @param y Coordinate in the y axis.
+     */ 
     private void copyClickedTile(int x, int y) {
         
         Tile boardTile = this.gameBoard.getTile(x, y);
@@ -273,8 +304,11 @@ public class Referee <
     }
     
     /**
-    * 
-    */
+     * Checks the game state when finishing a turn.
+     * @param x Coordinate in the x axis.
+     * @param y Coordinate in the y axis.
+     * @return Boolean that indicates success.
+     */
     public boolean checkPlay(int clickedX, int clickedY) {
         boolean success = false;
         this.playerScored = false;
@@ -304,23 +338,34 @@ public class Referee <
      * Gets game rules from class Rules.
      * @return a list of rules.
      */
-    
     public ArrayList<String> getGameRules() {
         return this.gameRules.getRules();
     }
-    
+    /**
+     * Gets if a certain piece has been eaten.
+     * @return Boolean that indicates if a piece has been eaten.
+     */
     public boolean getPieceEaten() {
         return this.pieceEaten.booleanValue();
     }
-    
+    /**
+     * Gets if a player has scored.
+     * @return A boolean that indicates if the player has scored.
+     */
     public boolean getIfScored() {
         return this.playerScored;
     }
-    
+    /**
+     * Gets if there's a winner.
+     * @return A boolean that indicates if the player has won.
+     */
     public boolean getIsWinner() {
         return this.isWinner;
     }
-    
+    /**
+     * Gets the next tile
+     * @return The next tile.
+     */
     public Tile getNextTile() {
         return this.nextTile;
     }

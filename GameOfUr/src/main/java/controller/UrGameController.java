@@ -112,7 +112,7 @@ public class UrGameController extends GameController
     }
     
     /**
-    * Inner Action Listener class to react accordingly user inputs on GUI
+    * Inner Action Listener class to react accordingly user inputs on GUI.
     */
     class buttonAction implements ActionListener{
    

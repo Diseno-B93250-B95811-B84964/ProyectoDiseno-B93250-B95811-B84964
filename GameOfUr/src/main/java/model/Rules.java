@@ -35,7 +35,7 @@ public final class Rules
     }
     /**
      * Returns list of rules.
-     * @return this.rules array.
+     * @return The array of rules.
      */
     public ArrayList<String> getRules() {
         return this.rules;

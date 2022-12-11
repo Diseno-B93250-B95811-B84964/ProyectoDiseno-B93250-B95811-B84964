@@ -37,7 +37,6 @@ model\JSONSerializer.class
 model\UrPlayer.class
 view\UrNewGame$6.class
 model\GameObject.class
-.netbeans_automatic_build
 model\Inventory.class
 model\Board.class
 view\UrMainMenu$2.class
