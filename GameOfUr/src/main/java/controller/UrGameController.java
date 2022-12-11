@@ -114,7 +114,7 @@ public class UrGameController
      */    
     private void makeReferee(){
         Player urPlayer = new UrPlayer();
-        Piece urPiece = new UrPiece();
+        Piece urPiece = new UrPiece(0);
         Tile urTile = new UrTile();
         this.referee = new Referee(urPlayer, urPiece, urTile);
 
@@ -310,7 +310,7 @@ public class UrGameController
                 System.out.println("/************/");
                 
                 boolean canMove = referee.checkPlay(formerRow, formerColumn);
-                if (canMove) {                    
+                if (canMove) {       
                     Tile nextTile = referee.getNextTile();
                     viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
 
@@ -322,15 +322,19 @@ public class UrGameController
                     updateGUI(formerRow, formerColumn);  
                     
                     if(referee.getPieceEaten()) {
-                        viewManager.desactivatePiece(nextTile.getPiece().getColor());
+                        System.out.println("Printing next piece color: "+ nextTile.getPiece().getColor());
+                        System.out.println("Printing Current player piece color" + playerArray.get(currentPlayer).getColor());
+                        updateCurrentPlayer();
+                        viewManager.desactivatePiece(playerArray.get(currentPlayer).getColor());
+                        updateCurrentPlayer();
                     }
                     
                     if (referee.getIfScored()) {
-                        
+                        viewManager.addScoreToPlayer(playerArray.get(currentPlayer).getColor());
                     }
                     
                     if (referee.getIsWinner()) {
-                        
+                        viewManager.declareWinner(currentPlayer);
                     }
                 } else {
                     viewManager.resetBackground(formerRow, formerColumn);

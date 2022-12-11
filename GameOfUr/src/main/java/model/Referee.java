@@ -217,7 +217,7 @@ public class Referee <
         PlayerType newPlayer = (PlayerType)
                 playerType.getClass()
                         .getConstructor(int.class, Color.class, String.class, this.pieceType.getClass())
-                        .newInstance(7, Color.BLACK, "Migulito", this.pieceType); // TODO change magic values
+                        .newInstance(7, Color.BLACK, "placeHolderName", this.pieceType); // TODO change magic values
         return newPlayer;
     }
     
@@ -249,8 +249,7 @@ public class Referee <
         if (playerName != null && playerColor != null) {
             playerArray.get(currentPlayer).setColor(playerColor);
             playerArray.get(currentPlayer).setName(playerName);
-
-            
+            playerArray.get(currentPlayer).setColorPiece(playerColor);
         }
         return success;
     }
@@ -277,10 +276,8 @@ public class Referee <
         boolean success = false;
         this.playerScored = false;
         this.isWinner = false;
-        System.out.println("Before copyClickedTile x," + clickedX + " y,"+ clickedY);
         // Moves piece to tile if possible
         copyClickedTile(clickedX, clickedY);
-        System.out.println("After copyClickedTile x," + clickedX + " y,"+ clickedY);
 
         success = this.commandMovePiece.execute();
         

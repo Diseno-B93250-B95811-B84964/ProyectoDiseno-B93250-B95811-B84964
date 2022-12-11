@@ -84,7 +84,7 @@ public abstract class Player
     private void initializePiecesArray(){
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
             try {
-                makeNewPiece();
+                makeNewPiece(pieceIndex);
             } catch (IllegalAccessException | InstantiationException |
                     NoSuchMethodException | IllegalArgumentException | 
                     InvocationTargetException ex) {
@@ -101,11 +101,11 @@ public abstract class Player
      * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
      * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
      */
-    public void makeNewPiece() throws IllegalAccessException,InstantiationException, 
+    public void makeNewPiece(int index) throws IllegalAccessException,InstantiationException, 
             NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
         PieceType newPiece = (PieceType)pieceType.getClass()
-                .getConstructor(Color.class)
-                .newInstance(this.color);
+                .getConstructor(Color.class, int.class)
+                .newInstance(this.color,index);
         pieces.add(newPiece);
     }
     
@@ -180,7 +180,6 @@ public abstract class Player
      * Converts Player into a string.
      * @return a string representing a player.
      */
-    
     @Override
     public String toString() {
         String string =
@@ -193,4 +192,5 @@ public abstract class Player
         }
         return string;
     }
+    public abstract void setColorPiece(Color color);
 }

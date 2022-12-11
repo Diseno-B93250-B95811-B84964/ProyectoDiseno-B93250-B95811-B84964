@@ -158,14 +158,6 @@ public class ViewManager
         this.mainGame.changePlayerTurn(currentPlayer);
     }
    
-    
-    
-    /**
-     * Updates main game view.
-     */
-    public void updateMainGameView() {
-        // TODO: ?
-    }
     /**
      * Show game rules.
      */
@@ -463,8 +455,8 @@ public class ViewManager
      * Updates label to indicate a player has won the game.
      * @param winnerName Name of the player that has won.
      */
-    public void declareWinner(String winnerName){
-        // TODO: update label to show there is a winner.
+    public void declareWinner(int playerNumber){
+        this.mainGame.declarePlayerWinner(playerNumber);
     }
     
     public void changeThrowDiceButtonText(String text){
@@ -482,6 +474,10 @@ public class ViewManager
     
     public int getNextColumnPosition(){
         return this.nextColumn;
+    }
+    
+    public void addScoreToPlayer(Color color){
+        this.mainGame.addScoreToPlayer(color);
     }
     
     /**

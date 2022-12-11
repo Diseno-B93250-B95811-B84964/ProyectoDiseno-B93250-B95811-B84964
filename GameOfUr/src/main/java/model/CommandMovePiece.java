@@ -89,13 +89,14 @@ public class CommandMovePiece implements CommandInterface {
         System.out.println("MyColumn is: "+ clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
             Piece currentPiece = getCurrentPiece();
-            System.out.println("piece: " + currentPiece);
+            //System.out.println("Current piece: " + currentPiece.getColor());
             if (currentPiece != null) {
                 nextTile = (UrTile) getPossibleTile();
                 if (nextTile != null) {
                     // Copies value from next tile to possibleTile
                     possibleTile.setRow(nextTile.getRow());
                     possibleTile.setColumn(nextTile.getColumn());
+                    possibleTile.setPiece(currentPiece);
                     success = setPieceInTile(nextTile, currentPiece);
                 }
             }
@@ -115,12 +116,15 @@ public class CommandMovePiece implements CommandInterface {
     
     private Piece getCurrentPiece() {
         Piece currentPiece = null;
-        if (this.clickedTile.isVacant() && this.clickedTile.getRow() == 4 && this.clickedTile.getColumn() != 1){
+        if (clickedTile.isVacant() && clickedTile.getRow() == 4 && clickedTile.getColumn() != 1){
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
-        } else if (!this.clickedTile.isVacant()) {
-            currentPiece = this.clickedTile.getPiece();
+        } else if (!clickedTile.isVacant()) {
+            currentPiece = clickedTile.getPiece();
+            System.out.println("CurrentPiece after getting it from board: " + currentPiece);
+
         }
         
+        System.out.println("Inside getCurrentPiece: Current player is: " + currentPlayer);
         return currentPiece;
     }
     
@@ -137,8 +141,8 @@ public class CommandMovePiece implements CommandInterface {
     }
             
     private Tile getPossibleTile() {
-        int currentRow = this.clickedTile.getRow();
-        int currentCol = this.clickedTile.getColumn();
+        int currentRow = clickedTile.getRow();
+        int currentCol = clickedTile.getColumn();
         
         int diceResult = dice.getDiceResult();
         
@@ -148,52 +152,90 @@ public class CommandMovePiece implements CommandInterface {
             && isPlayerColumn(currentCol) && diceResult != 0)
         {
             ArrayList<Tile> tileVertices = board.getVertices(currentRow, currentCol);
-
             while(diceResult > 0 && !tileVertices.isEmpty()) {
+                System.out.println("TileVertices: " + tileVertices);
+                
                 for (Tile tile : tileVertices) {
                     currentCol = tile.getColumn();
                     currentRow = tile.getRow();
+                    System.out.println("Tilevertices size is: " + tileVertices.size());
+                    if (tileVertices.size() > 1) {
+                        if (currentPlayer == 0) {
+                            currentCol = 0;
+                            currentRow = 7;
+                            newTile = tile;
+                        } else {
+                            currentCol = 2;
+                            currentRow = 7;
+                            newTile = tile; 
+                       }
+                    } else {
+                        newTile = tile; 
+                    }
+
                     if (isPlayerColumn(currentCol)) {
-                        newTile = tile;
-                        diceResult--;
+
+                        System.out.println("Current col of for is: ["+currentCol+"]");
+                        System.out.println("Current row of for is: ["+currentRow+"]");
+                        
+                        System.out.println("Printing new tile within commandMove" + newTile);
+                        
                     }
                 }
+                diceResult--;
                 tileVertices = board.getVertices(currentRow, currentCol);
+                System.out.println("DiceResult after each WHILE is: " + diceResult);
+                System.out.println("!TileVertices.IsEmpty after each While" + !tileVertices.isEmpty());
             }
         }
         
         return newTile;
     }
 
-    private boolean setPieceInTile(Tile realTile, Piece movedPiece) {
+    private boolean setPieceInTile(Tile nexTile, Piece movedPiece) {
         boolean success = false;
-        UrTile urTile = (UrTile) realTile;
-        System.out.println("realTile: " + realTile);
-        
-        UrTile urClickedTile = (UrTile) board.getTile(clickedTile.getRow(), clickedTile.getColumn());
-        
+        UrTile urNextTile = (UrTile) nexTile;
+        System.out.println("realTile: " + urNextTile);
+        //System.out.println("realTile: " + nexTile.getPiece().getColor());
+                
         UrPiece myUrPiece = (UrPiece) movedPiece;
         UrPiece yourUrPiece;
         System.out.println("Vamo a ver si es Vacant");
-        System.out.println("!urTile.isSafe()" + !urTile.isSafe());
+        System.out.println("!urNextTile.isSafe()" + !urNextTile.isSafe());
         
-        if (realTile.isVacant()) {
+        if (urNextTile.getPiece() != null) {
+            System.out.println("NextTile color: " + urNextTile.getPiece().getColor());
+            System.out.println("Moved piece color: " + myUrPiece.getColor());
+            System.out.println("Current piece index of urNextTile is: " + urNextTile.getPiece().pieceIndex);
+            System.out.println("Current piece index of movedPiece is: " + myUrPiece.pieceIndex);
+            boolean a = urNextTile.getPiece().getColor().getRGB() != myUrPiece.getColor().getRGB();
+            System.out.println("Printing weird !=" + a);
+        }
+
+        Tile tile = this.board.getTile(this.clickedTile.getRow(), this.clickedTile.getColumn());
+        tile.removePiece();
+        clickedTile.removePiece();
+        System.out.println("ClickedTile piece after removing" + this.clickedTile);
+        System.out.println("tile piece after removing" + tile);
+
+        if (urNextTile.isVacant()) {
             System.out.println("Si es Vacant");
             myUrPiece.setInPlay();
-            realTile.setPiece(movedPiece);
+            urNextTile.setPiece(myUrPiece);
             success = true;
-        } else if (realTile.getPiece().getColor().getRGB() != movedPiece.getColor().getRGB()
-            && !urTile.isSafe())
+        } else if (urNextTile.getPiece().getColor().getRGB() != myUrPiece.getColor().getRGB()
+            && !urNextTile.isSafe())
         {
             System.out.println("NO vacant");
             this.pieceEaten.setTrue();
-            realTile.setPiece(movedPiece);
+            urNextTile.setPiece(myUrPiece);
             myUrPiece.setInPlay();
-            yourUrPiece = (UrPiece) realTile.getPiece();
+            yourUrPiece = (UrPiece) urNextTile.getPiece();
             yourUrPiece.setNotInPlay();
-            this.clickedTile.removePiece();
+            
             success = true;
         } 
+        System.out.println("Printing movedPiece" + myUrPiece);
         return success;
     }
     

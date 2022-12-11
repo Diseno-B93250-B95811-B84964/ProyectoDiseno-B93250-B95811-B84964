@@ -163,7 +163,7 @@ public final class Board<TileType extends Tile> extends GameObject
      * @param y Column position in matrix
      * @return calculated index in vertices array
      */
-    private int getVertexIndexThroughXYCoordinates(int x, int y) {
+    public int getVertexIndexThroughXYCoordinates(int x, int y) {
         return (x * amountColumns) + y;
     }
     /**
