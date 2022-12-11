@@ -12,8 +12,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.Supplier;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Player;
+import model.Tile;
+import model.UrPiece;
 
 import view.UrLoadGame;
 import view.UrMainGame;
@@ -431,10 +435,54 @@ public class ViewManager
         }
     }
     
+    public int checkColorMatchForFormerGame(Color pieceColor, Player[] gamePlayers){
+        int player = 0;
+        for(int currentPlayer = 0; currentPlayer < gamePlayers.length; currentPlayer++){
+            if(pieceColor.getRGB() == gamePlayers[currentPlayer].getColor().getRGB()){
+                player = currentPlayer;
+                break;
+            }
+        }
+        return player;
+    }
+    
+    public void desactivatePiecesForAFormerMatch(Player[] playerArray, int index, Tile tile){        
+        UrPiece urCurrentPiece = (UrPiece)tile.getPiece();
+        if (urCurrentPiece.isInPlay()) {
+            mainGame.desactiveAPieceForPlayer(playerArray[index].getColor());
+            int x = tile.getRow();
+            int y = tile.getColumn();
+            System.out.println("X is " + x);
+            System.out.println("Y is" + y);
+            Color color = playerArray[index].getColor();
+            ImageIcon colorPieceIcon = mainGame.getPieceImageColor(color);
+            System.out.println("Colro is: " + colorPieceIcon);
+            mainGame.setNextPossibleLabel(x,y,colorPieceIcon);
+        } 
+    }
+    
+    public void loadFormerGame(Player[] playerArray) {
+        mainGame.setFirstPlayerNameToLabel(playerArray[0].getName());
+        mainGame.setSecondPlayerNameToLabel(playerArray[1].getName());
+        mainGame.addScoreToFirstPlayer(playerArray[0].getScore());
+        mainGame.addScoreToSecondPlayer(playerArray[1].getScore());
+        mainGame.setFirstPlayerPieceColor(playerArray[0].getColor());
+        mainGame.setSecondPlayerPieceColor(playerArray[1].getColor());
+        
+        for (int index = 0; index < playerArray[0].getScore(); index++) {
+            mainGame.desactiveAPieceForPlayer(playerArray[0].getColor());
+        }
+        
+        for (int index = 0; index < playerArray[1].getScore(); index++) {
+            mainGame.desactiveAPieceForPlayer(playerArray[1].getColor());
+        }
+
+    }
+    
     /**
      * Updates interface by moving piece from old tile to new one.
-     * @param currentRow The row of the piece that will be moved to a new tile.
-     * @param currentColumn The column of the piece that will be moved to a new tile.
+     * @param formerRow The row of the piece that will be moved to a new tile.
+     * @param formerColumn The column of the piece that will be moved to a new tile.
      * @param nextRow The row of the new tile, where the piece is now located.
      * @param nextColumn The column of the new tile, where the piece is now located.
      */

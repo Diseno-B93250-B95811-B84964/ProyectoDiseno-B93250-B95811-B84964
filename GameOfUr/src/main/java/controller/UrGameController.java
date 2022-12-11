@@ -260,10 +260,14 @@ public class UrGameController
         */
         private void manageStartLoadGame(){
             String file = viewManager.getFileNameToLoadGame();
+            ArrayList<Player> myPlayerArray = referee.getPlayerArray();
+            Player[] myPlayerAsArray = myPlayerArray.toArray(new Player[2]);
             if (file != null) {
                 JSONdeserializer.execute();
                 playerArray = referee.getPlayerArray();
                 viewManager.setPlayers(playerArray);
+                searchForPieces(myPlayerAsArray);
+                viewManager.loadFormerGame(myPlayerAsArray);
                 viewManager.swapViewToMainGame();
                 currentPlayer = currentPlayer % playerArray.size();
                 
@@ -287,7 +291,6 @@ public class UrGameController
         */ 
         private void manageSaveAndExit(){
             JSONserializer.execute();
-            System.out.println("Creado");
             System.exit(0);
         }
         /**
@@ -325,27 +328,14 @@ public class UrGameController
             if (playerPlayed) {
                 int formerRow = viewManager.getClickedRow();
                 int formerColumn = viewManager.getClickedColum();
-
-                System.out.println("/************/");
-                System.out.println("ClickedRow is: " + Integer.toString(formerRow));
-                System.out.println("ClickedColumn is: " + Integer.toString(formerColumn));
-                System.out.println("/************/");
                 
                 boolean canMove = referee.checkPlay(formerRow, formerColumn);
                 if (canMove) {       
                     Tile nextTile = referee.getNextTile();
                     viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
-
-                    System.out.println("/************/");
-                    System.out.println("NextTileRow: " + nextTile.getRow());
-                    System.out.println("NextTileColumn: " + nextTile.getColumn());
-                    System.out.println("/************/");
-
                     updateGUI(formerRow, formerColumn);  
                     
                     if(referee.getPieceEaten()) {
-                        System.out.println("Printing next piece color: "+ nextTile.getPiece().getColor());
-                        System.out.println("Printing Current player piece color" + playerArray.get(currentPlayer).getColor());
                         updateCurrentPlayer();
                         viewManager.desactivatePiece(playerArray.get(currentPlayer).getColor());
                         updateCurrentPlayer();
@@ -387,12 +377,27 @@ public class UrGameController
         * @return whether there is a winner.
         */  
         private boolean checkIfWinner(){
-            //if (playerArray.get(currentPlayer).getScore() == 7) {
-               // winnerExists = true;
-            //}
+            if (referee.getIsWinner()) {
+               winnerExists = true;
+            }
             return winnerExists;
         }
 
+        private void searchForPieces(Player[] myPlayerAsArray){
+            Board board = referee.getBoard();
+            UrTile tile = null;
+            int playerIndex = -1;
+            int totalSize = board.getAmountRows() * board.getAmountColumns();
+            for (int index = 0; index < totalSize; index++) {
+                tile = (UrTile)board.getTile(index);
+                System.out.println("Index of urGameController" + index);
+                if (tile.getPiece() != null) {
+                    playerIndex = viewManager.checkColorMatchForFormerGame(tile.getPiece().getColor(), myPlayerAsArray);
+                    viewManager.desactivatePiecesForAFormerMatch(myPlayerAsArray,playerIndex, tile); 
+                }
+            }
+        }
+        
         /**
         * Method that checks which button was clicked and acts accordingly.
         */   

@@ -234,6 +234,10 @@ public final class Board<TileType extends Tile> extends GameObject
         return this.verticesAmount;
     }
     
+    public Tile getTile(int index){
+        return this.vertices.get(index);
+    }
+    
     /**
      * Converts board into a string.
      * @return a string representing a board
