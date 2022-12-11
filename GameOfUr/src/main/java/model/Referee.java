@@ -279,8 +279,9 @@ public class Referee <
         // Moves piece to tile if possible
         copyClickedTile(clickedX, clickedY);
 
+        this.gameBoard.getTile(5, 0).removePiece();
+        this.gameBoard.getTile(5, 2).removePiece();
         success = this.commandMovePiece.execute();
-        
         
         // possible tile vacio -1, -1
         // movePiece = possible tile lleno
@@ -289,17 +290,12 @@ public class Referee <
         if (success) {
             // Validates if point can be given to player
             this.playerScored = this.commandAddScore.execute();
-
+            
             // Checks for winner
             this.isWinner = this.commandValidateWinner.execute();
-        } else {
-            System.out.println("NOT POSSIBLE MOVE BRO");
-        }
-        
+        } 
         return success;
     }
-
-
     
     /**
      * Gets game rules from class Rules.

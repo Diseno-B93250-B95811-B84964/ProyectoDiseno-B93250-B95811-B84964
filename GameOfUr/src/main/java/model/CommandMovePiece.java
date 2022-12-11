@@ -77,7 +77,6 @@ public class CommandMovePiece implements CommandInterface {
      
     @Override
     public boolean execute() {        
-        System.out.println("Current player executing..." + currentPlayer);
         boolean success = false;
         this.possibleTile.setRow(-1);
         this.possibleTile.setColumn(-1);
@@ -89,7 +88,6 @@ public class CommandMovePiece implements CommandInterface {
         System.out.println("MyColumn is: "+ clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
             Piece currentPiece = getCurrentPiece();
-            //System.out.println("Current piece: " + currentPiece.getColor());
             if (currentPiece != null) {
                 nextTile = (UrTile) getPossibleTile();
                 if (nextTile != null) {
@@ -98,6 +96,11 @@ public class CommandMovePiece implements CommandInterface {
                     possibleTile.setColumn(nextTile.getColumn());
                     possibleTile.setPiece(currentPiece);
                     success = setPieceInTile(nextTile, currentPiece);
+                    if (success) {
+                        Tile tile = this.board.getTile(this.clickedTile.getRow(), this.clickedTile.getColumn());
+                        tile.removePiece();
+                        clickedTile.removePiece();
+                    }
                 }
             }
         }
@@ -120,11 +123,7 @@ public class CommandMovePiece implements CommandInterface {
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
         } else if (!clickedTile.isVacant()) {
             currentPiece = clickedTile.getPiece();
-            System.out.println("CurrentPiece after getting it from board: " + currentPiece);
-
         }
-        
-        System.out.println("Inside getCurrentPiece: Current player is: " + currentPlayer);
         return currentPiece;
     }
     
@@ -153,39 +152,27 @@ public class CommandMovePiece implements CommandInterface {
         {
             ArrayList<Tile> tileVertices = board.getVertices(currentRow, currentCol);
             while(diceResult > 0 && !tileVertices.isEmpty()) {
-                System.out.println("TileVertices: " + tileVertices);
                 
-                for (Tile tile : tileVertices) {
+                    Tile tile = tileVertices.get(0);
                     currentCol = tile.getColumn();
                     currentRow = tile.getRow();
-                    System.out.println("Tilevertices size is: " + tileVertices.size());
                     if (tileVertices.size() > 1) {
                         if (currentPlayer == 0) {
                             currentCol = 0;
                             currentRow = 7;
-                            newTile = tile;
+
+                            newTile = tileVertices.get(0);
                         } else {
                             currentCol = 2;
                             currentRow = 7;
-                            newTile = tile; 
+                            newTile = tileVertices.get(1);
                        }
                     } else {
                         newTile = tile; 
                     }
-
-                    if (isPlayerColumn(currentCol)) {
-
-                        System.out.println("Current col of for is: ["+currentCol+"]");
-                        System.out.println("Current row of for is: ["+currentRow+"]");
-                        
-                        System.out.println("Printing new tile within commandMove" + newTile);
-                        
-                    }
-                }
                 diceResult--;
                 tileVertices = board.getVertices(currentRow, currentCol);
-                System.out.println("DiceResult after each WHILE is: " + diceResult);
-                System.out.println("!TileVertices.IsEmpty after each While" + !tileVertices.isEmpty());
+
             }
         }
         
@@ -195,38 +182,18 @@ public class CommandMovePiece implements CommandInterface {
     private boolean setPieceInTile(Tile nexTile, Piece movedPiece) {
         boolean success = false;
         UrTile urNextTile = (UrTile) nexTile;
-        System.out.println("realTile: " + urNextTile);
-        //System.out.println("realTile: " + nexTile.getPiece().getColor());
                 
         UrPiece myUrPiece = (UrPiece) movedPiece;
         UrPiece yourUrPiece;
-        System.out.println("Vamo a ver si es Vacant");
-        System.out.println("!urNextTile.isSafe()" + !urNextTile.isSafe());
-        
-        if (urNextTile.getPiece() != null) {
-            System.out.println("NextTile color: " + urNextTile.getPiece().getColor());
-            System.out.println("Moved piece color: " + myUrPiece.getColor());
-            System.out.println("Current piece index of urNextTile is: " + urNextTile.getPiece().pieceIndex);
-            System.out.println("Current piece index of movedPiece is: " + myUrPiece.pieceIndex);
-            boolean a = urNextTile.getPiece().getColor().getRGB() != myUrPiece.getColor().getRGB();
-            System.out.println("Printing weird !=" + a);
-        }
 
-        Tile tile = this.board.getTile(this.clickedTile.getRow(), this.clickedTile.getColumn());
-        tile.removePiece();
-        clickedTile.removePiece();
-        System.out.println("ClickedTile piece after removing" + this.clickedTile);
-        System.out.println("tile piece after removing" + tile);
 
         if (urNextTile.isVacant()) {
-            System.out.println("Si es Vacant");
             myUrPiece.setInPlay();
             urNextTile.setPiece(myUrPiece);
             success = true;
         } else if (urNextTile.getPiece().getColor().getRGB() != myUrPiece.getColor().getRGB()
             && !urNextTile.isSafe())
         {
-            System.out.println("NO vacant");
             this.pieceEaten.setTrue();
             urNextTile.setPiece(myUrPiece);
             myUrPiece.setInPlay();
@@ -235,7 +202,6 @@ public class CommandMovePiece implements CommandInterface {
             
             success = true;
         } 
-        System.out.println("Printing movedPiece" + myUrPiece);
         return success;
     }
     

@@ -48,7 +48,6 @@ public class UrPlayer <PieceType extends Piece> extends Player {
         UrPiece availablePiece = null;
         for(var piece : pieces) {
             availablePiece = (UrPiece)piece;
-            System.out.println("Printing all player pieces...: " + availablePiece.getColor());
             if (!availablePiece.isInPlay()) {
                 break;
             } 
