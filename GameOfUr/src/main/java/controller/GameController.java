@@ -1,6 +1,8 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Issue #27 - View Manager.
+ * Jimena Gdur Vargas - B93250.
+ * Álvaro Miranda Villegas - B84964.
+ * Ronald Palma Villegas - B95811.
  */
 package controller;
 
@@ -13,10 +15,10 @@ import model.Referee;
 import model.Tile;
 
 /**
- *
+ * General version of game controller.
  * @author Mauricio Palma
  */
-public class GameController {
+public abstract class GameController {
         /**
     *  A Button that represents the new game button on GUI.
     */
