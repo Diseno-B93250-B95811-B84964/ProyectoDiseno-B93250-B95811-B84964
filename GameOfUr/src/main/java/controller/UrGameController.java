@@ -9,17 +9,9 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
 import model.Board;
-import model.DataManager;
 
-import model.Dice;
-import model.FileManager;
 import model.JSONDeserializer;
 import model.JSONSerializer;
 import model.Piece;
