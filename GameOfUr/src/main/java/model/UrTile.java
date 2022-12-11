@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #25 - Graph logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -14,9 +14,9 @@ package model;
 public class UrTile extends Tile
 {
     /**
-    * A boolean value that determines if tile is safe.
+    * Determines if tile is safe.
     */
-    protected boolean isSafe;
+    private boolean isSafe;
     
     /**
      * Creates a new Tile located in -1, -1.
@@ -31,9 +31,9 @@ public class UrTile extends Tile
      * @param tileColumn The column in which the tile is located.
      * @param isTileSafe If current tile is safe.
     */
-    public UrTile(int tileRow, int tileColumn, boolean isTileSafe) {
+    public UrTile(int tileRow, int tileColumn) {
         super(tileRow, tileColumn);
-        this.isSafe = isTileSafe;
+        this.isSafe = false;
     }
     /**
      * Determines if current tile is safe.
@@ -48,6 +48,18 @@ public class UrTile extends Tile
     public void setAsSafe() {
         this.isSafe = true;
     }
+    /**
+     * Sets tile isSafe value depending on the parameter.
+     * @param isSafe indicates if the tile is safe.
+    */
+    public void setIsSafe(boolean isSafe) {
+        this.isSafe = isSafe;
+    }
+    /**
+     * Converts Tile into a string.
+     * Made for the Royal Game of Ur.
+     * @return a string representing a tile
+     */
     @Override
     public String toString() {
         String string  = 

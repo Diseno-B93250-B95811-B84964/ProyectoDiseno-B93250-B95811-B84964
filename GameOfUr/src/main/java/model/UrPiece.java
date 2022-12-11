@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #25 - Graph logic.
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
  * Ronald Palma Villegas - B95811.
@@ -17,22 +17,22 @@ public class UrPiece extends Piece {
     /**
     * Determines whether piece is currently in play.
     */
-    protected boolean isInPlay;
+    private boolean isInPlay;
     
+    /**
+     * Creates a new Piece.
+    */
+    public UrPiece(int index) {
+        super(index);
+        this.isInPlay = false;
+    }
     /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
-    public UrPiece(Color selectedColor) {
-        super(selectedColor);
+    public UrPiece(Color selectedColor, int index) {
+        super(selectedColor, index);
         this.isInPlay = false;
-    }
-    /**
-     * Determines if the piece is currently in play.
-     * @return value of isInPlay.
-    */
-    public boolean isInPlay() {
-        return this.isInPlay;
     }
     /**
      * Indicates piece is currently in play.
@@ -46,6 +46,25 @@ public class UrPiece extends Piece {
     public void setNotInPlay() {
         this.isInPlay = false;
     }
+    /**
+     * Sets given piece in current tile.
+     * @param givenPiece The piece that is located in current tile.
+    */
+    public void setIsInPlay(boolean isInPlay){
+        this.isInPlay = isInPlay;
+    }
+    /**
+     * Determines if the piece is currently in play.
+     * @return Value of isInPlay.
+    */
+    public boolean isInPlay() {
+        return this.isInPlay;
+    }
+    /**
+     * Converts Piece into a string.
+     * Made for the Royal Game of Ur.
+     * @return A string representing a piece
+     */
     @Override
     public String toString() {
         String string =

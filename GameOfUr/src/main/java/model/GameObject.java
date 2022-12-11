@@ -1,5 +1,5 @@
 /*
- * Issue #25 - Game Logic.
+ * Issue #25 - Graph logic.
  * 
  * Jimena Gdur Vargas - B93250.
  * Álvaro Miranda Villegas - B84964.
@@ -12,11 +12,11 @@ package model;
  * All game objects will inherit from this class.
  * @author Jimena Gdur
  */
-abstract public class GameObject {
-
+abstract public class GameObject
+{
     /**
      * Converts specific class into a string.
-     * @return a string representing class
+     * @return A string representing the class
      */
     @Override
     abstract public String toString();
