@@ -161,9 +161,9 @@ public class ViewManager
     /**
      * Show game rules.
      */
-    public void showRules() {
+    public void showRules(ArrayList<String> rules) {
         // TODO: receive rules object from referee
-        showRules.showRules();
+        showRules.showRules(rules);
     }
     /**
      * Gets file name that allows a former match to be loaded.

@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,24 +29,23 @@ public class ShowRules extends javax.swing.JPanel
     }
     /**
      * Creates new frame with game rules.
+     * @param rules Rules string with the rules
      */
-    public void showRules(){
-        //UrRulesModel rules = new UrRulesModel(); // TODO: is this okay?
+    public void showRules(ArrayList<String> rules){
         JFrame frame = new JFrame("Rules");        
         JPanel panel = new JPanel();
         LayoutManager layout = new FlowLayout();
         panel.setLayout(layout);     
         final JLabel title = new JLabel();
         title.setFont(new Font("Century Schoolbook", 1, 36));
-        //title.setText(rules.getRules()[0]);
-        title.setText("Some serious rules over here...");
+        title.setText(rules.get(0));
         panel.add(title);    
-        /*for (int index = 1; index < rules.getLength(); index++) {
+        for (int index = 1; index < rules.size(); index++) {
             final JLabel label = new JLabel();
             label.setFont(new Font("Century Schoolbook", 0, 18));
-            label.setText(rules.getRules()[index]);
+            label.setText(rules.get(index));
             panel.add(label);
-        }*/
+        }
         frame.getContentPane().add(panel, BorderLayout.CENTER);   
         frame.setSize(600, 420);      
         frame.setLocationRelativeTo(null);  

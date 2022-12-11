@@ -258,7 +258,8 @@ public class UrGameController
         * Coordinates how to show games rules.
         */ 
         private void manageShowRules(){
-            viewManager.showRules();
+            ArrayList<String> rules = referee.getGameRules();
+            viewManager.showRules(rules);
         }
         /**
         * Coordinates how to save current game state.
