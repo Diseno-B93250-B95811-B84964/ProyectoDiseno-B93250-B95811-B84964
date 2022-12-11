@@ -10,7 +10,8 @@ El proyecto consistió en la creación de un MARDA para generalizar el proceso d
 Para correr el programa se puede abrir el proyecto y ejecutarlo a través de NetBeans. Por otro lado, es posible ejecutarlo a través del archivo ejecutable con extensión jar
 
 ## Demostración de ejecución
-A continuación, se adjunta enlace a YouTube en donde se puede ver una ejecución del programa. 
+A continuación, se adjunta enlace a Google Drive en donde se puede ver una ejecución del programa.
+https://drive.google.com/drive/folders/1QlcJXaFx1tWFW7agDneIe23T6vuAzmii?usp=sharing
 
 ## Autores:
 - Jimena Gdur Vargas B93250
