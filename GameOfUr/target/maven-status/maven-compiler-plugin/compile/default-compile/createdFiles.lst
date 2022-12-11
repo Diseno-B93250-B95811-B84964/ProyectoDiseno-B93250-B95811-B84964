@@ -4,6 +4,7 @@ controller\ViewManager.class
 view\ShowRules.class
 view\UrMainMenu$3.class
 view\UrNewGame$8.class
+controller\GameController.class
 view\UrMainGame$2.class
 model\Rules.class
 view\UrLoadGame$1.class
@@ -49,7 +50,6 @@ view\NewGameInterface.class
 model\InventoryItem.class
 view\UrNewGame$7.class
 model\DataManager.class
-controller\refereeStub.class
 model\Dice.class
 view\UrLoadGame.class
 view\UrMainMenu.class

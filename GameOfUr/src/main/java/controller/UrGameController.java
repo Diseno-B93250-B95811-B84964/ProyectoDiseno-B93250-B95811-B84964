@@ -41,81 +41,15 @@ import view.ShowRules;
  * Referee and view manager.
  * @author Mauricio Palma.
  */
-public class UrGameController
+public class UrGameController extends GameController
 {
-    /**
-    *  A Button that represents the new game button on GUI.
-    */
-    private JButton startNewGameButton;
-    /**
-    *  A Button that represents the load game button on GUI.
-    */
-    private JButton startLoadGameButton;
-    /**
-    *  A Button that represents the go back button on GUI, new game view.
-    */
-    private JButton goBackToMainMenuFromNewGameButton;
-    /**
-    *  A Button that represents the continue button on GUI, new game view.
-    */
-    private JButton goToMainGameFromNewGameButton;
-    /**
-    *  A Button that represents the go back button on GUI, load game view.
-    */
-    private JButton goBackToMainMenuFromLoadGameButton;
-    /**
-    *  A Button that represents the continue button on GUI, load game view.
-    */
-    private JButton goToMainGameFromLoadGameButton;
-    /**
-    *  A Button that represents the rules button on GUI, at main menu view.
-    */
-    private JButton showRulesFromMainMenuButton;
-    /**
-    *  A Button that represents the rules button on GUI, at main game view.
-    */
-    private JButton showRulesFromGameButton;
-    /**
-    *  A Button that represents the save and exit button on GUI.
-    */
-    private JButton exitAndSaveButton;
-    /**
-    *  A Button that represents the throw dice button on GUI.
-    */
-    private JButton throwDiceButton;
-    /**
-    * Object to call methods of the view manager and coordinate them with.
-    * the referee object
-    */
-    private ViewManager viewManager;
-    /**
-    * ArrayList used to store the information of every player playing the game.
-    */ 
-    private ArrayList<Player> playerArray;
-
-    /**
-    * Integer that tracks which player is playing at a given time.
-    */
-    private int currentPlayer;
-    /**
-    * Referee to manage the game.
-    */
-    private Referee<UrPlayer, UrPiece, UrTile> referee;
-    /**
-    * Serializer attribute
-    */
-    private DataManager JSONdeserializer;
-    /**
-    * Deserializer attribute
-    */
-    private DataManager JSONserializer;
     
     /**
      * Constructor method that uses templates to create a personalized viewManager.  
      */
     public UrGameController(){     
         this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
-        this.playerArray = new ArrayList<>(); // Recibe, NO crea
+        this.playerArray = new ArrayList<>();
         this.currentPlayer = 0;
         makeReferee();
         makeSafeTiles();
