@@ -4,6 +4,7 @@ controller\ViewManager.class
 view\ShowRules.class
 view\UrMainMenu$3.class
 view\UrNewGame$8.class
+controller\GameController.class
 view\UrMainGame$2.class
 model\Rules.class
 view\UrLoadGame$1.class

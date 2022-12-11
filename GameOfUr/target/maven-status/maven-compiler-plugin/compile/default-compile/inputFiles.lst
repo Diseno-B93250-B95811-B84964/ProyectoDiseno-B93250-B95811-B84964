@@ -1,36 +1,37 @@
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\JSONDeserializer.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandRemoveFromInventory.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandValidateWinner.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Board.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Tile.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrNewGame.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\ViewManager.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\DataManager.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrMainMenu.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandInterface.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\main.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Rules.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandAddToInventory.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\FileManager.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrLoadGame.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\UrGameController.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrTile.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\LoadGameInterface.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\InventoryItem.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrPiece.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrMainGame.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Piece.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandAddScore.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Dice.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrPlayer.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandMovePiece.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Referee.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\NewGameInterface.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\ShowRules.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\GameObject.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Inventory.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\MainGameInterface.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\MainMenuInterface.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Player.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandGetObjectFromInventory.java
-C:\Users\Usuario1\Documents\NetBeansProjects\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\JSONSerializer.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandInterface.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Piece.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrMainMenu.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Inventory.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrPiece.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\MainGameInterface.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\JSONSerializer.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\ShowRules.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandAddScore.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandRemoveFromInventory.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\JSONDeserializer.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\NewGameInterface.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\ViewManager.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\GameController.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\InventoryItem.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandValidateWinner.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Rules.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandMovePiece.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Dice.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\GameObject.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Player.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\MainMenuInterface.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrLoadGame.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Board.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandAddToInventory.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Tile.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrPlayer.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\main.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\UrTile.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\FileManager.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\Referee.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrNewGame.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\controller\UrGameController.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\CommandGetObjectFromInventory.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\model\DataManager.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\UrMainGame.java
+D:\Respaldo Escritorio DELL\DESKTOP\Escritorio 2\Repositorio_Diseño_Soft\ProyectoDiseno-B93250-B95811-B84964\GameOfUr\src\main\java\view\LoadGameInterface.java

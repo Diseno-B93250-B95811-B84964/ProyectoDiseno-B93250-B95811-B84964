@@ -41,81 +41,15 @@ import view.ShowRules;
  * Referee and view manager.
  * @author Mauricio Palma.
  */
-public class UrGameController
+public class UrGameController extends GameController
 {
-    /**
-    *  A Button that represents the new game button on GUI.
-    */
-    private JButton startNewGameButton;
-    /**
-    *  A Button that represents the load game button on GUI.
-    */
-    private JButton startLoadGameButton;
-    /**
-    *  A Button that represents the go back button on GUI, new game view.
-    */
-    private JButton goBackToMainMenuFromNewGameButton;
-    /**
-    *  A Button that represents the continue button on GUI, new game view.
-    */
-    private JButton goToMainGameFromNewGameButton;
-    /**
-    *  A Button that represents the go back button on GUI, load game view.
-    */
-    private JButton goBackToMainMenuFromLoadGameButton;
-    /**
-    *  A Button that represents the continue button on GUI, load game view.
-    */
-    private JButton goToMainGameFromLoadGameButton;
-    /**
-    *  A Button that represents the rules button on GUI, at main menu view.
-    */
-    private JButton showRulesFromMainMenuButton;
-    /**
-    *  A Button that represents the rules button on GUI, at main game view.
-    */
-    private JButton showRulesFromGameButton;
-    /**
-    *  A Button that represents the save and exit button on GUI.
-    */
-    private JButton exitAndSaveButton;
-    /**
-    *  A Button that represents the throw dice button on GUI.
-    */
-    private JButton throwDiceButton;
-    /**
-    * Object to call methods of the view manager and coordinate them with.
-    * the referee object
-    */
-    private ViewManager viewManager;
-    /**
-    * ArrayList used to store the information of every player playing the game.
-    */ 
-    private ArrayList<Player> playerArray;
-
-    /**
-    * Integer that tracks which player is playing at a given time.
-    */
-    private int currentPlayer;
-    /**
-    * Referee to manage the game.
-    */
-    private Referee<UrPlayer, UrPiece, UrTile> referee;
-    /**
-    * Serializer attribute
-    */
-    private DataManager JSONdeserializer;
-    /**
-    * Deserializer attribute
-    */
-    private DataManager JSONserializer;
     
     /**
      * Constructor method that uses templates to create a personalized viewManager.  
      */
     public UrGameController(){     
         this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
-        this.playerArray = new ArrayList<>(); // Recibe, NO crea
+        this.playerArray = new ArrayList<>();
         this.currentPlayer = 0;
         makeReferee();
         makeSafeTiles();
@@ -260,10 +194,14 @@ public class UrGameController
         */
         private void manageStartLoadGame(){
             String file = viewManager.getFileNameToLoadGame();
+            ArrayList<Player> myPlayerArray = referee.getPlayerArray();
+            Player[] myPlayerAsArray = myPlayerArray.toArray(new Player[2]);
             if (file != null) {
                 JSONdeserializer.execute();
                 playerArray = referee.getPlayerArray();
                 viewManager.setPlayers(playerArray);
+                searchForPieces(myPlayerAsArray);
+                viewManager.loadFormerGame(myPlayerAsArray);
                 viewManager.swapViewToMainGame();
                 currentPlayer = currentPlayer % playerArray.size();
                 
@@ -287,7 +225,6 @@ public class UrGameController
         */ 
         private void manageSaveAndExit(){
             JSONserializer.execute();
-            System.out.println("Creado");
             System.exit(0);
         }
         /**
@@ -325,27 +262,14 @@ public class UrGameController
             if (playerPlayed) {
                 int formerRow = viewManager.getClickedRow();
                 int formerColumn = viewManager.getClickedColum();
-
-                System.out.println("/************/");
-                System.out.println("ClickedRow is: " + Integer.toString(formerRow));
-                System.out.println("ClickedColumn is: " + Integer.toString(formerColumn));
-                System.out.println("/************/");
                 
                 boolean canMove = referee.checkPlay(formerRow, formerColumn);
                 if (canMove) {       
                     Tile nextTile = referee.getNextTile();
                     viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
-
-                    System.out.println("/************/");
-                    System.out.println("NextTileRow: " + nextTile.getRow());
-                    System.out.println("NextTileColumn: " + nextTile.getColumn());
-                    System.out.println("/************/");
-
                     updateGUI(formerRow, formerColumn);  
                     
                     if(referee.getPieceEaten()) {
-                        System.out.println("Printing next piece color: "+ nextTile.getPiece().getColor());
-                        System.out.println("Printing Current player piece color" + playerArray.get(currentPlayer).getColor());
                         updateCurrentPlayer();
                         viewManager.desactivatePiece(playerArray.get(currentPlayer).getColor());
                         updateCurrentPlayer();
@@ -356,7 +280,7 @@ public class UrGameController
                     }
                     
                     if (referee.getIsWinner()) {
-                        viewManager.declareWinner(currentPlayer);
+                        viewManager.declareWinner(currentPlayer+1);
                     }
                 } else {
                     viewManager.resetBackground(formerRow, formerColumn);
@@ -387,12 +311,27 @@ public class UrGameController
         * @return whether there is a winner.
         */  
         private boolean checkIfWinner(){
-            //if (playerArray.get(currentPlayer).getScore() == 7) {
-               // winnerExists = true;
-            //}
+            if (referee.getIsWinner()) {
+               winnerExists = true;
+            }
             return winnerExists;
         }
 
+        private void searchForPieces(Player[] myPlayerAsArray){
+            Board board = referee.getBoard();
+            UrTile tile = null;
+            int playerIndex = -1;
+            int totalSize = board.getAmountRows() * board.getAmountColumns();
+            for (int index = 0; index < totalSize; index++) {
+                tile = (UrTile)board.getTile(index);
+                System.out.println("Index of urGameController" + index);
+                if (tile.getPiece() != null) {
+                    playerIndex = viewManager.checkColorMatchForFormerGame(tile.getPiece().getColor(), myPlayerAsArray);
+                    viewManager.desactivatePiecesForAFormerMatch(myPlayerAsArray,playerIndex, tile); 
+                }
+            }
+        }
+        
         /**
         * Method that checks which button was clicked and acts accordingly.
         */   
