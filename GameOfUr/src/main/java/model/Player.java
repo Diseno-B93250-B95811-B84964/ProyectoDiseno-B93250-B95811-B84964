@@ -36,9 +36,8 @@ public abstract class Player
      * Player's inventory which contains InventoryItems.
      */
     
-    /*******************************/
-    //protected Inventory inventory;
-    /******************************/
+   
+
     
     /**
      * Amount of pieces player has.
@@ -70,13 +69,22 @@ public abstract class Player
         initializePiecesArray();
     }
 
+    public Player() {
+        this.piecesAmount = 0;
+        this.name = "";
+        this.color = Color.WHITE;
+        this.pieces = new ArrayList<>(this.piecesAmount);        
+        this.pieceType = null;
+        //initializePiecesArray();
+    }
+
     /**
     * Initializes player array that contains all their pieces.
     */
     private void initializePiecesArray(){
         for (int pieceIndex = 0; pieceIndex < this.piecesAmount; pieceIndex++) {
             try {
-                makeNewPiece();
+                makeNewPiece(pieceIndex);
             } catch (IllegalAccessException | InstantiationException |
                     NoSuchMethodException | IllegalArgumentException | 
                     InvocationTargetException ex) {
@@ -93,11 +101,11 @@ public abstract class Player
      * @throws IllegalArgumentException Exception that is thrown if arguments do not match requested method
      * @throws InvocationTargetException Exception that is thrown if target cannot be invoked
      */
-    public void makeNewPiece() throws IllegalAccessException,InstantiationException, 
+    public void makeNewPiece(int index) throws IllegalAccessException,InstantiationException, 
             NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
         PieceType newPiece = (PieceType)pieceType.getClass()
-                .getConstructor(Color.class)
-                .newInstance(this.color);
+                .getConstructor(Color.class, int.class)
+                .newInstance(this.color,index);
         pieces.add(newPiece);
     }
     /**
@@ -184,4 +192,5 @@ public abstract class Player
         }
         return string;
     }
+    public abstract void setColorPiece(Color color);
 }

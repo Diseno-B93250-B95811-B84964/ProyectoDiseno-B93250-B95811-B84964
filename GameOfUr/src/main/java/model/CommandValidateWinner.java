@@ -41,12 +41,6 @@ public class CommandValidateWinner implements CommandInterface {
      */
     @Override
     public boolean execute() {
-        System.out.println("Current length: " + getPlayerArrayLength());
-        System.out.println("Current player value: " + currentPlayer);
-        
-        System.out.println("Name of the current player: " + playerArray.get(currentPlayer).getName());
-        System.out.println("Current player score: " + playerArray.get(currentPlayer).getScore());
-        System.out.println("/***********************************/");
         boolean checkIfWinner = this.playerArray.get(currentPlayer).score >= this.maxScore;
         updateCurrentPlayer();
         return checkIfWinner;

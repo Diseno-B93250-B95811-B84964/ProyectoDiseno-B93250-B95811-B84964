@@ -22,16 +22,16 @@ public class UrPiece extends Piece {
     /**
      * Creates a new Piece.
     */
-    public UrPiece() {
-        super();
+    public UrPiece(int index) {
+        super(index);
         this.isInPlay = false;
     }
     /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
-    public UrPiece(Color selectedColor) {
-        super(selectedColor);
+    public UrPiece(Color selectedColor, int index) {
+        super(selectedColor, index);
         this.isInPlay = false;
     }
     /**

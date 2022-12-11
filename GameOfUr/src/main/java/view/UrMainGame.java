@@ -1129,10 +1129,22 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
         pieceLabelSecondPlayer6.setIcon(icon);
         pieceLabelSecondPlayer7.setIcon(icon);
     }
+    
+     /**
+     * Updates player's score label by adding one point to it.
+     */
+    public void addScoreToPlayer(Color color){
+        if (color == firstPlayerColor) {
+            addScoreToFirstPlayer();
+        } else if (color == secondPlayerColor) {
+            addScoreToSecondPlayer();
+        }
+    }
+    
     /**
      * Updates first player's score label by adding one point to it.
      */
-    public void addScoreToFirstPlayer() {
+    private void addScoreToFirstPlayer() {
         int currentScore = Integer.parseInt(firstPlayerScore.getText());
         currentScore+=1;
         firstPlayerScore.setText(Integer.toString(currentScore));
@@ -1140,7 +1152,7 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     /**
      * Updates second player's score label by adding one point to it.
      */
-    public void addScoreToSecondPlayer() {
+    private void addScoreToSecondPlayer() {
         int currentScore = Integer.parseInt(secondPlayerScore.getText());
         currentScore+=1;
         secondPlayerScore.setText(Integer.toString(currentScore));
@@ -1182,6 +1194,10 @@ public class UrMainGame extends javax.swing.JPanel implements MainGameInterface{
     public void declarePlayerWinner(int number) {
         String playerTurn = "Player " + number + "'s" + " won!";
         playerTurnLabel.setText(playerTurn);
+    }
+    
+    public void changeButtonText(String textName){
+        throwDiceButton.setText(textName);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

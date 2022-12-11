@@ -283,7 +283,6 @@ public class UrNewGame extends javax.swing.JPanel implements NewGameInterface {
      */
     @Override
     public void addTextFieldFocusistener(FocusListener listenForButton) {
-        System.out.println("Im trying to gain focus...");
         playerNameTextField.addFocusListener(listenForButton);
     }
     /**
@@ -338,7 +337,6 @@ public class UrNewGame extends javax.swing.JPanel implements NewGameInterface {
      */
     @Override
     public void hideColorButton(Color color){
-        System.out.println("A color is being erased... so long");
         if (color.getRGB() == BLUE.getRGB()) {
             BlueButton.setVisible(false);
             BlueButton.setEnabled(false);

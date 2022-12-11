@@ -20,18 +20,22 @@ abstract public class Piece extends GameObject
     */
     protected Color color;
     
+    public int pieceIndex; // TODO delete this
+    
     /**
      * Creates a new Piece.
     */
-    public Piece() {
+    public Piece(int index) {
         this.color = Color.WHITE;
+        pieceIndex = index;
     }
     /**
      * Creates a new Piece for a player.
      * @param selectedColor Player's selected color.
     */
-    public Piece(Color selectedColor) {
+    public Piece(Color selectedColor, int index) {
         this.color = selectedColor;
+        pieceIndex = index;
 
     }
     /**
@@ -55,7 +59,7 @@ abstract public class Piece extends GameObject
     @Override
     public String toString() {
         String string =
-            "pieceColor: " + this.color.getRGB();
+            "pieceColor: " + this.color;
         return string;
     }
 }

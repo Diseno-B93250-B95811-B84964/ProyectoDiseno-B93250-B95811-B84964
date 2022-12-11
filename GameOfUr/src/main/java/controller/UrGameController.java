@@ -15,13 +15,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import model.Board;
+import model.DataManager;
 
 import model.Dice;
 import model.FileManager;
+import model.JSONDeserializer;
+import model.JSONSerializer;
 import model.Piece;
 import model.Player;
+import model.Referee;
+import model.Tile;
 import model.UrPiece;
 import model.UrPlayer;
+import model.UrTile;
 
 import view.UrLoadGame;
 import view.UrMainGame;
@@ -85,117 +92,74 @@ public class UrGameController
     * ArrayList used to store the information of every player playing the game.
     */ 
     private ArrayList<Player> playerArray;
-    /**
-    * Object that is used to manipulate the dice accordingly in each game.
-    */
-    private Dice dice;
+
     /**
     * Integer that tracks which player is playing at a given time.
     */
     private int currentPlayer;
     /**
-    * An array with the probabilities of each dice side.
+    * Referee to manage the game.
     */
-    private int[] diceProbabilities;
+    private Referee<UrPlayer, UrPiece, UrTile> referee;
     /**
-    * The amount of players in game.
+    * Serializer attribute
     */
-    private int playerAmount;  // TODO: USAR ESTOS AL CREAR REFEREE
+    private DataManager JSONdeserializer;
     /**
-    * The amount of pieces each player has.
+    * Deserializer attribute
     */
-    private int pieceAmount;
-    /**
-    * The amount of rows in game board.
-    */
-    private int rowAmount;
-    /**
-    * The amount of columns in game board.
-    */
-    private int colAmount;
-    /**
-    * A matrix that contains the adjacents of each tile.
-    */
-    private ArrayList<ArrayList<Boolean>> adjacentMatrix;
-    /**
-    * A reference to an object that reads and manages files.
-    */
-    private FileManager fileManager;
+    private DataManager JSONserializer;
     
     /**
      * Constructor method that uses templates to create a personalized viewManager.  
      */
-    public UrGameController(){
-        readGameData();
-        try {
-            SwingUtilities.invokeAndWait(() -> {
-                this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
-                this.playerArray = new ArrayList<>();
-                this.dice = new Dice(diceProbabilities.length, diceProbabilities);
-                this.manageButtons();
-                this.currentPlayer = 1;
-                
-            });
-        } catch (InterruptedException | InvocationTargetException ex) {
-            Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public UrGameController(){     
+        this.viewManager = new ViewManager(UrMainGame::new, UrLoadGame::new, UrMainMenu::new, UrNewGame::new, ShowRules::new);
+        this.playerArray = new ArrayList<>(); // Recibe, NO crea
+        this.currentPlayer = 0;
+        makeReferee();
+        makeSafeTiles();
+        makeSerializers();
+        this.manageButtons();
+    }
+    
+    /**
+    * Makes seriales
+    */
+    public void makeSerializers(){
+        ArrayList<Player> myPlayerArray = referee.getPlayerArray();
+        Board myBoard = referee.getBoard();
+        Player[] myPlayerAsArray = myPlayerArray.toArray(new Player[2]);
+        JSONserializer = new JSONSerializer(myBoard,myPlayerAsArray);
+        JSONdeserializer = new JSONDeserializer(myBoard,myPlayerAsArray);
+    }
+    
+    /**
+     * Constructor for the referee using the references from the game elements.  
+     */    
+    private void makeReferee(){
+        Player urPlayer = new UrPlayer();
+        Piece urPiece = new UrPiece(0);
+        Tile urTile = new UrTile();
+        this.referee = new Referee(urPlayer, urPiece, urTile);
+
     }
     /**
-     * Reads game data from file.  
+     * Initialize safe tiles.  
      */
-    private void readGameData() {
-        // Reads from file
-        fileManager = new FileManager();
-        fileManager.loadFile("gameData.csv", "src/main/java/auxiliaryFiles/");
-        ArrayList<String> stringArray = fileManager.getFileContents();
-        
-        setDiceProbabilities(stringArray.get(0));
-        setPlayerAmount(stringArray.get(1));
-        setBoardDimensions(stringArray.get(2));
-        
-        ArrayList<String> adjacentsArray = new ArrayList(stringArray.subList(3, stringArray.size()));
-        setBoardAdjacentMatrix(adjacentsArray);
+    private void makeSafeTiles(){
+        UrTile safeTile1 = (UrTile) referee.getTile(0, 0);
+        safeTile1.setAsSafe();
+        UrTile safeTile2 = (UrTile) referee.getTile(0, 2);
+        safeTile2.setAsSafe();
+        UrTile safeTile3 = (UrTile) referee.getTile(6, 0);
+        safeTile3.setAsSafe();
+        UrTile safeTile4 = (UrTile) referee.getTile(6, 2);
+        safeTile4.setAsSafe();
     }
+    
     /**
-     * Sets dice probabilities extracting them from a string.
-     * @param row A file line.
-     */
-    private void setDiceProbabilities(String row) {
-        String[] diceData = row.split(",");
-        diceProbabilities = new int[diceData.length];
-        for (int diceSide = 0; diceSide < diceData.length; diceSide++) {
-            diceProbabilities[diceSide] = Integer.parseInt(diceData[diceSide]);
-        }
-    }
-    /**
-     * Sets amount of players and the amount of pieces each player has, extracting them from a string.
-     * @param row A file line.
-     */
-    private void setPlayerAmount(String row) {
-        String[] playerData = row.split(",");
-        playerAmount = Integer.parseInt(playerData[0]);
-        pieceAmount = Integer.parseInt(playerData[1]);
-    }
-    /**
-     * Sets board dimensions, extracting them from a string.
-     * @param row A file line.
-     */
-    private void setBoardDimensions(String row) {
-        String[] boardData = row.split(",");
-        rowAmount = Integer.parseInt(boardData[0]);
-        colAmount = Integer.parseInt(boardData[1]);
-    }
-    /**
-     * Sets the graph's adjacent matrix, extracting them from an array of strings.
-     * @param adjacents An array of strings, each with a true or false value specifying if there is an adjacent there.
-     */
-    private void setBoardAdjacentMatrix(ArrayList<String> adjacents) {
-        // Converts from ArrayList<String> to ArrayList<ArrayList<Boolean>>
-        ArrayList<ArrayList<String>> stringMatrix = fileManager.splitArray(adjacents, ",");
-        adjacentMatrix = fileManager.convertFromStringToBoolean(stringMatrix);
-    }
-    /**
-     * Manages each button parameter of UrGameController to the actual GUI button.
+     * Manages each button parameter of UrGameController to the actual GUI button
     */
     private void manageButtons(){
         startNewGameButton = viewManager.getStartNewGameButton();
@@ -225,11 +189,7 @@ public class UrGameController
     * Inner Action Listener class to react accordingly user inputs on GUI.
     */
     class buttonAction implements ActionListener{
-        /**
-        * Referee object used to coordinate them with the view manager object.
-        * Referee manipulates the board logic and updates the game status.
-        */
-        refereeStub refereeStub;
+   
         /**
         * Determines if the current player is the first player.
         */
@@ -243,15 +203,15 @@ public class UrGameController
         */
         boolean winnerExists;
         
+        boolean selectedPiece;
         /**
         * Creates new action listener.
         */
         public buttonAction() {
-            refereeStub = new refereeStub();
             firstPlayer  = true;
-            playerPlayed = true;
+            playerPlayed = false;
             winnerExists = false;
-            viewManager.setIfPieceMoved(true);
+            selectedPiece = false;
         }
         /**
         * Coordinates how to react when a new game is chosen.
@@ -268,65 +228,66 @@ public class UrGameController
         /**
         * Coordinates what to do when a new game starts.
         */
-        private void manageStartNewGame(){
+        private void manageStartNewGame() {
             String playerData = viewManager.getPlayerData();
-            Piece urPiece = new UrPiece();
             if (playerData != null) {
                 // Creates new player from data received
                 String[] playerDataArray = playerData.split(",");
                 Color playerColor = new Color(Integer.parseInt(playerDataArray[0]));
                 String playerName = playerDataArray[1];
-                //public UrPlayer(int amountPieces, Color color, String name, UrPiece pieceType);
-                Player newPlayer = new UrPlayer(pieceAmount, playerColor, playerName, (UrPiece) urPiece); // TODO make a General Game Controller with templates
-           
-                System.out.println("Referee stubs says: " + refereeStub.getMessage());
+                referee.setPlayerInfo(playerName, playerColor, currentPlayer);
+                currentPlayer += 1;
                 int nextPlayerNumber = currentPlayer+1;
                 
                 if (firstPlayer) {
-                    playerArray.add(newPlayer);
+                    
                     firstPlayer = false;
                     viewManager.updateNewGameForNextPlayer(nextPlayerNumber);
-                    viewManager.hideColors(newPlayer.getColor());
+                    viewManager.hideColors(playerColor);
                     viewManager.resetColorChosen();
                     viewManager.swapViewToNewGame();
                 } else {
-                    playerArray.add(newPlayer);
+                    playerArray = referee.getPlayerArray();
                     viewManager.setPlayers(playerArray);
                     viewManager.swapViewToMainGame();
+                    currentPlayer = currentPlayer % playerArray.size();
                 }
+                
             }
         }
         /**
         * Coordinates how to start a game that has been load from a former match.
         */
         private void manageStartLoadGame(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             String file = viewManager.getFileNameToLoadGame();
             if (file != null) {
-                // playerArray = referee.getPlayers();
-                // viewManager.setPlayers(playerArray);
+                JSONdeserializer.execute();
+                playerArray = referee.getPlayerArray();
+                viewManager.setPlayers(playerArray);
                 viewManager.swapViewToMainGame();
+                currentPlayer = currentPlayer % playerArray.size();
+                
             }
         }
         /**
         * Coordinates how to go back to the main menu.
         */
         private void manageGoBackToMainMenu(){
-            System.out.println("Referee stubs says: " + refereeStub.getMessage());
             viewManager.swapViewToMainMenu();
         }
         /**
         * Coordinates how to show games rules.
         */ 
         private void manageShowRules(){
-            viewManager.showRules();
+            ArrayList<String> rules = referee.getGameRules();
+            viewManager.showRules(rules);
         }
         /**
         * Coordinates how to save current game state.
         */ 
         private void manageSaveAndExit(){
-            // TODO implement this
-            // serializer.saveState()
+            JSONserializer.execute();
+            System.out.println("Creado");
             System.exit(0);
         }
         /**
@@ -335,22 +296,92 @@ public class UrGameController
         private void managePlay(){
             boolean winner = checkIfWinner();
             if (!winner) {
-                playerPlayed = viewManager.getIfPieceMoved();
-                if (playerPlayed) {
-                    System.out.println("Inside!");
-                    int result = throwDice();     
-                    currentPlayer++;
-                    viewManager.playMove(result, currentPlayer, playerArray.get(currentPlayer-1).getColor());
-                    System.out.println("Current player is: " + currentPlayer);
-                    currentPlayer = currentPlayer % playerArray.size();
-                    System.out.println("Priting selected tile...: ");
-                    int row = viewManager.getClickedRow();
-                    int column = viewManager.getClickedColum();
-                    System.out.println("Row is: " + Integer.toString(row));
-                    System.out.println("Column is: " + Integer.toHexString(column));
+                if (!selectedPiece) {
+                    manageThrowDice();
+                } else{
+                    manageSelectedTile();
                 }
             }
         }
+        /**
+        * Manages the throw of the dice in the game flow.
+        */  
+        public void manageThrowDice(){
+            int result = referee.throwDice();
+            viewManager.playMove(result, currentPlayer+1, playerArray.get(currentPlayer).getColor());
+            if (result > 0) {
+                selectedPiece = true;
+                viewManager.changeThrowDiceButtonText("CONTINUE");
+            } else {
+                updateCurrentPlayer();
+            }
+        }
+        /**
+        * Manages the changes made when a tile is selected to make a move.
+        */  
+        public void manageSelectedTile(){
+            selectedPiece = false;
+            playerPlayed = viewManager.getIfPieceMoved();
+            if (playerPlayed) {
+                int formerRow = viewManager.getClickedRow();
+                int formerColumn = viewManager.getClickedColum();
+
+                System.out.println("/************/");
+                System.out.println("ClickedRow is: " + Integer.toString(formerRow));
+                System.out.println("ClickedColumn is: " + Integer.toString(formerColumn));
+                System.out.println("/************/");
+                
+                boolean canMove = referee.checkPlay(formerRow, formerColumn);
+                if (canMove) {       
+                    Tile nextTile = referee.getNextTile();
+                    viewManager.setNextTilePosition(nextTile.getRow(), nextTile.getColumn());
+
+                    System.out.println("/************/");
+                    System.out.println("NextTileRow: " + nextTile.getRow());
+                    System.out.println("NextTileColumn: " + nextTile.getColumn());
+                    System.out.println("/************/");
+
+                    updateGUI(formerRow, formerColumn);  
+                    
+                    if(referee.getPieceEaten()) {
+                        System.out.println("Printing next piece color: "+ nextTile.getPiece().getColor());
+                        System.out.println("Printing Current player piece color" + playerArray.get(currentPlayer).getColor());
+                        updateCurrentPlayer();
+                        viewManager.desactivatePiece(playerArray.get(currentPlayer).getColor());
+                        updateCurrentPlayer();
+                    }
+                    
+                    if (referee.getIfScored()) {
+                        viewManager.addScoreToPlayer(playerArray.get(currentPlayer).getColor());
+                    }
+                    
+                    if (referee.getIsWinner()) {
+                        viewManager.declareWinner(currentPlayer);
+                    }
+                } else {
+                    viewManager.resetBackground(formerRow, formerColumn);
+                }
+
+                updateCurrentPlayer();
+                viewManager.changeThrowDiceButtonText("THROW DICE");
+            }
+        }
+        /**
+        * Changes turns between players.
+        */  
+        private void updateCurrentPlayer(){
+            currentPlayer++;
+            currentPlayer = currentPlayer%playerArray.size();
+        }
+        /**
+        * Updates the users view.
+        */  
+        private void updateGUI(int formerX, int formerY){
+            int nextRow = viewManager.getNextRowPosition();
+            int nextColumn = viewManager.getNextColumnPosition();
+            viewManager.movePiece(formerX, formerY, nextRow, nextColumn);
+        }
+        
         /**
         * Checks if a player won the match.
         * @return whether there is a winner.
@@ -361,17 +392,9 @@ public class UrGameController
             //}
             return winnerExists;
         }
+
         /**
-        * Method that throws a random dice and shows up its result.
-        * @return dice result.
-        */    
-        private int throwDice(){
-            int diceResult = 0;
-            diceResult = dice.throwDice() - 1;
-            return diceResult;
-        }
-        /**
-        * Method that checks which button was clicked and acts accordingly
+        * Method that checks which button was clicked and acts accordingly.
         */   
         @Override
         public void actionPerformed(ActionEvent event) {

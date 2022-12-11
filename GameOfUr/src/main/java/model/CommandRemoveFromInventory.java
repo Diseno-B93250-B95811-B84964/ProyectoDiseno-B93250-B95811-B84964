@@ -4,11 +4,32 @@
  */
 package model;
 
+import java.util.ArrayList;
+import org.apache.commons.lang3.mutable.MutableInt;
+
 /**
  * Removing an inventory object from the inventory.
  * @author Mauricio Palma.
  */
-public class CommandRemoveFromInventory implements CommandInterface {
+public class CommandRemoveFromInventory<InventoryItemType extends InventoryItem> implements CommandInterface {
+    /*
+     * Holds the objects inside the inventory.
+     */
+    private ArrayList<InventoryItem> inventoryArray;
+    /*
+     * Location of the item within the array.
+     */
+    private MutableInt itemIndex;
+    
+    /*
+     * Constructor for the command class.
+     * @param array Holds the objects inside the inventory.
+     * @param itemIndex Location of the item within the array.
+     */
+    public CommandRemoveFromInventory(ArrayList<InventoryItem> array, MutableInt itemIndex) {
+        this.inventoryArray = array;
+        this.itemIndex = itemIndex;
+    }
     
     /**
      * Executes an action, to follow the command pattern.
@@ -16,7 +37,11 @@ public class CommandRemoveFromInventory implements CommandInterface {
      */
     @Override
     public boolean execute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean success = false;
+        
+        this.inventoryArray.remove(this.itemIndex.intValue());
+        
+        return success;
     }
     /**
      * Reverts an execution, to follow the command pattern.
@@ -24,7 +49,7 @@ public class CommandRemoveFromInventory implements CommandInterface {
      */
     @Override
     public boolean unExecute() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

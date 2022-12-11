@@ -82,31 +82,31 @@ public class CommandMovePiece implements CommandInterface {
      * @return Indicates if the action of eating a piece has been successful.
      */
     @Override
-    public boolean execute() {
-         System.out.println(clickedTile.getRow() + ", " + clickedTile.getColumn());
-        
+    public boolean execute() {        
         boolean success = false;
+        this.possibleTile.setRow(-1);
+        this.possibleTile.setColumn(-1);
+        this.possibleTile.removePiece();
+        
         resetEatenValue();
-        
-        dice.throwDice();
-        System.out.println("dice: " + dice.getDiceResult());
-        
+                
         UrTile nextTile = null;
-        System.out.println("clickedTile.getColumn(): " + clickedTile.getColumn());
+        System.out.println("MyColumn is: "+ clickedTile.getColumn());
         if (isPlayerColumn(clickedTile.getColumn())) {
-            System.out.println("My column");
             Piece currentPiece = getCurrentPiece();
-            System.out.println("currentPiece: " + currentPiece);
             if (currentPiece != null) {
-                System.out.println("Got piece: " + currentPiece);
                 nextTile = (UrTile) getPossibleTile();
                 if (nextTile != null) {
                     // Copies value from next tile to possibleTile
-                    System.out.println("Got possible tile: " + nextTile);
                     possibleTile.setRow(nextTile.getRow());
                     possibleTile.setColumn(nextTile.getColumn());
-                    setPieceInTile(nextTile, currentPiece);
-                    success = true;
+                    possibleTile.setPiece(currentPiece);
+                    success = setPieceInTile(nextTile, currentPiece);
+                    if (success) {
+                        Tile tile = this.board.getTile(this.clickedTile.getRow(), this.clickedTile.getColumn());
+                        tile.removePiece();
+                        clickedTile.removePiece();
+                    }
                 }
             }
         }
@@ -133,15 +133,11 @@ public class CommandMovePiece implements CommandInterface {
      */
     private Piece getCurrentPiece() {
         Piece currentPiece = null;
-        
-        if (this.clickedTile.isVacant()){
-            System.out.println("Is vacant");
+        if (clickedTile.isVacant() && clickedTile.getRow() == 4 && clickedTile.getColumn() != 1){
            currentPiece = this.playerArray.get(currentPlayer).getAvailablePiece();
-        } else {
-            System.out.println(" this.clickedTile.getPiece(): " +  this.clickedTile.getPiece());
-            currentPiece = this.clickedTile.getPiece();
+        } else if (!clickedTile.isVacant()) {
+            currentPiece = clickedTile.getPiece();
         }
-        
         return currentPiece;
     }
     
@@ -166,8 +162,8 @@ public class CommandMovePiece implements CommandInterface {
      * @return The selected tile.
      */ 
     private Tile getPossibleTile() {
-        int currentRow = this.clickedTile.getRow();
-        int currentCol = this.clickedTile.getColumn();
+        int currentRow = clickedTile.getRow();
+        int currentCol = clickedTile.getColumn();
         
         int diceResult = dice.getDiceResult();
         
@@ -177,17 +173,28 @@ public class CommandMovePiece implements CommandInterface {
             && isPlayerColumn(currentCol) && diceResult != 0)
         {
             ArrayList<Tile> tileVertices = board.getVertices(currentRow, currentCol);
-
             while(diceResult > 0 && !tileVertices.isEmpty()) {
-                for (Tile tile : tileVertices) {
+                
+                    Tile tile = tileVertices.get(0);
                     currentCol = tile.getColumn();
                     currentRow = tile.getRow();
-                    if (isPlayerColumn(currentCol)) {
-                        newTile = tile;
-                        diceResult--;
+                    if (tileVertices.size() > 1) {
+                        if (currentPlayer == 0) {
+                            currentCol = 0;
+                            currentRow = 7;
+
+                            newTile = tileVertices.get(0);
+                        } else {
+                            currentCol = 2;
+                            currentRow = 7;
+                            newTile = tileVertices.get(1);
+                       }
+                    } else {
+                        newTile = tile; 
                     }
-                }
+                diceResult--;
                 tileVertices = board.getVertices(currentRow, currentCol);
+
             }
         }
         
@@ -199,23 +206,30 @@ public class CommandMovePiece implements CommandInterface {
      * @param movedPiece Piece that's being moved.
      * @return If the coordinates are on the board or not.
      */
-    private void setPieceInTile(Tile realTile, Piece movedPiece) {
-        UrTile urTile = (UrTile) realTile;
+    private boolean setPieceInTile(Tile nexTile, Piece movedPiece) {
+        boolean success = false;
+        UrTile urNextTile = (UrTile) nexTile;
+
         UrPiece myUrPiece = (UrPiece) movedPiece;
         UrPiece yourUrPiece;
-        if (realTile.isVacant()) {
+
+
+        if (urNextTile.isVacant()) {
             myUrPiece.setInPlay();
-            realTile.setPiece(movedPiece);
-        } else if (realTile.getPiece().getColor() != movedPiece.getColor()
-            && !urTile.isSafe())
+            urNextTile.setPiece(myUrPiece);
+            success = true;
+        } else if (urNextTile.getPiece().getColor().getRGB() != myUrPiece.getColor().getRGB()
+            && !urNextTile.isSafe())
         {
             this.pieceEaten.setTrue();
-            realTile.setPiece(movedPiece);
+            urNextTile.setPiece(myUrPiece);
             myUrPiece.setInPlay();
-            yourUrPiece = (UrPiece) realTile.getPiece();
+            yourUrPiece = (UrPiece) urNextTile.getPiece();
             yourUrPiece.setNotInPlay();
-            this.clickedTile.removePiece();
+
+            success = true;
         } 
+        return success;
     }
     
     /**

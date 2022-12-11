@@ -25,6 +25,11 @@ public class UrPlayer <PieceType extends Piece> extends Player {
         super(amountPieces, color, name, pieceType);
     }
     
+    public UrPlayer() {
+        super();
+    }
+    
+    
     /**
      * Modifies player's score.
      * Made for the Royal Game of Ur.
@@ -41,16 +46,21 @@ public class UrPlayer <PieceType extends Piece> extends Player {
     @Override
     public UrPiece getAvailablePiece() {
         UrPiece availablePiece = null;
-        // TODO: research how to fix this issue
         for(var piece : pieces) {
-            //if (piece.isInstanceOf(Piece));
             availablePiece = (UrPiece)piece;
             if (!availablePiece.isInPlay()) {
                 break;
-            } else {
-                availablePiece = null;
-            }
+            } 
         }
         return availablePiece;
+    }
+
+    @Override
+    public void setColorPiece(Color color) {
+        UrPiece tempPiece = null;
+        for(var piece : pieces) {
+            tempPiece = (UrPiece)piece;
+            tempPiece.setColor(color);
+        }
     }
 }

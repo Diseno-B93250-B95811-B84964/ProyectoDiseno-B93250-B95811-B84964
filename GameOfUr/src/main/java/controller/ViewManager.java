@@ -103,6 +103,14 @@ public class ViewManager
      * The column clicked on interface.
      */
     private int clickedColumn;
+    /**
+     * The next row.
+     */
+    private int nextRow;
+    /**
+     * The next column.
+     */
+    private int nextColumn;
     
     /**
      * Creates a view manager.
@@ -140,25 +148,22 @@ public class ViewManager
      */
     public void playMove(int diceResult, int currentPlayer, Color playerColor) {
         this.setIfPieceMoved(false);
-        this.canClick = true;
+        if (diceResult>0) {
+            this.canClick = true;
+        }
         this.currentPlayerColor = playerColor;
         this.mainGame.cleanDice();
         this.mainGame.showThrownDice(diceResult);
         this.mainGame.setMoves(diceResult);
         this.mainGame.changePlayerTurn(currentPlayer);
     }
-    /**
-     * Updates main game view.
-     */
-    public void updateMainGameView() {
-        // TODO: ?
-    }
+   
     /**
      * Show game rules.
      */
-    public void showRules() {
+    public void showRules(ArrayList<String> rules) {
         // TODO: receive rules object from referee
-        showRules.showRules();
+        showRules.showRules(rules);
     }
     /**
      * Gets file name that allows a former match to be loaded.
@@ -183,8 +188,6 @@ public class ViewManager
         Color playerColor = newGame.getPlayerColor();
         String playerName = newGame.getPlayerName();
         String playerData = null;
-        System.out.println("Color: [" + playerColor+"]");
-        System.out.println("Nombre: [" + playerName+"]");
         if (playerColor != null && !playerName.equals("Enter player name")) { // TODO remove "Enter..." and make it a const variable
             playerData = playerColor.getRGB() + "," + playerName;
         } else {
@@ -419,6 +422,15 @@ public class ViewManager
     private void cleanTile(int row, int column) {
         mainGame.removeIconFromTile(row, column);
     }
+    
+    public void resetBackground(int formerRow, int formerColumn){
+        if (formerRow == 4 && formerColumn != 1){
+            mainGame.getLabel(formerRow, formerColumn).setBackground(Color.decode("#E0E0E0"));
+        } else {
+            mainGame.getLabel(formerRow, formerColumn).setBackground(Color.decode("#2D3553"));
+        }
+    }
+    
     /**
      * Updates interface by moving piece from old tile to new one.
      * @param currentRow The row of the piece that will be moved to a new tile.
@@ -426,16 +438,46 @@ public class ViewManager
      * @param nextRow The row of the new tile, where the piece is now located.
      * @param nextColumn The column of the new tile, where the piece is now located.
      */
-    public void movePiece(int currentRow, int currentColumn, int nextRow, int nextColumn) {
-        cleanTile(currentRow, currentColumn);
+    public void movePiece(int formerRow, int formerColumn, int nextRow, int nextColumn) {
+        resetBackground(formerRow, formerColumn);
+        cleanTile(formerRow, formerColumn);
         mainGame.setNextPossibleLabel(nextRow, nextColumn, mainGame.getPlayerIcon(currentPlayerColor));
+        if (formerRow == 4 && formerColumn != 1) {
+            mainGame.desactiveAPieceForPlayer(currentPlayerColor);
+        }
     }
+    
+    public void desactivatePiece(Color otherPlayer) {
+        mainGame.activeAPieceForPlayer(otherPlayer);
+    }
+    
     /**
      * Updates label to indicate a player has won the game.
      * @param winnerName Name of the player that has won.
      */
-    public void declareWinner(String winnerName){
-        // TODO: update label to show there is a winner.
+    public void declareWinner(int playerNumber){
+        this.mainGame.declarePlayerWinner(playerNumber);
+    }
+    
+    public void changeThrowDiceButtonText(String text){
+        this.mainGame.changeButtonText(text);
+    }
+    
+    public void setNextTilePosition(int row, int column){
+        this.nextRow = row;
+        this.nextColumn = column;
+    }
+    
+    public int getNextRowPosition(){
+        return this.nextRow;
+    }
+    
+    public int getNextColumnPosition(){
+        return this.nextColumn;
+    }
+    
+    public void addScoreToPlayer(Color color){
+        this.mainGame.addScoreToPlayer(color);
     }
     
     /**
@@ -494,11 +536,16 @@ public class ViewManager
         public void mousePressed(MouseEvent entered){
             if (canClick) {
                 canClick = false;
-                setIfPieceMoved(true);
                 setClickedTile(this.row, this.column);
-                mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
-                mainGame.desactiveAPieceForPlayer(currentPlayerColor);
-                currentPlayerColor = null;
+                setIfPieceMoved(true);
+                mainGame.getLabel(this.row, this.column).setBackground(Color.decode("#A12525"));   
+                 /*int row = getNextRowPosition();
+                int column = getNextColumnPosition();
+                mainGame.setNextPossibleLabel(row, column, mainGame.getPlayerIcon(currentPlayerColor));*/
+
+                //mainGame.setNextPossibleLabel(this.row, this.column, mainGame.getPlayerIcon(currentPlayerColor));
+                // mainGame.desactiveAPieceForPlayer(currentPlayerColor);
+                //currentPlayerColor = null;
             }
         }
         /*

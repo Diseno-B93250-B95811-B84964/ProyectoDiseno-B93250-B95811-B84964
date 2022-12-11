@@ -68,6 +68,8 @@ public class CommandAddScore implements CommandInterface {
         if (this.lastMovedTile.getRow() == this.outOfBoundRow &&
                 this.lastMovedTile.getColumn() != outOfBoundColumn){
             playerArray.get(currentPlayer).modifyScore();
+            System.out.println("VOY A BORRAR REMOVE PIECE x" + lastMovedTile.getRow() + " y " + lastMovedTile.getColumn());
+            this.lastMovedTile.removePiece();
             success = true;
         }
         updateCurrentPlayer();
